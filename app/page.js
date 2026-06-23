@@ -180,16 +180,16 @@ function initHero(THREE, mount, progressRef, reduced) {
   const palette = [0xe6b84e, 0x74b6e6, 0x70c45c];
   for (let i = 0; i < 6; i++) {
     const col = palette[i % palette.length];
-    const m = new THREE.MeshStandardMaterial({ color: col, emissive: col, emissiveIntensity: 0.95, metalness: 0.5, roughness: 0.28 });
+    const m = new THREE.MeshStandardMaterial({ color: col, emissive: col, emissiveIntensity: 0.75, metalness: 0.5, roughness: 0.28 });
     const cube = new THREE.Mesh(cubeGeo, m);
     const s = 0.95 + Math.random() * 0.9;
     cube.scale.setScalar(s);
-    cube.position.set((Math.random() - 0.4) * 13, 1.6 + Math.random() * 3.4, -1 - Math.random() * 8);
+    cube.position.set(2.8 + Math.random() * 7.5, 2.4 + Math.random() * 2.8, -1 - Math.random() * 7);
     cube.userData = { sp: 0.4 + Math.random() * 0.8, ph: Math.random() * 6.28, baseY: cube.position.y };
     cube.add(new THREE.LineSegments(edgeGeo, new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.6 })));
     scene.add(cube); cubes.push(cube);
-    const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: glow, color: col, transparent: true, opacity: 0.85, blending: THREE.AdditiveBlending, depthWrite: false }));
-    halo.scale.setScalar(s * 4.4);
+    const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: glow, color: col, transparent: true, opacity: 0.4, blending: THREE.AdditiveBlending, depthWrite: false }));
+    halo.scale.setScalar(s * 2.0);
     scene.add(halo); halos.push(halo);
   }
 
