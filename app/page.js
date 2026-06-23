@@ -142,9 +142,9 @@ function glowTexture(THREE) {
 function initHero(THREE, mount, progressRef, reduced) {
   let width = mount.clientWidth, height = mount.clientHeight;
   const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x0b2237, 0.07);
+  scene.fog = new THREE.FogExp2(0x0b2237, 0.045);
   const camera = new THREE.PerspectiveCamera(58, width / height, 0.1, 120);
-  camera.position.set(0, 3.4, 9.5);
+  camera.position.set(0, 1.9, 7.6);
   const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
   renderer.setSize(width, height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -152,7 +152,7 @@ function initHero(THREE, mount, progressRef, reduced) {
   mount.appendChild(renderer.domElement);
 
   // --- terrain ---
-  const terrainGeo = new THREE.PlaneGeometry(60, 60, 140, 140);
+  const terrainGeo = new THREE.PlaneGeometry(95, 95, 170, 170);
   const terrainMat = new THREE.ShaderMaterial({
     wireframe: true, transparent: true,
     uniforms: { uTime: { value: 0 } },
@@ -164,11 +164,11 @@ function initHero(THREE, mount, progressRef, reduced) {
       'varying float vH; varying float vDist;' +
       'void main(){ vec3 low=vec3(0.18,0.42,0.62); vec3 mid=vec3(0.37,0.63,0.29); vec3 high=vec3(0.86,0.67,0.26);' +
       'float m=smoothstep(-0.9,1.6,vH); vec3 col=mix(low,mid,smoothstep(0.0,0.55,m)); col=mix(col,high,smoothstep(0.55,1.0,m));' +
-      'float fade=clamp(1.0-vDist/42.0,0.0,1.0); float a=(0.32+m*0.55)*fade; gl_FragColor=vec4(col,a); }',
+      'float fade=clamp(1.0-vDist/42.0,0.0,1.0); float a=(0.42+m*0.60)*fade; gl_FragColor=vec4(col,a); }',
   });
   const terrain = new THREE.Mesh(terrainGeo, terrainMat);
   terrain.rotation.x = -Math.PI / 2;
-  terrain.position.set(0, -2.0, -6);
+  terrain.position.set(0, -1.7, -11);
   scene.add(terrain);
 
   // --- cubes + glow halos ---
@@ -178,18 +178,18 @@ function initHero(THREE, mount, progressRef, reduced) {
   const cubeGeo = new THREE.BoxGeometry(0.85, 0.85, 0.85);
   const edgeGeo = new THREE.EdgesGeometry(cubeGeo);
   const palette = [0xe6b84e, 0x74b6e6, 0x70c45c];
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < 6; i++) {
     const col = palette[i % palette.length];
-    const m = new THREE.MeshStandardMaterial({ color: col, emissive: col, emissiveIntensity: 0.7, metalness: 0.5, roughness: 0.28 });
+    const m = new THREE.MeshStandardMaterial({ color: col, emissive: col, emissiveIntensity: 0.95, metalness: 0.5, roughness: 0.28 });
     const cube = new THREE.Mesh(cubeGeo, m);
-    const s = 0.6 + Math.random() * 0.7;
+    const s = 0.95 + Math.random() * 0.9;
     cube.scale.setScalar(s);
-    cube.position.set((Math.random() - 0.5) * 13, 1.0 + Math.random() * 3.6, -2 - Math.random() * 7);
+    cube.position.set((Math.random() - 0.4) * 13, 1.6 + Math.random() * 3.4, -1 - Math.random() * 8);
     cube.userData = { sp: 0.4 + Math.random() * 0.8, ph: Math.random() * 6.28, baseY: cube.position.y };
     cube.add(new THREE.LineSegments(edgeGeo, new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.6 })));
     scene.add(cube); cubes.push(cube);
     const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: glow, color: col, transparent: true, opacity: 0.85, blending: THREE.AdditiveBlending, depthWrite: false }));
-    halo.scale.setScalar(s * 3.4);
+    halo.scale.setScalar(s * 4.4);
     scene.add(halo); halos.push(halo);
   }
 
@@ -236,11 +236,11 @@ function initHero(THREE, mount, progressRef, reduced) {
       halos[i].position.copy(c.position);
     }
     points.rotation.y = t * 0.015;
-    const camX = mouse.x * 2.6, camY = 3.4 - mouse.y * 1.4 - p * 2.2, camZ = 9.5 - p * 8.0;
+    const camX = mouse.x * 2.2, camY = 1.9 - mouse.y * 1.0 - p * 1.3, camZ = 7.6 - p * 7.2;
     camera.position.x += (camX - camera.position.x) * 0.05;
     camera.position.y += (camY - camera.position.y) * 0.05;
     camera.position.z += (camZ - camera.position.z) * 0.05;
-    camera.lookAt(0, 0.4 - p * 1.0, -6);
+    camera.lookAt(0, 1.15 - p * 0.6, -13);
     renderer.render(scene, camera);
     raf = requestAnimationFrame(render);
   };
@@ -304,7 +304,7 @@ export default function Home() {
       <section className="relative min-h-screen overflow-hidden bg-navy-deep">
         <HeroScene />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-2/3 bg-[radial-gradient(75%_55%_at_50%_0%,rgba(90,155,212,0.16),transparent_72%)] z-[1]" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-navy-deep via-navy-deep/65 to-transparent z-[1]" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-navy-deep/70 via-navy-deep/25 to-transparent z-[1]" />
         <div className="relative z-10 mx-auto flex min-h-screen max-w-8xl flex-col justify-center px-6 md:px-10">
           <div className="mb-7 inline-flex w-fit items-center gap-2.5 rounded-full border border-sky/30 bg-navy-900/50 px-4 py-2 text-xs font-medium tracking-wide text-sky-light backdrop-blur-sm">
             <span className="h-1.5 w-1.5 rounded-full bg-wheat" />
