@@ -1,21 +1,8 @@
-# dependencies
-/node_modules
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: 'export',
+  images: { unoptimized: true },
+  trailingSlash: true,
+};
 
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-*.log
-
-# env
-.env*
-
-# vercel / cloudflare
-.vercel
-.wrangler
+export default nextConfig;
