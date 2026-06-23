@@ -107,99 +107,177 @@ function Nav() {
   );
 }
 
-/* ---------------- hero canvas: data constellation ---------------- */
-function HeroCanvas() {
-  const canvasRef = useRef(null);
-  const progressRef = useRef(0);
-  const pointerRef = useRef({ x: 0, y: 0 });
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d', { alpha: true });
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let width = 0, height = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const NODE_COUNT = 86;
-    const nodes = [];
-    for (let i = 0; i < NODE_COUNT; i++) {
-      const base = { x: (Math.random() * 2 - 1) * 1.18, y: (Math.random() * 2 - 1) * 0.95, z: (Math.random() * 2 - 1) * 1.18 };
-      const roll = Math.random();
-      const color = roll > 0.86 ? [216, 169, 63] : roll > 0.72 ? [94, 160, 73] : [134, 186, 224];
-      nodes.push({ base, rise: 0.08 + (base.y + 1) * 0.42, twinkle: Math.random() * Math.PI * 2, color });
+/* ---------------- WebGL hero: 3D digital terrain + glowing blockchain cubes ---------------- */
+let __threePromise = null;
+function loadThree() {
+  if (typeof window === 'undefined') return Promise.reject();
+  if (window.THREE) return Promise.resolve(window.THREE);
+  if (__threePromise) return __threePromise;
+  __threePromise = new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+    s.async = true;
+    s.onload = () => resolve(window.THREE);
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
+  return __threePromise;
+}
+
+function glowTexture(THREE) {
+  const c = document.createElement('canvas');
+  c.width = c.height = 128;
+  const g = c.getContext('2d');
+  const grd = g.createRadialGradient(64, 64, 0, 64, 64, 64);
+  grd.addColorStop(0, 'rgba(255,255,255,1)');
+  grd.addColorStop(0.25, 'rgba(255,255,255,0.55)');
+  grd.addColorStop(1, 'rgba(255,255,255,0)');
+  g.fillStyle = grd;
+  g.fillRect(0, 0, 128, 128);
+  const t = new THREE.Texture(c);
+  t.needsUpdate = true;
+  return t;
+}
+
+function initHero(THREE, mount, progressRef, reduced) {
+  let width = mount.clientWidth, height = mount.clientHeight;
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x0b2237, 0.07);
+  const camera = new THREE.PerspectiveCamera(58, width / height, 0.1, 120);
+  camera.position.set(0, 3.4, 9.5);
+  const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+  renderer.setSize(width, height);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0x0b2237, 1);
+  mount.appendChild(renderer.domElement);
+
+  // --- terrain ---
+  const terrainGeo = new THREE.PlaneGeometry(60, 60, 140, 140);
+  const terrainMat = new THREE.ShaderMaterial({
+    wireframe: true, transparent: true,
+    uniforms: { uTime: { value: 0 } },
+    vertexShader:
+      'uniform float uTime; varying float vH; varying float vDist;' +
+      'float wave(vec2 p){ return sin(p.x*0.35+uTime*0.55)*0.7 + sin(p.y*0.42-uTime*0.40)*0.55 + sin((p.x+p.y)*0.28+uTime*0.30)*0.45 + sin((p.x-p.y)*0.6+uTime*0.7)*0.18; }' +
+      'void main(){ vec3 pos=position; float h=wave(position.xy); pos.z+=h; vH=h; vec4 mv=modelViewMatrix*vec4(pos,1.0); vDist=-mv.z; gl_Position=projectionMatrix*mv; }',
+    fragmentShader:
+      'varying float vH; varying float vDist;' +
+      'void main(){ vec3 low=vec3(0.18,0.42,0.62); vec3 mid=vec3(0.37,0.63,0.29); vec3 high=vec3(0.86,0.67,0.26);' +
+      'float m=smoothstep(-0.9,1.6,vH); vec3 col=mix(low,mid,smoothstep(0.0,0.55,m)); col=mix(col,high,smoothstep(0.55,1.0,m));' +
+      'float fade=clamp(1.0-vDist/42.0,0.0,1.0); float a=(0.32+m*0.55)*fade; gl_FragColor=vec4(col,a); }',
+  });
+  const terrain = new THREE.Mesh(terrainGeo, terrainMat);
+  terrain.rotation.x = -Math.PI / 2;
+  terrain.position.set(0, -2.0, -6);
+  scene.add(terrain);
+
+  // --- cubes + glow halos ---
+  const glow = glowTexture(THREE);
+  const cubes = [];
+  const halos = [];
+  const cubeGeo = new THREE.BoxGeometry(0.85, 0.85, 0.85);
+  const edgeGeo = new THREE.EdgesGeometry(cubeGeo);
+  const palette = [0xe6b84e, 0x74b6e6, 0x70c45c];
+  for (let i = 0; i < 8; i++) {
+    const col = palette[i % palette.length];
+    const m = new THREE.MeshStandardMaterial({ color: col, emissive: col, emissiveIntensity: 0.7, metalness: 0.5, roughness: 0.28 });
+    const cube = new THREE.Mesh(cubeGeo, m);
+    const s = 0.6 + Math.random() * 0.7;
+    cube.scale.setScalar(s);
+    cube.position.set((Math.random() - 0.5) * 13, 1.0 + Math.random() * 3.6, -2 - Math.random() * 7);
+    cube.userData = { sp: 0.4 + Math.random() * 0.8, ph: Math.random() * 6.28, baseY: cube.position.y };
+    cube.add(new THREE.LineSegments(edgeGeo, new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.6 })));
+    scene.add(cube); cubes.push(cube);
+    const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: glow, color: col, transparent: true, opacity: 0.85, blending: THREE.AdditiveBlending, depthWrite: false }));
+    halo.scale.setScalar(s * 3.4);
+    scene.add(halo); halos.push(halo);
+  }
+
+  // --- particles ---
+  const pCount = 750;
+  const pGeo = new THREE.BufferGeometry();
+  const pPos = new Float32Array(pCount * 3);
+  for (let i = 0; i < pCount; i++) {
+    pPos[i * 3] = (Math.random() - 0.5) * 72;
+    pPos[i * 3 + 1] = Math.random() * 26 - 2;
+    pPos[i * 3 + 2] = (Math.random() - 0.5) * 60 - 12;
+  }
+  pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+  const points = new THREE.Points(pGeo, new THREE.PointsMaterial({ map: glow, color: 0xbcd9f0, size: 0.32, transparent: true, opacity: 0.7, depthWrite: false, blending: THREE.AdditiveBlending, sizeAttenuation: true }));
+  scene.add(points);
+
+  // --- lights ---
+  scene.add(new THREE.AmbientLight(0x4a6c88, 1.0));
+  const l1 = new THREE.PointLight(0x74b6e6, 90, 60); l1.position.set(-8, 9, 7); scene.add(l1);
+  const l2 = new THREE.PointLight(0xe6b84e, 60, 60); l2.position.set(9, 5, -1); scene.add(l2);
+
+  // --- interaction ---
+  const mouse = { x: 0, y: 0 };
+  const onPointer = (e) => { mouse.x = e.clientX / window.innerWidth - 0.5; mouse.y = e.clientY / window.innerHeight - 0.5; };
+  window.addEventListener('pointermove', onPointer, { passive: true });
+  const onResize = () => {
+    width = mount.clientWidth; height = mount.clientHeight;
+    camera.aspect = width / height; camera.updateProjectionMatrix();
+    renderer.setSize(width, height);
+  };
+  window.addEventListener('resize', onResize);
+
+  const clock = new THREE.Clock();
+  let raf;
+  const render = () => {
+    const t = clock.getElapsedTime();
+    terrainMat.uniforms.uTime.value = t;
+    const p = progressRef.current;
+    for (let i = 0; i < cubes.length; i++) {
+      const c = cubes[i];
+      c.rotation.x += 0.004 * c.userData.sp;
+      c.rotation.y += 0.006 * c.userData.sp;
+      c.position.y = c.userData.baseY + Math.sin(t * c.userData.sp + c.userData.ph) * 0.35;
+      halos[i].position.copy(c.position);
     }
-    const edges = [];
-    for (let i = 0; i < NODE_COUNT; i++)
-      for (let j = i + 1; j < NODE_COUNT; j++) {
-        const a = nodes[i].base, b = nodes[j].base;
-        const d = Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
-        if (d < 0.72) edges.push([i, j, d]);
-      }
-    const resize = () => {
-      width = canvas.clientWidth; height = canvas.clientHeight;
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = Math.floor(width * dpr); canvas.height = Math.floor(height * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    };
-    resize();
-    window.addEventListener('resize', resize);
-    const onPointer = (e) => {
-      pointerRef.current.x = (e.clientX / window.innerWidth - 0.5) * 2;
-      pointerRef.current.y = (e.clientY / window.innerHeight - 0.5) * 2;
-    };
-    window.addEventListener('pointermove', onPointer, { passive: true });
-    const project = (x, y, z, ay, ax) => {
-      const cosY = Math.cos(ay), sinY = Math.sin(ay);
-      let dx = x * cosY - z * sinY, dz = x * sinY + z * cosY;
-      const cosX = Math.cos(ax), sinX = Math.sin(ax);
-      const dy = y * cosX - dz * sinX; dz = y * sinX + dz * cosX;
-      const fov = 3.2, scale = fov / (fov + dz), minDim = Math.min(width, height), reach = minDim * 0.4;
-      return { sx: width / 2 + dx * reach * scale, sy: height * 0.46 + dy * reach * scale, scale, depth: dz };
-    };
-    let raf, t = 0;
-    const draw = () => {
-      t += reduced ? 0 : 0.0028;
-      const p = progressRef.current;
-      const assembly = gsap.parseEase('power2.out')(Math.min(1, p / 0.55));
-      const fade = 1 - gsap.parseEase('power1.in')(Math.min(1, Math.max(0, (p - 0.15) / 0.85))) * 0.85;
-      const ay = t * 0.55 + p * Math.PI * 0.8 + pointerRef.current.x * 0.25;
-      const ax = -0.18 + pointerRef.current.y * 0.1;
-      ctx.clearRect(0, 0, width, height);
-      const pts = nodes.map((n) => {
-        const groundY = -1.6;
-        const y = groundY + (n.base.y - groundY) * gsap.parseEase('power3.out')(Math.min(1, assembly * (0.55 + n.rise)));
-        return project(n.base.x, y, n.base.z, ay, ax);
-      });
-      for (let k = 0; k < edges.length; k++) {
-        const [i, j, d] = edges[k]; const a = pts[i], b = pts[j];
-        const depth = (a.depth + b.depth) / 2;
-        const alpha = Math.max(0, 1 - (depth + 1.4) / 2.8) * (1 - d / 0.72) * 0.42 * fade * assembly;
-        if (alpha < 0.01) continue;
-        ctx.strokeStyle = `rgba(120, 170, 214, ${alpha})`;
-        ctx.lineWidth = 0.6 * a.scale; ctx.beginPath();
-        ctx.moveTo(a.sx, a.sy); ctx.lineTo(b.sx, b.sy); ctx.stroke();
-      }
-      for (let i = 0; i < pts.length; i++) {
-        const a = pts[i], n = nodes[i];
-        const depthAlpha = Math.max(0.12, 1 - (a.depth + 1.4) / 2.8);
-        const tw = reduced ? 1 : 0.72 + Math.sin(t * 2 + n.twinkle) * 0.28;
-        const r = Math.max(0.7, 2.3 * a.scale) * (0.7 + assembly * 0.3);
-        ctx.fillStyle = `rgba(${n.color[0]}, ${n.color[1]}, ${n.color[2]}, ${depthAlpha * fade * tw})`;
-        ctx.beginPath(); ctx.arc(a.sx, a.sy, r, 0, Math.PI * 2); ctx.fill();
-      }
-      raf = requestAnimationFrame(draw);
-    };
-    raf = requestAnimationFrame(draw);
-    gsap.registerPlugin(ScrollTrigger);
-    const st = ScrollTrigger.create({
-      trigger: document.documentElement, start: 'top top', end: () => `+=${window.innerHeight * 2}`,
-      scrub: true, onUpdate: (self) => { progressRef.current = self.progress; },
-    });
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener('resize', resize);
-      window.removeEventListener('pointermove', onPointer);
-      st.kill();
-    };
+    points.rotation.y = t * 0.015;
+    const camX = mouse.x * 2.6, camY = 3.4 - mouse.y * 1.4 - p * 2.2, camZ = 9.5 - p * 8.0;
+    camera.position.x += (camX - camera.position.x) * 0.05;
+    camera.position.y += (camY - camera.position.y) * 0.05;
+    camera.position.z += (camZ - camera.position.z) * 0.05;
+    camera.lookAt(0, 0.4 - p * 1.0, -6);
+    renderer.render(scene, camera);
+    raf = requestAnimationFrame(render);
+  };
+  if (reduced) renderer.render(scene, camera); else raf = requestAnimationFrame(render);
+
+  gsap.registerPlugin(ScrollTrigger);
+  const st = ScrollTrigger.create({
+    trigger: document.documentElement, start: 'top top', end: () => `+=${window.innerHeight * 1.6}`,
+    scrub: true, onUpdate: (s) => { progressRef.current = s.progress; },
+  });
+
+  return () => {
+    cancelAnimationFrame(raf);
+    window.removeEventListener('pointermove', onPointer);
+    window.removeEventListener('resize', onResize);
+    st.kill();
+    renderer.dispose(); terrainGeo.dispose(); terrainMat.dispose(); cubeGeo.dispose(); edgeGeo.dispose(); glow.dispose();
+    if (mount.contains(renderer.domElement)) mount.removeChild(renderer.domElement);
+  };
+}
+
+function HeroScene() {
+  const mountRef = useRef(null);
+  const progressRef = useRef(0);
+  useEffect(() => {
+    const mount = mountRef.current;
+    if (!mount) return;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let cleanup = () => {};
+    let active = true;
+    loadThree().then((THREE) => {
+      if (!active || !THREE) return;
+      cleanup = initHero(THREE, mount, progressRef, reduced);
+    }).catch(() => {});
+    return () => { active = false; cleanup(); };
   }, []);
-  return <canvas ref={canvasRef} aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 h-full w-full" />;
+  return <div ref={mountRef} className="absolute inset-0 z-0" aria-hidden="true" />;
 }
 
 /* ---------------- content data ---------------- */
@@ -223,36 +301,32 @@ export default function Home() {
   return (
     <main id="top" className="relative bg-navy-deep">
       {/* ===== HERO ===== */}
-      <section className="relative min-h-screen overflow-hidden bg-gradient-to-b from-navy-900 via-navy-deep to-navy">
-        <HeroCanvas />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-[radial-gradient(70%_60%_at_50%_0%,rgba(90,155,212,0.22),transparent_70%)]" />
+      <section className="relative min-h-screen overflow-hidden bg-navy-deep">
+        <HeroScene />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-2/3 bg-[radial-gradient(75%_55%_at_50%_0%,rgba(90,155,212,0.16),transparent_72%)] z-[1]" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-navy-deep via-navy-deep/65 to-transparent z-[1]" />
         <div className="relative z-10 mx-auto flex min-h-screen max-w-8xl flex-col justify-center px-6 md:px-10">
-          <div className="mb-7 inline-flex w-fit items-center gap-2.5 rounded-full border border-sky/30 bg-navy-900/40 px-4 py-2 text-xs font-medium tracking-wide text-sky-light backdrop-blur-sm">
+          <div className="mb-7 inline-flex w-fit items-center gap-2.5 rounded-full border border-sky/30 bg-navy-900/50 px-4 py-2 text-xs font-medium tracking-wide text-sky-light backdrop-blur-sm">
             <span className="h-1.5 w-1.5 rounded-full bg-wheat" />
             GBA &middot; Blockchain Maturity Model Certified
           </div>
-          <h1 className="font-serif max-w-5xl text-[12.5vw] font-semibold leading-[0.95] tracking-tight text-cream sm:text-[9vw] md:text-[6.6vw]">
+          <h1 className="font-serif max-w-5xl text-[12.5vw] font-semibold leading-[0.95] tracking-tight text-cream sm:text-[9vw] md:text-[6.6vw] [text-shadow:0_2px_40px_rgba(8,26,43,0.65)]">
             Verifiable infrastructure,<br />
             <span className="text-sky-light">rooted in the </span><span className="italic text-wheat-light">real world.</span>
           </h1>
-          <p className="mt-8 max-w-xl text-lg leading-relaxed text-sky-light/85 md:text-xl">
+          <p className="mt-8 max-w-xl text-lg leading-relaxed text-sky-light/90 md:text-xl [text-shadow:0_1px_22px_rgba(8,26,43,0.75)]">
             Cloud Control turns fragmented construction and infrastructure data into a verifiable Golden Thread &mdash; innovation aligned with Mother Nature, from concrete to code.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-4">
-            <a href="#contact" className="rounded-full bg-wheat px-7 py-3.5 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">Request a BMM Assessment</a>
-            <a href="#approach" className="rounded-full border border-sky-light/40 px-7 py-3.5 text-sm font-semibold text-cream transition-colors hover:border-wheat hover:text-wheat-light">See how it works</a>
+            <a href="#contact" className="rounded-full bg-wheat px-7 py-3.5 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/30 transition-transform hover:scale-[1.04] active:scale-95">Request a BMM Assessment</a>
+            <a href="#approach" className="rounded-full border border-sky-light/40 bg-navy-900/30 px-7 py-3.5 text-sm font-semibold text-cream backdrop-blur-sm transition-colors hover:border-wheat hover:text-wheat-light">See how it works</a>
           </div>
         </div>
-        <div className="absolute bottom-0 inset-x-0 z-[5] leading-[0]" aria-hidden="true">
-          <svg viewBox="0 0 1440 220" preserveAspectRatio="none" className="block w-full h-[26vh]">
-            <path d="M0,140 C260,80 520,170 760,140 C1000,110 1240,60 1440,120 L1440,220 L0,220 Z" fill="#3c7a31" opacity="0.45" />
-            <path d="M0,176 C300,120 560,200 820,172 C1080,144 1280,170 1440,150 L1440,220 L0,220 Z" fill="#11314f" />
-          </svg>
-        </div>
+        <div className="pointer-events-none absolute bottom-7 left-1/2 z-10 -translate-x-1/2 text-[11px] uppercase tracking-[0.3em] text-sky-light/60">Scroll to explore</div>
       </section>
 
       {/* ===== FROM CONCRETE TO CODE ===== */}
-      <section className="relative bg-navy px-6 pb-24 pt-16 md:px-10 md:pb-32">
+      <section className="relative bg-navy px-6 pb-24 pt-20 md:px-10 md:pb-32">
         <div className="mx-auto max-w-5xl text-center">
           <Reveal>
             <p className="mb-5 font-mono text-xs uppercase tracking-[0.3em] text-wheat">From concrete to code</p>
@@ -302,8 +376,8 @@ export default function Home() {
           </Reveal>
           <Reveal stagger className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2">
             {CAPABILITIES.map((c) => (
-              <div key={c.t} className="group rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-transparent p-8 transition-colors hover:border-wheat/40 md:p-9">
-                <div className="mb-5 h-10 w-10 rounded-xl bg-gradient-to-br from-sky to-field-deep opacity-90" />
+              <div key={c.t} className="group rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.07] to-transparent p-8 transition-all duration-300 hover:-translate-y-1 hover:border-wheat/40 hover:shadow-2xl hover:shadow-sky/10 md:p-9">
+                <div className="mb-5 h-11 w-11 rounded-xl bg-gradient-to-br from-sky to-field-deep shadow-lg shadow-sky/30 transition-transform duration-300 group-hover:scale-110" />
                 <h3 className="text-xl font-semibold text-cream md:text-2xl">{c.t}</h3>
                 <p className="mt-3 leading-relaxed text-sky-light/75">{c.b}</p>
               </div>
