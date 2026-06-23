@@ -142,7 +142,7 @@ function glowTexture(THREE) {
 function initHero(THREE, mount, progressRef, reduced) {
   let width = mount.clientWidth, height = mount.clientHeight;
   const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x0b2237, 0.045);
+  scene.fog = new THREE.FogExp2(0x0b2237, 0.062);
   const camera = new THREE.PerspectiveCamera(58, width / height, 0.1, 120);
   camera.position.set(0, 1.9, 7.6);
   const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
@@ -164,7 +164,7 @@ function initHero(THREE, mount, progressRef, reduced) {
       'varying float vH; varying float vDist;' +
       'void main(){ vec3 low=vec3(0.18,0.42,0.62); vec3 mid=vec3(0.37,0.63,0.29); vec3 high=vec3(0.86,0.67,0.26);' +
       'float m=smoothstep(-0.9,1.6,vH); vec3 col=mix(low,mid,smoothstep(0.0,0.55,m)); col=mix(col,high,smoothstep(0.55,1.0,m));' +
-      'float fade=clamp(1.0-vDist/42.0,0.0,1.0); float a=(0.42+m*0.60)*fade; gl_FragColor=vec4(col,a); }',
+      'float fade=clamp(1.0-vDist/30.0,0.0,1.0); float a=(0.34+m*0.46)*fade; gl_FragColor=vec4(col,a); }',
   });
   const terrain = new THREE.Mesh(terrainGeo, terrainMat);
   terrain.rotation.x = -Math.PI / 2;
@@ -184,7 +184,7 @@ function initHero(THREE, mount, progressRef, reduced) {
     const cube = new THREE.Mesh(cubeGeo, m);
     const s = 0.95 + Math.random() * 0.9;
     cube.scale.setScalar(s);
-    cube.position.set(2.8 + Math.random() * 7.5, 2.4 + Math.random() * 2.8, -1 - Math.random() * 7);
+    cube.position.set(4.6 + Math.random() * 6.0, 2.6 + Math.random() * 2.6, -2 - Math.random() * 6);
     cube.userData = { sp: 0.4 + Math.random() * 0.8, ph: Math.random() * 6.28, baseY: cube.position.y };
     cube.add(new THREE.LineSegments(edgeGeo, new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.6 })));
     scene.add(cube); cubes.push(cube);
