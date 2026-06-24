@@ -1,21 +1,21 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 /* ----------------------------------------------------------------------------
    BMM Readiness funnel — inbound lead capture for BMM engagement and
    GBA Working Group Alliance participation.
 
-   LEAD CAPTURE: the form currently emails the submission to the GBA inbox as
-   an interim capture path. To wire JoMoCo (GoHighLevel):
-     • EITHER replace <LeadForm /> with the JoMoCo form embed (iframe/script), OR
-     • set JOMOCO_WEBHOOK below to your inbound-webhook URL — the handler will
-       POST the lead to it (and still falls back to email on failure).
+   PRIMARY CAPTURE: the embedded JoMoCo (GoHighLevel) booking calendar —
+   a booking creates a contact + appointment directly in the CRM.
+   SECONDARY: the details form emails the GBA inbox (interim). If JoMoCo
+   later exposes an inbound webhook, set JOMOCO_WEBHOOK to POST leads there.
 ---------------------------------------------------------------------------- */
 
-const JOMOCO_WEBHOOK = ''; // ← paste your JoMoCo inbound webhook URL here to go live
+const JOMOCO_WEBHOOK = ''; // ← paste a JoMoCo inbound-webhook URL here if/when enabled
 const GBA_INBOX = 'everett.morton@gbaglobal.org';
+const BOOKING_URL = 'https://app.jomoco-solutions.com/widget/booking/fFqvgwdw8gb3W0A0BlMn';
 
 const PATHWAYS = [
   {
@@ -168,7 +168,7 @@ function LeadForm() {
       </div>
       <div className="sm:col-span-2 flex flex-wrap items-center gap-4">
         <button type="submit" disabled={status === 'sending'} className="rounded-full bg-wheat px-8 py-4 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95 disabled:opacity-60">
-          {status === 'sending' ? 'Sending…' : 'Request my readiness consult'}
+          {status === 'sending' ? 'Sending…' : 'Send my details'}
         </button>
         <span className="text-xs text-sky-light/50">No spam. Your details route directly to the GBA sales & revenue team.</span>
       </div>
@@ -177,6 +177,13 @@ function LeadForm() {
 }
 
 export default function ReadinessPage() {
+  useEffect(() => {
+    const s = document.createElement('script');
+    s.src = 'https://app.jomoco-solutions.com/js/form_embed.js';
+    s.async = true;
+    document.body.appendChild(s);
+    return () => { try { document.body.removeChild(s); } catch (e) {} };
+  }, []);
   return (
     <main className="relative min-h-screen bg-navy-deep text-cream">
       <Header />
@@ -190,7 +197,7 @@ export default function ReadinessPage() {
           <p className="mt-6 max-w-2xl text-xl leading-relaxed text-sky-light">The BMM is the global standard for the trustworthiness of blockchain solutions &mdash; a credible benchmark for security, performance, governance, and transparency, and a roadmap for continuous improvement.</p>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-sky-light/80">Cloud Control guides public- and private-sector teams from cultural alignment through certified readiness &mdash; assess, build, scale, repeat.</p>
           <div className="mt-9 flex flex-wrap items-center gap-4">
-            <a href="#start" className="rounded-full bg-wheat px-7 py-3.5 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/30 transition-transform hover:scale-[1.04] active:scale-95">Request a readiness consult</a>
+            <a href="#start" className="rounded-full bg-wheat px-7 py-3.5 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/30 transition-transform hover:scale-[1.04] active:scale-95">Book a 20-minute consult</a>
             <a href="https://gbaglobal.org/blockchain-maturity-model/" target="_blank" rel="noopener noreferrer" className="rounded-full border border-sky-light/40 bg-navy-900/30 px-7 py-3.5 text-sm font-semibold text-cream transition-colors hover:border-wheat hover:text-wheat-light">Read the BMM &#8599;</a>
           </div>
         </div>
@@ -230,14 +237,27 @@ export default function ReadinessPage() {
         </div>
       </section>
 
-      {/* The funnel form */}
+      {/* The funnel: book a consult (captures into JoMoCo CRM) + details form */}
       <section id="start" className="border-t border-white/10 bg-navy px-6 py-16 md:px-10 md:py-24">
         <div className="mx-auto max-w-3xl">
           <p className="mb-3 font-mono text-xs uppercase tracking-[0.25em] text-wheat">Start your readiness path</p>
-          <h2 className="font-serif text-3xl font-medium leading-[1.1] text-cream md:text-5xl">Request a consult.</h2>
-          <p className="mt-4 max-w-2xl leading-relaxed text-sky-light/75">Tell us where you are and where you&apos;re headed. We&apos;ll map the fastest route from Working Group alignment to a BMM rating and public-sector pilot.</p>
-          <div className="mt-10">
-            <LeadForm />
+          <h2 className="font-serif text-3xl font-medium leading-[1.1] text-cream md:text-5xl">Book your readiness consult.</h2>
+          <p className="mt-4 max-w-2xl leading-relaxed text-sky-light/75">Grab a 20-minute slot on the GBA calendar. We&apos;ll map the fastest route from Working Group alignment to a BMM rating and public-sector pilot.</p>
+          <div className="mt-8 overflow-hidden rounded-2xl border border-white/10 bg-cream p-2 shadow-2xl shadow-navy/40 sm:p-3">
+            <iframe
+              src={BOOKING_URL}
+              title="Book a 20-minute readiness consult"
+              scrolling="no"
+              className="w-full"
+              style={{ minHeight: 760, border: 'none', borderRadius: 12 }}
+            />
+          </div>
+          <div className="mt-14 border-t border-white/10 pt-10">
+            <h3 className="font-serif text-2xl font-medium text-cream md:text-3xl">Prefer to send details first?</h3>
+            <p className="mt-2 max-w-2xl leading-relaxed text-sky-light/75">Share a few lines about your solution and we&apos;ll follow up to schedule.</p>
+            <div className="mt-8">
+              <LeadForm />
+            </div>
           </div>
         </div>
       </section>
