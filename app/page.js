@@ -209,9 +209,9 @@ function initHero(THREE, mount, progressRef, reduced) {
     const bh = 2.0 + Math.random() * 4.0;
     const gy = -2.9;
     const edgeCol = Math.random() > 0.62 ? 0xe6b84e : 0x74b6e6;
-    const mesh = new THREE.Mesh(bBoxGeo, new THREE.MeshStandardMaterial({ color: 0x163a5c, emissive: 0x1a4063, emissiveIntensity: 0.32, metalness: 0.6, roughness: 0.35, transparent: true, opacity: 0.9 }));
+    const mesh = new THREE.Mesh(bBoxGeo, new THREE.MeshStandardMaterial({ color: 0x2b5a86, emissive: 0x356fa8, emissiveIntensity: 0.62, metalness: 0.5, roughness: 0.32, transparent: true, opacity: 0.94 }));
     mesh.position.set(bx, gy, bz); mesh.scale.set(bw, 0.02, bd);
-    mesh.add(new THREE.LineSegments(bEdgeGeo, new THREE.LineBasicMaterial({ color: edgeCol, transparent: true, opacity: 0.85 })));
+    mesh.add(new THREE.LineSegments(bEdgeGeo, new THREE.LineBasicMaterial({ color: edgeCol, transparent: true, opacity: 1.0 })));
     scene.add(mesh);
     buildings.push({ mesh, bw, bd, bh, gy, bx, bz, edgeCol, order: Math.random() });
   }
@@ -318,6 +318,7 @@ function initHero(THREE, mount, progressRef, reduced) {
     renderer.render(scene, camera);
     raf = requestAnimationFrame(render);
   };
+  if (typeof window !== 'undefined') { window.__cc = { scene, camera, buildings, twins }; }
   if (reduced) renderer.render(scene, camera); else raf = requestAnimationFrame(render);
 
   return () => {
