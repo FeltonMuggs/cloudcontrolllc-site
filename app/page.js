@@ -107,7 +107,7 @@ function Nav() {
   );
 }
 
-/* ---------------- WebGL hero: 3D digital terrain + glowing blockchain cubes ---------------- */
+/* ---------------- WebGL hero: living landscape that evolves into a digital city ---------------- */
 let __threePromise = null;
 function loadThree() {
   if (typeof window === 'undefined') return Promise.reject();
@@ -125,139 +125,209 @@ function loadThree() {
 }
 
 function glowTexture(THREE) {
-  const c = document.createElement('canvas');
-  c.width = c.height = 128;
+  const c = document.createElement('canvas'); c.width = c.height = 128;
   const g = c.getContext('2d');
   const grd = g.createRadialGradient(64, 64, 0, 64, 64, 64);
   grd.addColorStop(0, 'rgba(255,255,255,1)');
   grd.addColorStop(0.25, 'rgba(255,255,255,0.55)');
   grd.addColorStop(1, 'rgba(255,255,255,0)');
-  g.fillStyle = grd;
-  g.fillRect(0, 0, 128, 128);
-  const t = new THREE.Texture(c);
-  t.needsUpdate = true;
-  return t;
+  g.fillStyle = grd; g.fillRect(0, 0, 128, 128);
+  const t = new THREE.Texture(c); t.needsUpdate = true; return t;
+}
+function birdTexture(THREE) {
+  const c = document.createElement('canvas'); c.width = c.height = 64;
+  const g = c.getContext('2d'); g.clearRect(0, 0, 64, 64);
+  g.strokeStyle = 'rgba(233,239,241,0.95)'; g.lineWidth = 4; g.lineCap = 'round'; g.lineJoin = 'round';
+  g.beginPath(); g.moveTo(8, 42); g.quadraticCurveTo(22, 22, 32, 36); g.quadraticCurveTo(42, 22, 56, 42); g.stroke();
+  const t = new THREE.Texture(c); t.needsUpdate = true; return t;
+}
+function cloudTexture(THREE) {
+  const c = document.createElement('canvas'); c.width = c.height = 128;
+  const g = c.getContext('2d'); const grd = g.createRadialGradient(64, 64, 0, 64, 64, 64);
+  grd.addColorStop(0, 'rgba(180,205,232,0.55)'); grd.addColorStop(0.5, 'rgba(150,180,215,0.18)'); grd.addColorStop(1, 'rgba(0,0,0,0)');
+  g.fillStyle = grd; g.fillRect(0, 0, 128, 128);
+  const t = new THREE.Texture(c); t.needsUpdate = true; return t;
 }
 
 function initHero(THREE, mount, progressRef, reduced) {
   let width = mount.clientWidth, height = mount.clientHeight;
+  const clamp = (x) => Math.min(1, Math.max(0, x));
+  const ease = (x) => 1 - Math.pow(1 - clamp(x), 3);
+
   const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x0b2237, 0.062);
-  const camera = new THREE.PerspectiveCamera(58, width / height, 0.1, 120);
-  camera.position.set(0, 1.9, 7.6);
+  scene.fog = new THREE.FogExp2(0x0b2237, 0.05);
+  const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 200);
+  camera.position.set(0, 2.2, 9);
   const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
   renderer.setSize(width, height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setClearColor(0x0b2237, 1);
   mount.appendChild(renderer.domElement);
 
+  const glow = glowTexture(THREE), bird = birdTexture(THREE), cloud = cloudTexture(THREE);
+
   // --- terrain ---
-  const terrainGeo = new THREE.PlaneGeometry(95, 95, 170, 170);
+  const terrainGeo = new THREE.PlaneGeometry(110, 110, 170, 170);
   const terrainMat = new THREE.ShaderMaterial({
     wireframe: true, transparent: true,
     uniforms: { uTime: { value: 0 } },
     vertexShader:
       'uniform float uTime; varying float vH; varying float vDist;' +
-      'float wave(vec2 p){ return sin(p.x*0.35+uTime*0.55)*0.7 + sin(p.y*0.42-uTime*0.40)*0.55 + sin((p.x+p.y)*0.28+uTime*0.30)*0.45 + sin((p.x-p.y)*0.6+uTime*0.7)*0.18; }' +
+      'float wave(vec2 p){ return sin(p.x*0.32+uTime*0.5)*0.6 + sin(p.y*0.4-uTime*0.36)*0.5 + sin((p.x+p.y)*0.26+uTime*0.28)*0.4; }' +
       'void main(){ vec3 pos=position; float h=wave(position.xy); pos.z+=h; vH=h; vec4 mv=modelViewMatrix*vec4(pos,1.0); vDist=-mv.z; gl_Position=projectionMatrix*mv; }',
     fragmentShader:
       'varying float vH; varying float vDist;' +
-      'void main(){ vec3 low=vec3(0.18,0.42,0.62); vec3 mid=vec3(0.37,0.63,0.29); vec3 high=vec3(0.86,0.67,0.26);' +
-      'float m=smoothstep(-0.9,1.6,vH); vec3 col=mix(low,mid,smoothstep(0.0,0.55,m)); col=mix(col,high,smoothstep(0.55,1.0,m));' +
-      'float fade=clamp(1.0-vDist/30.0,0.0,1.0); float a=(0.34+m*0.46)*fade; gl_FragColor=vec4(col,a); }',
+      'void main(){ vec3 low=vec3(0.16,0.40,0.60); vec3 mid=vec3(0.34,0.60,0.27); vec3 high=vec3(0.84,0.66,0.26);' +
+      'float m=smoothstep(-0.8,1.4,vH); vec3 col=mix(low,mid,smoothstep(0.0,0.55,m)); col=mix(col,high,smoothstep(0.55,1.0,m));' +
+      'float fade=clamp(1.0-vDist/34.0,0.0,1.0); float a=(0.30+m*0.42)*fade; gl_FragColor=vec4(col,a); }',
   });
   const terrain = new THREE.Mesh(terrainGeo, terrainMat);
-  terrain.rotation.x = -Math.PI / 2;
-  terrain.position.set(0, -1.7, -11);
+  terrain.rotation.x = -Math.PI / 2; terrain.position.set(0, -2.4, -12);
   scene.add(terrain);
 
-  // --- cubes + glow halos ---
-  const glow = glowTexture(THREE);
-  const cubes = [];
-  const halos = [];
-  const cubeGeo = new THREE.BoxGeometry(0.85, 0.85, 0.85);
-  const edgeGeo = new THREE.EdgesGeometry(cubeGeo);
-  const palette = [0xe6b84e, 0x74b6e6, 0x70c45c];
+  // --- river (flowing) ---
+  const rPts = [];
+  for (let i = 0; i <= 44; i++) { const u = i / 44; rPts.push(new THREE.Vector3(7.5 * Math.sin(u * 5.2 + 0.6), -2.5 + Math.sin(u * 9.0) * 0.05, 3 - u * 34)); }
+  const riverGeo = new THREE.TubeGeometry(new THREE.CatmullRomCurve3(rPts), 160, 0.6, 8, false);
+  const riverMat = new THREE.ShaderMaterial({
+    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+    uniforms: { uTime: { value: 0 } },
+    vertexShader: 'varying vec2 vUv; void main(){ vUv=uv; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0); }',
+    fragmentShader: 'uniform float uTime; varying vec2 vUv; void main(){ float flow=sin(vUv.y*26.0 - uTime*2.6)*0.5+0.5; float side=smoothstep(0.0,0.45,vUv.x)*smoothstep(1.0,0.55,vUv.x); vec3 c=mix(vec3(0.16,0.42,0.66), vec3(0.62,0.86,1.0), flow*flow); gl_FragColor=vec4(c, (0.30+0.45*flow)*side); }',
+  });
+  const river = new THREE.Mesh(riverGeo, riverMat); scene.add(river);
+
+  // --- buildings (rise on scroll) + sky twins + link threads ---
+  const buildings = [], twins = [];
+  const bBoxGeo = new THREE.BoxGeometry(1, 1, 1); bBoxGeo.translate(0, 0.5, 0);
+  const bEdgeGeo = new THREE.EdgesGeometry(bBoxGeo);
+  const N = 26;
+  for (let i = 0; i < N; i++) {
+    const bx = (Math.random() * 2 - 1) * 12.5;
+    const bz = -2 - Math.random() * 22;
+    const bw = 0.55 + Math.random() * 1.0, bd = 0.55 + Math.random() * 1.0;
+    const bh = 2.4 + Math.random() * 5.2;
+    const gy = -3.2;
+    const edgeCol = Math.random() > 0.62 ? 0xe6b84e : 0x74b6e6;
+    const mesh = new THREE.Mesh(bBoxGeo, new THREE.MeshStandardMaterial({ color: 0x163a5c, emissive: 0x1a4063, emissiveIntensity: 0.32, metalness: 0.6, roughness: 0.35, transparent: true, opacity: 0.9 }));
+    mesh.position.set(bx, gy, bz); mesh.scale.set(bw, 0.02, bd);
+    mesh.add(new THREE.LineSegments(bEdgeGeo, new THREE.LineBasicMaterial({ color: edgeCol, transparent: true, opacity: 0.85 })));
+    scene.add(mesh);
+    buildings.push({ mesh, bw, bd, bh, gy, bx, bz, edgeCol, order: Math.random() });
+  }
+  const tBoxGeo = new THREE.BoxGeometry(1, 1, 1); tBoxGeo.translate(0, 0.5, 0);
+  const tEdgeGeo = new THREE.EdgesGeometry(tBoxGeo);
+  const linkPos = [];
+  const twinIdx = buildings.map((_, i) => i).sort(() => Math.random() - 0.5).slice(0, 12);
+  twinIdx.forEach((bi) => {
+    const b = buildings[bi]; const sk = 0.17;
+    const tx = b.bx * 0.55, tz = -7 - Math.random() * 6, ty = 6.6 + Math.random() * 2.4;
+    const mesh = new THREE.Mesh(tBoxGeo, new THREE.MeshBasicMaterial({ color: 0x0e2c47, transparent: true, opacity: 0 }));
+    mesh.position.set(tx, ty, tz); mesh.scale.set(b.bw * sk, b.bh * sk, b.bd * sk);
+    const edges = new THREE.LineSegments(tEdgeGeo, new THREE.LineBasicMaterial({ color: b.edgeCol, transparent: true, opacity: 0 }));
+    mesh.add(edges); scene.add(mesh);
+    twins.push({ mesh, edges, tx, ty, tz });
+    linkPos.push(b.bx, b.gy + b.bh, b.bz, tx, ty, tz);
+  });
+  const netPos = [];
+  for (let a = 0; a < twins.length; a++) for (let b = a + 1; b < twins.length; b++) {
+    const A = twins[a], B = twins[b];
+    if (Math.hypot(A.tx - B.tx, A.ty - B.ty, A.tz - B.tz) < 5.6) netPos.push(A.tx, A.ty, A.tz, B.tx, B.ty, B.tz);
+  }
+  const netGeo = new THREE.BufferGeometry(); netGeo.setAttribute('position', new THREE.Float32BufferAttribute(netPos, 3));
+  const netMat = new THREE.LineBasicMaterial({ color: 0x74b6e6, transparent: true, opacity: 0 });
+  const netLines = new THREE.LineSegments(netGeo, netMat); scene.add(netLines);
+  const linkGeo = new THREE.BufferGeometry(); linkGeo.setAttribute('position', new THREE.Float32BufferAttribute(linkPos, 3));
+  const linkMat = new THREE.LineBasicMaterial({ color: 0xe6b84e, transparent: true, opacity: 0 });
+  const linkLines = new THREE.LineSegments(linkGeo, linkMat); scene.add(linkLines);
+
+  // --- trees ---
+  const trees = [];
+  const trunkGeo = new THREE.CylinderGeometry(0.05, 0.08, 0.5, 5); trunkGeo.translate(0, 0.25, 0);
+  const foliageGeo = new THREE.ConeGeometry(0.36, 0.95, 7); foliageGeo.translate(0, 0.98, 0);
+  const trunkMat = new THREE.MeshStandardMaterial({ color: 0x5a3d24, roughness: 0.9 });
+  const foliageMat = new THREE.MeshStandardMaterial({ color: 0x3f7a31, emissive: 0x21451d, emissiveIntensity: 0.28, roughness: 0.8 });
+  for (let i = 0; i < 16; i++) {
+    const grp = new THREE.Group();
+    grp.add(new THREE.Mesh(trunkGeo, trunkMat)); grp.add(new THREE.Mesh(foliageGeo, foliageMat));
+    grp.position.set((Math.random() * 2 - 1) * 13, -2.7, -1 - Math.random() * 20);
+    grp.scale.setScalar(0.7 + Math.random() * 0.9);
+    grp.userData = { ph: Math.random() * 6.28 };
+    scene.add(grp); trees.push(grp);
+  }
+
+  // --- birds ---
+  const birds = [];
+  for (let i = 0; i < 5; i++) {
+    const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: bird, transparent: true, opacity: 0.9, depthWrite: false }));
+    sp.scale.setScalar(0.9 + Math.random() * 0.6);
+    sp.userData = { r: 6 + Math.random() * 7, sp: 0.16 + Math.random() * 0.16, ph: Math.random() * 6.28, yy: 3.4 + Math.random() * 3, cx: (Math.random() * 2 - 1) * 4, cz: -9 - Math.random() * 6 };
+    scene.add(sp); birds.push(sp);
+  }
+
+  // --- clouds ---
+  const clouds = [];
   for (let i = 0; i < 6; i++) {
-    const col = palette[i % palette.length];
-    const m = new THREE.MeshStandardMaterial({ color: col, emissive: col, emissiveIntensity: 0.75, metalness: 0.5, roughness: 0.28 });
-    const cube = new THREE.Mesh(cubeGeo, m);
-    const s = 0.95 + Math.random() * 0.9;
-    cube.scale.setScalar(s);
-    cube.position.set(4.6 + Math.random() * 6.0, 2.6 + Math.random() * 2.6, -2 - Math.random() * 6);
-    cube.userData = { sp: 0.4 + Math.random() * 0.8, ph: Math.random() * 6.28, baseY: cube.position.y };
-    cube.add(new THREE.LineSegments(edgeGeo, new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.6 })));
-    scene.add(cube); cubes.push(cube);
-    const halo = new THREE.Sprite(new THREE.SpriteMaterial({ map: glow, color: col, transparent: true, opacity: 0.4, blending: THREE.AdditiveBlending, depthWrite: false }));
-    halo.scale.setScalar(s * 2.0);
-    scene.add(halo); halos.push(halo);
+    const cl = new THREE.Sprite(new THREE.SpriteMaterial({ map: cloud, color: 0x9fc2e0, transparent: true, opacity: 0.5, depthWrite: false, blending: THREE.AdditiveBlending }));
+    cl.scale.set(8 + Math.random() * 6, 4 + Math.random() * 3, 1);
+    cl.position.set((Math.random() * 2 - 1) * 16, 6.4 + Math.random() * 3.2, -10 - Math.random() * 8);
+    cl.userData = { dx: (Math.random() * 2 - 1) * 0.25 };
+    scene.add(cl); clouds.push(cl);
   }
 
   // --- particles ---
-  const pCount = 750;
-  const pGeo = new THREE.BufferGeometry();
-  const pPos = new Float32Array(pCount * 3);
-  for (let i = 0; i < pCount; i++) {
-    pPos[i * 3] = (Math.random() - 0.5) * 72;
-    pPos[i * 3 + 1] = Math.random() * 26 - 2;
-    pPos[i * 3 + 2] = (Math.random() - 0.5) * 60 - 12;
-  }
+  const pCount = 600; const pGeo = new THREE.BufferGeometry(); const pPos = new Float32Array(pCount * 3);
+  for (let i = 0; i < pCount; i++) { pPos[i * 3] = (Math.random() - 0.5) * 72; pPos[i * 3 + 1] = Math.random() * 24 - 1; pPos[i * 3 + 2] = (Math.random() - 0.5) * 60 - 12; }
   pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
-  const points = new THREE.Points(pGeo, new THREE.PointsMaterial({ map: glow, color: 0xbcd9f0, size: 0.32, transparent: true, opacity: 0.7, depthWrite: false, blending: THREE.AdditiveBlending, sizeAttenuation: true }));
+  const points = new THREE.Points(pGeo, new THREE.PointsMaterial({ map: glow, color: 0xbcd9f0, size: 0.28, transparent: true, opacity: 0.65, depthWrite: false, blending: THREE.AdditiveBlending, sizeAttenuation: true }));
   scene.add(points);
 
   // --- lights ---
   scene.add(new THREE.AmbientLight(0x4a6c88, 1.0));
-  const l1 = new THREE.PointLight(0x74b6e6, 90, 60); l1.position.set(-8, 9, 7); scene.add(l1);
-  const l2 = new THREE.PointLight(0xe6b84e, 60, 60); l2.position.set(9, 5, -1); scene.add(l2);
+  const l1 = new THREE.PointLight(0x74b6e6, 80, 80); l1.position.set(-10, 12, 8); scene.add(l1);
+  const l2 = new THREE.PointLight(0xe6b84e, 60, 80); l2.position.set(10, 8, -2); scene.add(l2);
+  const dir = new THREE.DirectionalLight(0xbcd9f0, 0.5); dir.position.set(-5, 10, 6); scene.add(dir);
 
   // --- interaction ---
   const mouse = { x: 0, y: 0 };
   const onPointer = (e) => { mouse.x = e.clientX / window.innerWidth - 0.5; mouse.y = e.clientY / window.innerHeight - 0.5; };
   window.addEventListener('pointermove', onPointer, { passive: true });
-  const onResize = () => {
-    width = mount.clientWidth; height = mount.clientHeight;
-    camera.aspect = width / height; camera.updateProjectionMatrix();
-    renderer.setSize(width, height);
-  };
+  const onResize = () => { width = mount.clientWidth; height = mount.clientHeight; camera.aspect = width / height; camera.updateProjectionMatrix(); renderer.setSize(width, height); };
   window.addEventListener('resize', onResize);
 
-  const clock = new THREE.Clock();
-  let raf;
+  const clock = new THREE.Clock(); let raf;
   const render = () => {
-    const t = clock.getElapsedTime();
-    terrainMat.uniforms.uTime.value = t;
-    const p = progressRef.current;
-    for (let i = 0; i < cubes.length; i++) {
-      const c = cubes[i];
-      c.rotation.x += 0.004 * c.userData.sp;
-      c.rotation.y += 0.006 * c.userData.sp;
-      c.position.y = c.userData.baseY + Math.sin(t * c.userData.sp + c.userData.ph) * 0.35;
-      halos[i].position.copy(c.position);
-    }
-    points.rotation.y = t * 0.015;
-    const camX = mouse.x * 2.2, camY = 1.9 - mouse.y * 1.0 - p * 1.3, camZ = 7.6 - p * 7.2;
+    const t = clock.getElapsedTime(); const p = progressRef.current;
+    terrainMat.uniforms.uTime.value = t; riverMat.uniforms.uTime.value = t;
+    for (const b of buildings) { const local = ease((p - b.order * 0.32) / 0.5); b.mesh.scale.y = Math.max(0.02, b.bh * local); }
+    const tw = ease((p - 0.22) / 0.55);
+    for (const T of twins) { T.mesh.material.opacity = 0.28 * tw; T.edges.material.opacity = 0.92 * tw; T.mesh.position.y = T.ty + Math.sin(t * 0.8 + T.tx) * 0.12; }
+    netMat.opacity = 0.5 * tw; linkMat.opacity = 0.45 * tw;
+    for (const g of trees) g.rotation.z = Math.sin(t * 0.7 + g.userData.ph) * 0.045;
+    for (const sp of birds) { const u = sp.userData; const a = t * u.sp + u.ph; sp.position.set(u.cx + Math.cos(a) * u.r, u.yy + Math.sin(a * 1.3) * 0.5, u.cz + Math.sin(a) * u.r * 0.6); sp.material.rotation = Math.sin(a) * 0.3; sp.scale.x = (0.9) * (1 + Math.sin(t * 8 + u.ph) * 0.12); }
+    for (const cl of clouds) { cl.position.x += cl.userData.dx * 0.02; if (cl.position.x > 19) cl.position.x = -19; if (cl.position.x < -19) cl.position.x = 19; }
+    points.rotation.y = t * 0.014;
+    const camX = mouse.x * 2.4, camY = 2.2 - mouse.y * 1.1 + p * 1.0, camZ = 9 - p * 8.5;
     camera.position.x += (camX - camera.position.x) * 0.05;
     camera.position.y += (camY - camera.position.y) * 0.05;
     camera.position.z += (camZ - camera.position.z) * 0.05;
-    camera.lookAt(0, 1.15 - p * 0.6, -13);
+    camera.lookAt(0, 1.0 + p * 4.0, -11);
     renderer.render(scene, camera);
     raf = requestAnimationFrame(render);
   };
   if (reduced) renderer.render(scene, camera); else raf = requestAnimationFrame(render);
 
   gsap.registerPlugin(ScrollTrigger);
-  const st = ScrollTrigger.create({
-    trigger: document.documentElement, start: 'top top', end: () => `+=${window.innerHeight * 1.6}`,
-    scrub: true, onUpdate: (s) => { progressRef.current = s.progress; },
-  });
+  const st = ScrollTrigger.create({ trigger: document.documentElement, start: 'top top', end: () => `+=${window.innerHeight * 1.7}`, scrub: true, onUpdate: (s) => { progressRef.current = s.progress; } });
 
   return () => {
     cancelAnimationFrame(raf);
     window.removeEventListener('pointermove', onPointer);
     window.removeEventListener('resize', onResize);
-    st.kill();
-    renderer.dispose(); terrainGeo.dispose(); terrainMat.dispose(); cubeGeo.dispose(); edgeGeo.dispose(); glow.dispose();
+    st.kill(); renderer.dispose();
+    terrainGeo.dispose(); terrainMat.dispose(); riverGeo.dispose(); riverMat.dispose();
+    bBoxGeo.dispose(); bEdgeGeo.dispose(); tBoxGeo.dispose(); tEdgeGeo.dispose();
+    trunkGeo.dispose(); foliageGeo.dispose(); glow.dispose(); bird.dispose(); cloud.dispose();
     if (mount.contains(renderer.domElement)) mount.removeChild(renderer.domElement);
   };
 }
@@ -271,10 +341,7 @@ function HeroScene() {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let cleanup = () => {};
     let active = true;
-    loadThree().then((THREE) => {
-      if (!active || !THREE) return;
-      cleanup = initHero(THREE, mount, progressRef, reduced);
-    }).catch(() => {});
+    loadThree().then((THREE) => { if (!active || !THREE) return; cleanup = initHero(THREE, mount, progressRef, reduced); }).catch(() => {});
     return () => { active = false; cleanup(); };
   }, []);
   return <div ref={mountRef} className="absolute inset-0 z-0" aria-hidden="true" />;
@@ -305,16 +372,17 @@ export default function Home() {
         <HeroScene />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-2/3 bg-[radial-gradient(75%_55%_at_50%_0%,rgba(90,155,212,0.16),transparent_72%)] z-[1]" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-navy-deep/70 via-navy-deep/25 to-transparent z-[1]" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-2/3 bg-gradient-to-r from-navy-deep/55 to-transparent z-[1]" />
         <div className="relative z-10 mx-auto flex min-h-screen max-w-8xl flex-col justify-center px-6 md:px-10">
           <div className="mb-7 inline-flex w-fit items-center gap-2.5 rounded-full border border-sky/30 bg-navy-900/50 px-4 py-2 text-xs font-medium tracking-wide text-sky-light backdrop-blur-sm">
             <span className="h-1.5 w-1.5 rounded-full bg-wheat" />
             GBA &middot; Blockchain Maturity Model Certified
           </div>
-          <h1 className="font-serif max-w-5xl text-[12.5vw] font-semibold leading-[0.95] tracking-tight text-cream sm:text-[9vw] md:text-[6.6vw] [text-shadow:0_2px_40px_rgba(8,26,43,0.65)]">
+          <h1 className="font-serif max-w-5xl text-[12.5vw] font-semibold leading-[0.95] tracking-tight text-cream sm:text-[9vw] md:text-[6.6vw] [text-shadow:0_2px_40px_rgba(8,26,43,0.7)]">
             Verifiable infrastructure,<br />
             <span className="text-sky-light">rooted in the </span><span className="italic text-wheat-light">real world.</span>
           </h1>
-          <p className="mt-8 max-w-xl text-lg leading-relaxed text-sky-light/90 md:text-xl [text-shadow:0_1px_22px_rgba(8,26,43,0.75)]">
+          <p className="mt-8 max-w-xl text-lg leading-relaxed text-sky-light/90 md:text-xl [text-shadow:0_1px_22px_rgba(8,26,43,0.85)]">
             Cloud Control turns fragmented construction and infrastructure data into a verifiable Golden Thread &mdash; innovation aligned with Mother Nature, from concrete to code.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -322,7 +390,7 @@ export default function Home() {
             <a href="#approach" className="rounded-full border border-sky-light/40 bg-navy-900/30 px-7 py-3.5 text-sm font-semibold text-cream backdrop-blur-sm transition-colors hover:border-wheat hover:text-wheat-light">See how it works</a>
           </div>
         </div>
-        <div className="pointer-events-none absolute bottom-7 left-1/2 z-10 -translate-x-1/2 text-[11px] uppercase tracking-[0.3em] text-sky-light/60">Scroll to explore</div>
+        <div className="pointer-events-none absolute bottom-7 left-1/2 z-10 -translate-x-1/2 text-[11px] uppercase tracking-[0.3em] text-sky-light/60">Scroll to watch it build</div>
       </section>
 
       {/* ===== FROM CONCRETE TO CODE ===== */}
