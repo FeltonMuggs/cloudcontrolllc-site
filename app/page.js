@@ -365,14 +365,26 @@ const SERVICES = ['BMM Assessments', 'Digital Asset Roadmapping', 'IoT-to-Ledger
 
 export default function Home() {
   useSmoothScroll();
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    const el = document.getElementById('hero-copy');
+    if (!el) return;
+    const st = ScrollTrigger.create({
+      trigger: document.documentElement, start: 'top top',
+      end: () => `+=${window.innerHeight * 1.0}`, scrub: true,
+      onUpdate: (sc) => { const o = Math.max(0, 1 - sc.progress * 1.25); el.style.opacity = String(o); el.style.transform = `translateY(${-sc.progress * 42}px)`; },
+    });
+    return () => st.kill();
+  }, []);
   return (
     <main id="top" className="relative bg-navy-deep">
       {/* ===== HERO ===== */}
-      <section className="relative min-h-screen overflow-hidden bg-navy-deep">
+      <section className="relative h-[280vh] bg-navy-deep">
+        <div className="sticky top-0 h-screen overflow-hidden">
         <HeroScene />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-2/3 bg-[radial-gradient(75%_55%_at_50%_0%,rgba(90,155,212,0.16),transparent_72%)] z-[1]" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-navy-deep/70 via-navy-deep/25 to-transparent z-[1]" />
-        <div className="relative z-10 mx-auto flex min-h-screen max-w-8xl flex-col justify-center px-6 md:px-10">
+        <div id="hero-copy" className="relative z-10 mx-auto flex h-screen max-w-8xl flex-col justify-center px-6 md:px-10">
           <div className="mb-7 inline-flex w-fit items-center gap-2.5 rounded-full border border-sky/30 bg-navy-900/50 px-4 py-2 text-xs font-medium tracking-wide text-sky-light backdrop-blur-sm">
             <span className="h-1.5 w-1.5 rounded-full bg-wheat" />
             GBA &middot; Blockchain Maturity Model Certified
@@ -390,6 +402,7 @@ export default function Home() {
           </div>
         </div>
         <div className="pointer-events-none absolute bottom-7 left-1/2 z-10 -translate-x-1/2 text-[11px] uppercase tracking-[0.3em] text-sky-light/60">Scroll to explore</div>
+        </div>
       </section>
 
       {/* ===== FROM CONCRETE TO CODE ===== */}
