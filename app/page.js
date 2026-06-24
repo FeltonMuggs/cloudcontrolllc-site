@@ -297,7 +297,10 @@ function initHero(THREE, mount, progressRef, reduced) {
 
   const clock = new THREE.Clock(); let raf;
   const render = () => {
-    const t = clock.getElapsedTime(); const p = progressRef.current;
+    const t = clock.getElapsedTime();
+    const sc = (window.__lenis && typeof window.__lenis.scroll === 'number') ? window.__lenis.scroll : (window.scrollY || window.pageYOffset || 0);
+    const p = Math.min(1, Math.max(0, sc / (window.innerHeight * 1.7)));
+    progressRef.current = p;
     terrainMat.uniforms.uTime.value = t; riverMat.uniforms.uTime.value = t;
     for (const b of buildings) { const local = ease((p - b.order * 0.32) / 0.5); b.mesh.scale.y = Math.max(0.02, b.bh * local); }
     const tw = ease((p - 0.18) / 0.5);
@@ -317,14 +320,11 @@ function initHero(THREE, mount, progressRef, reduced) {
   };
   if (reduced) renderer.render(scene, camera); else raf = requestAnimationFrame(render);
 
-  gsap.registerPlugin(ScrollTrigger);
-  const st = ScrollTrigger.create({ trigger: document.documentElement, start: 'top top', end: () => `+=${window.innerHeight * 1.7}`, scrub: true, onUpdate: (s) => { progressRef.current = s.progress; } });
-
   return () => {
     cancelAnimationFrame(raf);
     window.removeEventListener('pointermove', onPointer);
     window.removeEventListener('resize', onResize);
-    st.kill(); renderer.dispose();
+    renderer.dispose();
     terrainGeo.dispose(); terrainMat.dispose(); riverGeo.dispose(); riverMat.dispose();
     bBoxGeo.dispose(); bEdgeGeo.dispose(); tBoxGeo.dispose(); tEdgeGeo.dispose();
     trunkGeo.dispose(); foliageGeo.dispose(); glow.dispose(); bird.dispose(); cloud.dispose();
