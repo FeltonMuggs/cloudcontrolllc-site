@@ -299,7 +299,7 @@ function initHero(THREE, mount, progressRef, reduced) {
   const render = () => {
     const t = reduced ? 0 : clock.getElapsedTime();
     const sc = (window.__lenis && typeof window.__lenis.scroll === 'number') ? window.__lenis.scroll : (window.scrollY || window.pageYOffset || 0);
-    const p = Math.min(1, Math.max(0, sc / (window.innerHeight * 1.7)));
+    const p = Math.min(1, Math.max(0, sc / (window.innerHeight * 2.3)));
     progressRef.current = p;
     terrainMat.uniforms.uTime.value = t; riverMat.uniforms.uTime.value = t;
     for (const b of buildings) { const local = ease((p - b.order * 0.32) / 0.5); b.mesh.scale.y = Math.max(0.02, b.bh * local); }
@@ -348,12 +348,11 @@ function HeroScene() {
 }
 
 /* ---------------- content data ---------------- */
-const THREAD = [
-  { k: '01', title: 'From static documents to structured assets', body: 'We transition fragmented construction records from human-readable PDFs into machine-readable datasets designed for the digital age.' },
-  { k: '02', title: 'Value engineering through digital twins', body: 'Your digital replica lets teams assess, manipulate, and optimize buildings and infrastructure to uncover efficiencies and reduce operational risk.' },
-  { k: '03', title: 'An auditable, immutable trust layer', body: 'We integrate IoT and sensor data with blockchain ledgers to ensure maintenance and performance records are tamper-evident and permanent.' },
-  { k: '04', title: 'Finance & tokenization readiness', body: 'Clean digital outputs transform physical assets into finance-ready records — reducing the friction of capital and grant qualification.' },
-  { k: '05', title: 'Validated by the GBA Blockchain Maturity Model', body: 'Every engagement maps to the Government Blockchain Association BMM — the only government-recognized assurance and readiness standard.' },
+const JOURNEY = [
+  { k: '01', phase: 'Assess', title: 'GBA Working Group Alliance', body: 'We lead with a pre-assessment, cultural-integration phase inside the GBA Working Group Alliance — shifting your product roadmap and development process from a Web2 posture to a 3rd-generation, DAO-like mindset and culture. Standards and compliance fluency are built before the first line of production code.' },
+  { k: '02', phase: 'Build', title: 'Product aligned to Working Group standards', body: 'Building comes months to years from initial engagement. As Working Group compliance and standards begin to align with your product development, we engineer verifiable infrastructure on a foundation that already speaks the language regulators and public buyers trust.' },
+  { k: '03', phase: 'Scale', title: 'Pilot through public-sector opportunity', body: 'We deploy and pilot the solution through pre-identified Government and Public Sector opportunities — meeting emerging legislative solicitations and partnerships across county, state, national, and international arenas.' },
+  { k: '04', phase: 'Repeat', title: 'The cycle compounds', body: 'Each engagement deepens maturity, widens the alliance, and unlocks the next tier of opportunity. Assess, build, scale — repeat.' },
 ];
 const CAPABILITIES = [
   { t: 'Blockchain digital ledgers', b: 'Immutable project, asset, and compliance records that stand up to audit across the full lifecycle.', slug: 'blockchain-ledgers' },
@@ -379,7 +378,7 @@ export default function Home() {
   return (
     <main id="top" className="relative bg-navy-deep">
       {/* ===== HERO ===== */}
-      <section className="relative h-[280vh] bg-navy-deep">
+      <section className="relative h-[360vh] bg-navy-deep">
         <div className="sticky top-0 h-screen overflow-hidden">
         <HeroScene />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-2/3 bg-[radial-gradient(75%_55%_at_50%_0%,rgba(90,155,212,0.16),transparent_72%)] z-[1]" />
@@ -390,12 +389,9 @@ export default function Home() {
             GBA &middot; Blockchain Maturity Model Certified
           </div>
           <h1 className="font-serif max-w-5xl text-[12.5vw] font-semibold leading-[0.95] tracking-tight text-cream sm:text-[9vw] md:text-[6.6vw] [text-shadow:0_2px_40px_rgba(8,26,43,0.65)]">
-            Verifiable infrastructure,<br />
-            <span className="text-sky-light">rooted in the </span><span className="italic text-wheat-light">real world.</span>
+            Artificial Infrastructure<br />
+            <span className="text-sky-light">Verified in the </span><span className="italic text-wheat-light">Real World.</span>
           </h1>
-          <p className="mt-8 max-w-xl text-lg leading-relaxed text-sky-light/90 md:text-xl [text-shadow:0_1px_22px_rgba(8,26,43,0.75)]">
-            Cloud Control turns fragmented construction and infrastructure data into a verifiable Golden Thread &mdash; innovation aligned with Mother Nature, from concrete to code.
-          </p>
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <a href="#contact" className="rounded-full bg-wheat px-7 py-3.5 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/30 transition-transform hover:scale-[1.04] active:scale-95">Request a BMM Assessment</a>
             <a href="#approach" className="rounded-full border border-sky-light/40 bg-navy-900/30 px-7 py-3.5 text-sm font-semibold text-cream backdrop-blur-sm transition-colors hover:border-wheat hover:text-wheat-light">See how it works</a>
@@ -409,33 +405,34 @@ export default function Home() {
       <section className="relative bg-navy px-6 pb-24 pt-20 md:px-10 md:pb-32">
         <div className="mx-auto max-w-5xl text-center">
           <Reveal>
-            <p className="mb-5 font-mono text-xs uppercase tracking-[0.3em] text-wheat">From concrete to code</p>
+            <p className="mb-5 font-mono text-xs uppercase tracking-[0.3em] text-wheat">From concrete to code &middot; dirt to disposition</p>
             <h2 className="font-serif text-3xl font-medium leading-[1.15] text-cream md:text-5xl">
-              We convert the physical world into a <span className="text-sky-light">Golden Thread</span> of structured, auditable data &mdash; so every asset can be trusted, valued, and financed.
+              We convert the physical world into a verifiable <span className="text-sky-light">Golden Thread</span> &mdash; structured, auditable data from concrete to code and dirt to disposition &mdash; so every asset can be trusted, valued, and financed.
             </h2>
           </Reveal>
         </div>
       </section>
       <Hills from="bg-navy" to="fill-cream" />
 
-      {/* ===== APPROACH / GOLDEN THREAD ===== */}
+      {/* ===== ENGAGEMENT MODEL: ASSESS / BUILD / SCALE / REPEAT ===== */}
       <section id="approach" className="relative bg-cream px-6 py-24 md:px-10 md:py-32">
         <div className="mx-auto max-w-6xl">
           <Reveal>
-            <p className="mb-3 font-mono text-xs uppercase tracking-[0.25em] text-field-deep">The Golden Thread</p>
-            <h2 className="font-serif max-w-3xl text-4xl font-medium leading-[1.08] text-ink md:text-6xl">Value engineering the digital asset.</h2>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">A clear, phased path that takes an asset from fragmented paperwork to a finance-ready, blockchain-verified digital twin.</p>
+            <p className="mb-3 font-mono text-xs uppercase tracking-[0.25em] text-field-deep">Our engagement model</p>
+            <h2 className="font-serif max-w-3xl text-4xl font-medium leading-[1.08] text-ink md:text-6xl">Assess. Build. Scale. Repeat.</h2>
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">We lead with culture, not code &mdash; embedding your team in the GBA Working Group Alliance before we build, then scaling through the public-sector opportunities most ready to adopt.</p>
           </Reveal>
           <div className="relative mt-16">
             <div className="absolute left-[27px] top-2 bottom-2 w-[2px] bg-gradient-to-b from-wheat via-wheat/60 to-field md:left-[31px]" aria-hidden="true" />
             <Reveal stagger className="space-y-8">
-              {THREAD.map((s) => (
+              {JOURNEY.map((s) => (
                 <div key={s.k} className="relative flex gap-6 md:gap-8">
                   <div className="relative z-10 grid h-14 w-14 flex-none place-items-center rounded-2xl bg-navy text-cream shadow-lg shadow-navy/20 ring-4 ring-cream">
                     <span className="font-serif text-lg font-semibold text-wheat-light">{s.k}</span>
                   </div>
                   <div className="pt-1.5">
-                    <h3 className="text-xl font-semibold text-ink md:text-2xl">{s.title}</h3>
+                    <p className="font-mono text-xs uppercase tracking-[0.22em] text-field-deep">{s.phase}</p>
+                    <h3 className="mt-1 text-xl font-semibold text-ink md:text-2xl">{s.title}</h3>
                     <p className="mt-2 max-w-2xl leading-relaxed text-ink-soft">{s.body}</p>
                   </div>
                 </div>
@@ -450,7 +447,7 @@ export default function Home() {
       <section id="capabilities" className="relative grain bg-navy-deep px-6 py-24 md:px-10 md:py-32">
         <div className="mx-auto max-w-6xl">
           <Reveal>
-            <p className="mb-3 font-mono text-xs uppercase tracking-[0.25em] text-wheat">Assess &middot; Build &middot; Scale</p>
+            <p className="mb-3 font-mono text-xs uppercase tracking-[0.25em] text-wheat">Capabilities</p>
             <h2 className="font-serif max-w-3xl text-4xl font-medium leading-[1.08] text-cream md:text-6xl">Built for the real-world asset economy.</h2>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-sky-light/80">Blockchain solution assessment and development through digital asset program management for construction, infrastructure, and real-world assets.</p>
           </Reveal>
