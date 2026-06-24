@@ -318,7 +318,6 @@ function initHero(THREE, mount, progressRef, reduced) {
     renderer.render(scene, camera);
     raf = requestAnimationFrame(render);
   };
-  if (typeof window !== 'undefined') { window.__cc = { camera, buildings, twins }; }
   raf = requestAnimationFrame(render);
 
   return () => {
