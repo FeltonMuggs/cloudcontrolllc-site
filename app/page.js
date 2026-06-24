@@ -356,10 +356,10 @@ const THREAD = [
   { k: '05', title: 'Validated by the GBA Blockchain Maturity Model', body: 'Every engagement maps to the Government Blockchain Association BMM — the only government-recognized assurance and readiness standard.' },
 ];
 const CAPABILITIES = [
-  { t: 'Blockchain digital ledgers', b: 'Immutable project, asset, and compliance records that stand up to audit across the full lifecycle.' },
-  { t: 'IoT & sensor ingestion', b: 'Real-time monitoring of the built and natural environment, anchored to a verifiable source of truth.' },
-  { t: 'Digital provenance', b: 'Materials, retrofits, maintenance, and energy performance — traceable from origin to operation.' },
-  { t: 'Lifecycle governance', b: 'Frameworks aligned to government acquisition and regulatory standards, planning through operations.' },
+  { t: 'Blockchain digital ledgers', b: 'Immutable project, asset, and compliance records that stand up to audit across the full lifecycle.', slug: 'blockchain-ledgers' },
+  { t: 'IoT & sensor ingestion', b: 'Real-time monitoring of the built and natural environment, anchored to a verifiable source of truth.', slug: 'iot-sensor-ingestion' },
+  { t: 'Digital provenance', b: 'Materials, retrofits, maintenance, and energy performance — traceable from origin to operation.', slug: 'digital-provenance' },
+  { t: 'Lifecycle governance', b: 'Frameworks aligned to government acquisition and regulatory standards, planning through operations.', slug: 'lifecycle-governance' },
 ];
 const SERVICES = ['BMM Assessments', 'Digital Asset Roadmapping', 'IoT-to-Ledger Integration', 'Material & Performance Provenance', 'Compliance Data Integrity', 'Grant & Funding Readiness', 'Lifecycle Analytics Dashboards'];
 
@@ -456,11 +456,12 @@ export default function Home() {
           </Reveal>
           <Reveal stagger className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2">
             {CAPABILITIES.map((c) => (
-              <div key={c.t} className="group rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.07] to-transparent p-8 transition-all duration-300 hover:-translate-y-1 hover:border-wheat/40 hover:shadow-2xl hover:shadow-sky/10 md:p-9">
+              <a key={c.t} href={`/solutions/${c.slug}/`} className="group block rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.07] to-transparent p-8 transition-all duration-300 hover:-translate-y-1 hover:border-wheat/40 hover:shadow-2xl hover:shadow-sky/10 md:p-9">
                 <div className="mb-5 h-11 w-11 rounded-xl bg-gradient-to-br from-sky to-field-deep shadow-lg shadow-sky/30 transition-transform duration-300 group-hover:scale-110" />
                 <h3 className="text-xl font-semibold text-cream md:text-2xl">{c.t}</h3>
                 <p className="mt-3 leading-relaxed text-sky-light/75">{c.b}</p>
-              </div>
+                <span className="mt-5 inline-block text-sm font-semibold text-wheat-light transition-transform group-hover:translate-x-1">Explore solutions &rarr;</span>
+              </a>
             ))}
           </Reveal>
         </div>
@@ -474,6 +475,9 @@ export default function Home() {
             <h2 className="font-serif text-4xl font-medium leading-[1.08] text-cream md:text-5xl">The only government-recognized blockchain readiness framework.</h2>
             <p className="mt-6 text-lg leading-relaxed text-sky-light/80">Cloud Control LLC holds a Certificate of the Government Blockchain Association&apos;s Blockchain Maturity Model &mdash; a standardized quality-assurance and risk-reduction roadmap for the public sector and regulated industries.</p>
             <p className="mt-5 text-lg leading-relaxed text-sky-light/80">Competitors provide technology tools. Cloud Control provides certified governance readiness.</p>
+            <div className="mt-8">
+              <a href="/readiness/" className="rounded-full bg-wheat px-7 py-3.5 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/30 transition-transform hover:scale-[1.04] active:scale-95">Explore the BMM readiness funnel</a>
+            </div>
           </Reveal>
           <Reveal stagger className="space-y-3">
             {['Assess the digital maturity of construction and infrastructure assets', 'Identify gaps in data integrity, cybersecurity, compliance, and performance', 'Develop a clear, phased roadmap to peak digital-asset performance', 'Align programs with grant, utility, and federal funding requirements'].map((line) => (
