@@ -297,7 +297,7 @@ function initHero(THREE, mount, progressRef, reduced) {
 
   const clock = new THREE.Clock(); let raf;
   const render = () => {
-    const t = clock.getElapsedTime();
+    const t = reduced ? 0 : clock.getElapsedTime();
     const sc = (window.__lenis && typeof window.__lenis.scroll === 'number') ? window.__lenis.scroll : (window.scrollY || window.pageYOffset || 0);
     const p = Math.min(1, Math.max(0, sc / (window.innerHeight * 1.7)));
     progressRef.current = p;
@@ -318,8 +318,8 @@ function initHero(THREE, mount, progressRef, reduced) {
     renderer.render(scene, camera);
     raf = requestAnimationFrame(render);
   };
-  if (typeof window !== 'undefined') { window.__cc = { scene, camera, buildings, twins }; }
-  if (reduced) renderer.render(scene, camera); else raf = requestAnimationFrame(render);
+  if (typeof window !== 'undefined') { window.__cc = { camera, buildings, twins }; }
+  raf = requestAnimationFrame(render);
 
   return () => {
     cancelAnimationFrame(raf);
