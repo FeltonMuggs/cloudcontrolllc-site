@@ -155,9 +155,9 @@ function initHero(THREE, mount, progressRef, reduced) {
   const ease = (x) => 1 - Math.pow(1 - clamp(x), 3);
 
   const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x0b2237, 0.05);
+  scene.fog = new THREE.FogExp2(0x0b2237, 0.055);
   const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 200);
-  camera.position.set(0, 2.2, 9);
+  camera.position.set(0, 1.9, 7.8);
   const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
   renderer.setSize(width, height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -167,7 +167,7 @@ function initHero(THREE, mount, progressRef, reduced) {
   const glow = glowTexture(THREE), bird = birdTexture(THREE), cloud = cloudTexture(THREE);
 
   // --- terrain ---
-  const terrainGeo = new THREE.PlaneGeometry(110, 110, 170, 170);
+  const terrainGeo = new THREE.PlaneGeometry(110, 110, 96, 96);
   const terrainMat = new THREE.ShaderMaterial({
     wireframe: true, transparent: true,
     uniforms: { uTime: { value: 0 } },
@@ -179,16 +179,16 @@ function initHero(THREE, mount, progressRef, reduced) {
       'varying float vH; varying float vDist;' +
       'void main(){ vec3 low=vec3(0.16,0.40,0.60); vec3 mid=vec3(0.34,0.60,0.27); vec3 high=vec3(0.84,0.66,0.26);' +
       'float m=smoothstep(-0.8,1.4,vH); vec3 col=mix(low,mid,smoothstep(0.0,0.55,m)); col=mix(col,high,smoothstep(0.55,1.0,m));' +
-      'float fade=clamp(1.0-vDist/34.0,0.0,1.0); float a=(0.30+m*0.42)*fade; gl_FragColor=vec4(col,a); }',
+      'float fade=clamp(1.0-vDist/40.0,0.0,1.0); float a=(0.42+m*0.55)*fade; gl_FragColor=vec4(col,a); }',
   });
   const terrain = new THREE.Mesh(terrainGeo, terrainMat);
-  terrain.rotation.x = -Math.PI / 2; terrain.position.set(0, -2.4, -12);
+  terrain.rotation.x = -Math.PI / 2; terrain.position.set(0, -1.9, -11);
   scene.add(terrain);
 
   // --- river (flowing) ---
   const rPts = [];
   for (let i = 0; i <= 44; i++) { const u = i / 44; rPts.push(new THREE.Vector3(7.5 * Math.sin(u * 5.2 + 0.6), -2.5 + Math.sin(u * 9.0) * 0.05, 3 - u * 34)); }
-  const riverGeo = new THREE.TubeGeometry(new THREE.CatmullRomCurve3(rPts), 160, 0.6, 8, false);
+  const riverGeo = new THREE.TubeGeometry(new THREE.CatmullRomCurve3(rPts), 120, 0.6, 6, false);
   const riverMat = new THREE.ShaderMaterial({
     transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
     uniforms: { uTime: { value: 0 } },
@@ -201,13 +201,13 @@ function initHero(THREE, mount, progressRef, reduced) {
   const buildings = [], twins = [];
   const bBoxGeo = new THREE.BoxGeometry(1, 1, 1); bBoxGeo.translate(0, 0.5, 0);
   const bEdgeGeo = new THREE.EdgesGeometry(bBoxGeo);
-  const N = 26;
+  const N = 18;
   for (let i = 0; i < N; i++) {
     const bx = (Math.random() * 2 - 1) * 12.5;
     const bz = -2 - Math.random() * 22;
     const bw = 0.55 + Math.random() * 1.0, bd = 0.55 + Math.random() * 1.0;
     const bh = 2.4 + Math.random() * 5.2;
-    const gy = -3.2;
+    const gy = -2.9;
     const edgeCol = Math.random() > 0.62 ? 0xe6b84e : 0x74b6e6;
     const mesh = new THREE.Mesh(bBoxGeo, new THREE.MeshStandardMaterial({ color: 0x163a5c, emissive: 0x1a4063, emissiveIntensity: 0.32, metalness: 0.6, roughness: 0.35, transparent: true, opacity: 0.9 }));
     mesh.position.set(bx, gy, bz); mesh.scale.set(bw, 0.02, bd);
@@ -218,7 +218,7 @@ function initHero(THREE, mount, progressRef, reduced) {
   const tBoxGeo = new THREE.BoxGeometry(1, 1, 1); tBoxGeo.translate(0, 0.5, 0);
   const tEdgeGeo = new THREE.EdgesGeometry(tBoxGeo);
   const linkPos = [];
-  const twinIdx = buildings.map((_, i) => i).sort(() => Math.random() - 0.5).slice(0, 12);
+  const twinIdx = buildings.map((_, i) => i).sort(() => Math.random() - 0.5).slice(0, 9);
   twinIdx.forEach((bi) => {
     const b = buildings[bi]; const sk = 0.17;
     const tx = b.bx * 0.55, tz = -7 - Math.random() * 6, ty = 6.6 + Math.random() * 2.4;
@@ -247,7 +247,7 @@ function initHero(THREE, mount, progressRef, reduced) {
   const foliageGeo = new THREE.ConeGeometry(0.36, 0.95, 7); foliageGeo.translate(0, 0.98, 0);
   const trunkMat = new THREE.MeshStandardMaterial({ color: 0x5a3d24, roughness: 0.9 });
   const foliageMat = new THREE.MeshStandardMaterial({ color: 0x3f7a31, emissive: 0x21451d, emissiveIntensity: 0.28, roughness: 0.8 });
-  for (let i = 0; i < 16; i++) {
+  for (let i = 0; i < 10; i++) {
     const grp = new THREE.Group();
     grp.add(new THREE.Mesh(trunkGeo, trunkMat)); grp.add(new THREE.Mesh(foliageGeo, foliageMat));
     grp.position.set((Math.random() * 2 - 1) * 13, -2.7, -1 - Math.random() * 20);
@@ -267,7 +267,7 @@ function initHero(THREE, mount, progressRef, reduced) {
 
   // --- clouds ---
   const clouds = [];
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 4; i++) {
     const cl = new THREE.Sprite(new THREE.SpriteMaterial({ map: cloud, color: 0x9fc2e0, transparent: true, opacity: 0.5, depthWrite: false, blending: THREE.AdditiveBlending }));
     cl.scale.set(8 + Math.random() * 6, 4 + Math.random() * 3, 1);
     cl.position.set((Math.random() * 2 - 1) * 16, 6.4 + Math.random() * 3.2, -10 - Math.random() * 8);
@@ -276,7 +276,7 @@ function initHero(THREE, mount, progressRef, reduced) {
   }
 
   // --- particles ---
-  const pCount = 600; const pGeo = new THREE.BufferGeometry(); const pPos = new Float32Array(pCount * 3);
+  const pCount = 380; const pGeo = new THREE.BufferGeometry(); const pPos = new Float32Array(pCount * 3);
   for (let i = 0; i < pCount; i++) { pPos[i * 3] = (Math.random() - 0.5) * 72; pPos[i * 3 + 1] = Math.random() * 24 - 1; pPos[i * 3 + 2] = (Math.random() - 0.5) * 60 - 12; }
   pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
   const points = new THREE.Points(pGeo, new THREE.PointsMaterial({ map: glow, color: 0xbcd9f0, size: 0.28, transparent: true, opacity: 0.65, depthWrite: false, blending: THREE.AdditiveBlending, sizeAttenuation: true }));
@@ -307,11 +307,11 @@ function initHero(THREE, mount, progressRef, reduced) {
     for (const sp of birds) { const u = sp.userData; const a = t * u.sp + u.ph; sp.position.set(u.cx + Math.cos(a) * u.r, u.yy + Math.sin(a * 1.3) * 0.5, u.cz + Math.sin(a) * u.r * 0.6); sp.material.rotation = Math.sin(a) * 0.3; sp.scale.x = (0.9) * (1 + Math.sin(t * 8 + u.ph) * 0.12); }
     for (const cl of clouds) { cl.position.x += cl.userData.dx * 0.02; if (cl.position.x > 19) cl.position.x = -19; if (cl.position.x < -19) cl.position.x = 19; }
     points.rotation.y = t * 0.014;
-    const camX = mouse.x * 2.4, camY = 2.2 - mouse.y * 1.1 + p * 1.0, camZ = 9 - p * 8.5;
+    const camX = mouse.x * 2.4, camY = 1.9 - mouse.y * 1.0 + p * 1.7, camZ = 7.8 - p * 7.0;
     camera.position.x += (camX - camera.position.x) * 0.05;
     camera.position.y += (camY - camera.position.y) * 0.05;
     camera.position.z += (camZ - camera.position.z) * 0.05;
-    camera.lookAt(0, 1.0 + p * 4.0, -11);
+    camera.lookAt(0, 1.05 + p * 3.6, -12);
     renderer.render(scene, camera);
     raf = requestAnimationFrame(render);
   };
@@ -372,17 +372,16 @@ export default function Home() {
         <HeroScene />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-2/3 bg-[radial-gradient(75%_55%_at_50%_0%,rgba(90,155,212,0.16),transparent_72%)] z-[1]" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-navy-deep/70 via-navy-deep/25 to-transparent z-[1]" />
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-2/3 bg-gradient-to-r from-navy-deep/55 to-transparent z-[1]" />
         <div className="relative z-10 mx-auto flex min-h-screen max-w-8xl flex-col justify-center px-6 md:px-10">
           <div className="mb-7 inline-flex w-fit items-center gap-2.5 rounded-full border border-sky/30 bg-navy-900/50 px-4 py-2 text-xs font-medium tracking-wide text-sky-light backdrop-blur-sm">
             <span className="h-1.5 w-1.5 rounded-full bg-wheat" />
             GBA &middot; Blockchain Maturity Model Certified
           </div>
-          <h1 className="font-serif max-w-5xl text-[12.5vw] font-semibold leading-[0.95] tracking-tight text-cream sm:text-[9vw] md:text-[6.6vw] [text-shadow:0_2px_40px_rgba(8,26,43,0.7)]">
+          <h1 className="font-serif max-w-5xl text-[12.5vw] font-semibold leading-[0.95] tracking-tight text-cream sm:text-[9vw] md:text-[6.6vw] [text-shadow:0_2px_40px_rgba(8,26,43,0.65)]">
             Verifiable infrastructure,<br />
             <span className="text-sky-light">rooted in the </span><span className="italic text-wheat-light">real world.</span>
           </h1>
-          <p className="mt-8 max-w-xl text-lg leading-relaxed text-sky-light/90 md:text-xl [text-shadow:0_1px_22px_rgba(8,26,43,0.85)]">
+          <p className="mt-8 max-w-xl text-lg leading-relaxed text-sky-light/90 md:text-xl [text-shadow:0_1px_22px_rgba(8,26,43,0.75)]">
             Cloud Control turns fragmented construction and infrastructure data into a verifiable Golden Thread &mdash; innovation aligned with Mother Nature, from concrete to code.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -390,7 +389,7 @@ export default function Home() {
             <a href="#approach" className="rounded-full border border-sky-light/40 bg-navy-900/30 px-7 py-3.5 text-sm font-semibold text-cream backdrop-blur-sm transition-colors hover:border-wheat hover:text-wheat-light">See how it works</a>
           </div>
         </div>
-        <div className="pointer-events-none absolute bottom-7 left-1/2 z-10 -translate-x-1/2 text-[11px] uppercase tracking-[0.3em] text-sky-light/60">Scroll to watch it build</div>
+        <div className="pointer-events-none absolute bottom-7 left-1/2 z-10 -translate-x-1/2 text-[11px] uppercase tracking-[0.3em] text-sky-light/60">Scroll to explore</div>
       </section>
 
       {/* ===== FROM CONCRETE TO CODE ===== */}
