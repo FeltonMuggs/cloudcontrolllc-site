@@ -23,12 +23,12 @@ const SOLUTIONS = {
       'Finance-ready outputs that map cleanly to capital, grant, and procurement diligence.',
     ],
     featured: [
-      { company: 'Evergon Labs', sector: 'Digital Identity & Infrastructure', name: 'End-to-end tokenized asset lifecycle', desc: 'Manages tokenized assets as fully-governed financial products — issuance, distribution, transfers, yield, corporate actions, and redemptions — with programmable compliance (identity and eligibility checks) embedded directly into settlement.' },
-      { company: 'Swift', sector: 'Finance', name: 'The Swift Ledger', desc: 'A shared ledger that orchestrates the full payment lifecycle — funding, authorization, and settlement triggering — for deterministic 24/7 cross-border payments, while preserving existing legal and regulatory settlement frameworks.' },
-      { company: 'Bank of Canada', sector: 'Government', name: 'Project Samara', desc: 'A distributed-ledger capital-markets experiment that issued and traded a real CA$100M government bond settled with central bank money, testing the feasibility of DLT-based bond issuance.' },
-      { company: 'Cardano Foundation', sector: 'Finance', name: 'Reeve — audit attestations', desc: 'Tamper-evident audit attestations for regulated financial reporting: restatements are anchored as new records preserving full version history, paired with an on-chain audit opinion issued with Grant Thornton.' },
-      { company: 'Edge & Node', sector: 'Compliance Infrastructure', name: 'Amp — compliance database', desc: 'A blockchain-native database for enterprise compliance and auditability — sanctions screening, AML workflows, tokenized asset registries, and stablecoin treasury tracking — deployable on-premises for regulated environments.' },
-      { company: 'Archax', sector: 'Finance', name: 'GOVY — tokenized T-Bills', desc: 'Tokenized US Treasury bills with custody, settlement, and delivery rights embedded directly in the token, backed 1:1 in regulated custody across Ethereum, Hedera, and Stellar.' },
+      { company: 'Evergon Labs', url: 'https://evergonlabs.com', sector: 'Digital Identity & Infrastructure', name: 'End-to-end tokenized asset lifecycle', desc: 'Manages tokenized assets as fully-governed financial products — issuance, distribution, transfers, yield, corporate actions, and redemptions — with programmable compliance (identity and eligibility checks) embedded directly into settlement.' },
+      { company: 'Swift', url: 'https://www.swift.com', sector: 'Finance', name: 'The Swift Ledger', desc: 'A shared ledger that orchestrates the full payment lifecycle — funding, authorization, and settlement triggering — for deterministic 24/7 cross-border payments, while preserving existing legal and regulatory settlement frameworks.' },
+      { company: 'Bank of Canada', url: 'https://www.bankofcanada.ca', sector: 'Government', name: 'Project Samara', desc: 'A distributed-ledger capital-markets experiment that issued and traded a real CA$100M government bond settled with central bank money, testing the feasibility of DLT-based bond issuance.' },
+      { company: 'Cardano Foundation', url: 'https://cardanofoundation.org', sector: 'Finance', name: 'Reeve — audit attestations', desc: 'Tamper-evident audit attestations for regulated financial reporting: restatements are anchored as new records preserving full version history, paired with an on-chain audit opinion issued with Grant Thornton.' },
+      { company: 'Edge & Node', url: 'https://edgeandnode.com', sector: 'Compliance Infrastructure', name: 'Amp — compliance database', desc: 'A blockchain-native database for enterprise compliance and auditability — sanctions screening, AML workflows, tokenized asset registries, and stablecoin treasury tracking — deployable on-premises for regulated environments.' },
+      { company: 'Archax', url: 'https://govy.finance', sector: 'Finance', name: 'GOVY — tokenized T-Bills', desc: 'Tokenized US Treasury bills with custody, settlement, and delivery rights embedded directly in the token, backed 1:1 in regulated custody across Ethereum, Hedera, and Stellar.' },
     ],
   },
   'iot-sensor-ingestion': {
@@ -46,12 +46,12 @@ const SOLUTIONS = {
       'Transparent, defensible reporting for regulators, buyers, and supply-chain partners.',
     ],
     featured: [
-      { company: 'Cintel', sector: 'Agriculture & Energy', name: 'AgroTrack traceability', desc: 'Anchors each critical data point — collected volumes, origin and destination, lab and organoleptic testing — to an immutable record, with smart contracts enforcing business rules and supporting product payments.' },
-      { company: 'CattleProof Verified', sector: 'Agriculture & Energy', name: 'Livestock identity infrastructure', desc: 'Next-generation livestock identity delivering faster, more secure payments, real-time shareable data for supply-chain partners, and improved regulatory compliance and auditability.' },
-      { company: 'Blockchain for Energy', sector: 'Agriculture & Energy', name: 'Shared energy data platform', desc: 'An infrastructure layer for the energy industry that cuts manual reconciliation and supports operational coordination, standardized emissions data for carbon reporting, and participant identity and credentials.' },
-      { company: 'onocoy / UZH Blockchain Center', sector: 'Infrastructure', name: 'High-precision GNSS commons', desc: 'An economically viable shared infrastructure for high-precision GNSS positioning: crowdsourced reference stations earn token rewards scaled by signal quality, availability, and coverage contribution.' },
-      { company: 'Virginia Dept. of Environmental Quality', sector: 'Government', name: 'SWaN water-credit marketplace', desc: 'A digital marketplace for environmental mitigation and nutrient-banking credits that brings public transparency, steadier pricing, and more timely, ecologically successful offsets to water management.' },
-      { company: '2Tokens / Amelander Energie Coöperatie', sector: 'Agriculture & Energy', name: 'Tokenized community energy', desc: 'Fair-priced local energy contracts and tokenized eBonds to finance startup assets, selected for the European Commission’s Blockchain Regulatory Sandbox.' },
+      { company: 'Cintel', url: 'https://cintel.co', sector: 'Agriculture & Energy', name: 'AgroTrack traceability', desc: 'Anchors each critical data point — collected volumes, origin and destination, lab and organoleptic testing — to an immutable record, with smart contracts enforcing business rules and supporting product payments.' },
+      { company: 'CattleProof Verified', url: 'https://cattleproof.com', sector: 'Agriculture & Energy', name: 'Livestock identity infrastructure', desc: 'Next-generation livestock identity delivering faster, more secure payments, real-time shareable data for supply-chain partners, and improved regulatory compliance and auditability.' },
+      { company: 'Blockchain for Energy', url: 'https://blockchainforenergy.net', sector: 'Agriculture & Energy', name: 'Shared energy data platform', desc: 'An infrastructure layer for the energy industry that cuts manual reconciliation and supports operational coordination, standardized emissions data for carbon reporting, and participant identity and credentials.' },
+      { company: 'onocoy / UZH Blockchain Center', url: 'https://onocoy.com', sector: 'Infrastructure', name: 'High-precision GNSS commons', desc: 'An economically viable shared infrastructure for high-precision GNSS positioning: crowdsourced reference stations earn token rewards scaled by signal quality, availability, and coverage contribution.' },
+      { company: 'Virginia Dept. of Environmental Quality', url: 'https://swan.waterledger.com', sector: 'Government', name: 'SWaN water-credit marketplace', desc: 'A digital marketplace for environmental mitigation and nutrient-banking credits that brings public transparency, steadier pricing, and more timely, ecologically successful offsets to water management.' },
+      { company: '2Tokens / Amelander Energie Coöperatie', url: 'https://www.2tokens.org', sector: 'Agriculture & Energy', name: 'Tokenized community energy', desc: 'Fair-priced local energy contracts and tokenized eBonds to finance startup assets, selected for the European Commission’s Blockchain Regulatory Sandbox.' },
     ],
   },
   'digital-provenance': {
@@ -69,12 +69,12 @@ const SOLUTIONS = {
       'Provenance that links physical assets to finance-ready, auditable digital records.',
     ],
     featured: [
-      { company: 'The Provenance Chain Network', sector: 'Supply Chains', name: 'Commercial Trust™ Architecture', desc: 'Digitized rules, decentralized evidence storage, AI-based evaluation, and DLT-recorded credentials combine to issue reliability and authenticity "passports" across a value chain.' },
-      { company: 'IOTA Foundation', sector: 'Supply Chains', name: 'TLIP trade-logistics platform', desc: 'A trusted, transparent platform integrated with national authorities (Kenya Revenue Authority and others) that issues permits instantly and lets exporters securely store and share consignment data.' },
-      { company: 'DFM Data Corp.', sector: 'Supply Chains', name: 'Transport Unit Identifier (TUID)', desc: 'A custom on-chain ID for every shipment that preserves traceability even as goods change custody, are re-routed, or are split and recombined — bridging physical and digital worlds.' },
-      { company: 'UNDP / Plastiks', sector: 'Sustainability', name: 'Verified plastic recovery', desc: 'Blockchain verification, traceability, and financing for plastic recovery — 4.2M+ kg verified across four regions in 2025, each kilogram backed by an immutable on-chain certificate.' },
-      { company: 'Fairfood International + Hashgraph', sector: 'Agriculture', name: 'Traceable farmer payments', desc: 'Links smallholder-farmer transactions to Hedera’s ledger so payments are traceable, verifiable, and tied to the individual farmer — supporting fair compensation and livelihoods.' },
-      { company: 'Tether Gold (XAUT)', sector: 'Commodities', name: 'Allocated physical gold provenance', desc: 'Each token represents ownership of one fine troy ounce of allocated physical gold on a specific bar, combining direct gold exposure with on-chain transactional utility.' },
+      { company: 'The Provenance Chain Network', url: 'https://theprovenancechain.com', sector: 'Supply Chains', name: 'Commercial Trust™ Architecture', desc: 'Digitized rules, decentralized evidence storage, AI-based evaluation, and DLT-recorded credentials combine to issue reliability and authenticity "passports" across a value chain.' },
+      { company: 'IOTA Foundation', url: 'https://tlip.io', sector: 'Supply Chains', name: 'TLIP trade-logistics platform', desc: 'A trusted, transparent platform integrated with national authorities (Kenya Revenue Authority and others) that issues permits instantly and lets exporters securely store and share consignment data.' },
+      { company: 'DFM Data Corp.', url: 'https://tuid.dfmdata.com', sector: 'Supply Chains', name: 'Transport Unit Identifier (TUID)', desc: 'A custom on-chain ID for every shipment that preserves traceability even as goods change custody, are re-routed, or are split and recombined — bridging physical and digital worlds.' },
+      { company: 'UNDP / Plastiks', url: 'https://plastiks.io', sector: 'Sustainability', name: 'Verified plastic recovery', desc: 'Blockchain verification, traceability, and financing for plastic recovery — 4.2M+ kg verified across four regions in 2025, each kilogram backed by an immutable on-chain certificate.' },
+      { company: 'Fairfood International + Hashgraph', url: 'https://fairfood.org', sector: 'Agriculture', name: 'Traceable farmer payments', desc: 'Links smallholder-farmer transactions to Hedera’s ledger so payments are traceable, verifiable, and tied to the individual farmer — supporting fair compensation and livelihoods.' },
+      { company: 'Tether Gold (XAUT)', url: 'https://gold.tether.to', sector: 'Commodities', name: 'Allocated physical gold provenance', desc: 'Each token represents ownership of one fine troy ounce of allocated physical gold on a specific bar, combining direct gold exposure with on-chain transactional utility.' },
     ],
   },
   'lifecycle-governance': {
@@ -92,12 +92,12 @@ const SOLUTIONS = {
       'A governance backbone that carries an asset from planning to procurement to operations.',
     ],
     featured: [
-      { company: 'Uniform Commercial Code (UCC) Amendments', sector: 'Government', name: 'Legal certainty for digital collateral', desc: 'Defines Controllable Electronic Records (CERs) and a uniform method for creditors to perfect a security interest in digital assets by obtaining "control" — giving legal certainty to digital-asset collateral.' },
-      { company: 'Wyoming Stable Token Commission', sector: 'Government', name: 'FRNT public-issuer framework', desc: 'A replicable framework for state-issued digital payments, designed for bilateral settlement between public issuers and faster payment-on-delivery for commodities.' },
-      { company: 'Utah Blockchain Coalition', sector: 'Government', name: 'SEDI state-endorsed identity', desc: 'State-endorsed digital identity enabling instant KYC — combining individual privacy control, cryptographic validation, and publicly verifiable on-chain events.' },
-      { company: 'Global Standards Mapping Initiative', sector: 'Standards', name: 'GSMI standards mapping', desc: 'Crowdsourced, open-access mapping of global blockchain standards — referenced by corporations, regulators, agencies, and academia to advance common standards and interoperability.' },
-      { company: 'InterWork Alliance', sector: 'Standards', name: 'Token Taxonomy Framework (TTF)', desc: 'A standards framework for defining tokens and data packages, used as the foundation for digital Measurement, Reporting & Verification (dMRV) of environmental claims.' },
-      { company: 'GLEIF', sector: 'Standards', name: 'Verifiable LEIs (vLEI)', desc: 'Verifiable Legal Entity Identifiers that embed verifiable organizational identity for automated compliance, linking smart contracts and tokens to real-world legal entities.' },
+      { company: 'Uniform Commercial Code (UCC) Amendments', url: 'https://www.uniformlaws.org', sector: 'Government', name: 'Legal certainty for digital collateral', desc: 'Defines Controllable Electronic Records (CERs) and a uniform method for creditors to perfect a security interest in digital assets by obtaining "control" — giving legal certainty to digital-asset collateral.' },
+      { company: 'Wyoming Stable Token Commission', url: 'https://stabletoken.wyo.gov', sector: 'Government', name: 'FRNT public-issuer framework', desc: 'A replicable framework for state-issued digital payments, designed for bilateral settlement between public issuers and faster payment-on-delivery for commodities.' },
+      { company: 'Utah Blockchain Coalition', url: 'https://privacy.utah.gov', sector: 'Government', name: 'SEDI state-endorsed identity', desc: 'State-endorsed digital identity enabling instant KYC — combining individual privacy control, cryptographic validation, and publicly verifiable on-chain events.' },
+      { company: 'Global Standards Mapping Initiative', url: 'https://gbbc.io/gsmi', sector: 'Standards', name: 'GSMI standards mapping', desc: 'Crowdsourced, open-access mapping of global blockchain standards — referenced by corporations, regulators, agencies, and academia to advance common standards and interoperability.' },
+      { company: 'InterWork Alliance', url: 'https://interworkalliance.github.io', sector: 'Standards', name: 'Token Taxonomy Framework (TTF)', desc: 'A standards framework for defining tokens and data packages, used as the foundation for digital Measurement, Reporting & Verification (dMRV) of environmental claims.' },
+      { company: 'GLEIF', url: 'https://gleif.org', sector: 'Standards', name: 'Verifiable LEIs (vLEI)', desc: 'Verifiable Legal Entity Identifiers that embed verifiable organizational identity for automated compliance, linking smart contracts and tokens to real-world legal entities.' },
     ],
   },
 };
@@ -177,15 +177,16 @@ export default function SolutionPage({ params }) {
         <div className="mx-auto max-w-6xl">
           <p className="mb-3 font-mono text-xs uppercase tracking-[0.25em] text-wheat">Real-world proof</p>
           <h2 className="font-serif max-w-3xl text-3xl font-medium leading-[1.1] text-cream md:text-5xl">Solutions already live in this space.</h2>
-          <p className="mt-4 max-w-2xl leading-relaxed text-sky-light/70">A snapshot of organizations deploying this capability today &mdash; the kind of verifiable infrastructure Cloud Control brings to construction, infrastructure, and real-world assets.</p>
+          <p className="mt-4 max-w-2xl leading-relaxed text-sky-light/70">A snapshot of organizations deploying this capability today &mdash; the kind of verifiable infrastructure Cloud Control brings to construction, infrastructure, and real-world assets. Select any to visit the solution.</p>
           <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
             {s.featured.map((f) => (
-              <div key={f.company} className="flex flex-col rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.07] to-transparent p-7 transition-all duration-300 hover:-translate-y-1 hover:border-wheat/40 hover:shadow-2xl hover:shadow-sky/10">
+              <a key={f.company} href={f.url} target="_blank" rel="noopener noreferrer" className="group/card flex flex-col rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.07] to-transparent p-7 transition-all duration-300 hover:-translate-y-1 hover:border-wheat/40 hover:shadow-2xl hover:shadow-sky/10">
                 <span className="mb-4 w-fit rounded-full border border-sky/30 bg-navy-900/40 px-3 py-1 text-[11px] font-medium uppercase tracking-wide text-sky-light/80">{f.sector}</span>
                 <h3 className="text-lg font-semibold text-cream">{f.name}</h3>
                 <p className="mt-1 text-sm font-medium text-wheat-light">{f.company}</p>
                 <p className="mt-3 text-sm leading-relaxed text-sky-light/75">{f.desc}</p>
-              </div>
+                <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-sky-light/70 transition-colors group-hover/card:text-wheat-light">Visit solution &#8599;</span>
+              </a>
             ))}
           </div>
           <p className="mt-10 text-xs leading-relaxed text-sky-light/50">Featured solutions sourced from the Global Blockchain Business Council (GBBC) &ldquo;101 Real-World Blockchain Use Cases Handbook,&rdquo; 2026 Edition. Cloud Control LLC is not affiliated with the listed organizations; examples are shown to illustrate the capability.</p>
