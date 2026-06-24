@@ -157,7 +157,7 @@ function initHero(THREE, mount, progressRef, reduced) {
   const scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2(0x0b2237, 0.055);
   const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 200);
-  camera.position.set(0, 1.9, 7.8);
+  camera.position.set(0, 1.7, 7.8);
   const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
   renderer.setSize(width, height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -204,9 +204,9 @@ function initHero(THREE, mount, progressRef, reduced) {
   const N = 18;
   for (let i = 0; i < N; i++) {
     const bx = (Math.random() * 2 - 1) * 12.5;
-    const bz = -3 - Math.random() * 16;
-    const bw = 0.55 + Math.random() * 1.0, bd = 0.55 + Math.random() * 1.0;
-    const bh = 2.4 + Math.random() * 5.2;
+    const bz = -3 - Math.random() * 15;
+    const bw = 0.7 + Math.random() * 1.1, bd = 0.7 + Math.random() * 1.1;
+    const bh = 2.0 + Math.random() * 4.0;
     const gy = -2.9;
     const edgeCol = Math.random() > 0.62 ? 0xe6b84e : 0x74b6e6;
     const mesh = new THREE.Mesh(bBoxGeo, new THREE.MeshStandardMaterial({ color: 0x163a5c, emissive: 0x1a4063, emissiveIntensity: 0.32, metalness: 0.6, roughness: 0.35, transparent: true, opacity: 0.9 }));
@@ -220,8 +220,8 @@ function initHero(THREE, mount, progressRef, reduced) {
   const linkPos = [];
   const twinIdx = buildings.map((_, i) => i).sort(() => Math.random() - 0.5).slice(0, 9);
   twinIdx.forEach((bi) => {
-    const b = buildings[bi]; const sk = 0.22;
-    const tx = b.bx * 0.6, tz = -7 - Math.random() * 5, ty = 5.0 + Math.random() * 2.0;
+    const b = buildings[bi]; const sk = 0.24;
+    const tx = b.bx * 0.6, tz = -6 - Math.random() * 5, ty = 3.6 + Math.random() * 1.6;
     const mesh = new THREE.Mesh(tBoxGeo, new THREE.MeshBasicMaterial({ color: 0x0e2c47, transparent: true, opacity: 0 }));
     mesh.position.set(tx, ty, tz); mesh.scale.set(b.bw * sk, b.bh * sk, b.bd * sk);
     const edges = new THREE.LineSegments(tEdgeGeo, new THREE.LineBasicMaterial({ color: b.edgeCol, transparent: true, opacity: 0 }));
@@ -270,7 +270,7 @@ function initHero(THREE, mount, progressRef, reduced) {
   for (let i = 0; i < 4; i++) {
     const cl = new THREE.Sprite(new THREE.SpriteMaterial({ map: cloud, color: 0x9fc2e0, transparent: true, opacity: 0.5, depthWrite: false, blending: THREE.AdditiveBlending }));
     cl.scale.set(8 + Math.random() * 6, 4 + Math.random() * 3, 1);
-    cl.position.set((Math.random() * 2 - 1) * 16, 6.4 + Math.random() * 3.2, -10 - Math.random() * 8);
+    cl.position.set((Math.random() * 2 - 1) * 16, 4.6 + Math.random() * 2.6, -10 - Math.random() * 8);
     cl.userData = { dx: (Math.random() * 2 - 1) * 0.25 };
     scene.add(cl); clouds.push(cl);
   }
@@ -303,18 +303,18 @@ function initHero(THREE, mount, progressRef, reduced) {
     progressRef.current = p;
     terrainMat.uniforms.uTime.value = t; riverMat.uniforms.uTime.value = t;
     for (const b of buildings) { const local = ease((p - b.order * 0.32) / 0.5); b.mesh.scale.y = Math.max(0.02, b.bh * local); }
-    const tw = ease((p - 0.18) / 0.5);
-    for (const T of twins) { T.mesh.material.opacity = 0.28 * tw; T.edges.material.opacity = 0.92 * tw; T.mesh.position.y = T.ty + Math.sin(t * 0.8 + T.tx) * 0.12; }
-    netMat.opacity = 0.5 * tw; linkMat.opacity = 0.45 * tw;
+    const tw = ease((p - 0.15) / 0.5);
+    for (const T of twins) { T.mesh.material.opacity = 0.34 * tw; T.edges.material.opacity = 1.0 * tw; T.mesh.position.y = T.ty + Math.sin(t * 0.8 + T.tx) * 0.12; }
+    netMat.opacity = 0.6 * tw; linkMat.opacity = 0.55 * tw;
     for (const g of trees) g.rotation.z = Math.sin(t * 0.7 + g.userData.ph) * 0.045;
     for (const sp of birds) { const u = sp.userData; const a = t * u.sp + u.ph; sp.position.set(u.cx + Math.cos(a) * u.r, u.yy + Math.sin(a * 1.3) * 0.5, u.cz + Math.sin(a) * u.r * 0.6); sp.material.rotation = Math.sin(a) * 0.3; sp.scale.x = (0.9) * (1 + Math.sin(t * 8 + u.ph) * 0.12); }
     for (const cl of clouds) { cl.position.x += cl.userData.dx * 0.02; if (cl.position.x > 19) cl.position.x = -19; if (cl.position.x < -19) cl.position.x = 19; }
     points.rotation.y = t * 0.014;
-    const camX = mouse.x * 2.4, camY = 1.9 - mouse.y * 1.0 + p * 1.0, camZ = 7.8 - p * 5.0;
+    const camX = mouse.x * 1.8, camY = 1.7 - mouse.y * 0.8 + p * 0.9, camZ = 7.8 - p * 4.0;
     camera.position.x += (camX - camera.position.x) * 0.05;
     camera.position.y += (camY - camera.position.y) * 0.05;
     camera.position.z += (camZ - camera.position.z) * 0.05;
-    camera.lookAt(0, 1.0 + p * 2.3, -12);
+    camera.lookAt(0, 0.2 + p * 1.5, -11);
     renderer.render(scene, camera);
     raf = requestAnimationFrame(render);
   };
