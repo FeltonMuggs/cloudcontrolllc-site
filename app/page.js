@@ -367,8 +367,6 @@ function HomeAudio() {
   const startedRef = useRef(false);
   const ctrlRef = useRef(null);
   useEffect(() => {
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced) return;
     window.onSpotifyIframeApiReady = (IFrameAPI) => {
       const el = document.getElementById('cc-spotify');
       if (!el) return;
