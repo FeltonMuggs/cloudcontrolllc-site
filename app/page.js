@@ -74,6 +74,7 @@ const LINKS = [
   { label: 'BMM Certified', href: '#bmm' },
   { label: 'Contact', href: '#contact' },
 ];
+const PROJECT_LINKS = [{ label: 'DNaI', href: '/dnai' }];
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -99,6 +100,13 @@ function Nav() {
         <nav className="hidden items-center gap-9 lg:flex">
           {LINKS.map((l) => (
             <a key={l.href} href={l.href} onClick={(e) => go(e, l.href)} className="text-sm font-medium text-sky-light/80 transition-colors hover:text-cream">{l.label}</a>
+          ))}
+          <span className="h-4 w-[1px] bg-white/15" aria-hidden="true" />
+          {PROJECT_LINKS.map((l) => (
+            <a key={l.href} href={l.href} className="flex items-center gap-1.5 text-sm font-medium text-field transition-colors hover:text-field-deep">
+              <span className="h-1.5 w-1.5 rounded-full bg-field" />
+              {l.label}
+            </a>
           ))}
         </nav>
         <a href="#contact" onClick={(e) => go(e, '#contact')} className="rounded-full bg-wheat px-5 py-2.5 text-sm font-semibold text-navy-900 shadow-lg shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">Request a BMM Assessment</a>
