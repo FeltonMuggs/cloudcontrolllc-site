@@ -201,6 +201,7 @@ function DNACanvas() {
 const NAV_LINKS = [
   { label: 'Overview', href: '#overview' },
   { label: 'How It Works', href: '#how' },
+  { label: 'Watch', href: '#watch' },
   { label: 'Token', href: '#token' },
   { label: 'Roadmap', href: '#roadmap' },
   { label: 'Contact', href: '#contact' },
@@ -446,6 +447,36 @@ export default function DNaIPage() {
           </div>
         </div>
       </section>
+
+      {/* ===== VIDEO ===== */}
+      <section id="watch" className="relative bg-navy-deep px-6 py-24 md:px-10 md:py-32">
+        <div className="mx-auto max-w-5xl">
+          <Reveal>
+            <p className="mb-3 font-mono text-xs uppercase tracking-[0.25em] text-field text-center">Watch</p>
+            <h2 className="font-serif text-center text-4xl font-medium leading-[1.08] text-cream md:text-5xl">
+              Medical AI without exposing<br />
+              <span className="italic text-wheat-light">your DNA.</span>
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-center text-lg leading-relaxed text-sky-light/80">
+              See why genomic privacy and AI-powered medicine don&rsquo;t have to be in conflict — and how DNaI makes both possible.
+            </p>
+          </Reveal>
+          <Reveal y={32}>
+            <div className="relative mt-12 overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-black/40"
+                 style={{ paddingTop: '56.25%' }}>
+              <iframe
+                src="https://www.youtube.com/embed/Y6d9MhKyrTo"
+                title="Medical AI without exposing your DNA"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                loading="lazy"
+                className="absolute inset-0 h-full w-full"
+              />
+            </div>
+          </Reveal>
+        </div>
+      </section>
+      <Hills from="bg-navy-deep" to="fill-navy" />
 
       {/* ===== APPLICATIONS ===== */}
       <section className="relative grain bg-navy px-6 py-24 md:px-10 md:py-32">
