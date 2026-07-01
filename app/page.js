@@ -72,6 +72,7 @@ const LINKS = [
   { label: 'Approach', href: '#approach' },
   { label: 'Capabilities', href: '#capabilities' },
   { label: 'BMM Certified', href: '#bmm' },
+  { label: 'Projects', href: '#projects' },
   { label: 'Contact', href: '#contact' },
 ];
 const PROJECT_LINKS = [{ label: 'DNaI', href: '/dnai' }];
@@ -551,7 +552,72 @@ export default function Home() {
           </Reveal>
         </div>
       </section>
-      <Hills from="bg-field-deep" to="fill-navy-900" />
+      <Hills from="bg-field-deep" to="fill-navy-deep" />
+
+      {/* ===== PROJECTS ===== */}
+      <section id="projects" className="relative bg-navy-deep px-6 py-24 md:px-10 md:py-32">
+        <div className="mx-auto max-w-6xl">
+          <Reveal>
+            <p className="mb-3 font-mono text-xs uppercase tracking-[0.25em] text-wheat">Projects</p>
+            <h2 className="font-serif max-w-3xl text-4xl font-medium leading-[1.08] text-cream md:text-6xl">
+              Building the sovereign data economy.
+            </h2>
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-sky-light/80">
+              Cloud Control LLC applies its blockchain and data-integrity expertise beyond the built environment — extending sovereign digital infrastructure to every domain where provenance, ownership, and consent matter.
+            </p>
+          </Reveal>
+          <Reveal y={32}>
+            <a href="/dnai" className="group relative mt-14 flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-transparent transition-colors hover:border-field/50 md:flex-row">
+              {/* DNA visual accent */}
+              <div className="relative flex h-48 w-full flex-none items-center justify-center overflow-hidden bg-gradient-to-br from-navy-900 to-navy md:h-auto md:w-72 md:rounded-l-3xl">
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_70%_at_50%_50%,rgba(94,160,73,0.22),transparent_80%)]" />
+                {/* stylised double helix glyph */}
+                <svg viewBox="0 0 80 120" className="h-28 w-auto opacity-80 md:h-36" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="s1" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#5a9bd4" />
+                      <stop offset="100%" stopColor="#d8a93f" />
+                    </linearGradient>
+                    <linearGradient id="s2" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#d8a93f" />
+                      <stop offset="100%" stopColor="#5a9bd4" />
+                    </linearGradient>
+                  </defs>
+                  {/* strand 1 */}
+                  <path d="M40,0 C60,15 20,30 40,45 C60,60 20,75 40,90 C60,105 20,118 40,120" fill="none" stroke="url(#s1)" strokeWidth="3" strokeLinecap="round" />
+                  {/* strand 2 */}
+                  <path d="M40,0 C20,15 60,30 40,45 C20,60 60,75 40,90 C20,105 60,118 40,120" fill="none" stroke="url(#s2)" strokeWidth="3" strokeLinecap="round" />
+                  {/* rungs */}
+                  {[11, 22.5, 34, 45, 56.5, 68, 79.5, 91, 108].map((y, i) => (
+                    <line key={i} x1="22" y1={y} x2="58" y2={y} stroke="#5ea049" strokeWidth="1.8" strokeOpacity="0.7" />
+                  ))}
+                </svg>
+                <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full border border-field/50 bg-field/15 px-3 py-1.5 text-[10px] font-semibold tracking-widest text-field uppercase md:bottom-5 md:left-5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-field" style={{ animation: 'pulse 2s cubic-bezier(0.4,0,0.6,1) infinite' }} />
+                  In Development
+                </div>
+              </div>
+              {/* text */}
+              <div className="flex flex-1 flex-col justify-center p-8 md:p-12">
+                <p className="font-mono text-xs uppercase tracking-[0.25em] text-field">Project DNaI</p>
+                <h3 className="font-serif mt-3 text-3xl font-semibold leading-tight text-cream md:text-4xl">
+                  Genomic Sovereign Token
+                </h3>
+                <p className="mt-4 max-w-xl text-lg leading-relaxed text-sky-light/80">
+                  DNaI transforms every human&rsquo;s genetic code into a verifiable, ownable digital asset — with on-chain consent, automatic royalties, and zero-knowledge privacy. Your DNA. Your data. Your sovereignty.
+                </p>
+                <div className="mt-8 flex items-center gap-2 text-sm font-semibold text-field transition-colors group-hover:text-field-deep">
+                  Explore DNaI
+                  <svg viewBox="0 0 20 20" className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="currentColor" aria-hidden="true">
+                    <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
+                  </svg>
+                </div>
+              </div>
+            </a>
+          </Reveal>
+        </div>
+      </section>
+      <Hills from="bg-navy-deep" to="fill-navy-900" />
 
       {/* ===== CONTACT ===== */}
       <section id="contact" className="relative bg-navy-900 px-6 py-28 md:px-10">
