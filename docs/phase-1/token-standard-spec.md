@@ -1081,17 +1081,6 @@ The following invariants are candidates for formal verification (Certora Prover 
 - Sum of `HOLDER_BPS + PROTOCOL_BPS + DAO_TREASURY_BPS == 10_000` is a compile-time constant
 - A token with `locked(tokenId) == true` cannot appear with a different `ownerOf()` after any state transition
 
-### 9.4 Bug Bounty Program
-
-A public bug bounty program will be launched on Immunefi concurrent with the Phase III testnet deployment. Reward tiers:
-
-| Severity | Reward Range |
-|---|---|
-| Critical (fund drainage, unauthorized mint, governance takeover) | $50,000 – $250,000 USDC |
-| High (consent bypass, fee manipulation) | $10,000 – $50,000 USDC |
-| Medium (data exposure, access expiry bypass) | $2,000 – $10,000 USDC |
-| Low / Informational | $500 – $2,000 USDC |
-
 ---
 
 ## 10. Appendix: Interface Summary
