@@ -315,6 +315,7 @@ The following sub-agents run continuously to accelerate each phase:
 
 | Agent | Responsibility | Output Path |
 |-------|---------------|-------------|
+| **4-Layer Architecture Agent** | Full Genomic Sovereignty Stack spec (Hyperledger Fabric, Flare, FHE, BioNFTs) | `docs/phase-1/four-layer-architecture.md` |
 | **Architecture Agent** | Vault design, ZK proofs, smart contract specs | `docs/phase-1/technical-architecture.md` |
 | **Token Agent** | Token standard, royalty contracts, consent layer | `docs/phase-1/token-standard-spec.md` |
 | **Regulatory Agent** | HIPAA/GDPR/CCPA analysis, compliance framework | `docs/phase-1/regulatory-framework.md` |
@@ -338,18 +339,39 @@ The following sub-agents run continuously to accelerate each phase:
 
 ---
 
-## Technology Stack
+## Technology Stack — The Genomic Sovereignty Stack (4-Layer Architecture)
 
-| Layer | Choice | Rationale |
-|-------|--------|-----------|
-| Blockchain | Ethereum L2 (Base or Polygon) | Low gas, EVM compatible, ecosystem |
-| Smart Contracts | Solidity + Foundry | Battle-tested, audit tooling mature |
-| ZK Proofs | Noir (Aztec) or Circom | Genomic data range proofs, performance |
-| Vault Storage | IPFS + Filecoin (client-encrypted) | Decentralized, censorship-resistant |
-| Key Management | ERC-4337 account abstraction | Social recovery, no seed phrase UX barrier |
+> Full specification: `docs/phase-1/four-layer-architecture.md`
+
+### Layer 1: Foundation & Trust
+| Component | Choice | Rationale |
+|-----------|--------|-----------|
+| Consortium Blockchain | Hyperledger Fabric | Permissioned network of trusted nodes (research institutions, pharma, sequencing providers); 3,500+ TPS; no gas costs for consortium ops |
+| Cross-Chain Bridge | Flare State Connector + Flare Network | Proves Hyperledger Fabric state to Ethereum/Base; enables cross-chain royalty settlement |
+
+### Layer 2: Data & Oracles
+| Component | Choice | Rationale |
+|-----------|--------|-----------|
+| Raw Genomic Storage | IPFS + Filecoin (BAM/VCF, client-encrypted) | Off-chain for large files (30GB WGS); content-addressed integrity |
+| Pricing Oracle | Flare Time Series Oracles (FTSO) | Tamper-proof real-time pricing signals for genomic data marketplace |
+
+### Layer 3: Privacy Compute Engine
+| Component | Choice | Rationale |
+|-----------|--------|-----------|
+| Computation Without Decryption | FHE — OpenFHE (CKKS scheme) | Researchers analyze encrypted genomic data; no decryption required |
+| ZK Proofs | Noir (Aztec) / UltraHonk | Ownership proofs, variant presence, ancestry range — faster than FHE |
+| Decentralized AI Training | Federated Learning (Flower) + FHE-encrypted gradients | Double-layer privacy for AI model training across institutions |
+
+### Layer 4: Governance & Legacy (Owner Sovereignty)
+| Component | Choice | Rationale |
+|-----------|--------|-----------|
+| BioNFTs™ / DNaI Token | ERC-721 soulbound (Ethereum/Base mainnet) | Tamper-proof certificate of genomic ownership; cross-chain verified via Flare |
+| Consent & Revenue | Solidity + Foundry (ConsentRegistry, RoyaltyDistributor) | Self-executing access grants; automatic royalty distribution in USDC |
+| Key Management | ERC-4337 account abstraction + Gnosis Safe | Gas-sponsored minting; social recovery; no seed phrase barrier |
+| Multi-Generational Transfer | Gnosis Safe multi-sig inheritance | Shared custody; time-locked heir designation; estate planning on-chain |
+| Indexing | The Graph subgraph | On-chain consent audit trail queries |
 | API Layer | Rust (Axum) | Performance for genomic data pipelines |
 | Frontend | Next.js (existing CloudControlLLC.com stack) | Consistency, shipping speed |
-| Indexing | The Graph | On-chain consent audit trail queries |
 | Identity | W3C DID + ERC-725 | Portable genomic identity standard |
 
 ---
