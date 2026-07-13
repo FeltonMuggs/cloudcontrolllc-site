@@ -1,0 +1,25 @@
+name: XRPL kit offline tests
+
+on:
+  push:
+    paths:
+      - 'dnai-xrpl-kit/**'
+  pull_request:
+    paths:
+      - 'dnai-xrpl-kit/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: dnai-xrpl-kit
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: dnai-xrpl-kit/package-lock.json
+      - run: npm ci
+      - run: npm test

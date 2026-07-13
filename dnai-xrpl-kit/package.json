@@ -1,0 +1,13 @@
+{
+  "name": "dnai-xrpl-kit",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DNaI agentic-payment rail on the XRP Ledger — pay-for-access with XRP/RLUSD via X402-style verification",
+  "scripts": {
+    "test": "node test/offline.test.js",
+    "wallet": "node scripts/create-wallet.js",
+    "pay": "node scripts/pay-for-access.js",
+    "verify": "node scripts/verify-access.js"
+  },
+  "dependencies": { "xrpl": "^4.0.0", "dotenv": "^16.4.5" }
+}
