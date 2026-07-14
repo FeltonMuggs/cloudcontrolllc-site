@@ -308,6 +308,7 @@
             </div>
             <label class="field">Email</label>
             <input required type="email" name="email" autocomplete="email" placeholder="you@email.com" />
+            <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;top:-9999px" aria-hidden="true" />
             <label class="field">Preferred deposit method</label>
             <select name="rail" id="railSelect">
               <option value="card">Credit / Debit card</option>
@@ -318,7 +319,7 @@
             </select>
             <div class="consent">
               <input required type="checkbox" id="agree" />
-              <label for="agree">I understand this reserves a founding-member slot, that no payment is taken today, and that I'll be invited to complete a $250 deposit when live processing opens. I agree to be contacted about my reservation.</label>
+              <label for="agree">I understand this reserves a founding-member slot, that no payment is taken today, and that I'll be invited to complete a $250 deposit when live processing opens. I agree to be contacted about my reservation and have read the <a href="/dnai/terms/" target="_blank">VIP Terms &amp; Refund Policy</a>.</label>
             </div>
             <button class="btn btn-gold btn-lg" style="width:100%;margin-top:16px" type="submit">Reserve my VIP Wallet</button>
             <p id="vipMsg" class="muted" style="font-size:13px;text-align:center;margin:12px 0 0"></p>
@@ -360,7 +361,7 @@
 <footer>
   <div class="wrap foot-in">
     <div>© 2026 Cloud Control LLC · DNaI “Inherited Scientific”. All rights reserved.</div>
-    <div class="muted">Reservations only. No securities offered. Testnet + synthetic data until compliance clears. Not medical advice.</div>
+    <div class="muted">Reservations only. No securities offered. Testnet + synthetic data until compliance clears. Not medical advice. <a href="/dnai/terms/">VIP Terms &amp; Refund Policy</a></div>
   </div>
 </footer>
 
@@ -383,29 +384,43 @@
     });
   }
 
-  // Waitlist submit — mailto fallback (swap for a real form endpoint when backend is wired)
+  // Waitlist submit — POSTs to /api/reserve (Cloudflare Pages Function → D1).
+  // Falls back to a mailto: draft only if the endpoint is unreachable.
   function submitVip(e){
     e.preventDefault();
     var f = e.target;
     var msg = document.getElementById('vipMsg');
+    var btn = f.querySelector('button[type="submit"]');
     var data = {
       first: f.first.value.trim(), last: f.last.value.trim(),
-      email: f.email.value.trim(), rail: f.rail.value
+      email: f.email.value.trim(), rail: f.rail.value,
+      website: f.website ? f.website.value : ''
     };
-    // TODO: replace with POST to your form endpoint / connector.
-    var subject = encodeURIComponent('DNaI Genomic Wallet — VIP Waitlist reservation');
-    var body = encodeURIComponent(
-      'New VIP waitlist reservation:\n\n' +
-      'Name: ' + data.first + ' ' + data.last + '\n' +
-      'Email: ' + data.email + '\n' +
-      'Preferred deposit method: ' + data.rail + '\n' +
-      'Bundle: $250 founding VIP (hardware slot + software priority)\n'
-    );
-    window.location.href = 'mailto:everett@cloudcontrolllc.com?subject=' + subject + '&body=' + body;
-    msg.textContent = 'Thanks, ' + data.first + '! Your email client is opening to confirm your reservation. We’ll be in touch about your $250 deposit when live processing opens.';
-    f.reset();
-    railOpts.forEach(function(x){x.classList.remove('active')});
-    if (railOpts[0]) railOpts[0].classList.add('active');
+    btn.disabled = true;
+    msg.textContent = 'Reserving your slot…';
+    fetch('/api/reserve', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(function(r){ return r.json(); }).then(function(res){
+      if (!res.ok) throw new Error(res.error || 'failed');
+      msg.textContent = 'You are on the list, ' + data.first + '! Your founding-member reservation is recorded — we will email you at ' + data.email + ' the moment your $250 deposit window opens. No payment is taken today.';
+      f.reset();
+      railOpts.forEach(function(x){x.classList.remove('active')});
+      if (railOpts[0]) railOpts[0].classList.add('active');
+    }).catch(function(){
+      // Endpoint unreachable — fall back to a pre-filled email draft.
+      var subject = encodeURIComponent('DNaI Genomic Wallet — VIP Waitlist reservation');
+      var body = encodeURIComponent(
+        'New VIP waitlist reservation:\n\n' +
+        'Name: ' + data.first + ' ' + data.last + '\n' +
+        'Email: ' + data.email + '\n' +
+        'Preferred deposit method: ' + data.rail + '\n' +
+        'Bundle: $250 founding VIP (hardware slot + software priority)\n'
+      );
+      window.location.href = 'mailto:everett@cloudcontrolllc.com?subject=' + subject + '&body=' + body;
+      msg.textContent = 'Our reservation service could not be reached, so your email client is opening to send your reservation directly.';
+    }).finally(function(){ btn.disabled = false; });
     return false;
   }
 </script>
