@@ -252,10 +252,10 @@ export default function Home() {
                 Start a conversation
               </a>
               <a
-                href="tel:2029618805"
+                href="https://www.linkedin.com/in/everettjaymorton" target="_blank" rel="noopener"
                 className="rounded-full border border-line px-7 py-3.5 text-sm font-semibold text-ink transition-colors hover:border-accent/60 hover:text-accent"
               >
-                (202) 961-8805
+                Connect on LinkedIn
               </a>
             </div>
           </Reveal>
