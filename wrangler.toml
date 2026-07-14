@@ -8,3 +8,6 @@ compatibility_date = "2026-01-01"
 binding = "DB"
 database_name = "dnai-reservations"
 database_id = "bd3daa96-3027-4c3a-9528-69ff19efbd24"
+
+[vars]
+WEB3FORMS_KEY = "44ff1f02-d250-48bc-8155-fb9158da4fa5"
