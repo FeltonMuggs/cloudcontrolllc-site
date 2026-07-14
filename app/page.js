@@ -371,41 +371,6 @@ const CAPABILITIES = [
 ];
 const SERVICES = ['BMM Assessments', 'Digital Asset Roadmapping', 'IoT-to-Ledger Integration', 'Material & Performance Provenance', 'Compliance Data Integrity', 'Grant & Funding Readiness', 'Lifecycle Analytics Dashboards'];
 
-/* ---------------- homepage background music (Spotify, starts on first interaction) ---------------- */
-function HomeAudio() {
-  const startedRef = useRef(false);
-  const ctrlRef = useRef(null);
-  useEffect(() => {
-    window.onSpotifyIframeApiReady = (IFrameAPI) => {
-      const el = document.getElementById('cc-spotify');
-      if (!el) return;
-      IFrameAPI.createController(el, { uri: 'spotify:album:6sLhNooFMt6jJxObilqcyZ', width: '100%', height: 80 }, (controller) => {
-        ctrlRef.current = controller;
-        if (startedRef.current) { try { controller.play(); } catch (e) {} }
-      });
-    };
-    const s = document.createElement('script');
-    s.src = 'https://open.spotify.com/embed/iframe-api/v1';
-    s.async = true;
-    document.body.appendChild(s);
-    const start = () => {
-      if (startedRef.current) return;
-      startedRef.current = true;
-      try { ctrlRef.current && ctrlRef.current.play(); } catch (e) {}
-      remove();
-    };
-    const evs = ['pointerdown', 'touchstart', 'keydown', 'scroll'];
-    const remove = () => evs.forEach((ev) => window.removeEventListener(ev, start));
-    evs.forEach((ev) => window.addEventListener(ev, start, { passive: true }));
-    return () => remove();
-  }, []);
-  return (
-    <div className="fixed bottom-4 left-4 z-40 w-[280px] max-w-[78vw] overflow-hidden rounded-xl opacity-85 shadow-2xl shadow-navy-900/60 transition-opacity hover:opacity-100" aria-label="Background music player">
-      <div id="cc-spotify" />
-    </div>
-  );
-}
-
 export default function Home() {
   useSmoothScroll();
   useEffect(() => {
@@ -428,6 +393,7 @@ export default function Home() {
         <div className="pointer-events-none absolute inset-x-0 top-0 h-2/3 bg-[radial-gradient(75%_55%_at_50%_0%,rgba(90,155,212,0.16),transparent_72%)] z-[1]" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-navy-deep/70 via-navy-deep/25 to-transparent z-[1]" />
         <div id="hero-copy" className="relative z-10 mx-auto flex h-screen max-w-8xl flex-col justify-center px-6 md:px-10">
+          <img src="/logo.png" alt="Cloud Control LLC" className="mb-6 h-24 w-auto self-start drop-shadow-2xl md:h-32" />
           <div className="mb-7 inline-flex w-fit items-center gap-2.5 rounded-full border border-sky/30 bg-navy-900/50 px-4 py-2 text-xs font-medium tracking-wide text-sky-light backdrop-blur-sm">
             <span className="h-1.5 w-1.5 rounded-full bg-wheat" />
             GBA &middot; Blockchain Maturity Model Certified
@@ -643,7 +609,6 @@ export default function Home() {
           <p className="text-sm text-sky-light/60">&copy; {new Date().getFullYear()} Cloud Control LLC &mdash; All Rights Reserved.</p>
         </div>
       </footer>
-      <HomeAudio />
     </main>
   );
 }
