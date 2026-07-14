@@ -579,9 +579,13 @@ export default function DNaIPage() {
               <a href="mailto:everett@cloudcontrolllc.com?subject=DNaI%20Waitlist%20Inquiry" className="rounded-full bg-field px-8 py-4 text-sm font-semibold text-cream shadow-xl shadow-field/20 transition-transform hover:scale-[1.04] hover:bg-field-deep active:scale-95">
                 Join the DNaI Waitlist
               </a>
-              <a href="tel:2029618805" className="rounded-full border border-sky-light/40 px-8 py-4 text-sm font-semibold text-cream transition-colors hover:border-wheat hover:text-wheat-light">
-                (202) 961-8805
-              </a>
+              <a href="/dnai/wallet/" className="rounded-full bg-wheat px-8 py-4 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">VIP DNaI Deposit &middot; $250</a>
+            </div>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+              <a href="https://www.linkedin.com/in/everettjaymorton" target="_blank" rel="noopener" className="rounded-full border border-sky-light/25 px-5 py-2.5 text-xs font-semibold text-sky-light/80 transition-colors hover:border-wheat hover:text-wheat-light">LinkedIn &mdash; Everett Morton</a>
+              <a href="https://www.linkedin.com/company/93807770/" target="_blank" rel="noopener" className="rounded-full border border-sky-light/25 px-5 py-2.5 text-xs font-semibold text-sky-light/80 transition-colors hover:border-wheat hover:text-wheat-light">LinkedIn &mdash; Cloud Control LLC</a>
+              <a href="https://www.facebook.com/profile.php?id=61577496382293" target="_blank" rel="noopener" className="rounded-full border border-sky-light/25 px-5 py-2.5 text-xs font-semibold text-sky-light/80 transition-colors hover:border-wheat hover:text-wheat-light">Facebook</a>
+              <a href="https://www.youtube.com/@CloudControlLLC" target="_blank" rel="noopener" className="rounded-full border border-sky-light/25 px-5 py-2.5 text-xs font-semibold text-sky-light/80 transition-colors hover:border-wheat hover:text-wheat-light">YouTube</a>
             </div>
             <p className="mt-8 text-sm text-sky-light/50">A Cloud Control LLC project &middot; GBA Blockchain Maturity Model Certified</p>
           </Reveal>
