@@ -1,0 +1,16 @@
+# dependencies
+/node_modules
+**/node_modules
+
+# next.js build output
+/.next
+/out
+
+# env / secrets
+.env
+.env.*
+!.env.example
+
+# misc
+.DS_Store
+*.log
