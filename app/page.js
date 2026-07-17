@@ -397,6 +397,7 @@ export default function Home() {
         <div className="pointer-events-none absolute inset-x-0 top-0 h-2/3 bg-[radial-gradient(75%_55%_at_50%_0%,rgba(90,155,212,0.16),transparent_72%)] z-[1]" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-navy-deep/70 via-navy-deep/25 to-transparent z-[1]" />
         <div id="hero-copy" className="relative z-10 mx-auto flex h-screen max-w-8xl flex-col justify-center px-6 md:px-10">
+          <img src="/logo.png" alt="Cloud Control LLC" className="mb-6 h-24 w-auto self-start drop-shadow-2xl md:h-32" />
           <h1 className="font-serif max-w-5xl text-[12.5vw] font-semibold leading-[0.95] tracking-tight text-cream sm:text-[9vw] md:text-[6.6vw] [text-shadow:0_2px_40px_rgba(8,26,43,0.65)]">
             Artificial Infrastructure<br />
             <span className="text-sky-light">Verified in the </span><span className="italic text-wheat-light">Real World.</span>
@@ -591,7 +592,7 @@ export default function Home() {
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-sky-light/80">Reduce risk, unlock funding, and ensure infrastructure investments deliver measurable, auditable, long-term value.</p>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
               <a href="mailto:everett@cloudcontrolllc.com?subject=BMM%20Assessment%20Inquiry" className="rounded-full bg-wheat px-8 py-4 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">Start a conversation</a>
-              <a href="tel:2029618805" className="rounded-full border border-sky-light/40 px-8 py-4 text-sm font-semibold text-cream transition-colors hover:border-wheat hover:text-wheat-light">(202) 961-8805</a>
+              <a href="https://www.linkedin.com/in/everettjaymorton" target="_blank" rel="noopener" className="rounded-full border border-sky-light/40 px-8 py-4 text-sm font-semibold text-cream transition-colors hover:border-wheat hover:text-wheat-light">Connect on LinkedIn</a>
             </div>
           </Reveal>
         </div>

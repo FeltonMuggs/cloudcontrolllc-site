@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DNaI Genomic Wallet — Own Your Genome. Earn From It. | Inherited Scientific</title>
+<meta name="description" content="The DNaI Genomic Wallet is a personal hardware vault where your genome stays encrypted on a device you hold — consent enforced in hardware, royalties paid to you. Reserve a founding VIP slot for $250." />
+<link rel="canonical" href="https://cloudcontrolllc.com/dnai/wallet/" />
+<meta name="robots" content="index,follow" />
+<meta property="og:title" content="DNaI Genomic Wallet — Own Your Genome. Earn From It." />
+<meta property="og:description" content="A personal hardware vault where your genome stays encrypted on a device you physically hold. Consent enforced in hardware, royalties paid to you. Reserve a founding VIP slot for $250." />
+<meta property="og:url" content="https://cloudcontrolllc.com/dnai/wallet/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Cloud Control LLC" />
+<meta name="twitter:card" content="summary_large_image" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap');
+  :root{
+    --bg:#081a2b; --bg2:#0b2237; --panel:#0f2940; --panel2:#0b2237;
+    --ink:#f5f2ea; --muted:#a9cde8; --line:#1d3a55;
+    --brand:#5a9bd4; --brand2:#5ea049; --accent:#5ea049; --gold:#d8a93f;
+    --danger:#ff5c7a;
+    --grad:linear-gradient(135deg,#5a9bd4 0%,#5ea049 100%);
+    --radius:16px; --maxw:1080px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:radial-gradient(1200px 600px at 70% -10%,#11314f80 0,transparent 60%),var(--bg);
+    color:var(--ink);font:16px/1.6 'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  a{color:var(--brand);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  h1,h2,h3{line-height:1.12;margin:0 0 .5em;font-family:'Fraunces',Georgia,serif;font-weight:600}
+  h1{font-size:clamp(30px,5vw,52px);letter-spacing:-.02em}
+  h2{font-size:clamp(23px,3.4vw,34px);letter-spacing:-.01em}
+  h3{font-size:19px}
+  p{color:var(--ink)}
+  .muted{color:var(--muted)}
+  .grad-text{color:#ecc873;font-style:italic}
+
+  /* Nav */
+  header.nav{position:sticky;top:0;z-index:40;backdrop-filter:blur(10px);
+    background:rgba(8,26,43,.78);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:62px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.01em;color:var(--ink)}
+  .brand .dot{width:26px;height:26px;border-radius:8px;background:var(--grad);box-shadow:0 0 18px rgba(62,166,255,.5)}
+  .brand small{display:block;font-weight:600;font-size:11px;color:var(--muted);letter-spacing:.12em}
+  .nav-links{display:flex;gap:22px;align-items:center}
+  .nav-links a{color:var(--muted);font-size:14px;font-weight:600}
+  .nav-links a:hover{color:var(--ink);text-decoration:none}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-weight:700;border-radius:12px;padding:12px 20px;border:1px solid transparent;cursor:pointer;font-size:15px;transition:.15s}
+  .btn-primary{background:#5ea049;color:#f5f2ea;box-shadow:0 8px 30px rgba(94,160,73,.30)}
+  .btn-primary:hover{background:#3c7a31}
+  .btn-primary:hover{transform:translateY(-1px);text-decoration:none}
+  .btn-gold{background:linear-gradient(135deg,#d8a93f,#ecc873);color:#081a2b;box-shadow:0 8px 30px rgba(216,169,63,.28)}
+  .btn-gold:hover{transform:translateY(-1px);text-decoration:none}
+  .btn-ghost{background:transparent;border-color:var(--line);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--brand);text-decoration:none}
+  .btn-lg{padding:16px 28px;font-size:16px;border-radius:14px}
+
+  /* Hero */
+  .hero{padding:74px 0 40px;position:relative;overflow:hidden}
+  .hero .badge{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--line);
+    background:var(--panel);border-radius:999px;padding:6px 14px;font-size:12.5px;color:var(--muted);font-weight:600;margin-bottom:20px}
+  .hero .badge b{color:var(--accent)}
+  .hero p.lead{font-size:19px;max-width:640px;color:#dcebf7}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
+  .trust{display:flex;gap:22px;flex-wrap:wrap;margin-top:30px;color:var(--muted);font-size:13.5px}
+  .trust span{display:flex;align-items:center;gap:7px}
+  .tick{color:var(--accent);font-weight:800}
+
+  /* device visual */
+  .device{margin:40px auto 0;max-width:520px;border:1px solid var(--line);border-radius:20px;
+    background:linear-gradient(180deg,var(--panel),var(--panel2));padding:22px;position:relative}
+  .device .chip{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid var(--line);border-radius:12px;background:#0b2237;margin-bottom:10px}
+  .device .chip:last-child{margin-bottom:0}
+  .device .ic{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-size:18px;background:#11314f;border:1px solid var(--line)}
+  .device .chip b{font-size:14px}
+  .device .chip small{color:var(--muted);font-size:12px}
+
+  section{padding:52px 0;border-top:1px solid var(--line)}
+  .section-head{max-width:680px;margin-bottom:30px}
+  .grid{display:grid;gap:18px}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .card h3{margin-bottom:6px}
+  .card .num{font-size:12px;font-weight:800;color:var(--brand);letter-spacing:.1em}
+  .card p{color:var(--muted);font-size:14.5px;margin:0}
+
+  /* roadmap */
+  .phase{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:20px 0;border-bottom:1px dashed var(--line)}
+  .phase:last-child{border-bottom:0}
+  .phase .tag{font-weight:800;color:var(--accent);font-size:14px}
+  .phase .tag small{display:block;color:var(--muted);font-weight:600;font-size:12px;margin-top:3px}
+  .phase h3{margin-bottom:4px}
+  .phase p{color:var(--muted);font-size:14.5px;margin:0}
+
+  /* VIP */
+  .vip{background:
+    radial-gradient(700px 300px at 15% 0%,rgba(90,155,212,.16),transparent 60%),
+    radial-gradient(700px 300px at 90% 100%,rgba(94,160,73,.14),transparent 60%),
+    linear-gradient(180deg,var(--panel),var(--panel2));
+    border:1px solid var(--line);border-radius:22px;padding:34px}
+  .price{display:flex;align-items:baseline;gap:10px;margin:6px 0 4px}
+  .price .amt{font-size:52px;font-weight:800;letter-spacing:-.02em}
+  .price .cur{font-size:18px;color:var(--muted);font-weight:700}
+  .incl{list-style:none;padding:0;margin:18px 0}
+  .incl li{display:flex;gap:10px;align-items:flex-start;padding:7px 0;color:#dcebf7;font-size:14.5px}
+  .incl li .tick{margin-top:2px}
+  .rails{margin:22px 0 6px}
+  .rails .rlabel{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);font-weight:700;margin-bottom:10px}
+  .rail-opts{display:flex;flex-wrap:wrap;gap:10px}
+  .rail{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:#0b2237;border-radius:11px;padding:11px 14px;font-size:14px;font-weight:600;cursor:pointer;transition:.15s;user-select:none}
+  .rail:hover{border-color:var(--brand)}
+  .rail.active{border-color:var(--brand);background:#11314f;box-shadow:0 0 0 2px rgba(90,155,212,.22) inset}
+  .rail .glyph{font-size:16px}
+  .note{font-size:12.5px;color:var(--muted);border-left:2px solid var(--gold);padding:8px 12px;background:rgba(240,180,41,.06);border-radius:0 8px 8px 0;margin-top:16px}
+
+  /* form */
+  .form-row{display:grid;gap:12px;grid-template-columns:1fr 1fr;margin-top:8px}
+  input,select{width:100%;padding:12px 14px;border-radius:11px;border:1px solid var(--line);background:#0b2237;color:var(--ink);font-size:14.5px}
+  input:focus,select:focus{outline:none;border-color:var(--brand)}
+  label.field{display:block;font-size:12.5px;color:var(--muted);font-weight:600;margin:12px 0 6px}
+  .consent{display:flex;gap:10px;align-items:flex-start;margin-top:14px;font-size:13px;color:var(--muted)}
+  .consent input{width:auto;margin-top:3px}
+
+  /* CONTACT */
+  #contact .contact-box{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:22px;padding:38px;text-align:center}
+  .contact-actions{display:flex;flex-direction:column;align-items:center;gap:14px;max-width:420px;margin:24px auto 6px}
+  .contact-actions .btn{width:100%}
+  .socials{display:flex;justify-content:center;flex-wrap:wrap;gap:14px;margin-top:26px;padding-top:24px;border-top:1px solid var(--line)}
+  .social{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);background:#0b2237;border-radius:12px;padding:11px 16px;font-size:14px;font-weight:600;color:var(--ink);transition:.15s}
+  .social:hover{border-color:var(--brand);text-decoration:none;transform:translateY(-1px)}
+  .social .glyph{font-size:17px}
+  .social small{color:var(--muted);font-weight:500}
+
+  footer{padding:34px 0;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+  .foot-in{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
+  .placeholder{outline:1px dashed var(--gold);outline-offset:2px}
+
+  @media(max-width:820px){
+    .g2,.g3,.form-row{grid-template-columns:1fr}
+    .phase{grid-template-columns:1fr}
+    .nav-links{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="/dnai/" style="text-decoration:none">
+      <span class="dot"></span>
+      <span>DNaI<small>INHERITED SCIENTIFIC · CLOUD CONTROL LLC</small></span>
+    </a>
+    <nav class="nav-links">
+      <a href="/dnai/">DNaI Home</a>
+      <a href="#how">How it works</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#vip">VIP Wallet</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#vip" class="btn btn-primary">Reserve a Wallet</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" style="border-top:0">
+  <div class="wrap">
+    <span class="badge">🧬 New · <b>DNaI Genomic Wallet</b> · hardware vault + royalty engine</span>
+    <h1>Own your genome. Keep it on a device <span class="grad-text">you hold.</span> Earn every time it's used.</h1>
+    <p class="lead">The DNaI Genomic Wallet is a personal hardware vault. Your raw genome stays encrypted on a device you physically hold and <b>never leaves it</b>. Consent is enforced in hardware. When a researcher, lab, or model licenses access, the answer is computed on your device — and the royalty is paid to you.</p>
+    <div class="hero-cta">
+      <a href="#vip" class="btn btn-gold btn-lg">Reserve VIP Wallet · $250</a>
+      <a href="#how" class="btn btn-ghost btn-lg">See how it works</a>
+    </div>
+    <div class="trust">
+      <span><span class="tick">✓</span> Raw DNA never leaves your device</span>
+      <span><span class="tick">✓</span> Consent enforced in hardware</span>
+      <span><span class="tick">✓</span> You hold the keys &amp; earn the royalties</span>
+    </div>
+
+    <div class="device" aria-hidden="true">
+      <div class="chip"><span class="ic">🔒</span><div><b>Encrypted Vault</b><br><small>Your genome, sealed on a device you physically hold</small></div></div>
+      <div class="chip"><span class="ic">🖐️</span><div><b>Consent Engine</b><br><small>Grant &amp; revoke access — enforced in hardware</small></div></div>
+      <div class="chip"><span class="ic">⚡</span><div><b>Private Queries</b><br><small>Questions are answered on-device — only the result leaves, never your data</small></div></div>
+      <div class="chip"><span class="ic">💎</span><div><b>Royalty Wallet</b><br><small>Access royalties settle straight to keys only you control</small></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">The loop</span>
+      <h2>Register once. Set your terms. Get paid when your data creates value.</h2>
+      <p class="muted">Cloud vaults still ask you to trust a company's servers. The DNaI Genomic Wallet removes that trust — the sequence sits on silicon you physically control.</p>
+    </div>
+    <div class="grid g3">
+      <div class="card"><div class="num">01 · REGISTER</div><h3>Seal your genome</h3><p>Load your sequencing file onto the wallet. It's encrypted to the on-device vault instantly — only a secure reference is registered, never the sequence itself.</p></div>
+      <div class="card"><div class="num">02 · CONSENT</div><h3>Set license terms</h3><p>Pick who may access what, for which purpose, at what royalty. Consent is machine-readable, revocable, and signed on the device.</p></div>
+      <div class="card"><div class="num">03 · QUERY</div><h3>Answered on-device</h3><p>An approved request is answered on your device. Only the consented result is returned — your genome never transits the network.</p></div>
+      <div class="card"><div class="num">04 · SETTLE</div><h3>You get paid</h3><p>The royalty is paid automatically to keys only you hold, with a verifiable receipt. Income shows on the device and your dashboard.</p></div>
+      <div class="card"><div class="num">05 · REVOKE</div><h3>Change your mind, anytime</h3><p>Revoke your consent at any time. Future requests are refused, and your revocation is provable.</p></div>
+      <div class="card"><div class="num">06 · CONTROL</div><h3>Sovereign by design</h3><p>Your keys stay on the device and are never exportable. Your personal data is never published — you hold the keys and stay in control.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section id="architecture" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Why it's private</span>
+<h2>Private by design</h2>
+<p class="muted">Your raw genome never leaves the device you hold — not our servers, not anyone's cloud. Yours.</p>
+</div>
+<div class="grid g3">
+<div class="card"><div class="num">YOU HOLD IT</div><h3>On a device you control</h3><p>Your sequence lives on a personal device you physically hold — not on a company's servers you have to trust.</p></div>
+<div class="card"><div class="num">QUESTIONS, NOT COPIES</div><h3>The data never travels</h3><p>When a researcher, lab, or model is approved, the question is answered on your device and only the answer leaves. Your genome itself never moves.</p></div>
+<div class="card"><div class="num">CONSENT YOU PROVE</div><h3>Grant, earn, revoke</h3><p>You set the terms, you're paid when your data creates value, and you can withdraw consent at any time — provably.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Roadmap</span>
+      <h2>From reference design to devices in hands</h2>
+      <p class="muted">Hardware phases move in step with the DNaI platform. Everything runs on testnet with synthetic data until our compliance and IP gates clear.</p>
+    </div>
+
+    <div class="phase">
+      <div class="tag">H0<small>Now</small></div>
+      <div><h3>Spec &amp; reference design</h3><p>Finalize the wallet's reference design and enclosure. Publish this roadmap and open the $250 VIP waitlist. Intent captured now — live deposits switch on once gates clear.</p></div>
+    </div>
+    <div class="phase">
+      <div class="tag">H1<small>Build</small></div>
+      <div><h3>Wallet software — vault + consent + keys</h3><p>The DNaI Wallet software: encrypted vault storage, the consent engine, and on-device key custody. Register-and-consent works against testnet.</p></div>
+    </div>
+    <div class="phase">
+      <div class="tag">H2<small>Demo</small></div>
+      <div><h3>Private queries + royalties</h3><p>Private on-device queries and royalty payouts go live. First end-to-end demo: an approved licensee is answered, the owner is paid — the centerpiece for partners and supporters.</p></div>
+    </div>
+    <div class="phase">
+      <div class="tag">H3<small>Pilot</small></div>
+      <div><h3>Pilot units</h3><p>Pilot devices go to early design partners and heritage-community programs on hardened, tamper-resistant hardware with a physical consent control.</p></div>
+    </div>
+    <div class="phase">
+      <div class="tag">H4<small>Ship</small></div>
+      <div><h3>Production run &amp; fulfillment</h3><p>A production run fulfills the VIP waitlist. Marketplace and vault services go live; payment rails switch to real money once the securities, licensing, and audit gates clear.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- VIP -->
+<section id="vip" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">VIP Waitlist</span>
+      <h2>Reserve your DNaI Genomic Wallet</h2>
+      <p class="muted">One $250 deposit reserves a hardware device slot <b>and</b> grants software VIP priority — the founding-member bundle.</p>
+    </div>
+
+    <div class="vip">
+      <div class="grid g2" style="align-items:start">
+        <div>
+          <span class="eyebrow">Founding VIP Bundle</span>
+          <div class="price"><span class="amt">$250</span><span class="cur">USD deposit</span></div>
+          <p class="muted" style="font-size:14px">Applied in full toward your device. Refundable escrow by default until fulfillment.</p>
+          <ul class="incl">
+            <li><span class="tick">✓</span> Priority hardware device slot in the first production run</li>
+            <li><span class="tick">✓</span> Software VIP priority — early access to the vault &amp; marketplace</li>
+            <li><span class="tick">✓</span> Founding-member pricing locked in</li>
+            <li><span class="tick">✓</span> Deposit applied 100% toward your wallet</li>
+            <li><span class="tick">✓</span> Direct line to the build — shape the product</li>
+          </ul>
+
+          <div class="rails">
+            <div class="rlabel">Deposit method — all rails supported</div>
+            <div class="rail-opts" id="railOpts">
+              <div class="rail active" data-rail="card"><span class="glyph">💳</span> Credit / Debit</div>
+              <div class="rail" data-rail="stablecoin"><span class="glyph">🪙</span> Stablecoin (USDC / USDT)</div>
+              <div class="rail" data-rail="paypal"><span class="glyph">🅿️</span> PayPal</div>
+              <div class="rail" data-rail="stripe"><span class="glyph">▨</span> Stripe</div>
+              <div class="rail" data-rail="venmo"><span class="glyph">Ⓥ</span> Venmo</div>
+            </div>
+          </div>
+          <div class="note"><b>Waitlist is open now.</b> We're capturing founding-member intent while final compliance and IP steps complete. You'll be invited to complete your $250 deposit through your chosen method the moment live processing opens — you are not charged today.</div>
+        </div>
+
+        <div class="card" style="background:#0b2237">
+          <h3 style="margin-bottom:2px">Join the VIP waitlist</h3>
+          <p class="muted" style="font-size:13.5px;margin:0 0 6px">Reserve your slot and preferred deposit method.</p>
+          <form id="vipForm" onsubmit="return submitVip(event)">
+            <div class="form-row">
+              <div><label class="field">First name</label><input required name="first" autocomplete="given-name" /></div>
+              <div><label class="field">Last name</label><input required name="last" autocomplete="family-name" /></div>
+            </div>
+            <label class="field">Email</label>
+            <input required type="email" name="email" autocomplete="email" placeholder="you@email.com" />
+            <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;top:-9999px" aria-hidden="true" />
+            <label class="field">Preferred deposit method</label>
+            <select name="rail" id="railSelect">
+              <option value="card">Credit / Debit card</option>
+              <option value="stablecoin">Stablecoin (USDC / USDT)</option>
+              <option value="paypal">PayPal</option>
+              <option value="stripe">Stripe</option>
+              <option value="venmo">Venmo</option>
+            </select>
+            <div class="consent">
+              <input required type="checkbox" id="agree" />
+              <label for="agree">I understand this reserves a founding-member slot, that no payment is taken today, and that I'll be invited to complete a $250 deposit when live processing opens. I agree to be contacted about my reservation and have read the <a href="/dnai/terms/" target="_blank">VIP Terms &amp; Refund Policy</a>.</label>
+            </div>
+            <button class="btn btn-gold btn-lg" style="width:100%;margin-top:16px" type="submit">Reserve my VIP Wallet</button>
+            <p id="vipMsg" class="muted" style="font-size:13px;text-align:center;margin:12px 0 0"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="section-head" style="text-align:center;margin:0 auto 8px">
+      <span class="eyebrow">Get involved</span>
+      <h2>Join the movement to make genomes sovereign</h2>
+    </div>
+    <div class="contact-box">
+      <p class="muted" style="max-width:520px;margin:0 auto">Start with the free waitlist, or lock in founding-member status with the VIP deposit. Follow along on our channels below.</p>
+
+      <div class="contact-actions">
+        <!-- Order per spec: 1) Join Waitlist  2) VIP Deposit  3) socials below -->
+        <a href="#how" class="btn btn-primary btn-lg" id="joinWaitlistBtn">Join the DNaI Waitlist</a>
+        <a href="#vip" class="btn btn-gold btn-lg" id="vipDepositBtn">VIP DNaI Deposit · $250</a>
+      </div>
+
+      <!-- SOCIAL LINKS — real URLs -->
+      <div class="socials" id="socials">
+        <a class="social" href="https://www.linkedin.com/in/everettjaymorton" target="_blank" rel="noopener"><span class="glyph">in</span> LinkedIn <small>Everett Morton</small></a>
+        <a class="social" href="https://www.linkedin.com/company/93807770/" target="_blank" rel="noopener"><span class="glyph">in</span> LinkedIn <small>Cloud Control LLC</small></a>
+        <a class="social" href="https://www.facebook.com/profile.php?id=61577496382293" target="_blank" rel="noopener"><span class="glyph">f</span> Facebook <small>Cloud Control LLC</small></a>
+        <a class="social" href="https://www.youtube.com/@CloudControlLLC" target="_blank" rel="noopener"><span class="glyph">▶</span> YouTube <small>Cloud Control LLC</small></a>
+      </div>
+      <p class="muted" style="font-size:12px;margin-top:18px">Cloud Control LLC · <a href="mailto:everett@cloudcontrolllc.com">everett@cloudcontrolllc.com</a></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <div>© 2026 Cloud Control LLC · DNaI “Inherited Scientific”. All rights reserved.</div>
+    <div class="muted">Reservations only. No securities offered. Testnet + synthetic data until compliance clears. Not medical advice. <a href="/dnai/terms/">VIP Terms &amp; Refund Policy</a></div>
+  </div>
+</footer>
+
+<script>
+  // Deposit-rail chip <-> select sync
+  var railOpts = document.querySelectorAll('#railOpts .rail');
+  var railSelect = document.getElementById('railSelect');
+  railOpts.forEach(function(el){
+    el.addEventListener('click', function(){
+      railOpts.forEach(function(x){x.classList.remove('active')});
+      el.classList.add('active');
+      if (railSelect) railSelect.value = el.getAttribute('data-rail');
+    });
+  });
+  if (railSelect){
+    railSelect.addEventListener('change', function(){
+      railOpts.forEach(function(x){
+        x.classList.toggle('active', x.getAttribute('data-rail') === railSelect.value);
+      });
+    });
+  }
+
+  // Waitlist submit — POSTs to /api/reserve (Cloudflare Pages Function → D1).
+  // Falls back to a mailto: draft only if the endpoint is unreachable.
+  function submitVip(e){
+    e.preventDefault();
+    var f = e.target;
+    var msg = document.getElementById('vipMsg');
+    var btn = f.querySelector('button[type="submit"]');
+    var data = {
+      first: f.first.value.trim(), last: f.last.value.trim(),
+      email: f.email.value.trim(), rail: f.rail.value,
+      website: f.website ? f.website.value : ''
+    };
+    btn.disabled = true;
+    msg.textContent = 'Reserving your slot…';
+    fetch('/api/reserve', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(function(r){ return r.json(); }).then(function(res){
+      if (!res.ok) throw new Error(res.error || 'failed');
+      msg.textContent = 'You are on the list, ' + data.first + '! Your founding-member reservation is recorded — we will email you at ' + data.email + ' the moment your $250 deposit window opens. No payment is taken today.';
+      f.reset();
+      railOpts.forEach(function(x){x.classList.remove('active')});
+      if (railOpts[0]) railOpts[0].classList.add('active');
+    }).catch(function(){
+      // Endpoint unreachable — fall back to a pre-filled email draft.
+      var subject = encodeURIComponent('DNaI Genomic Wallet — VIP Waitlist reservation');
+      var body = encodeURIComponent(
+        'New VIP waitlist reservation:\n\n' +
+        'Name: ' + data.first + ' ' + data.last + '\n' +
+        'Email: ' + data.email + '\n' +
+        'Preferred deposit method: ' + data.rail + '\n' +
+        'Bundle: $250 founding VIP (hardware slot + software priority)\n'
+      );
+      window.location.href = 'mailto:everett@cloudcontrolllc.com?subject=' + subject + '&body=' + body;
+      msg.textContent = 'Our reservation service could not be reached, so your email client is opening to send your reservation directly.';
+    }).finally(function(){ btn.disabled = false; });
+    return false;
+  }
+</script>
+</body>
+</html>
