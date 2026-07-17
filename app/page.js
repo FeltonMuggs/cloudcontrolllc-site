@@ -428,16 +428,11 @@ export default function Home() {
         <div className="pointer-events-none absolute inset-x-0 top-0 h-2/3 bg-[radial-gradient(75%_55%_at_50%_0%,rgba(90,155,212,0.16),transparent_72%)] z-[1]" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-navy-deep/70 via-navy-deep/25 to-transparent z-[1]" />
         <div id="hero-copy" className="relative z-10 mx-auto flex h-screen max-w-8xl flex-col justify-center px-6 md:px-10">
-          <div className="mb-7 inline-flex w-fit items-center gap-2.5 rounded-full border border-sky/30 bg-navy-900/50 px-4 py-2 text-xs font-medium tracking-wide text-sky-light backdrop-blur-sm">
-            <span className="h-1.5 w-1.5 rounded-full bg-wheat" />
-            GBA &middot; Blockchain Maturity Model Certified
-          </div>
           <h1 className="font-serif max-w-5xl text-[12.5vw] font-semibold leading-[0.95] tracking-tight text-cream sm:text-[9vw] md:text-[6.6vw] [text-shadow:0_2px_40px_rgba(8,26,43,0.65)]">
             Artificial Infrastructure<br />
             <span className="text-sky-light">Verified in the </span><span className="italic text-wheat-light">Real World.</span>
           </h1>
           <div className="mt-10 flex flex-wrap items-center gap-4">
-            <a href="#contact" className="rounded-full bg-wheat px-7 py-3.5 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/30 transition-transform hover:scale-[1.04] active:scale-95">Request a BMM Assessment</a>
             <a href="#approach" className="rounded-full border border-sky-light/40 bg-navy-900/30 px-7 py-3.5 text-sm font-semibold text-cream backdrop-blur-sm transition-colors hover:border-wheat hover:text-wheat-light">See how it works</a>
           </div>
         </div>
