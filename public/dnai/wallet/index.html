@@ -174,7 +174,7 @@
   <div class="wrap">
     <span class="badge">🧬 New · <b>DNaI Genomic Wallet</b> · hardware vault + royalty engine</span>
     <h1>Own your genome. Keep it on a device <span class="grad-text">you hold.</span> Earn every time it's used.</h1>
-    <p class="lead">The DNaI Genomic Wallet is a personal hardware vault built on Raspberry Pi. Your raw genome stays encrypted on the device and <b>never leaves it</b>. Consent is enforced in hardware. When a researcher, lab, or model licenses access, the answer is computed on your device — and the royalty is paid to you.</p>
+    <p class="lead">The DNaI Genomic Wallet is a personal hardware vault. Your raw genome stays encrypted on a device you physically hold and <b>never leaves it</b>. Consent is enforced in hardware. When a researcher, lab, or model licenses access, the answer is computed on your device — and the royalty is paid to you.</p>
     <div class="hero-cta">
       <a href="#vip" class="btn btn-gold btn-lg">Reserve VIP Wallet · $250</a>
       <a href="#how" class="btn btn-ghost btn-lg">See how it works</a>
@@ -186,9 +186,9 @@
     </div>
 
     <div class="device" aria-hidden="true">
-      <div class="chip"><span class="ic">🔒</span><div><b>Encrypted Vault</b><br><small>Your genome, sealed on the device (LUKS + secure element)</small></div></div>
-      <div class="chip"><span class="ic">🖐️</span><div><b>Consent Engine</b><br><small>Grant &amp; revoke access — signed in hardware, provable on-chain</small></div></div>
-      <div class="chip"><span class="ic">⚡</span><div><b>Compute-to-Data</b><br><small>Queries run on-device — only the result leaves, never the data</small></div></div>
+      <div class="chip"><span class="ic">🔒</span><div><b>Encrypted Vault</b><br><small>Your genome, sealed on a device you physically hold</small></div></div>
+      <div class="chip"><span class="ic">🖐️</span><div><b>Consent Engine</b><br><small>Grant &amp; revoke access — enforced in hardware</small></div></div>
+      <div class="chip"><span class="ic">⚡</span><div><b>Private Queries</b><br><small>Questions are answered on-device — only the result leaves, never your data</small></div></div>
       <div class="chip"><span class="ic">💎</span><div><b>Royalty Wallet</b><br><small>Access royalties settle straight to keys only you control</small></div></div>
     </div>
   </div>
@@ -203,12 +203,12 @@
       <p class="muted">Cloud vaults still ask you to trust a company's servers. The DNaI Genomic Wallet removes that trust — the sequence sits on silicon you physically control.</p>
     </div>
     <div class="grid g3">
-      <div class="card"><div class="num">01 · REGISTER</div><h3>Seal your genome</h3><p>Load your sequencing file onto the wallet. It's encrypted to the on-device vault instantly and hashed locally — only the hash and a pointer are registered.</p></div>
-      <div class="card"><div class="num">02 · CONSENT</div><h3>Set license terms</h3><p>Pick who may access what, for which purpose, at what royalty. Consent is machine-readable, revocable, and signed by the device's secure element.</p></div>
-      <div class="card"><div class="num">03 · QUERY</div><h3>Answered on-device</h3><p>A licensee's approved query runs inside the wallet against your vault. Only the consented result is returned. Your genome never transits the network.</p></div>
-      <div class="card"><div class="num">04 · SETTLE</div><h3>You get paid</h3><p>The royalty splits automatically to the wallet keys only you hold, with an immutable receipt. Income shows on the device and your dashboard.</p></div>
-      <div class="card"><div class="num">05 · REVOKE</div><h3>Change your mind, anytime</h3><p>Press the hardware consent button to revoke. Future queries are refused and the on-chain state proves your revocation.</p></div>
-      <div class="card"><div class="num">06 · CONTROL</div><h3>Sovereign by design</h3><p>Keys are generated on-chip and never exportable. No personal data ever goes on-chain — only hashes and consent state.</p></div>
+      <div class="card"><div class="num">01 · REGISTER</div><h3>Seal your genome</h3><p>Load your sequencing file onto the wallet. It's encrypted to the on-device vault instantly — only a secure reference is registered, never the sequence itself.</p></div>
+      <div class="card"><div class="num">02 · CONSENT</div><h3>Set license terms</h3><p>Pick who may access what, for which purpose, at what royalty. Consent is machine-readable, revocable, and signed on the device.</p></div>
+      <div class="card"><div class="num">03 · QUERY</div><h3>Answered on-device</h3><p>An approved request is answered on your device. Only the consented result is returned — your genome never transits the network.</p></div>
+      <div class="card"><div class="num">04 · SETTLE</div><h3>You get paid</h3><p>The royalty is paid automatically to keys only you hold, with a verifiable receipt. Income shows on the device and your dashboard.</p></div>
+      <div class="card"><div class="num">05 · REVOKE</div><h3>Change your mind, anytime</h3><p>Revoke your consent at any time. Future requests are refused, and your revocation is provable.</p></div>
+      <div class="card"><div class="num">06 · CONTROL</div><h3>Sovereign by design</h3><p>Your keys stay on the device and are never exportable. Your personal data is never published — you hold the keys and stay in control.</p></div>
     </div>
   </div>
 </section>
@@ -217,17 +217,14 @@
 <section id="architecture" style="background:var(--bg2)">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">Architecture</span>
-      <h2>A hardware vault, built on Raspberry Pi</h2>
-      <p class="muted">Five layers turn a Pi into a sovereign genomic appliance. Raw data has no network egress path by design.</p>
-    </div>
-    <div class="grid g2">
-      <div class="card"><div class="num">LAYER 1 · STORAGE</div><h3>Encrypted vault</h3><p>Full-disk-encrypted NVMe holds your VCF / CRAM / FASTQ. Unsealed only after the secure element attests the device. Read only by local compute.</p></div>
-      <div class="card"><div class="num">LAYER 2 · CONSENT</div><h3>Consent-as-code engine</h3><p>Revocable, royalty-aware consent runs on the device. Every grant or revocation is hardware-signed; only its hash and state reach the chain.</p></div>
-      <div class="card"><div class="num">LAYER 3 · KEYS</div><h3>Secure-element custody</h3><p>A hardware secure element holds your royalty wallet key and vault master key. Keys are generated on-chip and never leave it.</p></div>
-      <div class="card"><div class="num">LAYER 4 · COMPUTE-TO-DATA</div><h3>On-device query gateway</h3><p>Approved licensee queries and model inference execute locally against the vault. Only the consented result is returned and billed.</p></div>
-      <div class="card"><div class="num">LAYER 5 · ON-CHAIN CLIENT</div><h3>Registry &amp; royalty rail</h3><p>A thin client publishes asset hashes and pointers, syncs consent, and receives royalty settlements — testnet first, mainnet when compliance clears.</p></div>
-      <div class="card" style="border-color:#2c527a"><div class="num" style="color:var(--accent)">THE PROMISE</div><h3>Your DNA never leaves</h3><p>No raw genome transits the network. No personal data on-chain. Monetization without data transfer — the cleanest answer to privacy law.</p></div>
+      <span class="eyebrow">Why it's private</span>
+<h2>Private by design</h2>
+<p class="muted">Your raw genome never leaves the device you hold — not our servers, not anyone's cloud. Yours.</p>
+</div>
+<div class="grid g3">
+<div class="card"><div class="num">YOU HOLD IT</div><h3>On a device you control</h3><p>Your sequence lives on a personal device you physically hold — not on a company's servers you have to trust.</p></div>
+<div class="card"><div class="num">QUESTIONS, NOT COPIES</div><h3>The data never travels</h3><p>When a researcher, lab, or model is approved, the question is answered on your device and only the answer leaves. Your genome itself never moves.</p></div>
+<div class="card"><div class="num">CONSENT YOU PROVE</div><h3>Grant, earn, revoke</h3><p>You set the terms, you're paid when your data creates value, and you can withdraw consent at any time — provably.</p></div>
     </div>
   </div>
 </section>
@@ -243,19 +240,19 @@
 
     <div class="phase">
       <div class="tag">H0<small>Now</small></div>
-      <div><h3>Spec &amp; reference design</h3><p>Finalize the Raspberry Pi reference build, secure-element choice, and enclosure. Publish this roadmap and open the $250 VIP waitlist. Intent captured now — live deposits switch on once gates clear.</p></div>
+      <div><h3>Spec &amp; reference design</h3><p>Finalize the wallet's reference design and enclosure. Publish this roadmap and open the $250 VIP waitlist. Intent captured now — live deposits switch on once gates clear.</p></div>
     </div>
     <div class="phase">
       <div class="tag">H1<small>Build</small></div>
-      <div><h3>Wallet OS — vault + consent + keys</h3><p>The DNaI Wallet OS image: encrypted vault storage, the consent engine, and secure-element key custody on a Raspberry Pi. Register-and-consent works against testnet.</p></div>
+      <div><h3>Wallet software — vault + consent + keys</h3><p>The DNaI Wallet software: encrypted vault storage, the consent engine, and on-device key custody. Register-and-consent works against testnet.</p></div>
     </div>
     <div class="phase">
       <div class="tag">H2<small>Demo</small></div>
-      <div><h3>Compute-to-data + royalties</h3><p>The on-device query gateway and royalty receipt go live. First end-to-end demo: a licensee queries a wallet, the owner is paid — the centerpiece for partners and supporters.</p></div>
+      <div><h3>Private queries + royalties</h3><p>Private on-device queries and royalty payouts go live. First end-to-end demo: an approved licensee is answered, the owner is paid — the centerpiece for partners and supporters.</p></div>
     </div>
     <div class="phase">
       <div class="tag">H3<small>Pilot</small></div>
-      <div><h3>Custom board &amp; pilot units</h3><p>A custom carrier board, hardware consent button, and measured boot. Pilot devices go to early design partners and heritage-community programs.</p></div>
+      <div><h3>Pilot units</h3><p>Pilot devices go to early design partners and heritage-community programs on hardened, tamper-resistant hardware with a physical consent control.</p></div>
     </div>
     <div class="phase">
       <div class="tag">H4<small>Ship</small></div>
