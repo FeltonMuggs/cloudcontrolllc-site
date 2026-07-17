@@ -110,7 +110,7 @@ function Nav() {
             </a>
           ))}
         </nav>
-        <a href="#contact" onClick={(e) => go(e, '#contact')} className="rounded-full bg-wheat px-5 py-2.5 text-sm font-semibold text-navy-900 shadow-lg shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">Request a BMM Assessment</a>
+        <a href="#contact" onClick={(e) => go(e, '#contact')} className="rounded-full bg-wheat px-5 py-2.5 text-sm font-semibold text-navy-900 shadow-lg shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">Start a conversation</a>
       </div>
     </header>
   );
@@ -371,41 +371,6 @@ const CAPABILITIES = [
 ];
 const SERVICES = ['BMM Assessments', 'Digital Asset Roadmapping', 'IoT-to-Ledger Integration', 'Material & Performance Provenance', 'Compliance Data Integrity', 'Grant & Funding Readiness', 'Lifecycle Analytics Dashboards'];
 
-/* ---------------- homepage background music (Spotify, starts on first interaction) ---------------- */
-function HomeAudio() {
-  const startedRef = useRef(false);
-  const ctrlRef = useRef(null);
-  useEffect(() => {
-    window.onSpotifyIframeApiReady = (IFrameAPI) => {
-      const el = document.getElementById('cc-spotify');
-      if (!el) return;
-      IFrameAPI.createController(el, { uri: 'spotify:album:6sLhNooFMt6jJxObilqcyZ', width: '100%', height: 80 }, (controller) => {
-        ctrlRef.current = controller;
-        if (startedRef.current) { try { controller.play(); } catch (e) {} }
-      });
-    };
-    const s = document.createElement('script');
-    s.src = 'https://open.spotify.com/embed/iframe-api/v1';
-    s.async = true;
-    document.body.appendChild(s);
-    const start = () => {
-      if (startedRef.current) return;
-      startedRef.current = true;
-      try { ctrlRef.current && ctrlRef.current.play(); } catch (e) {}
-      remove();
-    };
-    const evs = ['pointerdown', 'touchstart', 'keydown', 'scroll'];
-    const remove = () => evs.forEach((ev) => window.removeEventListener(ev, start));
-    evs.forEach((ev) => window.addEventListener(ev, start, { passive: true }));
-    return () => remove();
-  }, []);
-  return (
-    <div className="fixed bottom-4 left-4 z-40 w-[280px] max-w-[78vw] overflow-hidden rounded-xl opacity-85 shadow-2xl shadow-navy-900/60 transition-opacity hover:opacity-100" aria-label="Background music player">
-      <div id="cc-spotify" />
-    </div>
-  );
-}
-
 export default function Home() {
   useSmoothScroll();
   useEffect(() => {
@@ -421,6 +386,7 @@ export default function Home() {
   }, []);
   return (
     <main id="top" className="relative bg-navy-deep">
+      <Nav />
       {/* ===== HERO ===== */}
       <section className="relative h-[360vh] bg-navy-deep">
         <div className="sticky top-0 h-screen overflow-hidden">
@@ -638,7 +604,6 @@ export default function Home() {
           <p className="text-sm text-sky-light/60">&copy; {new Date().getFullYear()} Cloud Control LLC &mdash; All Rights Reserved.</p>
         </div>
       </footer>
-      <HomeAudio />
     </main>
   );
 }
