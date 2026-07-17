@@ -187,7 +187,7 @@ export default function LegacyPage() {
             <p className="mb-3 font-mono text-xs uppercase tracking-[0.25em] text-wheat">Clark Construction &middot; Strategic Partnership Program</p>
             <h2 className="font-serif text-3xl font-medium leading-[1.15] text-cream md:text-5xl">Trained where the biggest work gets built.</h2>
             <p className="mt-6 text-lg leading-relaxed text-sky-light/80">
-              Cloud Control LLC is proud to carry the crest of Clark Construction&rsquo;s Strategic Partnership Program &mdash; an executive-education program that develops small and diverse subcontractors in the disciplines that win and deliver major work: estimating, project controls, contracts, safety, and financial management.
+              Cloud Control LLC is a graduate of Clark Construction&rsquo;s Strategic Partnership Program &mdash; the executive-education program that has been empowering small businesses since 2006, developing subcontractors in the disciplines that win and deliver major work: estimating, project controls, contracts, safety, and financial management.
             </p>
             <p className="mt-4 text-lg leading-relaxed text-sky-light/80">
               That training is baked into how we build software: every workflow we digitize is one we first learned to run on paper, under contract, on a live project.
