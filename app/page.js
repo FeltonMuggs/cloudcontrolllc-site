@@ -75,7 +75,10 @@ const LINKS = [
   { label: 'Projects', href: '#projects' },
   { label: 'Contact', href: '#contact' },
 ];
-const PROJECT_LINKS = [{ label: 'DNaI', href: '/dnai' }];
+const PROJECT_LINKS = [
+  { label: 'DNaI', href: '/dnai', text: 'text-field hover:text-field-deep', dot: 'bg-field' },
+  { label: 'Legacy', href: '/legacy', text: 'text-wheat hover:text-wheat-light', dot: 'bg-wheat' },
+];
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -104,8 +107,8 @@ function Nav() {
           ))}
           <span className="h-4 w-[1px] bg-white/15" aria-hidden="true" />
           {PROJECT_LINKS.map((l) => (
-            <a key={l.href} href={l.href} className="flex items-center gap-1.5 text-sm font-medium text-field transition-colors hover:text-field-deep">
-              <span className="h-1.5 w-1.5 rounded-full bg-field" />
+            <a key={l.href} href={l.href} className={`flex items-center gap-1.5 text-sm font-medium transition-colors ${l.text}`}>
+              <span className={`h-1.5 w-1.5 rounded-full ${l.dot}`} />
               {l.label}
             </a>
           ))}
