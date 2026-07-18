@@ -481,6 +481,12 @@ export default function Home() {
             <h2 className="font-serif text-4xl font-medium leading-[1.08] text-cream md:text-5xl">The only government-recognized blockchain readiness framework.</h2>
             <p className="mt-6 text-lg leading-relaxed text-sky-light/80">Cloud Control LLC holds a Certificate of the Government Blockchain Association&apos;s Blockchain Maturity Model &mdash; a standardized quality-assurance and risk-reduction roadmap for the public sector and regulated industries.</p>
             <p className="mt-5 text-lg leading-relaxed text-sky-light/80">Competitors provide technology tools. Cloud Control provides certified governance readiness.</p>
+            <div className="mt-7 flex items-start gap-3.5 rounded-xl border border-wheat/40 bg-wheat/10 p-4">
+              <span className="mt-0.5 grid h-7 w-7 flex-none place-items-center rounded-full bg-wheat/20 ring-1 ring-wheat/50">
+                <svg viewBox="0 0 24 24" className="h-4 w-4 fill-none stroke-wheat" strokeWidth="3" aria-hidden="true"><path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              </span>
+              <p className="text-[15px] leading-relaxed text-cream"><span className="font-semibold">Assessments led by a GBA-Certified Blockchain Maturity Model Assessor</span> &mdash; your readiness evaluation is guided by a certified practitioner, not just a vendor.</p>
+            </div>
             <div className="mt-8">
               <a href="/readiness/" className="rounded-full bg-wheat px-7 py-3.5 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/30 transition-transform hover:scale-[1.04] active:scale-95">Explore the BMM readiness funnel</a>
             </div>
