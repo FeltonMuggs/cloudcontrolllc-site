@@ -606,6 +606,19 @@ export default function Home() {
 
       {/* ===== FOOTER ===== */}
       <footer className="bg-navy-900 px-6 pb-12 md:px-10">
+        <div className="mx-auto max-w-8xl">
+          <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.25em] text-sky-light/50">Partners &amp; Affiliations</p>
+          <div className="flex flex-wrap items-center gap-4 pb-9">
+            <span className="inline-flex items-center gap-2.5 rounded-lg bg-white px-4 py-2.5 shadow-sm ring-1 ring-black/5">
+              <img src="/bmm-logo.png" alt="GBA Blockchain Maturity Model" className="h-12 w-auto" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling.style.display = 'inline'; }} />
+              <span style={{ display: 'none' }} className="text-sm font-semibold text-navy-900">Blockchain Maturity Model</span>
+            </span>
+            <span className="inline-flex items-center gap-2.5 rounded-lg bg-white px-4 py-2.5 shadow-sm ring-1 ring-black/5">
+              <img src="/clark-spp.png" alt="Clark SPP" className="h-12 w-auto" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling.style.display = 'inline'; }} />
+              <span style={{ display: 'none' }} className="text-sm font-semibold text-navy-900">Clark SPP</span>
+            </span>
+          </div>
+        </div>
         <div className="mx-auto flex max-w-8xl flex-col items-start justify-between gap-6 border-t border-white/10 pt-8 md:flex-row md:items-center">
           <div className="flex items-center gap-3">
             <img src="/logo.png" alt="Cloud Control LLC" className="h-10 w-auto" />
