@@ -68,7 +68,7 @@ function Hills({ from, to, flip = false }) {
 }
 
 /* ---------------- affiliation logo (graceful: text chip until the image loads) ---------------- */
-function AffiliationLogo({ src, label }) {
+function AffiliationLogo({ src, label, href }) {
   const [ok, setOk] = useState(false);
   const ref = useRef(null);
   useEffect(() => {
@@ -76,7 +76,13 @@ function AffiliationLogo({ src, label }) {
     if (img && img.complete && img.naturalWidth > 0) setOk(true);
   }, []);
   return (
-    <span className={`inline-flex items-center rounded-lg px-4 py-2.5 shadow-sm ${ok ? 'bg-white ring-1 ring-black/5' : 'border border-white/15 bg-white/[0.06]'}`}>
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      title={label}
+      className={`inline-flex items-center rounded-lg px-4 py-2.5 shadow-sm transition-transform hover:scale-[1.03] ${ok ? 'bg-white ring-1 ring-black/5 hover:shadow-md' : 'border border-white/15 bg-white/[0.06] hover:border-white/30'}`}
+    >
       <img
         ref={ref}
         src={src}
@@ -86,7 +92,7 @@ function AffiliationLogo({ src, label }) {
         onError={() => setOk(false)}
       />
       {!ok && <span className="text-sm font-semibold tracking-wide text-sky-light">{label}</span>}
-    </span>
+    </a>
   );
 }
 
@@ -632,8 +638,8 @@ export default function Home() {
         <div className="mx-auto max-w-8xl">
           <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.25em] text-sky-light/50">Partners &amp; Affiliations</p>
           <div className="flex flex-wrap items-center gap-4 pb-9">
-            <AffiliationLogo src="/bmm-logo.png" label="GBA · Blockchain Maturity Model" />
-            <AffiliationLogo src="/clark-spp.png" label="Clark SPP · Graduate" />
+            <AffiliationLogo src="/bmm-logo.png" label="GBA · Blockchain Maturity Model" href="https://gbaglobal.org/blockchain-maturity-model/" />
+            <AffiliationLogo src="/clark-spp.png" label="Clark SPP · Graduate" href="https://www.clarkconstruction.com/business-with-us/strategic-partnership-program" />
           </div>
         </div>
         <div className="mx-auto flex max-w-8xl flex-col items-start justify-between gap-6 border-t border-white/10 pt-8 md:flex-row md:items-center">
