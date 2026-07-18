@@ -67,6 +67,29 @@ function Hills({ from, to, flip = false }) {
   );
 }
 
+/* ---------------- affiliation logo (graceful: text chip until the image loads) ---------------- */
+function AffiliationLogo({ src, label }) {
+  const [ok, setOk] = useState(false);
+  const ref = useRef(null);
+  useEffect(() => {
+    const img = ref.current;
+    if (img && img.complete && img.naturalWidth > 0) setOk(true);
+  }, []);
+  return (
+    <span className={`inline-flex items-center rounded-lg px-4 py-2.5 shadow-sm ${ok ? 'bg-white ring-1 ring-black/5' : 'border border-white/15 bg-white/[0.06]'}`}>
+      <img
+        ref={ref}
+        src={src}
+        alt={label}
+        className={`h-12 w-auto ${ok ? '' : 'hidden'}`}
+        onLoad={() => setOk(true)}
+        onError={() => setOk(false)}
+      />
+      {!ok && <span className="text-sm font-semibold tracking-wide text-sky-light">{label}</span>}
+    </span>
+  );
+}
+
 /* ---------------- nav ---------------- */
 const LINKS = [
   { label: 'Approach', href: '#approach' },
@@ -609,14 +632,8 @@ export default function Home() {
         <div className="mx-auto max-w-8xl">
           <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.25em] text-sky-light/50">Partners &amp; Affiliations</p>
           <div className="flex flex-wrap items-center gap-4 pb-9">
-            <span className="inline-flex items-center gap-2.5 rounded-lg bg-white px-4 py-2.5 shadow-sm ring-1 ring-black/5">
-              <img src="/bmm-logo.png" alt="GBA Blockchain Maturity Model" className="h-12 w-auto" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling.style.display = 'inline'; }} />
-              <span style={{ display: 'none' }} className="text-sm font-semibold text-navy-900">Blockchain Maturity Model</span>
-            </span>
-            <span className="inline-flex items-center gap-2.5 rounded-lg bg-white px-4 py-2.5 shadow-sm ring-1 ring-black/5">
-              <img src="/clark-spp.png" alt="Clark SPP" className="h-12 w-auto" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling.style.display = 'inline'; }} />
-              <span style={{ display: 'none' }} className="text-sm font-semibold text-navy-900">Clark SPP</span>
-            </span>
+            <AffiliationLogo src="/bmm-logo.png" label="GBA · Blockchain Maturity Model" />
+            <AffiliationLogo src="/clark-spp.png" label="Clark SPP · Graduate" />
           </div>
         </div>
         <div className="mx-auto flex max-w-8xl flex-col items-start justify-between gap-6 border-t border-white/10 pt-8 md:flex-row md:items-center">
