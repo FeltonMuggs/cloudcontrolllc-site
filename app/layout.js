@@ -5,6 +5,11 @@ export const metadata = {
   title: 'Cloud Control LLC - Verifiable Infrastructure, From the Ground Up',
   description:
     'The digital foundation for real infrastructure - GBA-certified blockchain for verifiable trust, compliance, and performance across the built environment.',
+  icons: {
+    icon: '/logo.png',
+    shortcut: '/logo.png',
+    apple: '/logo.png',
+  },
   openGraph: {
     title: 'Cloud Control LLC',
     description: 'Verifiable Infrastructure, From the Ground Up.',
