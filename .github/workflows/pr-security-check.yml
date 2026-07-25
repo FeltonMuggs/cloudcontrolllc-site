@@ -12,7 +12,9 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install dependencies
         run: |
-          if [ -f package.json ]; then npm ci; else echo "no package.json"; fi
+          if [ -f package-lock.json ]; then npm ci
+          elif [ -f package.json ]; then npm install
+          else echo "no package.json"; fi
       - name: Run npm audit
         run: |
           if [ -f package.json ]; then npm audit --audit-level=moderate || true; else echo "no package.json"; fi
