@@ -1,0 +1,25 @@
+name: PR security checks
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  security:
+    name: Run basic security & lint checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then npm ci
+          elif [ -f package.json ]; then npm install
+          else echo "no package.json"; fi
+      - name: Run npm audit
+        run: |
+          if [ -f package.json ]; then npm audit --audit-level=moderate || true; else echo "no package.json"; fi
+      - name: Run lint (if available)
+        run: |
+          if [ -f package.json ]; then npm run lint || true; else echo "no package.json"; fi
+      - name: Security scan placeholder
+        run: echo "No repository-specific scan configured. Enable code scanning and Dependabot for deeper checks."
