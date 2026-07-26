@@ -100,7 +100,7 @@ function AffiliationLogo({ src, label, href }) {
 const LINKS = [
   { label: 'Approach', href: '#approach' },
   { label: 'Capabilities', href: '#capabilities' },
-  { label: 'BMM Certified', href: '#bmm' },
+  { label: 'GBA Certified', href: '#bmm' },
   { label: 'Projects', href: '#projects' },
   { label: 'Contact', href: '#contact' },
 ];
@@ -428,8 +428,8 @@ export default function Home() {
         <div id="hero-copy" className="relative z-10 mx-auto flex h-screen max-w-8xl flex-col justify-center px-6 md:px-10">
           <img src="/logo.png" alt="Cloud Control LLC" className="mb-6 h-24 w-auto self-start drop-shadow-2xl md:h-32" />
           <h1 className="font-serif max-w-5xl text-[12.5vw] font-semibold leading-[0.95] tracking-tight text-cream sm:text-[9vw] md:text-[6.6vw] [text-shadow:0_2px_40px_rgba(8,26,43,0.65)]">
-            Artificial Infrastructure<br />
-            <span className="text-sky-light">Verified in the </span><span className="italic text-wheat-light">Real World.</span>
+            Building a<br />
+            <span className="text-sky-light">Blockchain </span><span className="italic text-wheat-light">Future.</span>
           </h1>
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <a href="#approach" className="rounded-full border border-sky-light/40 bg-navy-900/30 px-7 py-3.5 text-sm font-semibold text-cream backdrop-blur-sm transition-colors hover:border-wheat hover:text-wheat-light">See how it works</a>
@@ -521,6 +521,26 @@ export default function Home() {
             </div>
           </Reveal>
           <Reveal stagger className="space-y-3">
+            <a
+              href="/bmm-certificate.jpg"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="View the certificate at full size"
+              className="group block rounded-2xl border border-wheat/30 bg-navy-deep/60 p-4 shadow-xl shadow-navy-900/40 transition-all duration-300 hover:-translate-y-1 hover:border-wheat/60 hover:shadow-wheat/10 md:p-5"
+            >
+              <img
+                src="/bmm-certificate-card.jpg"
+                alt="Certificate of Completion — Blockchain Maturity Model (BMM) Program, presented to Everett Morton by the Government Blockchain Association"
+                loading="lazy"
+                className="w-full rounded-lg ring-1 ring-white/10"
+              />
+              <div className="mt-3.5 flex items-center justify-between gap-3">
+                <p className="text-sm leading-snug text-sky-light/80">
+                  <span className="font-semibold text-cream">Certificate of Completion</span> &mdash; GBA Blockchain Maturity Model Program &middot; 30 hours &middot; March 2026
+                </p>
+                <span className="flex-none text-xs font-semibold uppercase tracking-[0.15em] text-wheat-light transition-transform group-hover:translate-x-1">View &rarr;</span>
+              </div>
+            </a>
             {['Assess the digital maturity of construction and infrastructure assets', 'Identify gaps in data integrity, cybersecurity, compliance, and performance', 'Develop a clear, phased roadmap to peak digital-asset performance', 'Align programs with grant, utility, and federal funding requirements'].map((line) => (
               <div key={line} className="flex items-start gap-4 rounded-xl border border-white/10 bg-navy-deep/60 p-5">
                 <span className="mt-0.5 grid h-6 w-6 flex-none place-items-center rounded-full bg-wheat/15 ring-1 ring-wheat/40">
