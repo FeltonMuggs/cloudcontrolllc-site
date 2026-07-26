@@ -310,8 +310,146 @@ const ROADMAP = [
   },
 ];
 
+/* ---------------- access gate (owner-approved registration) ---------------- */
+function AccessGate({ onGranted }) {
+  const [mode, setMode] = useState('register'); // 'register' | 'check'
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [org, setOrg] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [note, setNote] = useState('');
+
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = prev; };
+  }, []);
+
+  const grant = (em) => {
+    try {
+      localStorage.setItem('dnai_access', 'granted');
+      if (em) localStorage.setItem('dnai_email', em);
+    } catch (e) { /* private mode */ }
+    onGranted();
+  };
+
+  const checkStatus = async (em, silent) => {
+    try {
+      const r = await fetch(`/api/register?action=status&email=${encodeURIComponent(em)}`);
+      const d = await r.json();
+      if (d.status === 'approved') { grant(em); return true; }
+      if (!silent) {
+        if (d.status === 'pending') setNote('Your request is still awaiting approval. You’ll be able to enter as soon as Everett approves it — check back shortly.');
+        else if (d.status === 'denied') setNote('This registration was not approved. Questions? Email everett@cloudcontrolllc.com.');
+        else setNote('No registration found for that email — request access below.');
+      }
+    } catch (e) {
+      if (!silent) setNote('Could not reach the server — please try again.');
+    }
+    return false;
+  };
+
+  // Returning visitor: quietly re-check a previously submitted email.
+  useEffect(() => {
+    let em = '';
+    try { em = localStorage.getItem('dnai_email') || ''; } catch (e) { /* noop */ }
+    if (em) { setEmail(em); checkStatus(em, true); }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const submit = async (e) => {
+    e.preventDefault();
+    if (busy) return;
+    setNote('');
+    setBusy(true);
+    if (mode === 'check') {
+      await checkStatus(email.trim().toLowerCase(), false);
+      setBusy(false);
+      return;
+    }
+    try {
+      const r = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name.trim(), email: email.trim().toLowerCase(), org: org.trim() }),
+      });
+      const d = await r.json();
+      if (d.ok && d.status === 'approved') { grant(email.trim().toLowerCase()); }
+      else if (d.ok) {
+        try { localStorage.setItem('dnai_email', email.trim().toLowerCase()); } catch (err) { /* noop */ }
+        setNote('Request received. Every registration is personally approved — you’ll get an email once you’re in, or check back here with “Already registered?”.');
+      } else setNote(d.error || 'Something went wrong — please try again.');
+    } catch (err) {
+      setNote('Could not reach the server — please try again.');
+    }
+    setBusy(false);
+  };
+
+  const field = 'w-full rounded-xl border border-white/15 bg-navy-900/60 px-4 py-3 text-[15px] text-cream placeholder:text-sky-light/40 outline-none transition-colors focus:border-field';
+
+  return (
+    <div className="fixed inset-0 z-[100] grid place-items-center overflow-y-auto bg-navy-deep/80 px-4 py-8 backdrop-blur-md">
+      <div className="w-full max-w-md rounded-3xl border border-field/30 bg-navy-900/90 p-8 shadow-2xl shadow-black/50 md:p-10">
+        <div className="mb-6 flex items-center gap-3">
+          <img src="/logo.png" alt="Cloud Control LLC" className="h-10 w-auto" />
+          <div className="leading-tight">
+            <p className="font-serif text-lg font-semibold text-cream">Project DNaI</p>
+            <p className="text-xs uppercase tracking-[0.25em] text-field">Registered access</p>
+          </div>
+        </div>
+        <h2 className="font-serif text-2xl font-medium leading-snug text-cream">This page is open to registered members.</h2>
+        <p className="mt-3 text-[15px] leading-relaxed text-sky-light/75">
+          {mode === 'register'
+            ? 'Request access below — each registration is personally reviewed and approved.'
+            : 'Enter the email you registered with to unlock this device.'}
+        </p>
+        <form onSubmit={submit} className="mt-6 space-y-3.5">
+          {mode === 'register' && (
+            <>
+              <input required value={name} onChange={(e) => setName(e.target.value)} placeholder="Full name" autoComplete="name" className={field} />
+              <input value={org} onChange={(e) => setOrg(e.target.value)} placeholder="Organization (optional)" autoComplete="organization" className={field} />
+            </>
+          )}
+          <input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" autoComplete="email" className={field} />
+          {/* Honeypot — humans never see or fill this */}
+          <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" onChange={() => {}} />
+          <button type="submit" disabled={busy} className="w-full rounded-full bg-field px-7 py-3.5 text-sm font-semibold text-cream shadow-xl shadow-field/20 transition-transform hover:scale-[1.02] hover:bg-field-deep active:scale-95 disabled:opacity-60">
+            {busy ? 'One moment…' : mode === 'register' ? 'Request access' : 'Check my status'}
+          </button>
+        </form>
+        {note && <p className="mt-4 rounded-xl border border-wheat/30 bg-wheat/10 p-3.5 text-sm leading-relaxed text-cream">{note}</p>}
+        <button
+          type="button"
+          onClick={() => { setMode(mode === 'register' ? 'check' : 'register'); setNote(''); }}
+          className="mt-5 text-sm font-semibold text-wheat-light underline-offset-4 hover:underline"
+        >
+          {mode === 'register' ? 'Already registered? Check my status →' : '← Need access? Register here'}
+        </button>
+        <p className="mt-6 border-t border-white/10 pt-4 text-xs leading-relaxed text-sky-light/50">
+          Cloud Control LLC &middot; questions: <a href="mailto:everett@cloudcontrolllc.com" className="text-sky-light/80 hover:text-cream">everett@cloudcontrolllc.com</a>
+        </p>
+      </div>
+    </div>
+  );
+}
+
 /* ------------------------------------------------------------------ */
 export default function DNaIPage() {
+  const [granted, setGranted] = useState(false);
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    try { setGranted(localStorage.getItem('dnai_access') === 'granted'); } catch (e) { /* noop */ }
+    setReady(true);
+  }, []);
+  return (
+    <>
+      {ready && !granted && <AccessGate onGranted={() => setGranted(true)} />}
+      <DNaIContent />
+    </>
+  );
+}
+
+function DNaIContent() {
   useSmoothScroll();
   return (
     <main id="top" className="relative bg-navy-deep">
