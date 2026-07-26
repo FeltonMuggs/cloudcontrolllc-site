@@ -506,7 +506,12 @@ export default function Home() {
       <section id="bmm" className="relative bg-navy px-6 py-24 md:px-10 md:py-32">
         <div className="mx-auto grid max-w-6xl gap-14 lg:grid-cols-2 lg:gap-20">
           <Reveal>
-            <p className="mb-3 font-mono text-xs uppercase tracking-[0.25em] text-wheat">GBA Certified</p>
+            <div className="mb-5 flex items-center gap-4">
+              <a href="https://gbaglobal.org/" target="_blank" rel="noopener noreferrer" title="Government Blockchain Association" className="inline-flex items-center rounded-lg bg-white px-3.5 py-2 shadow-sm ring-1 ring-black/5 transition-transform hover:scale-[1.04]">
+                <img src="/gba-logo.png" alt="Government Blockchain Association (GBA)" className="h-9 w-auto" />
+              </a>
+              <p className="font-mono text-xs uppercase tracking-[0.25em] text-wheat">GBA Certified</p>
+            </div>
             <h2 className="font-serif text-4xl font-medium leading-[1.08] text-cream md:text-5xl">The only government-recognized blockchain readiness framework.</h2>
             <p className="mt-6 text-lg leading-relaxed text-sky-light/80">Cloud Control LLC holds a Certificate of the Government Blockchain Association&apos;s Blockchain Maturity Model &mdash; a standardized quality-assurance and risk-reduction roadmap for the public sector and regulated industries.</p>
             <p className="mt-5 text-lg leading-relaxed text-sky-light/80">Competitors provide technology tools. Cloud Control provides certified governance readiness.</p>
@@ -658,7 +663,7 @@ export default function Home() {
         <div className="mx-auto max-w-8xl">
           <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.25em] text-sky-light/50">Partners &amp; Affiliations</p>
           <div className="flex flex-wrap items-center gap-4 pb-9">
-            <AffiliationLogo src="/bmm-logo.png" label="GBA · Blockchain Maturity Model" href="https://gbaglobal.org/blockchain-maturity-model/" />
+            <AffiliationLogo src="/gba-logo.png" label="GBA · Government Blockchain Association" href="https://gbaglobal.org/blockchain-maturity-model/" />
             <AffiliationLogo src="/clark-spp.png" label="Clark SPP · Graduate" href="https://www.clarkconstruction.com/business-with-us/strategic-partnership-program" />
           </div>
         </div>
