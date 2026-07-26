@@ -153,7 +153,7 @@ export default function LegacyPage() {
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <a href="#clark-spp" className="rounded-full bg-wheat px-7 py-3.5 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/30 transition-transform hover:scale-[1.04] active:scale-95">The Clark SPP story</a>
-            <a href="#playbook" className="rounded-full border border-sky-light/40 bg-navy-900/30 px-7 py-3.5 text-sm font-semibold text-cream backdrop-blur-sm transition-colors hover:border-wheat hover:text-wheat-light">The Subcontractor Playbook</a>
+            <a href="/Cloud-Control-Connected-Construction-Playbook.pdf" target="_blank" rel="noopener noreferrer" className="rounded-full border border-sky-light/40 bg-navy-900/30 px-7 py-3.5 text-sm font-semibold text-cream backdrop-blur-sm transition-colors hover:border-wheat hover:text-wheat-light">The Subcontractor Playbook</a>
           </div>
         </div>
       </section>
@@ -206,7 +206,7 @@ export default function LegacyPage() {
               A field-tested operating guide for subcontractors moving from paper to verifiable digital records &mdash; bidding, compliance, payment, and closeout &mdash; distilled from the Clark SPP curriculum and our own years in the trades.
             </p>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-              <a href="mailto:everett@cloudcontrolllc.com?subject=Subcontractor%20Playbook" className="rounded-full bg-wheat px-8 py-4 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">Get notified when it ships</a>
+              <a href="/Cloud-Control-Connected-Construction-Playbook.pdf" target="_blank" rel="noopener noreferrer" download className="rounded-full bg-wheat px-8 py-4 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">Click here to Download Playbook - Free!</a>
             </div>
           </Reveal>
         </div>
