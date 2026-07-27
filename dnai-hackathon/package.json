@@ -1,0 +1,23 @@
+{
+  "name": "dnai-hackathon",
+  "version": "1.0.0",
+  "description": "DNaI sovereign genomic asset — Flare hackathon build",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy": "hardhat run scripts/deploy.js --network coston2"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@flarenetwork/flare-periphery-contracts": "^0.1.52",
+    "@nomicfoundation/hardhat-chai-matchers": "^2.1.2",
+    "@nomicfoundation/hardhat-ethers": "^3.1.3",
+    "@nomicfoundation/hardhat-network-helpers": "^1.1.2",
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@openzeppelin/contracts": "^5.0.2",
+    "chai": "^4.5.0",
+    "dotenv": "^17.4.2",
+    "ethers": "^6.17.0",
+    "hardhat": "^2.29.0"
+  }
+}

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DNaI — Sovereign Genomic Asset · Flare Testnet</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.13.2/ethers.umd.min.js"></script>
+<style>
+  :root{
+    --navy:#081a2b; --navy-2:#0d2740; --ink:#e8eef4; --muted:#8fa6bd;
+    --line:rgba(143,166,189,.18); --accent:#2F86CC; --gold:#c9a24b;
+    --green:#3fae7a; --amber:#d8973c; --red:#c9584f;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);
+    font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,sans-serif;
+    line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:32px 20px 80px}
+  header{display:flex;justify-content:space-between;align-items:flex-start;
+    gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:22px}
+  .brand{font-family:Georgia,"Times New Roman",serif;font-size:26px;letter-spacing:.2px}
+  .brand b{color:var(--accent)}
+  .tag{color:var(--muted);font-size:13px;margin-top:4px;max-width:44ch}
+  button{font:inherit;cursor:pointer;border-radius:9px;border:1px solid transparent;
+    padding:9px 16px;transition:.15s}
+  button:disabled{opacity:.4;cursor:not-allowed}
+  .connect{background:var(--accent);color:#fff;font-weight:600}
+  .connect:hover:not(:disabled){background:#3a95dd}
+  .who{font-size:12px;color:var(--muted);margin-top:6px;font-family:ui-monospace,monospace}
+  .net-warn{background:rgba(216,151,60,.12);border:1px solid var(--amber);
+    color:#f0c88a;padding:8px 12px;border-radius:8px;font-size:13px;margin-top:14px;display:none}
+  .card{background:var(--navy-2);border:1px solid var(--line);border-radius:14px;
+    padding:22px;margin-top:22px}
+  .row{display:flex;justify-content:space-between;gap:12px;padding:7px 0;
+    border-bottom:1px dashed var(--line);font-size:14px}
+  .row:last-child{border-bottom:none}
+  .row .k{color:var(--muted)}
+  .row .v{font-family:ui-monospace,monospace;text-align:right;word-break:break-all}
+  /* signature element: the consent-state machine track */
+  .machine{display:flex;align-items:center;gap:0;margin:6px 0 20px;
+    background:var(--navy);border:1px solid var(--line);border-radius:12px;padding:16px 12px;overflow-x:auto}
+  .stage{flex:1;min-width:96px;text-align:center;position:relative}
+  .dot{width:15px;height:15px;border-radius:50%;background:#20364c;margin:0 auto 8px;
+    border:2px solid #2b4763;transition:.25s}
+  .stage .lbl{font-size:12px;color:var(--muted);letter-spacing:.4px;text-transform:uppercase}
+  .stage.on .dot{background:var(--accent);border-color:var(--accent);
+    box-shadow:0 0 0 5px rgba(47,134,204,.16)}
+  .stage.on .lbl{color:var(--ink)}
+  .stage.granted.on .dot{background:var(--green);border-color:var(--green);box-shadow:0 0 0 5px rgba(63,174,122,.16)}
+  .stage.revoked.on .dot{background:var(--red);border-color:var(--red);box-shadow:0 0 0 5px rgba(201,88,79,.16)}
+  .stage:not(:last-child)::after{content:"";position:absolute;top:7px;left:calc(50% + 20px);
+    right:calc(-50% + 20px);height:2px;background:#2b4763}
+  h2{font-family:Georgia,serif;font-weight:normal;font-size:19px;margin:0 0 4px}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 16px}
+  .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+  .act{background:transparent;border-color:var(--accent);color:var(--accent);font-weight:600}
+  .act:hover:not(:disabled){background:rgba(47,134,204,.1)}
+  .act.primary{background:var(--accent);color:#fff}
+  .act.owner{border-color:var(--gold);color:var(--gold)}
+  .act.owner:hover:not(:disabled){background:rgba(201,162,75,.1)}
+  .prov{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;
+    border:1px solid var(--line);color:var(--muted);letter-spacing:.5px}
+  table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px}
+  th{text-align:left;color:var(--muted);font-weight:500;font-size:11px;
+    text-transform:uppercase;letter-spacing:.5px;padding:8px 8px;border-bottom:1px solid var(--line)}
+  td{padding:9px 8px;border-bottom:1px solid var(--line);font-family:ui-monospace,monospace;font-size:12px}
+  .pill{font-size:11px;padding:2px 8px;border-radius:20px}
+  .pill.g{background:rgba(63,174,122,.15);color:var(--green)}
+  .pill.p{background:rgba(216,151,60,.15);color:var(--amber)}
+  .empty{color:var(--muted);font-size:13px;padding:16px 0;text-align:center}
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+    background:var(--navy-2);border:1px solid var(--accent);border-radius:10px;
+    padding:12px 18px;font-size:13px;max-width:90vw;opacity:0;pointer-events:none;transition:.3s}
+  .toast.show{opacity:1}
+  .toast a{color:var(--accent)}
+  .foot{color:var(--muted);font-size:11px;margin-top:30px;text-align:center;line-height:1.7}
+  @media(max-width:560px){.machine{gap:0}.stage{min-width:78px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <div class="brand">DN<b>a</b>I</div>
+      <div class="tag">Sovereign genomic assets with verifiable on-chain consent. Your data stays yours — access is requested, priced, and granted on-chain.</div>
+    </div>
+    <div style="text-align:right">
+      <button id="connect" class="connect">Connect wallet</button>
+      <div id="who" class="who"></div>
+    </div>
+  </header>
+  <div id="netwarn" class="net-warn">Wrong network. Switch your wallet to Flare Coston2 (chain 114).</div>
+
+  <div class="card">
+    <h2>Token #<span id="tid">1</span> — consent state</h2>
+    <p class="sub">The state machine below <em>is</em> the product: every transition is a signed, timestamped on-chain event.</p>
+    <div class="machine" id="machine">
+      <div class="stage" data-s="0"><div class="dot"></div><div class="lbl">Idle</div></div>
+      <div class="stage" data-s="1"><div class="dot"></div><div class="lbl">Requested</div></div>
+      <div class="stage granted" data-s="2"><div class="dot"></div><div class="lbl">Granted</div></div>
+      <div class="stage revoked" data-s="3"><div class="dot"></div><div class="lbl">Revoked</div></div>
+    </div>
+    <div class="row"><span class="k">Provenance</span><span class="v"><span id="prov" class="prov">—</span></span></div>
+    <div class="row"><span class="k">Access price</span><span class="v" id="price">—</span></div>
+    <div class="row"><span class="k">Content hash</span><span class="v" id="hash">—</span></div>
+    <div class="row"><span class="k">Current requester</span><span class="v" id="req">—</span></div>
+
+    <div class="actions">
+      <button id="btnRequest" class="act primary" disabled>Request access &amp; pay</button>
+      <button id="btnGrant" class="act owner" disabled>Grant (owner)</button>
+      <button id="btnDeny" class="act owner" disabled>Deny + refund (owner)</button>
+      <button id="btnRevoke" class="act owner" disabled>Revoke (owner)</button>
+      <button id="btnWithdraw" class="act" disabled>Withdraw balance</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Access ledger</h2>
+    <p class="sub">Who accessed what, when, and at what price — read straight from chain events.</p>
+    <table>
+      <thead><tr><th>#</th><th>Licensee</th><th>Price</th><th>When</th><th>Status</th></tr></thead>
+      <tbody id="ledger"><tr><td colspan="5" class="empty">Connect a wallet to load history.</td></tr></tbody>
+    </table>
+  </div>
+
+  <div class="foot">
+    Flare Coston2 testnet · no real value · demo asset provenance is SYNTHETIC<br/>
+    Mainnet is gated (provisional patent · securities opinion · MTL/KYC · audit · multisig).
+  </div>
+</div>
+<div id="toast" class="toast"></div>
+
+<script>
+const ABI = [{"inputs":[{"internalType":"uint96","name":"_platformRoyaltyBps","type":"uint96"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"address","name":"sender","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"address","name":"owner","type":"address"}],"name":"ERC721IncorrectOwner","type":"error"},{"inputs":[{"internalType":"address","name":"operator","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"ERC721InsufficientApproval","type":"error"},{"inputs":[{"internalType":"address","name":"approver","type":"address"}],"name":"ERC721InvalidApprover","type":"error"},{"inputs":[{"internalType":"address","name":"operator","type":"address"}],"name":"ERC721InvalidOperator","type":"error"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"ERC721InvalidOwner","type":"error"},{"inputs":[{"internalType":"address","name":"receiver","type":"address"}],"name":"ERC721InvalidReceiver","type":"error"},{"inputs":[{"internalType":"address","name":"sender","type":"address"}],"name":"ERC721InvalidSender","type":"error"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"ERC721NonexistentToken","type":"error"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"OwnableInvalidOwner","type":"error"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"OwnableUnauthorizedAccount","type":"error"},{"inputs":[],"name":"ReentrancyGuardReentrantCall","type":"error"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"},{"indexed":true,"internalType":"address","name":"licensee","type":"address"},{"indexed":false,"internalType":"uint256","name":"refundedWei","type":"uint256"}],"name":"AccessDenied","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"},{"indexed":true,"internalType":"address","name":"licensee","type":"address"},{"indexed":false,"internalType":"uint256","name":"pricePaidWei","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"ownerShareWei","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"platformShareWei","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"logIndex","type":"uint256"}],"name":"AccessGranted","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"},{"indexed":true,"internalType":"address","name":"licensee","type":"address"},{"indexed":false,"internalType":"uint256","name":"pricePaidWei","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"logIndex","type":"uint256"}],"name":"AccessRequested","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"approved","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"operator","type":"address"},{"indexed":false,"internalType":"bool","name":"approved","type":"bool"}],"name":"ApprovalForAll","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"},{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":false,"internalType":"bytes32","name":"contentHash","type":"bytes32"},{"indexed":false,"internalType":"string","name":"provenance","type":"string"},{"indexed":false,"internalType":"uint256","name":"accessPriceWei","type":"uint256"}],"name":"AssetRegistered","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"},{"indexed":true,"internalType":"address","name":"licensee","type":"address"}],"name":"ConsentRevoked","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"newPriceWei","type":"uint256"}],"name":"PriceUpdated","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"account","type":"address"},{"indexed":false,"internalType":"uint256","name":"amountWei","type":"uint256"}],"name":"Withdrawal","type":"event"},{"inputs":[],"name":"BPS_DENOMINATOR","outputs":[{"internalType":"uint96","name":"","type":"uint96"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"accessLog","outputs":[{"internalType":"address","name":"licensee","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"uint256","name":"pricePaidWei","type":"uint256"},{"internalType":"uint256","name":"timestamp","type":"uint256"},{"internalType":"bool","name":"granted","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"accessLogLength","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"activeRequester","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"approve","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"assets","outputs":[{"internalType":"bytes32","name":"contentHash","type":"bytes32"},{"internalType":"string","name":"provenance","type":"string"},{"internalType":"uint256","name":"accessPriceWei","type":"uint256"},{"internalType":"enum DNaIToken.Consent","name":"state","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"denyAccess","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"escrowed","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"getApproved","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"getAssetState","outputs":[{"internalType":"bytes32","name":"contentHash","type":"bytes32"},{"internalType":"string","name":"provenance","type":"string"},{"internalType":"uint256","name":"accessPriceWei","type":"uint256"},{"internalType":"enum DNaIToken.Consent","name":"state","type":"uint8"},{"internalType":"address","name":"currentRequester","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"grantAccess","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"operator","type":"address"}],"name":"isApprovedForAll","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"ownerOf","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"pendingWithdrawals","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"platformRoyaltyBps","outputs":[{"internalType":"uint96","name":"","type":"uint96"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"bytes32","name":"contentHash","type":"bytes32"},{"internalType":"string","name":"provenance","type":"string"},{"internalType":"string","name":"tokenURI_","type":"string"},{"internalType":"uint256","name":"accessPriceWei","type":"uint256"}],"name":"registerAsset","outputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"requestAccess","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"revokeAccess","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"bytes","name":"data","type":"bytes"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"uint256","name":"newPriceWei","type":"uint256"}],"name":"setAccessPrice","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"operator","type":"address"},{"internalType":"bool","name":"approved","type":"bool"}],"name":"setApprovalForAll","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes4","name":"interfaceId","type":"bytes4"}],"name":"supportsInterface","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"tokenHistory","outputs":[{"components":[{"internalType":"address","name":"licensee","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"uint256","name":"pricePaidWei","type":"uint256"},{"internalType":"uint256","name":"timestamp","type":"uint256"},{"internalType":"bool","name":"granted","type":"bool"}],"internalType":"struct DNaIToken.AccessRecord[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"tokenURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalMinted","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"transferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}];
+// ---- CONFIG: paste your deployed address after running npm run deploy ----
+const CONTRACT = "0x0000000000000000000000000000000000000000";
+const TOKEN_ID = 1;
+const CHAIN_ID = 114n;
+const EXPLORER = "https://coston2-explorer.flare.network";
+const STATE_NAMES = ["Idle","Requested","Granted","Revoked"];
+
+let provider, signer, account, dnai, priceWei;
+
+function toast(msg, ms=4200){const t=document.getElementById('toast');t.innerHTML=msg;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),ms);}
+function short(a){return a? a.slice(0,6)+'…'+a.slice(-4):'—';}
+
+document.getElementById('tid').textContent = TOKEN_ID;
+
+document.getElementById('connect').onclick = async () => {
+  if(!window.ethereum){toast('No injected wallet found. Install MetaMask.');return;}
+  provider = new ethers.BrowserProvider(window.ethereum);
+  await provider.send('eth_requestAccounts', []);
+  signer = await provider.getSigner();
+  account = await signer.getAddress();
+  document.getElementById('who').textContent = short(account);
+  const net = await provider.getNetwork();
+  document.getElementById('netwarn').style.display = net.chainId===CHAIN_ID ? 'none':'block';
+  if(CONTRACT.startsWith('0x0000')){toast('Set CONTRACT in the HTML to your deployed address first.');return;}
+  dnai = new ethers.Contract(CONTRACT, ABI, signer);
+  await refresh();
+};
+
+async function refresh(){
+  try{
+    const [hash, prov, price, state, requester] = await dnai.getAssetState(TOKEN_ID);
+    priceWei = price;
+    document.getElementById('prov').textContent = prov;
+    document.getElementById('price').textContent = ethers.formatEther(price)+' FLR';
+    document.getElementById('hash').textContent = short(hash);
+    document.getElementById('req').textContent = requester===ethers.ZeroAddress?'—':short(requester);
+
+    document.querySelectorAll('.stage').forEach(s=>s.classList.toggle('on', Number(s.dataset.s)===Number(state)));
+
+    const tokenOwner = (await dnai.ownerOf(TOKEN_ID)).toLowerCase();
+    const isOwner = tokenOwner===account.toLowerCase();
+    const st = Number(state);
+    document.getElementById('btnRequest').disabled = !(st===0||st===3) || isOwner;
+    document.getElementById('btnGrant').disabled  = !(isOwner && st===1);
+    document.getElementById('btnDeny').disabled   = !(isOwner && st===1);
+    document.getElementById('btnRevoke').disabled = !(isOwner && st===2);
+    const bal = await dnai.pendingWithdrawals(account);
+    document.getElementById('btnWithdraw').disabled = bal===0n;
+    document.getElementById('btnWithdraw').textContent = bal>0n? 'Withdraw '+ethers.formatEther(bal)+' FLR' : 'Withdraw balance';
+
+    await loadLedger();
+  }catch(e){console.error(e);toast('Read failed: '+(e.shortMessage||e.message));}
+}
+
+async function loadLedger(){
+  const hist = await dnai.tokenHistory(TOKEN_ID);
+  const body = document.getElementById('ledger');
+  if(hist.length===0){body.innerHTML='<tr><td colspan="5" class="empty">No access requests yet.</td></tr>';return;}
+  body.innerHTML = hist.map((r,i)=>{
+    const when = new Date(Number(r.timestamp)*1000).toLocaleString();
+    const status = r.granted? '<span class="pill g">granted</span>':'<span class="pill p">requested</span>';
+    return '<tr><td>'+i+'</td><td>'+short(r.licensee)+'</td><td>'+ethers.formatEther(r.pricePaidWei)+' FLR</td><td>'+when+'</td><td>'+status+'</td></tr>';
+  }).join('');
+}
+
+async function send(fn, label){
+  try{ toast(label+'…'); const tx=await fn(); toast(label+' sent · <a href="'+EXPLORER+'/tx/'+tx.hash+'" target="_blank">view</a>');
+    await tx.wait(); toast(label+' confirmed'); await refresh();
+  }catch(e){console.error(e);toast(label+' failed: '+(e.shortMessage||e.message));}
+}
+
+document.getElementById('btnRequest').onclick = ()=>send(()=>dnai.requestAccess(TOKEN_ID,{value:priceWei}),'Access request');
+document.getElementById('btnGrant').onclick   = ()=>send(()=>dnai.grantAccess(TOKEN_ID),'Grant');
+document.getElementById('btnDeny').onclick    = ()=>send(()=>dnai.denyAccess(TOKEN_ID),'Deny');
+document.getElementById('btnRevoke').onclick  = ()=>send(()=>dnai.revokeAccess(TOKEN_ID),'Revoke');
+document.getElementById('btnWithdraw').onclick= ()=>send(()=>dnai.withdraw(),'Withdraw');
+
+if(window.ethereum){window.ethereum.on('accountsChanged',()=>location.reload());window.ethereum.on('chainChanged',()=>location.reload());}
+</script>
+</body>
+</html>
