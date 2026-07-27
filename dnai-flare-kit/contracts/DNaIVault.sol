@@ -10,12 +10,22 @@ interface IERC721 {
 }
 
 /**
- * @dev Interface for the Flare Time Series Oracle (FTSO) v2 on Coston2 Testnet.
- * Used to dynamically price genomic queries in USD, paid natively in FLR.
+ * @dev The FTSO price consumer interface — the ONLY oracle seam in the system.
+ * Matches dnai-hackathon/contracts/IFtsoAdapter.sol: the vault reads the live
+ * FLR/USD price exclusively through this interface, so the real Coston2 FTSOv2
+ * wiring stays isolated in a single adapter contract (FtsoV2Adapter / mock).
+ *
+ * Returns:
+ *   price     - the FLR/USD value as an unsigned integer
+ *   decimals  - signed exponent; actual price = price / 10^decimals
+ *               (FTSOv2 returns int8 decimals; it CAN be negative)
+ *   timestamp - unix seconds the feed was last updated (for staleness checks)
  */
-interface IFlareFTSO {
-    // Returns the price of an asset (e.g., FLR/USD) with its decimal precision and timestamp
-    function getFeedPrice(string calldata _feedId) external view returns (uint256 price, uint256 decimals, uint256 timestamp);
+interface IFtsoAdapter {
+    function getFlrUsdPrice()
+        external
+        view
+        returns (uint256 price, int8 decimals, uint64 timestamp);
 }
 
 /**
@@ -36,7 +46,10 @@ contract DNaIVault is IERC721 {
 
     uint256 private _tokenCounter;
     address public platformAdmin;
-    address public ftsoOracleAddress; // Coston2 FTSO Registry address
+    address public ftsoOracleAddress; // IFtsoAdapter price consumer (Coston2)
+
+    // Oldest FLR/USD update the vault will price against (see IFtsoAdapter.timestamp)
+    uint256 public constant MAX_PRICE_STALENESS = 1 hours;
 
     // --- Mappings ---
     mapping(uint256 => address) private _owners;
@@ -182,17 +195,29 @@ contract DNaIVault is IERC721 {
      */
     function getRequiredFLRPayment(uint256 tokenId) public view tokenExists(tokenId) returns (uint256) {
         GenomicProfile memory profile = genomes[tokenId];
-        
-        // Query the FTSO contract for live FLR/USD feed price
-        (uint256 flrPriceUSD, uint256 decimals, ) = IFlareFTSO(ftsoOracleAddress).getFeedPrice("FLR/USD");
-        
-        require(flrPriceUSD > 0, "DNaI: Oracle feed failure");
 
-        // profile.baseFeeUSD is scaled to 2 decimals ($10.00 = 1000)
-        // FTSO price returns with 'decimals' precision
-        // We compute: baseFeeUSD * 10^decimals * 1e18 / (flrPriceUSD * 100)
-        uint256 requiredFLR = (profile.baseFeeUSD * (10 ** decimals) * 1e18) / (flrPriceUSD * 100);
-        return requiredFLR;
+        // Live FLR/USD read — exclusively via the FTSO price consumer seam
+        (uint256 flrPriceUSD, int8 decimals, uint64 ts) = IFtsoAdapter(ftsoOracleAddress).getFlrUsdPrice();
+
+        require(flrPriceUSD > 0, "DNaI: Oracle feed failure");
+        require(block.timestamp >= ts && block.timestamp - ts <= MAX_PRICE_STALENESS, "DNaI: Stale oracle price");
+
+        return _usdCentsToFlrWei(profile.baseFeeUSD, flrPriceUSD, decimals);
+    }
+
+    /**
+     * @dev 1 FLR in USD = price / 10^decimals.
+     *      wei = (usdCents/100) / (price/10^decimals) * 1e18.
+     *      Multiply before divide; handle signed decimals both ways.
+     *      (Same conversion as DNaIConsent so both contracts price identically.)
+     */
+    function _usdCentsToFlrWei(uint256 usdCents, uint256 price, int8 decimals) internal pure returns (uint256) {
+        require(decimals >= -18 && decimals <= 36, "DNaI: Oracle decimals out of range");
+        if (decimals >= 0) {
+            return (usdCents * 1e18 * (10 ** uint256(uint8(decimals)))) / (price * 100);
+        } else {
+            return (usdCents * 1e18) / (price * 100 * (10 ** uint256(uint8(-decimals))));
+        }
     }
 
     /**

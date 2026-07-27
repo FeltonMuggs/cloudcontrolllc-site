@@ -9,6 +9,7 @@ module.exports = {
         enabled: true,
         runs: 200,
       },
+      evmVersion: "paris", // Coston2 has no PUSH0; 0.8.20 would default to shanghai
     },
   },
   networks: {
