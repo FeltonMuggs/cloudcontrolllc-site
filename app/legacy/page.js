@@ -124,6 +124,44 @@ function SppCrest() {
   );
 }
 
+/* ---------------- Clark SPP video poster: links out to YouTube (embedding disabled by owner) ---------------- */
+function SppVideoCard() {
+  const [src, setSrc] = useState('https://i.ytimg.com/vi/1lKCfaz3W8c/maxresdefault.jpg');
+  return (
+    <a
+      href="https://youtu.be/1lKCfaz3W8c"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Watch the Clark Construction Strategic Partnership Program video on YouTube"
+      className="group mt-8 block overflow-hidden rounded-2xl border border-white/10 bg-navy-900/60 shadow-xl shadow-black/30 transition-all hover:border-wheat/50 hover:shadow-2xl"
+    >
+      <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
+        <img
+          src={src}
+          alt="Clark Construction Strategic Partnership Program — watch on YouTube"
+          loading="lazy"
+          onError={() => setSrc('https://i.ytimg.com/vi/1lKCfaz3W8c/hqdefault.jpg')}
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy-900/85 via-navy-900/20 to-transparent" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className="flex h-16 w-16 items-center justify-center rounded-full bg-wheat shadow-lg shadow-black/40 transition-transform group-hover:scale-110">
+            <svg viewBox="0 0 24 24" aria-hidden="true" className="ml-1 h-7 w-7 fill-navy-900">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </span>
+        </div>
+        <div className="absolute inset-x-0 bottom-0 flex flex-wrap items-center gap-2.5 p-4">
+          <span className="rounded-full bg-black/70 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-white">
+            Watch on YouTube
+          </span>
+          <span className="text-sm font-medium text-cream/90">Clark Construction &middot; Strategic Partnership Program</span>
+        </div>
+      </div>
+    </a>
+  );
+}
+
 const HERITAGE_POINTS = [
   { k: '01', title: 'Field First', body: 'Cloud Control was built by people who have stood on the jobsite — bidding work, managing crews, and answering to schedules, inspections, and pay applications long before writing a line of code.' },
   { k: '02', title: 'Earned Standards', body: 'Our approach to verifiable infrastructure data comes from living the paperwork burden firsthand: submittals, RFIs, certified payroll, closeout. We digitize what we have personally carried.' },
@@ -193,20 +231,8 @@ export default function LegacyPage() {
               That training is baked into how we build software: every workflow we digitize is one we first learned to run on paper, under contract, on a live project.
             </p>
 
-            {/* Clark SPP program video + link */}
-            <div className="mt-8 overflow-hidden rounded-2xl border border-white/10 bg-navy-900/40 shadow-xl shadow-black/30">
-              <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
-                <iframe
-                  className="absolute inset-0 h-full w-full"
-                  src="https://www.youtube-nocookie.com/embed/1lKCfaz3W8c"
-                  title="Clark Construction Strategic Partnership Program"
-                  loading="lazy"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                />
-              </div>
-            </div>
+            {/* Clark SPP program video — links to YouTube (owner disabled off-site embedding) */}
+            <SppVideoCard />
             <a
               href="https://www.clarkconstruction.com/business-with-us/strategic-partnership-program"
               target="_blank"
