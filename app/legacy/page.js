@@ -192,6 +192,30 @@ export default function LegacyPage() {
             <p className="mt-4 text-lg leading-relaxed text-sky-light/80">
               That training is baked into how we build software: every workflow we digitize is one we first learned to run on paper, under contract, on a live project.
             </p>
+
+            {/* Clark SPP program video + link */}
+            <div className="mt-8 overflow-hidden rounded-2xl border border-white/10 bg-navy-900/40 shadow-xl shadow-black/30">
+              <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
+                <iframe
+                  className="absolute inset-0 h-full w-full"
+                  src="https://www.youtube-nocookie.com/embed/1lKCfaz3W8c"
+                  title="Clark Construction Strategic Partnership Program"
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+            <a
+              href="https://www.clarkconstruction.com/business-with-us/strategic-partnership-program"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex items-center gap-2 rounded-full border border-wheat/50 bg-wheat/10 px-6 py-3 text-sm font-semibold text-wheat-light transition-colors hover:border-wheat hover:bg-wheat/20"
+            >
+              Explore Clark&rsquo;s Strategic Partnership Program
+              <span aria-hidden="true">&rarr;</span>
+            </a>
           </Reveal>
         </div>
       </section>
