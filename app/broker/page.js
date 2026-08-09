@@ -180,17 +180,16 @@ export default function BrokerPage() {
           </Reveal>
           <Reveal y={32}>
             <div className="mt-10 overflow-hidden rounded-3xl border border-white/10 shadow-2xl shadow-black/40">
-              <video
-                controls
-                playsInline
-                preload="metadata"
-                poster="/broker/demo-poster.png"
-                className="block w-full"
-              >
-                <source src="/broker/swan-broker-demo.mp4" type="video/mp4" />
-                Your browser does not support embedded video.
-                <a href="/broker/swan-broker-demo.mp4">Download the demo video</a>.
-              </video>
+              <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
+                <iframe
+                  src="https://www.youtube-nocookie.com/embed/yCi1H4o0gpo"
+                  title="Carbon Broker demo — verified, not trusted"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="absolute inset-0 h-full w-full"
+                  style={{ border: 0 }}
+                />
+              </div>
             </div>
             <p className="mt-4 text-center font-mono text-xs uppercase tracking-[0.2em] text-sky-light/50">
               Built on FDC + FTSO v2 &middot; Coston2 testnet &middot; simulated deal data
