@@ -1,0 +1,2 @@
+/swan /broker 301
+/swan/* /broker/:splat 301
