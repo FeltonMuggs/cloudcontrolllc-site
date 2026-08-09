@@ -107,6 +107,7 @@ const LINKS = [
 const PROJECT_LINKS = [
   { label: 'DNaI', href: '/dnai', text: 'text-field hover:text-field-deep', dot: 'bg-field' },
   { label: 'Legacy', href: '/legacy', text: 'text-wheat hover:text-wheat-light', dot: 'bg-wheat' },
+  { label: 'SWAN', href: '/swan', text: 'text-sky-light hover:text-cream', dot: 'bg-sky-light' },
 ];
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -633,6 +634,48 @@ export default function Home() {
                 </p>
                 <div className="mt-8 flex items-center gap-2 text-sm font-semibold text-field transition-colors group-hover:text-field-deep">
                   Explore DNaI
+                  <svg viewBox="0 0 20 20" className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="currentColor" aria-hidden="true">
+                    <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
+                  </svg>
+                </div>
+              </div>
+            </a>
+          </Reveal>
+          <Reveal y={32}>
+            <a href="/swan" className="group relative mt-8 flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-transparent transition-colors hover:border-sky-light/50 md:flex-row">
+              {/* land-parcel visual accent */}
+              <div className="relative flex h-48 w-full flex-none items-center justify-center overflow-hidden bg-gradient-to-br from-navy-900 to-navy md:h-auto md:w-72 md:rounded-l-3xl">
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_70%_at_50%_50%,rgba(90,155,212,0.22),transparent_80%)]" />
+                {/* stylised land parcels + leaf glyph */}
+                <svg viewBox="0 0 100 120" className="h-28 w-auto opacity-80 md:h-36" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="sw1" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stopColor="#5a9bd4" />
+                      <stop offset="100%" stopColor="#5ea049" />
+                    </linearGradient>
+                  </defs>
+                  <rect x="8" y="52" width="36" height="28" rx="4" fill="none" stroke="url(#sw1)" strokeWidth="2.5" />
+                  <rect x="50" y="40" width="42" height="40" rx="4" fill="none" stroke="url(#sw1)" strokeWidth="2.5" strokeOpacity="0.7" />
+                  <rect x="22" y="86" width="56" height="26" rx="4" fill="none" stroke="url(#sw1)" strokeWidth="2.5" strokeOpacity="0.5" />
+                  <path d="M50 34 C50 16 62 8 76 6 C76 24 66 32 50 34 Z" fill="#5ea049" fillOpacity="0.85" />
+                  <path d="M50 34 C54 24 60 16 70 11" fill="none" stroke="#0a1220" strokeWidth="1.6" strokeLinecap="round" />
+                </svg>
+                <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full border border-sky-light/50 bg-sky-light/15 px-3 py-1.5 text-[10px] font-semibold tracking-widest text-sky-light uppercase md:bottom-5 md:left-5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-sky-light" style={{ animation: 'pulse 2s cubic-bezier(0.4,0,0.6,1) infinite' }} />
+                  Testnet Demo
+                </div>
+              </div>
+              {/* text */}
+              <div className="flex flex-1 flex-col justify-center p-8 md:p-12">
+                <p className="font-mono text-xs uppercase tracking-[0.25em] text-sky-light">Project SWAN</p>
+                <h3 className="font-serif mt-3 text-3xl font-semibold leading-tight text-cream md:text-4xl">
+                  Land &amp; Carbon Credit RWA Broker
+                </h3>
+                <p className="mt-4 max-w-xl text-lg leading-relaxed text-sky-light/80">
+                  SWAN decouples the finance friction and historical restrictions that keep smaller landowners out of land and carbon-credit real-world-asset markets &mdash; broker-matched deals, oracle-priced settlement, and credit provenance verified on-chain instead of taken on trust.
+                </p>
+                <div className="mt-8 flex items-center gap-2 text-sm font-semibold text-sky-light transition-colors group-hover:text-cream">
+                  Watch the broker demo
                   <svg viewBox="0 0 20 20" className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="currentColor" aria-hidden="true">
                     <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
                   </svg>
