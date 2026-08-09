@@ -107,7 +107,7 @@ const LINKS = [
 const PROJECT_LINKS = [
   { label: 'DNaI', href: '/dnai', text: 'text-field hover:text-field-deep', dot: 'bg-field' },
   { label: 'Legacy', href: '/legacy', text: 'text-wheat hover:text-wheat-light', dot: 'bg-wheat' },
-  { label: 'SWAN', href: '/swan', text: 'text-sky-light hover:text-cream', dot: 'bg-sky-light' },
+  { label: 'Carbon Broker', href: '/broker', text: 'text-sky-light hover:text-cream', dot: 'bg-sky-light' },
 ];
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -642,7 +642,7 @@ export default function Home() {
             </a>
           </Reveal>
           <Reveal y={32}>
-            <a href="/swan" className="group relative mt-8 flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-transparent transition-colors hover:border-sky-light/50 md:flex-row">
+            <a href="/broker" className="group relative mt-8 flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-transparent transition-colors hover:border-sky-light/50 md:flex-row">
               {/* land-parcel visual accent */}
               <div className="relative flex h-48 w-full flex-none items-center justify-center overflow-hidden bg-gradient-to-br from-navy-900 to-navy md:h-auto md:w-72 md:rounded-l-3xl">
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_70%_at_50%_50%,rgba(90,155,212,0.22),transparent_80%)]" />
@@ -667,12 +667,12 @@ export default function Home() {
               </div>
               {/* text */}
               <div className="flex flex-1 flex-col justify-center p-8 md:p-12">
-                <p className="font-mono text-xs uppercase tracking-[0.25em] text-sky-light">Project SWAN</p>
+                <p className="font-mono text-xs uppercase tracking-[0.25em] text-sky-light">Carbon Broker</p>
                 <h3 className="font-serif mt-3 text-3xl font-semibold leading-tight text-cream md:text-4xl">
                   Land &amp; Carbon Credit RWA Broker
                 </h3>
                 <p className="mt-4 max-w-xl text-lg leading-relaxed text-sky-light/80">
-                  SWAN decouples the finance friction and historical restrictions that keep smaller landowners out of land and carbon-credit real-world-asset markets &mdash; broker-matched deals, oracle-priced settlement, and credit provenance verified on-chain instead of taken on trust.
+                  Carbon Broker decouples the finance friction and historical restrictions that keep smaller landowners out of land and carbon-credit real-world-asset markets &mdash; broker-matched deals, oracle-priced settlement, and credit provenance verified on-chain instead of taken on trust. Built for regulated markets like Virginia&rsquo;s SWaN exchange.
                 </p>
                 <div className="mt-8 flex items-center gap-2 text-sm font-semibold text-sky-light transition-colors group-hover:text-cream">
                   Watch the broker demo

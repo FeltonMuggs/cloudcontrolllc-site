@@ -90,7 +90,7 @@ function Nav() {
           <span className="text-white/20 text-lg" aria-hidden="true">/</span>
           <span className="flex items-center gap-2 rounded-full border border-sky-light/50 bg-sky-light/15 px-3.5 py-1.5 text-xs font-semibold text-sky-light tracking-widest uppercase">
             <span className="h-1.5 w-1.5 rounded-full bg-sky-light" />
-            SWAN
+            Carbon Broker
           </span>
         </div>
         <nav className="hidden items-center gap-9 lg:flex">
@@ -98,7 +98,7 @@ function Nav() {
             <a key={l.href} href={l.href} onClick={(e) => go(e, l.href)} className="text-sm font-medium text-sky-light/80 transition-colors hover:text-cream">{l.label}</a>
           ))}
         </nav>
-        <a href="mailto:everett@cloudcontrolllc.com?subject=SWAN%20Inquiry" className="rounded-full bg-wheat px-5 py-2.5 text-sm font-semibold text-navy-900 shadow-lg shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">Start a conversation</a>
+        <a href="mailto:everett@cloudcontrolllc.com?subject=Carbon%20Broker%20Inquiry" className="rounded-full bg-wheat px-5 py-2.5 text-sm font-semibold text-navy-900 shadow-lg shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">Start a conversation</a>
       </div>
     </header>
   );
@@ -111,12 +111,12 @@ const HOW_STEPS = [
 ];
 
 const BARRIERS = [
-  { t: 'Finance friction', b: 'Brokered markets with opaque spreads, slow settlement, and intermediaries who hold your funds. SWAN puts the economics on the table and never takes custody.' },
+  { t: 'Finance friction', b: 'Brokered markets with opaque spreads, slow settlement, and intermediaries who hold your funds. Carbon Broker puts the economics on the table and never takes custody.' },
   { t: 'Historical restrictions', b: 'Land and credit markets have structurally favored large holders. Smaller landowners rarely see the demand side, the pricing, or the paperwork path to participate at all.' },
-  { t: 'Verification by trust', b: 'Today a credit’s status is a registry screenshot and a broker’s word. SWAN replaces that with decentralized attestation anyone can check.' },
+  { t: 'Verification by trust', b: 'Today a credit’s status is a registry screenshot and a broker’s word. Carbon Broker replaces that with decentralized attestation anyone can check.' },
 ];
 
-export default function SwanPage() {
+export default function BrokerPage() {
   useSmoothScroll();
   return (
     <main id="top" className="relative bg-navy-deep">
@@ -128,7 +128,7 @@ export default function SwanPage() {
         <div className="relative z-10 mx-auto flex min-h-screen max-w-8xl flex-col justify-center px-6 md:px-10">
           <div className="mb-7 inline-flex w-fit items-center gap-2.5 rounded-full border border-sky-light/40 bg-navy-900/40 px-4 py-2 text-xs font-medium tracking-wide text-sky-light backdrop-blur-sm">
             <span className="h-1.5 w-1.5 rounded-full bg-sky-light" />
-            Cloud Control LLC &middot; Project SWAN &middot; Coston2 testnet demo
+            Cloud Control LLC &middot; Carbon Broker &middot; Coston2 testnet demo
           </div>
           <h1 className="font-serif max-w-5xl text-[12.5vw] font-semibold leading-[0.95] tracking-tight text-cream sm:text-[9vw] md:text-[6.6vw]">
             The land economy<br />
@@ -136,7 +136,7 @@ export default function SwanPage() {
             <span className="italic text-wheat-light">We&rsquo;re removing it.</span>
           </h1>
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-sky-light/85 md:text-xl">
-            SWAN decouples the finance friction and historical restrictions that keep smaller landowners out of land and carbon-credit real-world-asset markets &mdash; broker-matched deals, oracle-priced settlement, and credit provenance verified on-chain instead of taken on trust.
+            Carbon Broker decouples the finance friction and historical restrictions that keep smaller landowners out of land and carbon-credit real-world-asset markets &mdash; broker-matched deals, oracle-priced settlement, and credit provenance verified on-chain instead of taken on trust.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <a href="#demo" className="rounded-full bg-sky-light px-7 py-3.5 text-sm font-semibold text-navy-900 shadow-xl shadow-sky-light/30 transition-transform hover:scale-[1.04] active:scale-95">Watch the demo</a>
@@ -154,7 +154,7 @@ export default function SwanPage() {
               Every development permit creates demand. Smaller landowners should be able to supply it.
             </h2>
             <p className="mt-6 max-w-3xl text-lg leading-relaxed text-sky-light/80">
-              In regulated mitigation markets like Virginia&rsquo;s, permits that impact streams, wetlands, or the Chesapeake Bay watershed create a legal obligation to buy offset credits &mdash; and demand outruns approved supply. The barriers that keep landowners on the sidelines aren&rsquo;t about land. They&rsquo;re about access:
+              In regulated mitigation markets like Virginia&rsquo;s, permits that impact streams, wetlands, or the Chesapeake Bay watershed create a legal obligation to buy offset credits &mdash; and demand outruns approved supply, and the state&rsquo;s SWaN exchange (a Virginia DEQ &times; Water Ledger platform) now publishes credit availability and pricing in the open. Carbon Broker is built for regulated markets like Virginia&rsquo;s &mdash; the participant-side service layer that gets smaller landowners into them. The barriers that keep landowners on the sidelines aren&rsquo;t about land. They&rsquo;re about access:
             </p>
           </Reveal>
           <Reveal stagger className="mt-14 grid gap-8 md:grid-cols-3">
@@ -184,12 +184,12 @@ export default function SwanPage() {
                 controls
                 playsInline
                 preload="metadata"
-                poster="/swan/demo-poster.png"
+                poster="/broker/demo-poster.png"
                 className="block w-full"
               >
-                <source src="/swan/swan-broker-demo.mp4" type="video/mp4" />
+                <source src="/broker/swan-broker-demo.mp4" type="video/mp4" />
                 Your browser does not support embedded video.
-                <a href="/swan/swan-broker-demo.mp4">Download the demo video</a>.
+                <a href="/broker/swan-broker-demo.mp4">Download the demo video</a>.
               </video>
             </div>
             <p className="mt-4 text-center font-mono text-xs uppercase tracking-[0.2em] text-sky-light/50">
@@ -217,7 +217,7 @@ export default function SwanPage() {
           </Reveal>
           <Reveal y={24}>
             <div className="mt-12 rounded-2xl border border-wheat/30 bg-wheat/[0.06] p-6 text-sky-light/80">
-              <span className="font-semibold text-wheat">Status:</span> SWAN is a working demo on Flare&rsquo;s Coston2 testnet with simulated deal data. No mainnet deployment, no live transactions, and no customer funds &mdash; by design, until the market and compliance gates clear.
+              <span className="font-semibold text-wheat">Status:</span> Carbon Broker is a working demo on Flare&rsquo;s Coston2 testnet with simulated deal data. No mainnet deployment, no live transactions, and no customer funds &mdash; by design, until the market and compliance gates clear.
             </div>
           </Reveal>
         </div>
@@ -230,7 +230,7 @@ export default function SwanPage() {
             <h2 className="font-serif text-4xl font-semibold leading-[1.05] text-cream md:text-5xl">Own land? <span className="italic text-wheat-light">You&rsquo;re the supply side.</span></h2>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-sky-light/80">If you hold land in a mitigation-eligible watershed and want to understand what participation could look like, start a conversation.</p>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-              <a href="mailto:everett@cloudcontrolllc.com?subject=SWAN%20Inquiry" className="rounded-full bg-wheat px-8 py-4 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">Start a conversation</a>
+              <a href="mailto:everett@cloudcontrolllc.com?subject=Carbon%20Broker%20Inquiry" className="rounded-full bg-wheat px-8 py-4 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">Start a conversation</a>
               <a href="/" className="rounded-full border border-sky-light/40 px-8 py-4 text-sm font-semibold text-cream transition-colors hover:border-wheat hover:text-wheat-light">Back to Cloud Control</a>
             </div>
           </Reveal>
