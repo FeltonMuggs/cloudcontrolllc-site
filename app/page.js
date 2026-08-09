@@ -683,6 +683,49 @@ export default function Home() {
               </div>
             </a>
           </Reveal>
+          <Reveal y={32}>
+            <a href="/legacy" className="group relative mt-8 flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-transparent transition-colors hover:border-wheat/50 md:flex-row">
+              {/* heritage crest visual accent */}
+              <div className="relative flex h-48 w-full flex-none items-center justify-center overflow-hidden bg-gradient-to-br from-navy-900 to-navy md:h-auto md:w-72 md:rounded-l-3xl">
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_70%_at_50%_50%,rgba(214,183,120,0.20),transparent_80%)]" />
+                {/* stylised hexagon crest + beam glyph */}
+                <svg viewBox="0 0 100 120" className="h-28 w-auto opacity-80 md:h-36" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="lg1" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#d8a93f" />
+                      <stop offset="100%" stopColor="#b9852e" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M50 8 L88 30 L88 74 L50 96 L12 74 L12 30 Z" fill="none" stroke="url(#lg1)" strokeWidth="3" strokeLinejoin="round" />
+                  <path d="M50 20 L78 36 L78 68 L50 84 L22 68 L22 36 Z" fill="none" stroke="url(#lg1)" strokeWidth="1.6" strokeOpacity="0.6" strokeLinejoin="round" />
+                  <line x1="30" y1="62" x2="70" y2="62" stroke="#d8a93f" strokeWidth="3" strokeLinecap="round" />
+                  <line x1="38" y1="62" x2="38" y2="46" stroke="#d8a93f" strokeWidth="2.4" strokeLinecap="round" />
+                  <line x1="62" y1="62" x2="62" y2="40" stroke="#d8a93f" strokeWidth="2.4" strokeLinecap="round" />
+                  <line x1="30" y1="40" x2="70" y2="40" stroke="#d8a93f" strokeWidth="2" strokeOpacity="0.7" strokeLinecap="round" />
+                </svg>
+                <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full border border-wheat/50 bg-wheat/15 px-3 py-1.5 text-[10px] font-semibold tracking-widest text-wheat uppercase md:bottom-5 md:left-5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-wheat" style={{ animation: 'pulse 2s cubic-bezier(0.4,0,0.6,1) infinite' }} />
+                  In Production
+                </div>
+              </div>
+              {/* text */}
+              <div className="flex flex-1 flex-col justify-center p-8 md:p-12">
+                <p className="font-mono text-xs uppercase tracking-[0.25em] text-wheat">Project Legacy</p>
+                <h3 className="font-serif mt-3 text-3xl font-semibold leading-tight text-cream md:text-4xl">
+                  Before the ledger, the jobsite.
+                </h3>
+                <p className="mt-4 max-w-xl text-lg leading-relaxed text-sky-light/80">
+                  The construction heritage behind Cloud Control &mdash; a Clark Construction Strategic Partnership Program graduate &mdash; and the Subcontractor Playbook: a field-tested operating guide for the trades moving from paper to verifiable digital records.
+                </p>
+                <div className="mt-8 flex items-center gap-2 text-sm font-semibold text-wheat transition-colors group-hover:text-wheat-light">
+                  Explore Legacy
+                  <svg viewBox="0 0 20 20" className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="currentColor" aria-hidden="true">
+                    <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
+                  </svg>
+                </div>
+              </div>
+            </a>
+          </Reveal>
         </div>
       </section>
       <Hills from="bg-navy-deep" to="fill-navy-900" />
