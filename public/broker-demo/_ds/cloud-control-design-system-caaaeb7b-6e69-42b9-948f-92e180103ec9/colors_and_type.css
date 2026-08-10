@@ -1,0 +1,255 @@
+/* ============================================================
+   Cloud Control LLC — Design Tokens
+   Brand: Construction × IoT × Blockchain × Tokenization
+   Voice: civic, institutional, evidentiary, mission-driven
+   ============================================================ */
+
+/* ---------- Webfonts ----------
+   Archivo + Archivo Black — strong, slightly civic geometric sans
+   IBM Plex Mono — technical / ledger / data
+*/
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+
+:root {
+  /* ---------- COLOR — Primitive scale ---------- */
+
+  /* Navy (primary — shield outline, headlines, section bars) */
+  --navy-50:  #EAF0F7;
+  --navy-100: #C9D6E6;
+  --navy-200: #95ADC8;
+  --navy-300: #5C7DA5;
+  --navy-400: #2F5784;
+  --navy-500: #15355C;   /* CORE primary */
+  --navy-600: #102B4A;
+  --navy-700: #0B2138;
+  --navy-800: #08182A;
+  --navy-900: #050F1B;
+
+  /* Sky (secondary — cubes, accent, links, data viz) */
+  --sky-50:  #E8F3FC;
+  --sky-100: #C5E1F6;
+  --sky-200: #8AC3EC;
+  --sky-300: #4FA5E2;
+  --sky-400: #2E8FD6;    /* CORE secondary */
+  --sky-500: #1F7BBE;
+  --sky-600: #175F94;
+  --sky-700: #11476F;
+
+  /* Field green (tertiary — wheat, soil, verified states, growth) */
+  --field-50:  #ECF4E9;
+  --field-100: #CFE3C7;
+  --field-200: #A4CC95;
+  --field-300: #78B463;
+  --field-400: #4A8C3D;   /* CORE tertiary */
+  --field-500: #3A7030;
+  --field-600: #2F6B2A;
+  --field-700: #214B1D;
+
+  /* Earth — warm support color (used sparingly for "physical" callouts) */
+  --earth-100: #EFE6D7;
+  --earth-300: #C9A876;
+  --earth-500: #8A6A3B;
+
+  /* Neutrals — slightly cool to sit on the navy-blue page */
+  --ink-900: #0B1320;
+  --ink-800: #1B2A3A;     /* section header bars in the capability statement */
+  --ink-700: #2D3D50;
+  --ink-600: #4A5A6E;
+  --ink-500: #6B7A8E;
+  --ink-400: #95A2B3;
+  --ink-300: #BDC6D2;
+  --ink-200: #DCE4EC;
+  --ink-100: #ECF1F6;
+  --ink-50:  #F4F7FB;     /* page background */
+  --white:   #FFFFFF;
+
+  /* Semantic — system feedback */
+  --status-success: var(--field-400);
+  --status-info:    var(--sky-400);
+  --status-warn:    #D99024;
+  --status-error:   #C53030;
+
+  /* ---------- COLOR — Semantic aliases ---------- */
+  --bg-app:        var(--ink-50);
+  --bg-surface:    var(--white);
+  --bg-sunken:     var(--ink-100);
+  --bg-inverse:    var(--ink-800);
+  --bg-brand:      var(--navy-500);
+  --bg-brand-soft: var(--navy-50);
+  --bg-accent:     var(--sky-400);
+
+  --fg-1: var(--navy-500);   /* primary text — headlines */
+  --fg-2: var(--ink-700);    /* body */
+  --fg-3: var(--ink-500);    /* muted / captions */
+  --fg-4: var(--ink-400);    /* placeholder */
+  --fg-on-brand: var(--white);
+  --fg-accent:   var(--sky-500);
+  --fg-link:     var(--sky-500);
+
+  --border-1: var(--ink-200);
+  --border-2: var(--ink-300);
+  --border-strong: var(--navy-500);
+  --border-accent: var(--sky-400);
+
+  /* ---------- TYPE — Families ---------- */
+  --font-display: "Archivo Black", "Archivo", system-ui, sans-serif;
+  --font-sans:    "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:    "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  /* ---------- TYPE — Scale ---------- */
+  --fs-display:  64px;   /* hero, capability statement headline */
+  --fs-h1:       48px;
+  --fs-h2:       36px;
+  --fs-h3:       24px;
+  --fs-h4:       18px;
+  --fs-body:     16px;
+  --fs-small:    14px;
+  --fs-micro:    12px;
+  --fs-eyebrow:  12px;   /* with .eyebrow utility */
+
+  /* ---------- TYPE — Weights ---------- */
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-semibold:600;
+  --fw-bold:    700;
+  --fw-black:   900;
+
+  /* ---------- TYPE — Leading & tracking ---------- */
+  --lh-tight: 1.05;
+  --lh-snug:  1.2;
+  --lh-base:  1.5;
+  --lh-loose: 1.7;
+  --tracking-tight: -0.01em;
+  --tracking-normal: 0;
+  --tracking-eyebrow: 0.14em;   /* eyebrows are ALL CAPS with wide tracking */
+
+  /* ---------- SPACING (4-pt grid) ---------- */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* ---------- RADII ----------
+     Shield/civic system: corners are restrained.
+     Rect (containers, section bars) = 4px; cards = 10px; pills = 999px.
+  */
+  --radius-xs:  2px;
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  10px;
+  --radius-xl:  14px;
+  --radius-pill: 999px;
+
+  /* ---------- BORDERS ---------- */
+  --bw-hair: 1px;
+  --bw-rule: 2px;       /* navy underlines under section headings */
+  --bw-shield: 3px;     /* logo-grade outlines */
+
+  /* ---------- ELEVATION ---------- */
+  --shadow-1: 0 1px 2px rgba(8, 24, 42, 0.06);
+  --shadow-2: 0 2px 6px rgba(8, 24, 42, 0.08), 0 1px 2px rgba(8, 24, 42, 0.05);
+  --shadow-3: 0 8px 24px rgba(8, 24, 42, 0.10), 0 2px 6px rgba(8, 24, 42, 0.06);
+  --shadow-4: 0 16px 40px rgba(8, 24, 42, 0.14), 0 4px 12px rgba(8, 24, 42, 0.08);
+  --shadow-inset: inset 0 0 0 1px rgba(21, 53, 92, 0.08);
+
+  /* ---------- MOTION ---------- */
+  --ease-standard: cubic-bezier(0.2, 0.6, 0.2, 1);
+  --ease-out:      cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-1: 120ms;
+  --dur-2: 200ms;
+  --dur-3: 320ms;
+
+  /* ---------- BACKGROUND PATTERN ---------- */
+  /* Subtle "constellation" grid — used in capability statement corners */
+  --pattern-constellation:
+    radial-gradient(circle at 1px 1px, rgba(21, 53, 92, 0.10) 1px, transparent 1.5px);
+  --pattern-size: 22px 22px;
+}
+
+/* ============================================================
+   Semantic element styles
+   ============================================================ */
+
+html {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  color: var(--fg-2);
+  background: var(--bg-app);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body { margin: 0; line-height: var(--lh-base); }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--fg-1);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--lh-tight);
+  margin: 0;
+}
+
+h1 { font-size: var(--fs-h1); font-weight: var(--fw-black); }
+h2 { font-size: var(--fs-h2); font-weight: var(--fw-black); }
+h3 { font-size: var(--fs-h3); font-family: var(--font-sans); font-weight: var(--fw-bold); line-height: var(--lh-snug); }
+h4 { font-size: var(--fs-h4); font-family: var(--font-sans); font-weight: var(--fw-bold); line-height: var(--lh-snug); }
+
+p  { font-size: var(--fs-body); line-height: var(--lh-base); margin: 0; color: var(--fg-2); }
+
+a  { color: var(--fg-link); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color var(--dur-1) var(--ease-standard); }
+a:hover { border-bottom-color: var(--fg-link); }
+
+code, pre, kbd, samp {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}
+
+small { font-size: var(--fs-small); color: var(--fg-3); }
+
+hr {
+  border: 0;
+  height: var(--bw-rule);
+  background: var(--navy-500);
+  margin: var(--space-6) 0;
+}
+
+/* Utility — eyebrow caps used over headlines */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--sky-500);
+}
+
+/* Display headline (capability statement style) */
+.display {
+  font-family: var(--font-display);
+  font-size: var(--fs-display);
+  line-height: var(--lh-tight);
+  color: var(--fg-1);
+  letter-spacing: var(--tracking-tight);
+}
+
+/* Section header bar — the navy chip behind "1. Converting Static Documents..." */
+.section-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: var(--ink-800);
+  color: var(--white);
+  padding: var(--space-3) var(--space-5);
+  font-family: var(--font-sans);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-h4);
+  border-radius: var(--radius-sm);
+}
