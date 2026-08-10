@@ -97,18 +97,32 @@ function AffiliationLogo({ src, label, href }) {
 }
 
 /* ---------------- nav ---------------- */
-const LINKS = [
+const SITE_LINKS = [
   { label: 'Approach', href: '#approach' },
   { label: 'Capabilities', href: '#capabilities' },
   { label: 'GBA Certified', href: '#bmm' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Contact', href: '#contact' },
 ];
 const PROJECT_LINKS = [
   { label: 'DNaI', href: '/dnai', text: 'text-field hover:text-field-deep', dot: 'bg-field' },
   { label: 'Legacy', href: '/legacy', text: 'text-wheat hover:text-wheat-light', dot: 'bg-wheat' },
   { label: 'Carbon Broker', href: '/broker', text: 'text-sky-light hover:text-cream', dot: 'bg-sky-light' },
 ];
+function Chevron() {
+  return (
+    <svg viewBox="0 0 20 20" className="h-3.5 w-3.5 opacity-60 transition-transform duration-300 group-hover:rotate-180" fill="currentColor" aria-hidden="true">
+      <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.17l3.71-3.94a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+    </svg>
+  );
+}
+function Dropdown({ children, align = 'left' }) {
+  return (
+    <div className={`invisible absolute top-full ${align === 'left' ? 'left-0' : 'right-0'} pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100`}>
+      <div className="min-w-[230px] rounded-2xl border border-white/10 bg-navy-900/95 p-2 shadow-2xl shadow-black/50 backdrop-blur-md">
+        {children}
+      </div>
+    </div>
+  );
+}
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -127,23 +141,42 @@ function Nav() {
   return (
     <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled ? 'bg-navy-900/85 backdrop-blur-md border-b border-white/10' : 'bg-transparent border-b border-transparent'}`}>
       <div className="mx-auto flex max-w-8xl items-center justify-between px-6 py-3.5 md:px-10">
-        <a href="#top" onClick={(e) => go(e, '#top')} className="flex items-center gap-3">
-          <img src="/logo.png" alt="Cloud Control LLC" className="h-10 w-auto" />
-          <span className="font-serif text-lg font-semibold text-cream leading-none">Cloud Control <span className="text-sky-light">LLC</span></span>
-        </a>
-        <nav className="hidden items-center gap-9 lg:flex">
-          {LINKS.map((l) => (
-            <a key={l.href} href={l.href} onClick={(e) => go(e, l.href)} className="text-sm font-medium text-sky-light/80 transition-colors hover:text-cream">{l.label}</a>
-          ))}
-          <span className="h-4 w-[1px] bg-white/15" aria-hidden="true" />
-          {PROJECT_LINKS.map((l) => (
-            <a key={l.href} href={l.href} className={`flex items-center gap-1.5 text-sm font-medium transition-colors ${l.text}`}>
-              <span className={`h-1.5 w-1.5 rounded-full ${l.dot}`} />
-              {l.label}
-            </a>
-          ))}
-        </nav>
-        <a href="#contact" onClick={(e) => go(e, '#contact')} className="rounded-full bg-wheat px-5 py-2.5 text-sm font-semibold text-navy-900 shadow-lg shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">Start a conversation</a>
+        {/* Logo + wordmark: hover reveals site sections */}
+        <div className="group relative">
+          <a href="#top" onClick={(e) => go(e, '#top')} className="flex items-center gap-3">
+            <img src="/logo.png" alt="Cloud Control LLC" className="h-10 w-auto" />
+            <span className="font-serif text-lg font-semibold text-cream leading-none">Cloud Control <span className="text-sky-light">LLC</span></span>
+            <Chevron />
+          </a>
+          <Dropdown align="left">
+            {SITE_LINKS.map((l) => (
+              <a key={l.href} href={l.href} onClick={(e) => go(e, l.href)} className="block rounded-xl px-4 py-2.5 text-sm font-medium text-sky-light/80 transition-colors hover:bg-white/5 hover:text-cream">
+                {l.label}
+              </a>
+            ))}
+          </Dropdown>
+        </div>
+        <div className="flex items-center gap-9">
+          <nav className="hidden items-center gap-9 lg:flex">
+            {/* Projects: hover reveals the three project pages */}
+            <div className="group relative">
+              <a href="#projects" onClick={(e) => go(e, '#projects')} className="flex items-center gap-1.5 text-sm font-medium text-sky-light/80 transition-colors hover:text-cream">
+                Projects
+                <Chevron />
+              </a>
+              <Dropdown align="right">
+                {PROJECT_LINKS.map((l) => (
+                  <a key={l.href} href={l.href} className={`flex items-center gap-2.5 rounded-xl px-4 py-2.5 text-sm font-medium transition-colors hover:bg-white/5 ${l.text}`}>
+                    <span className={`h-1.5 w-1.5 rounded-full ${l.dot}`} />
+                    {l.label}
+                  </a>
+                ))}
+              </Dropdown>
+            </div>
+            <a href="#contact" onClick={(e) => go(e, '#contact')} className="text-sm font-medium text-sky-light/80 transition-colors hover:text-cream">Contact</a>
+          </nav>
+          <a href="#contact" onClick={(e) => go(e, '#contact')} className="rounded-full bg-wheat px-5 py-2.5 text-sm font-semibold text-navy-900 shadow-lg shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">Start a conversation</a>
+        </div>
       </div>
     </header>
   );
