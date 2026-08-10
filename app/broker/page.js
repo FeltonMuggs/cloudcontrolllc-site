@@ -126,9 +126,13 @@ export default function BrokerPage() {
       <section className="relative min-h-screen overflow-hidden bg-gradient-to-b from-navy-900 via-navy-deep to-navy">
         <div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-[radial-gradient(70%_60%_at_50%_0%,rgba(90,155,212,0.18),transparent_70%)]" />
         <div className="relative z-10 mx-auto flex min-h-screen max-w-8xl flex-col justify-center px-6 md:px-10">
-          <div className="mb-7 inline-flex w-fit items-center gap-2.5 rounded-full border border-sky-light/40 bg-navy-900/40 px-4 py-2 text-xs font-medium tracking-wide text-sky-light backdrop-blur-sm">
+          <div className="mb-4 inline-flex w-fit items-center gap-2.5 rounded-full border border-sky-light/40 bg-navy-900/40 px-4 py-2 text-xs font-medium tracking-wide text-sky-light backdrop-blur-sm">
             <span className="h-1.5 w-1.5 rounded-full bg-sky-light" />
             Cloud Control LLC &middot; Carbon Broker &middot; Coston2 testnet demo
+          </div>
+          <div className="mb-7 inline-flex w-fit items-center gap-2.5 rounded-full border border-wheat/40 bg-wheat/[0.08] px-4 py-2 text-xs font-medium tracking-wide text-wheat-light backdrop-blur-sm">
+            <span aria-hidden="true">&#127942;</span>
+            Built for Flare Summer Signal &middot; Interoperable Asset Products (FTSOv2 + FDC)
           </div>
           <h1 className="font-serif max-w-5xl text-[12.5vw] font-semibold leading-[0.95] tracking-tight text-cream sm:text-[9vw] md:text-[6.6vw]">
             The land economy<br />
