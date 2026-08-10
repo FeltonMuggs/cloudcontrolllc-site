@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/cloud-control-design-system-caaaeb7b-6e69-42b9-948f-92e180103ec9/colors_and_type.css">
+  <script src="_ds/cloud-control-design-system-caaaeb7b-6e69-42b9-948f-92e180103ec9/_ds_bundle.js"></script>
+  <style>
+    body{margin:0;background:var(--bg-app);background-image:var(--pattern-constellation);background-size:var(--pattern-size)}
+    a{color:var(--fg-link)} a:hover{color:var(--sky-600)}
+    @keyframes ccPulse{0%{box-shadow:0 0 0 0 rgba(21,53,92,.35)}70%{box-shadow:0 0 0 8px rgba(21,53,92,0)}100%{box-shadow:0 0 0 0 rgba(21,53,92,0)}}
+    @keyframes ccBlink{0%,100%{opacity:1}50%{opacity:.35}}
+  </style>
+</helmet>
+<div style="min-height:100vh;display:flex;align-items:flex-start;justify-content:center;gap:48px;padding:48px 32px;flex-wrap:wrap;font-family:var(--font-sans)">
+  <div style="width:300px;flex:none;padding-top:12px;display:flex;flex-direction:column;gap:16px">
+    <img src="assets/logo-shield.png" alt="Inherited Sciences" style="width:56px;height:56px;object-fit:contain">
+    <div style="font-family:var(--font-sans);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sky-500)">Inherited Sciences&trade; &middot; Flare Summer Signal</div>
+    <div style="font-family:var(--font-display);font-size:28px;line-height:1.1;color:var(--navy-500)">The Carbon Broker</div>
+    <p style="font-size:14px;line-height:1.6;color:var(--ink-600)">Submission demo for the Flare Summer Signal hackathon (DoraHacks), Interoperable Asset Products track. Six brokered-deal scenarios run end-to-end to a settled, line-item profit.</p>
+    <a href="walkthrough.html" style="display:block;background:var(--navy-500);color:var(--white);border-radius:8px;padding:12px 16px;font-size:13px;font-weight:600;text-align:center;border-bottom:none" style-hover="background:var(--navy-600);color:var(--white)">Open screen-by-screen walkthrough deck</a>
+    <div style="background:var(--white);border:1px solid var(--border-1);border-radius:10px;padding:16px 18px;box-shadow:var(--shadow-2);display:flex;flex-direction:column;gap:10px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-500)">How to demo</div>
+      <div style="font-size:13px;line-height:1.55;color:var(--ink-700)">Open a scenario and tap <strong>Run end-to-end</strong> to auto-play every stage, or <strong>Advance step</strong> to narrate. Settled spreads accrue to the treasury card. The Market tab shows the tokenized-credit listings; the architecture card on Home maps the 4-layer stack.</div>
+    </div>
+    <div style="background:var(--white);border:1px solid var(--border-1);border-radius:10px;padding:16px 18px;box-shadow:var(--shadow-2);display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-500)">Flare surface area shown</div>
+      <div style="font-size:13px;line-height:1.55;color:var(--ink-700)">FTSOv2 feeds (FLR, XRP) &middot; FDC JsonApi + Payment attestations &middot; FAssets FXRP settlement &middot; state-connector-proven XRPL payments &middot; escrow + atomic settlement &middot; ERC-1155 tokenized credits &middot; ERC-721 retirement certificate.</div>
+    </div>
+    <div style="font-size:12px;line-height:1.5;color:var(--ink-500)">Assumptions: broker point of view, wallet pre-connected on Coston2, registry calls mocked at current integration status. Figures illustrative.</div>
+  </div>
+  <x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" dark="{{ true }}" hint-size="402px,874px">
+    <div style="height:100%;display:flex;flex-direction:column;background:var(--ink-50);font-family:var(--font-sans)">
+      <div style="flex:none;background:var(--navy-500);padding:62px 18px 12px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="width:34px;height:34px;border-radius:8px;background:var(--white);display:flex;align-items:center;justify-content:center;flex:none"><img src="assets/logo-shield.png" alt="" style="width:26px;height:26px;object-fit:contain"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sky-200)">Inherited Sciences&trade;</div>
+            <div style="font-family:var(--font-display);font-size:16px;color:var(--white);line-height:1.15">The Carbon Broker</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;background:var(--navy-600);border:1px solid var(--navy-400);border-radius:999px;padding:5px 10px">
+            <span style="width:7px;height:7px;border-radius:50%;background:var(--field-300);flex:none"></span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--navy-100)">0x7A4c&hellip;3F9</span>
+          </div>
+        </div>
+      </div>
+      <div style="flex:none;background:var(--navy-700);padding:6px 18px;display:flex;align-items:center;gap:10px">
+        <span style="font-size:9px;font-weight:700;letter-spacing:.12em;color:var(--sky-300)">FTSOv2</span>
+        <span style="font-family:var(--font-mono);font-size:10.5px;color:var(--white)">FLR <span style="color:{{ priceColor }}">{{ price }}</span></span>
+        <span style="font-family:var(--font-mono);font-size:10.5px;color:var(--white)">XRP $2.21</span>
+        <span style="font-family:var(--font-mono);font-size:10.5px;color:var(--navy-200)">CO&#8322; $13.02/t</span>
+        <span style="margin-left:auto;display:flex;align-items:center;gap:5px"><span style="width:6px;height:6px;border-radius:50%;background:var(--field-300);animation:ccBlink 1.6s infinite"></span><span style="font-family:var(--font-mono);font-size:10px;color:var(--navy-200)">{{ network }}</span></span>
+      </div>
+      <div style="flex:1;overflow:auto;min-height:0">
+
+        <sc-if value="{{ showDeals }}" hint-placeholder-val="{{ true }}">
+          <div style="padding:16px 16px 24px;display:flex;flex-direction:column;gap:14px">
+            <div style="background:var(--navy-500);border-radius:10px;padding:16px 18px;box-shadow:var(--shadow-2), var(--shadow-inset)">
+              <div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sky-200)">Broker Treasury &middot; Net P&amp;L</div>
+              <div style="font-family:var(--font-display);font-size:34px;color:var(--white);margin-top:6px">{{ totalPnl }}</div>
+              <div style="font-size:12px;color:var(--navy-100);margin-top:2px">{{ settledCount }}</div>
+            </div>
+            <div onClick="{{ openStack }}" style="background:var(--white);border:1px solid var(--border-1);border-radius:10px;padding:12px 16px;box-shadow:var(--shadow-2);cursor:pointer;display:flex;align-items:center;gap:12px" style-hover="box-shadow:var(--shadow-3)">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2E8FD6" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="m12 2 8.5 4.5-8.5 4.5L3.5 6.5 12 2Z"></path><path d="m3.5 12 8.5 4.5 8.5-4.5"></path><path d="m3.5 17.5 8.5 4.5 8.5-4.5"></path></svg>
+              <div style="flex:1">
+                <div style="font-size:13px;font-weight:700;color:var(--navy-500)">The Carbon Broker Stack</div>
+                <div style="font-size:11px;color:var(--ink-500)">4-layer architecture map &middot; Flare services</div>
+              </div>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#95A2B3" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="m9 18 6-6-6-6"></path></svg>
+            </div>
+            <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-500);margin-top:4px">Brokered deals &mdash; all scenarios</div>
+            <sc-for list="{{ list }}" as="d" hint-placeholder-count="6">
+              <div onClick="{{ d.open }}" style="background:var(--white);border:1px solid var(--border-1);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow-2);cursor:pointer;display:flex;flex-direction:column;gap:8px;transition:box-shadow 200ms ease-out" style-hover="box-shadow:var(--shadow-3)">
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span style="font-size:9px;font-weight:700;letter-spacing:.12em;background:var(--navy-500);color:var(--white);border-radius:4px;padding:3px 7px">{{ d.badge }}</span>
+                  <span style="margin-left:auto;font-size:11px;font-weight:600;color:{{ d.statusColor }};background:{{ d.statusBg }};border-radius:999px;padding:3px 9px">{{ d.statusLabel }}</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px">
+                  <div style="flex:1;min-width:0">
+                    <div style="font-size:15px;font-weight:700;color:var(--navy-500);line-height:1.25">{{ d.title }}</div>
+                    <div style="font-size:12px;color:var(--ink-500);margin-top:2px">{{ d.sub }}</div>
+                  </div>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#95A2B3" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="m9 18 6-6-6-6"></path></svg>
+                </div>
+                <div style="height:4px;border-radius:2px;background:var(--ink-100);overflow:hidden"><div style="height:100%;background:var(--field-400);border-radius:2px;width:{{ d.barW }};transition:width 320ms ease-out"></div></div>
+              </div>
+            </sc-for>
+            <div style="font-size:11px;color:var(--ink-400);text-align:center;margin-top:2px">Flare Summer Signal &middot; Interoperable Asset Products &middot; {{ network }}</div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ showStack }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:14px 16px 24px;display:flex;flex-direction:column;gap:12px">
+            <div onClick="{{ back }}" style="display:flex;align-items:center;gap:6px;cursor:pointer;color:var(--sky-500);font-size:13px;font-weight:600;width:fit-content">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>
+              Home
+            </div>
+            <div style="font-family:var(--font-display);font-size:20px;color:var(--navy-500);line-height:1.15">The Carbon Broker Stack</div>
+            <div style="font-size:12px;color:var(--ink-500);margin-top:-6px">Adapted from the Inherited Sciences&trade; 4-layer framework.</div>
+            <sc-for list="{{ layers }}" as="l" hint-placeholder-count="4">
+              <div style="background:var(--white);border:1px solid var(--border-1);border-left:4px solid {{ l.accent }};border-radius:8px;padding:12px 14px;box-shadow:var(--shadow-1)">
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span style="font-family:var(--font-mono);font-size:10px;font-weight:600;color:var(--white);background:{{ l.accent }};border-radius:4px;padding:2px 6px">L{{ l.n }}</span>
+                  <span style="font-size:13px;font-weight:700;color:var(--navy-500)">{{ l.t }}</span>
+                </div>
+                <div style="font-size:11.5px;line-height:1.55;color:var(--ink-600);margin-top:6px">{{ l.items }}</div>
+              </div>
+            </sc-for>
+            <div style="font-size:11px;color:var(--ink-400);text-align:center">Deployed on Coston2 &middot; contracts: BrokerEscrow.sol &middot; ForwardOfftake.sol &middot; CarbonToken-1155</div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ showDeal }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:14px 16px 24px;display:flex;flex-direction:column;gap:14px">
+            <div onClick="{{ back }}" style="display:flex;align-items:center;gap:6px;cursor:pointer;color:var(--sky-500);font-size:13px;font-weight:600;width:fit-content">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>
+              All deals
+            </div>
+            <div>
+              <span style="font-size:9px;font-weight:700;letter-spacing:.12em;background:var(--navy-500);color:var(--white);border-radius:4px;padding:3px 7px">{{ deal.badge }}</span>
+              <div style="font-family:var(--font-display);font-size:21px;color:var(--navy-500);margin-top:8px;line-height:1.15">{{ deal.title }}</div>
+              <div style="font-size:12px;color:var(--ink-500);margin-top:4px">{{ deal.sub }}</div>
+            </div>
+            <div style="display:flex;align-items:stretch;gap:6px">
+              <div style="flex:1;background:var(--white);border:1px solid var(--border-1);border-radius:8px;padding:9px 10px">
+                <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-400)">{{ deal.fromRole }}</div>
+                <div style="font-size:12px;font-weight:700;color:var(--navy-500);margin-top:2px">{{ deal.from }}</div>
+                <div style="font-family:var(--font-mono);font-size:10px;color:var(--ink-500);margin-top:1px">{{ deal.fromSub }}</div>
+              </div>
+              <div style="display:flex;align-items:center;flex:none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E8FD6" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></div>
+              <div style="flex:none;background:var(--navy-500);border-radius:8px;padding:9px 10px;display:flex;flex-direction:column;justify-content:center;align-items:center">
+                <div style="font-size:9px;font-weight:700;letter-spacing:.1em;color:var(--sky-200)">BROKER</div>
+                <div style="font-size:11px;font-weight:700;color:var(--white)">IS&trade;</div>
+              </div>
+              <div style="display:flex;align-items:center;flex:none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E8FD6" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></div>
+              <div style="flex:1;background:var(--white);border:1px solid var(--border-1);border-radius:8px;padding:9px 10px">
+                <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-400)">{{ deal.toRole }}</div>
+                <div style="font-size:12px;font-weight:700;color:var(--navy-500);margin-top:2px">{{ deal.to }}</div>
+                <div style="font-family:var(--font-mono);font-size:10px;color:var(--ink-500);margin-top:1px">{{ deal.toSub }}</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:8px">
+              <div onClick="{{ run }}" style="flex:1.4;background:{{ primaryBg }};color:var(--white);border-radius:8px;padding:11px 0;text-align:center;font-size:13px;font-weight:600;cursor:pointer;transition:background 200ms" style-active="transform:scale(.98)">{{ primaryLabel }}</div>
+              <div onClick="{{ advance }}" style="flex:1;background:var(--white);border:1px solid var(--navy-500);color:{{ advColor }};border-radius:8px;padding:11px 0;text-align:center;font-size:13px;font-weight:600;cursor:pointer" style-hover="background:var(--navy-50)" style-active="transform:scale(.98)">Advance step</div>
+            </div>
+            <div style="background:var(--white);border:1px solid var(--border-1);border-radius:10px;padding:16px;box-shadow:var(--shadow-2)">
+              <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-500);margin-bottom:12px">End-to-end operation</div>
+              <sc-for list="{{ steps }}" as="s" hint-placeholder-count="7">
+                <div style="display:flex;gap:12px">
+                  <div style="display:flex;flex-direction:column;align-items:center;flex:none;width:26px">
+                    <div style="width:26px;height:26px;border-radius:50%;background:{{ s.dotBg }};border:2px solid {{ s.dotBorder }};display:flex;align-items:center;justify-content:center;box-sizing:border-box;animation:{{ s.anim }}">
+                      <sc-if value="{{ s.done }}" hint-placeholder-val="{{ false }}">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+                      </sc-if>
+                      <sc-if value="{{ s.notDone }}" hint-placeholder-val="{{ true }}">
+                        <span style="font-size:11px;font-weight:700;color:{{ s.numColor }}">{{ s.n }}</span>
+                      </sc-if>
+                    </div>
+                    <sc-if value="{{ s.notLast }}" hint-placeholder-val="{{ true }}"><div style="width:2px;flex:1;min-height:14px;background:{{ s.lineBg }}"></div></sc-if>
+                  </div>
+                  <div style="flex:1;min-width:0;padding-bottom:14px">
+                    <div style="font-size:13px;font-weight:700;color:{{ s.tColor }};line-height:1.3;padding-top:4px">{{ s.t }}</div>
+                    <div style="font-size:11.5px;color:var(--ink-500);margin-top:2px;line-height:1.4">{{ s.s }}</div>
+                    <sc-if value="{{ s.done }}" hint-placeholder-val="{{ false }}">
+                      <div style="font-family:var(--font-mono);font-size:10.5px;color:var(--sky-600);background:var(--sky-50);border-radius:4px;padding:3px 7px;margin-top:5px;display:inline-block">{{ s.m }}</div>
+                    </sc-if>
+                    <sc-if value="{{ s.active }}" hint-placeholder-val="{{ false }}">
+                      <div style="font-family:var(--font-mono);font-size:10.5px;color:var(--ink-400);margin-top:5px">awaiting confirmation&hellip;</div>
+                    </sc-if>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+            <sc-if value="{{ complete }}" hint-placeholder-val="{{ false }}">
+              <div style="background:var(--white);border:1px solid var(--border-1);border-radius:10px;overflow:hidden;box-shadow:var(--shadow-2), var(--shadow-inset)">
+                <div style="background:var(--ink-800);color:var(--white);padding:10px 16px;font-size:12px;font-weight:700;letter-spacing:.06em">DEAL P&amp;L &mdash; EVIDENCE-GRADE</div>
+                <div style="padding:6px 16px 12px">
+                  <sc-for list="{{ pnlRows }}" as="r" hint-placeholder-count="4">
+                    <div style="display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid var(--ink-100)">
+                      <span style="font-size:12px;color:var(--ink-600)">{{ r.k }}</span>
+                      <span style="font-family:var(--font-mono);font-size:12px;font-weight:{{ r.fw }};color:{{ r.color }};white-space:nowrap">{{ r.v }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ showCert }}" hint-placeholder-val="{{ false }}">
+              <div style="background:var(--navy-500);border-radius:10px;padding:18px;box-shadow:var(--shadow-3);display:flex;gap:14px;align-items:center;border:3px solid var(--navy-700)">
+                <div style="width:52px;height:52px;border-radius:8px;background:var(--white);display:flex;align-items:center;justify-content:center;flex:none"><img src="assets/logo-shield.png" alt="" style="width:40px;height:40px;object-fit:contain"></div>
+                <div style="min-width:0">
+                  <div style="font-size:9px;font-weight:700;letter-spacing:.14em;color:var(--sky-200)">RETIREMENT CERTIFICATE &middot; ERC-721 #0042</div>
+                  <div style="font-size:14px;font-weight:700;color:var(--white);margin-top:3px">150 tCO&#8322;e permanently retired</div>
+                  <div style="font-family:var(--font-mono);font-size:10px;color:var(--navy-100);margin-top:3px">0xB7a4&hellip;D311 &middot; Flare &middot; FDC-anchored</div>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ showMarket }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:16px 16px 24px;display:flex;flex-direction:column;gap:12px">
+            <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-500)">Tokenized credit marketplace &mdash; secondary</div>
+            <sc-for list="{{ listings }}" as="g" hint-placeholder-count="4">
+              <div style="background:var(--white);border:1px solid var(--border-1);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow-2);display:flex;flex-direction:column;gap:8px">
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span style="font-family:var(--font-mono);font-size:10px;font-weight:600;background:var(--sky-50);color:var(--sky-600);border-radius:4px;padding:3px 7px">{{ g.token }}</span>
+                  <span style="margin-left:auto;font-size:10.5px;font-weight:600;color:{{ g.tagColor }};background:{{ g.tagBg }};border-radius:999px;padding:3px 9px">{{ g.tag }}</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px">
+                  <div style="flex:1;min-width:0">
+                    <div style="font-size:14px;font-weight:700;color:var(--navy-500)">{{ g.name }}</div>
+                    <div style="font-size:11.5px;color:var(--ink-500);margin-top:2px">{{ g.sub }}</div>
+                  </div>
+                  <div style="text-align:right;flex:none">
+                    <div style="font-family:var(--font-mono);font-size:15px;font-weight:600;color:var(--navy-500)">{{ g.price }}</div>
+                    <div style="font-size:10.5px;color:var(--ink-500)">{{ g.avail }}</div>
+                  </div>
+                </div>
+                <div style="display:flex;gap:8px;align-items:center">
+                  <div style="font-size:10.5px;color:var(--ink-400)">Listed by IS&trade; Broker &middot; FDC-attested</div>
+                  <div style="margin-left:auto;background:{{ g.btnBg }};color:{{ g.btnColor }};border-radius:6px;padding:6px 14px;font-size:11.5px;font-weight:600;cursor:pointer" style-active="transform:scale(.98)">{{ g.btn }}</div>
+                </div>
+              </div>
+            </sc-for>
+            <div style="font-size:11px;color:var(--ink-400);text-align:center">Retail buyers settle in FLR or FXRP at the live FTSO rate.</div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ showLedger }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:16px 16px 24px;display:flex;flex-direction:column;gap:10px">
+            <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-500)">On-chain ledger &mdash; audit trail</div>
+            <sc-for list="{{ ledger }}" as="e" hint-placeholder-count="8">
+              <div style="background:var(--white);border:1px solid var(--border-1);border-radius:8px;padding:11px 14px;display:flex;align-items:center;gap:12px">
+                <div style="flex:1;min-width:0">
+                  <div style="font-size:12.5px;font-weight:600;color:var(--navy-500)">{{ e.label }}</div>
+                  <div style="font-family:var(--font-mono);font-size:10px;color:var(--ink-500);margin-top:2px">{{ e.m }}</div>
+                </div>
+                <div style="text-align:right;flex:none">
+                  <div style="font-family:var(--font-mono);font-size:12px;font-weight:600;color:{{ e.amtColor }}">{{ e.amt }}</div>
+                  <div style="font-size:10px;color:var(--ink-400);margin-top:2px">{{ e.time }}</div>
+                </div>
+              </div>
+            </sc-for>
+            <div style="font-size:11px;color:var(--ink-400);text-align:center;margin-top:4px">Every entry carries an FDC attestation or Flare tx hash.</div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ showWallet }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:16px 16px 24px;display:flex;flex-direction:column;gap:14px">
+            <div style="background:var(--navy-500);border-radius:10px;padding:18px;box-shadow:var(--shadow-2), var(--shadow-inset)">
+              <div style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sky-200)">Broker account &middot; {{ network }}</div>
+              <div style="font-family:var(--font-mono);font-size:12px;color:var(--navy-100);margin-top:8px">0x7A4cE9d21bB80cF4a02e6C1a9F0d84b7C1e33F9</div>
+              <div style="font-family:var(--font-display);font-size:30px;color:var(--white);margin-top:10px">412,806 <span style="font-size:16px">FLR</span></div>
+              <div style="font-size:12px;color:var(--navy-100);margin-top:2px">&asymp; $14,122 at FTSO {{ price }}</div>
+            </div>
+            <div style="background:var(--white);border:1px solid var(--border-1);border-radius:10px;box-shadow:var(--shadow-2);overflow:hidden">
+              <div style="padding:10px 16px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-500);border-bottom:1px solid var(--ink-100)">Positions</div>
+              <sc-for list="{{ positions }}" as="p" hint-placeholder-count="5">
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 16px;border-bottom:1px solid var(--ink-100)">
+                  <div>
+                    <div style="font-size:13px;font-weight:600;color:var(--navy-500)">{{ p.k }}</div>
+                    <div style="font-size:11px;color:var(--ink-500);margin-top:1px">{{ p.s }}</div>
+                  </div>
+                  <div style="font-family:var(--font-mono);font-size:12.5px;color:var(--ink-700)">{{ p.v }}</div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="font-size:11px;color:var(--ink-400);text-align:center">Wallet pre-connected for demo &middot; WalletConnect v2 in production build.</div>
+          </div>
+        </sc-if>
+
+      </div>
+      <div style="flex:none;background:var(--white);border-top:1px solid var(--border-1);display:flex;padding:8px 6px 30px">
+        <div onClick="{{ goDeals }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:6px 0">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ tDeals }}" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+          <span style="font-size:10px;font-weight:600;color:{{ tDeals }}">Deals</span>
+        </div>
+        <div onClick="{{ goMarket }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:6px 0">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ tMarket }}" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m2 7 4.4-4.4A2 2 0 0 1 7.8 2h8.4a2 2 0 0 1 1.4.6L22 7"></path><path d="M4 7v13a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7"></path><path d="M2 7h20"></path><path d="M9 11a3 3 0 0 0 6 0"></path></svg>
+          <span style="font-size:10px;font-weight:600;color:{{ tMarket }}">Market</span>
+        </div>
+        <div onClick="{{ goLedger }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:6px 0">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ tLedger }}" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13"></path><path d="M8 12h13"></path><path d="M8 18h13"></path><path d="M3 6h.01"></path><path d="M3 12h.01"></path><path d="M3 18h.01"></path></svg>
+          <span style="font-size:10px;font-weight:600;color:{{ tLedger }}">Ledger</span>
+        </div>
+        <div onClick="{{ goWallet }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:6px 0">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{ tWallet }}" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path></svg>
+          <span style="font-size:10px;font-weight:600;color:{{ tWallet }}">Wallet</span>
+        </div>
+      </div>
+    </div>
+  </x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;network&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Coston2 testnet&quot;,&quot;options&quot;:[&quot;Coston2 testnet&quot;,&quot;Songbird&quot;,&quot;Flare mainnet&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Demo&quot;},&quot;autoRunMs&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:900,&quot;min&quot;:400,&quot;max&quot;:2000,&quot;step&quot;:100,&quot;unit&quot;:&quot;ms&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Demo&quot;}}">
+class Component extends DCLogic {
+  state = { tab: 'deals', dealId: null, stackOpen: false, progress: { spot: 0, agg: 0, resale: 0, xchain: 0, forward: 0, retire: 0 }, running: false, price: 0.03421, delta: 1 };
+
+  deals = [
+    { id: 'spot', title: 'Spot brokered buy', sub: 'VCS-1739 Mangrove Restoration \u00b7 Ghana \u00b7 500 tCO\u2082e', net: 846.88,
+      fromRole: 'Seller', from: 'GhanaBlue Ltd', fromSub: 'Ask $12.40/t', toRole: 'Buyer', to: 'Aureon Logistics', toSub: 'Bid $14.10/t',
+      steps: [
+        { t: 'Credits sourced', s: 'Seller listing verified on Verra registry', m: 'VCS-1739-2024-GH \u00b7 500 tCO\u2082e' },
+        { t: 'FDC attestation anchored', s: 'Web2 registry proof via Flare Data Connector', m: '0x8f2c\u2026a41d \u00b7 JsonApi' },
+        { t: 'Buyer matched', s: 'Aureon Logistics accepts offer at $14.10/t', m: 'ORDER-2291 \u00b7 signed' },
+        { t: 'FTSO price locked', s: 'FLR/USD median from FTSOv2 feed', m: '$0.03421 \u00b7 epoch 918,442' },
+        { t: 'Escrow funded', s: 'Buyer funds locked in BrokerEscrow.sol', m: '206,140 FLR \u00b7 0x41Ce\u202609aB' },
+        { t: 'Atomic settlement', s: 'Credits \u2194 FLR swap executed in a single tx', m: 'tx 0xc7d1\u2026e83f \u00b7 finalized' },
+        { t: 'Spread booked', s: 'Broker margin transferred to IS treasury', m: '+$846.88 net' }],
+      pnl: [['Sell side \u00b7 500 t \u00d7 $14.10', '$7,050.00'], ['Buy side \u00b7 500 t \u00d7 $12.40', '\u2212$6,200.00'], ['Gas + FDC fees', '\u2212$3.12'], ['Net broker spread', '+$846.88', 1], ['Margin on notional', '12.0%']] },
+    { id: 'agg', title: 'Upstream aggregation match', sub: 'Three sellers pooled into one 1,000 tCO\u2082e block \u00b7 multi-party', net: 2089.60,
+      fromRole: 'Sellers \u00d73', from: 'TidalRoots +2', fromSub: 'Avg $11.11/t', toRole: 'Buyer', to: 'Meridian Steel', toSub: 'Bid $13.20/t',
+      steps: [
+        { t: 'Sellers aggregated', s: 'Three small lots pooled into one wholesale block', m: 'TidalRoots 300t \u00b7 KijaniGrid 450t \u00b7 AndeanPeat 250t' },
+        { t: 'Pre-issuance forward signed', s: 'AndeanPeat lot contracted upstream, ahead of issuance', m: 'FWD-0231 \u00b7 $10.10/t' },
+        { t: 'FDC attestations \u00d73', s: 'Verra + Gold Standard lots proven via JsonApi', m: '0x77aa\u202610ce \u00b7 batch proof' },
+        { t: 'Block tokenized', s: '1,000 t minted as one tradable block token', m: 'CCT-BLK-07 \u00b7 ERC-1155 \u00b7 0x5D21\u20268fC0' },
+        { t: 'Buyer matched', s: 'Meridian Steel takes the full block at $13.20/t', m: 'ORDER-2308 \u00b7 signed' },
+        { t: 'FTSO price locked', s: 'FLR/USD median from FTSOv2 feed', m: '$0.03425 \u00b7 epoch 923,118' },
+        { t: 'Atomic settlement', s: 'Three sellers paid pro-rata in a single tx', m: 'tx 0x1e9b\u202677d2 \u00b7 finalized' },
+        { t: 'Spread booked', s: 'Aggregation margin to IS treasury', m: '+$2,089.60 net' }],
+      pnl: [['Sell \u00b7 1,000 t \u00d7 $13.20', '$13,200.00'], ['Buy \u00b7 TidalRoots 300 t \u00d7 $11.20', '\u2212$3,360.00'], ['Buy \u00b7 KijaniGrid 450 t \u00d7 $11.60', '\u2212$5,220.00'], ['Buy \u00b7 AndeanPeat 250 t \u00d7 $10.10 fwd', '\u2212$2,525.00'], ['Gas + FDC fees', '\u2212$5.40'], ['Net aggregation spread', '+$2,089.60', 1], ['Margin on notional', '15.8%']] },
+    { id: 'resale', title: 'Tokenized credit resale', sub: 'Wholesale block resold retail on the marketplace \u00b7 inventory risk', net: 1378.35,
+      fromRole: 'Inventory', from: 'IS book \u00b7 350 t', fromSub: 'Cost $10.80/t', toRole: 'Market', to: 'Retail buyers \u00d73', toSub: 'Avg $14.75/t',
+      steps: [
+        { t: 'Wholesale block acquired', s: 'Bought below market; inventory risk on the IS book', m: 'VCS-1739 \u00b7 350 t \u00b7 $10.80/t' },
+        { t: 'Credits tokenized', s: 'Minted 1:1 as transferable credit tokens', m: 'CCT-1739 \u00b7 ERC-1155 \u00b7 0x8C44\u20262aB1' },
+        { t: 'Listed on marketplace', s: 'Retail lots of 10\u201350 t at ask $14.90/t', m: 'LIST-0092 \u00b7 live' },
+        { t: 'FTSO pricing feed', s: 'Retail quotes auto-converted to FLR at the median', m: 'FLR/USD $0.03419' },
+        { t: 'Retail fills', s: 'Three buyers clear the full 350 t at avg $14.75', m: '3 fills \u00b7 350 tCO\u2082e' },
+        { t: 'Proceeds settled', s: 'Marketplace escrow releases to IS treasury', m: 'tx 0xa30f\u2026c651 \u00b7 finalized' },
+        { t: 'Inventory P&L booked', s: 'Book flat \u2014 spread realized, risk closed', m: '+$1,378.35 net' }],
+      pnl: [['Retail fills \u00b7 350 t \u00d7 $14.75 avg', '$5,162.50'], ['Wholesale cost \u00b7 350 t \u00d7 $10.80', '\u2212$3,780.00'], ['Gas + marketplace fees', '\u2212$4.15'], ['Net inventory spread', '+$1,378.35', 1], ['Margin on cost', '36.5%']] },
+    { id: 'xchain', title: 'Cross-chain FXRP settlement', sub: 'XRPL buyer pays in XRP \u00b7 settled on Flare via FAssets', net: 633.80,
+      fromRole: 'Seller', from: 'GhanaBlue Ltd', fromSub: 'Ask $12.30/t', toRole: 'Buyer (XRPL)', to: 'Ryujin Shipping', toSub: 'Pays in XRP',
+      steps: [
+        { t: 'Cross-chain quote issued', s: 'Buyer quoted in XRP at the FTSO median', m: '2,527 XRP \u00b7 XRP/USD $2.20' },
+        { t: 'Buyer pays on XRPL', s: 'XRP sent to the broker settlement address', m: 'XRPL tx A4C9\u2026F210' },
+        { t: 'FDC payment proof', s: 'XRPL payment attested on Flare via Data Connector', m: '0x3fb8\u202690e7 \u00b7 Payment' },
+        { t: 'FXRP minted', s: 'FAssets agent collateralizes XRP into FXRP on Flare', m: '2,527 FXRP \u00b7 agent 0xF11a\u20263c02' },
+        { t: 'Escrow funded in FXRP', s: 'Settlement value locked in BrokerEscrow.sol', m: '2,527 FXRP \u00b7 0x41Ce\u202609aB' },
+        { t: 'Atomic settlement', s: 'Credits released, seller paid, spread retained', m: 'tx 0xbb02\u202641cd \u00b7 finalized' },
+        { t: 'Spread booked', s: 'Margin held in FXRP on the IS book', m: '+$633.80 net \u00b7 in FXRP' }],
+      pnl: [['Sell side \u00b7 400 t \u00d7 $13.90 (in XRP)', '$5,560.00'], ['Buy side \u00b7 400 t \u00d7 $12.30', '\u2212$4,920.00'], ['Gas + FAssets + FDC fees', '\u2212$6.20'], ['Net cross-chain spread', '+$633.80', 1], ['Held as', '288 FXRP']] },
+    { id: 'forward', title: 'Forward offtake \u00b7 tranche 1', sub: 'GS-2211 Clean Cookstoves \u00b7 Kenya \u00b7 2,000 tCO\u2082e / 4 tranches', net: 647.13,
+      fromRole: 'Seller', from: 'Sunbird Energy', fromSub: 'Locked $11.75/t', toRole: 'Buyer', to: 'Helvion Group', toSub: 'Locked $13.05/t',
+      steps: [
+        { t: 'Offtake terms agreed', s: '2,000 t over four quarterly deliveries', m: 'TERMS-0117 \u00b7 countersigned' },
+        { t: 'ForwardOfftake.sol deployed', s: 'On-chain forward with milestone escrow', m: '0x9A02\u202644Ee \u00b7 Flare' },
+        { t: 'FDC issuance proof', s: 'Gold Standard issuance schedule attested', m: '0x2b77\u2026c9d0 \u00b7 JsonApi' },
+        { t: 'Tranche 1 delivered', s: '500 t transferred into escrow custody', m: 'GS-2211-T1 \u00b7 500 tCO\u2082e' },
+        { t: 'FTSO settlement rate', s: 'FLR/USD locked at delivery block', m: '$0.03418 \u00b7 epoch 921,006' },
+        { t: 'Tranche 1 settled', s: 'Buyer payment released, seller paid', m: 'tx 0x5efa\u20261b27 \u00b7 finalized' },
+        { t: 'Tranche P&L booked', s: 'Three remaining tranches scheduled', m: '+$647.13 net \u00b7 next Nov 2026' }],
+      pnl: [['Tranche revenue \u00b7 500 t \u00d7 $13.05', '$6,525.00'], ['Tranche cost \u00b7 500 t \u00d7 $11.75', '\u2212$5,875.00'], ['Gas + FDC fees', '\u2212$2.87'], ['Net spread \u00b7 tranche 1', '+$647.13', 1], ['Projected \u00b7 all 4 tranches', '+$2,588.52']] },
+    { id: 'retire', title: 'Retirement & certificate', sub: 'Aureon Logistics \u00b7 retire 150 tCO\u2082e against FY26 target', net: 133.96,
+      fromRole: 'Client', from: 'Aureon Logistics', fromSub: 'Retire 150 t', toRole: 'Registry', to: 'Verra', toSub: 'Permanent',
+      steps: [
+        { t: 'Retirement order received', s: 'Buyer commits 150 t from settled inventory', m: 'RET-0088 \u00b7 authorized' },
+        { t: 'Registry retirement executed', s: 'Verra Web2 API called by broker service', m: 'conf VCS-RET-77120' },
+        { t: 'FDC proof of retirement', s: 'Attestation anchors registry confirmation', m: '0x6d19\u2026f2c4 \u00b7 JsonApi' },
+        { t: 'Certificate minted', s: 'ERC-721 retirement certificate on Flare', m: 'CERT #0042 \u00b7 0xB7a4\u2026D311' },
+        { t: 'Fee settled in FLR', s: '150 t \u00d7 $0.90 broker retirement fee', m: '3,946 FLR \u00b7 tx 0x90cc\u20267ae2' },
+        { t: 'Fee booked', s: 'Recurring service revenue to IS treasury', m: '+$133.96 net' }],
+      pnl: [['Retirement fee \u00b7 150 t \u00d7 $0.90', '$135.00'], ['Gas + FDC fees', '\u2212$1.04'], ['Net fee revenue', '+$133.96', 1], ['Certificate', 'ERC-721 #0042']] }
+  ];
+
+  layersData = [
+    { n: 4, t: 'Governance & Deal Legacy', accent: '#15355C', items: 'Deal smart contracts \u00b7 multi-sig treasury custody \u00b7 automated fee & pro-rata distribution \u00b7 auditable deal history' },
+    { n: 3, t: 'Broker Engine', accent: '#2E8FD6', items: 'Matching & spread engine \u00b7 seller aggregation \u00b7 inventory book & risk \u00b7 quoting in FLR / FXRP' },
+    { n: 2, t: 'Data & Oracles', accent: '#4A8C3D', items: 'FTSOv2 price feeds (FLR, XRP) \u00b7 FDC JsonApi attestations of Verra & Gold Standard \u00b7 FDC Payment proofs \u00b7 IPFS project docs' },
+    { n: 1, t: 'Foundation & Trust', accent: '#1B2A3A', items: 'Flare EVM (Coston2) \u00b7 FAssets (FXRP) \u00b7 state-connector-proven XRPL settlement \u00b7 BrokerEscrow.sol' }
+  ];
+
+  listingsData = [
+    { token: 'CCT-1739', name: 'Mangrove Restoration', sub: 'Verra VCS \u00b7 Ghana \u00b7 vintage 2024', price: '$14.90/t', avail: '40 t available', tag: 'IS inventory', tagColor: '#175F94', tagBg: '#E8F3FC', btn: 'Reserve', btnBg: '#15355C', btnColor: '#FFFFFF' },
+    { token: 'GS-2211-T2', name: 'Clean Cookstoves \u00b7 forward', sub: 'Gold Standard \u00b7 Kenya \u00b7 delivery Nov 2026', price: '$13.40/t', avail: '500 t available', tag: 'Forward', tagColor: '#8A6A3B', tagBg: '#EFE6D7', btn: 'Reserve', btnBg: '#15355C', btnColor: '#FFFFFF' },
+    { token: 'CCT-BLK-07', name: 'Aggregated block', sub: '3 projects pooled \u00b7 1,000 tCO\u2082e \u00b7 2025', price: '$13.20/t', avail: 'Sold out', tag: 'Settled', tagColor: '#2F6B2A', tagBg: '#ECF4E9', btn: 'View tx', btnBg: '#ECF1F6', btnColor: '#4A5A6E' },
+    { token: 'CERT #0042', name: 'Retirement certificate', sub: 'ERC-721 \u00b7 non-transferable \u00b7 150 t retired', price: '\u2014', avail: 'Display only', tag: 'Retired', tagColor: '#6B7A8E', tagBg: '#ECF1F6', btn: 'View', btnBg: '#ECF1F6', btnColor: '#4A5A6E' }
+  ];
+
+  ledgerRows = [
+    { label: 'Aggregated block settled \u00b7 3 sellers paid', m: 'tx 0x1e9b\u202677d2', amt: '+$2,089.60', amtColor: '#2F6B2A', time: '11:20' },
+    { label: 'Marketplace fills \u00b7 CCT-1739 \u00d73', m: 'tx 0xa30f\u2026c651', amt: '+$1,378.35', amtColor: '#2F6B2A', time: '11:04' },
+    { label: 'Atomic settlement \u00b7 spot', m: 'tx 0xc7d1\u2026e83f', amt: '+$846.88', amtColor: '#2F6B2A', time: '10:42' },
+    { label: 'FXRP minted via FAssets agent', m: '2,527 FXRP \u00b7 agent 0xF11a\u20263c02', amt: 'minted', amtColor: '#175F94', time: '10:31' },
+    { label: 'FDC Payment proof \u00b7 XRPL', m: '0x3fb8\u202690e7 \u00b7 A4C9\u2026F210', amt: 'proof', amtColor: '#175F94', time: '10:27' },
+    { label: 'Tranche 1 settled \u00b7 forward', m: 'tx 0x5efa\u20261b27', amt: '+$647.13', amtColor: '#2F6B2A', time: '09:57' },
+    { label: 'Certificate minted \u00b7 ERC-721 #0042', m: '0xB7a4\u2026D311', amt: 'minted', amtColor: '#175F94', time: '09:12' },
+    { label: 'FDC attestation \u00b7 Verra JsonApi', m: '0x8f2c\u2026a41d', amt: 'proof', amtColor: '#175F94', time: '08:44' }
+  ];
+
+  positionsRows = [
+    { k: 'FLR', s: 'Native \u00b7 settlement + gas', v: '412,806' },
+    { k: 'FXRP', s: 'FAssets \u00b7 cross-chain spread', v: '288' },
+    { k: 'Escrowed FLR', s: 'BrokerEscrow.sol \u00b7 spot deal', v: '206,140' },
+    { k: 'Carbon inventory', s: 'CCT-1739 tokenized credits', v: '40 tCO\u2082e' },
+    { k: 'Forward book', s: '3 tranches \u00b7 GS-2211', v: '1,500 tCO\u2082e' }
+  ];
+
+  componentDidMount() {
+    this.pt = setInterval(() => this.setState(s => {
+      const d = (Math.random() - 0.5) * 0.00042;
+      return { price: Math.max(0.03, s.price + d), delta: d >= 0 ? 1 : -1 };
+    }), 2600);
+  }
+  componentWillUnmount() { clearInterval(this.pt); clearInterval(this.rt); }
+
+  renderVals() {
+    const { tab, dealId, stackOpen, progress, running, price, delta } = this.state;
+    const fmt = n => '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const network = this.props.network ?? 'Coston2 testnet';
+    const speed = this.props.autoRunMs ?? 900;
+    const settled = this.deals.filter(d => progress[d.id] >= d.steps.length);
+    const list = this.deals.map((d, i) => {
+      const p = progress[d.id], n = d.steps.length, done = p >= n;
+      return { id: d.id, badge: 'SCENARIO 0' + (i + 1), title: d.title, sub: d.sub,
+        statusLabel: done ? 'Settled +' + fmt(d.net) : p > 0 ? 'In progress \u00b7 ' + p + '/' + n : 'Ready to run',
+        statusColor: done ? '#2F6B2A' : p > 0 ? '#175F94' : '#6B7A8E',
+        statusBg: done ? '#ECF4E9' : p > 0 ? '#E8F3FC' : '#ECF1F6',
+        barW: Math.round(p / n * 100) + '%',
+        open: () => this.setState({ dealId: d.id, stackOpen: false }) };
+    });
+    const d = this.deals.find(x => x.id === dealId);
+    let deal = null, steps = [], pnlRows = [], complete = false;
+    if (d) {
+      const p = progress[d.id];
+      complete = p >= d.steps.length;
+      steps = d.steps.map((st, i) => {
+        const done = i < p, active = i === p && !complete;
+        return { n: i + 1, t: st.t, s: st.s, m: st.m, done, active, notDone: !done, notLast: i < d.steps.length - 1,
+          dotBg: done ? '#4A8C3D' : active ? '#15355C' : '#FFFFFF',
+          dotBorder: done ? '#4A8C3D' : active ? '#15355C' : '#DCE4EC',
+          numColor: active ? '#FFFFFF' : '#95A2B3',
+          tColor: done || active ? '#15355C' : '#95A2B3',
+          lineBg: done ? '#A4CC95' : '#DCE4EC',
+          anim: active ? 'ccPulse 1.6s infinite' : 'none' };
+      });
+      pnlRows = d.pnl.map(r => ({ k: r[0], v: r[1], fw: r[2] ? 700 : 500, color: r[2] ? '#2F6B2A' : '#15355C' }));
+      deal = { ...d, badge: 'SCENARIO 0' + (this.deals.indexOf(d) + 1) };
+    }
+    return {
+      network,
+      price: '$' + price.toFixed(5),
+      priceColor: delta >= 0 ? '#78B463' : '#D99024',
+      showDeals: tab === 'deals' && !dealId && !stackOpen,
+      showDeal: tab === 'deals' && !!dealId,
+      showStack: tab === 'deals' && stackOpen && !dealId,
+      showMarket: tab === 'market',
+      showLedger: tab === 'ledger',
+      showWallet: tab === 'wallet',
+      totalPnl: fmt(settled.reduce((a, x) => a + x.net, 0)),
+      settledCount: settled.length + ' of 6 scenarios settled',
+      list, deal, steps, pnlRows, complete,
+      showCert: complete && dealId === 'retire',
+      layers: this.layersData,
+      listings: this.listingsData,
+      openStack: () => this.setState({ stackOpen: true }),
+      primaryLabel: running ? 'Running end-to-end\u2026' : complete ? 'Replay end-to-end' : 'Run end-to-end',
+      primaryBg: running ? '#5C7DA5' : '#15355C',
+      advColor: complete || running ? '#95A2B3' : '#15355C',
+      advance: () => {
+        if (!d || running || complete) return;
+        this.setState(s => ({ progress: { ...s.progress, [d.id]: Math.min(s.progress[d.id] + 1, d.steps.length) } }));
+      },
+      run: () => {
+        if (!d || running) return;
+        clearInterval(this.rt);
+        this.setState(s => ({ running: true, progress: { ...s.progress, [d.id]: 0 } }));
+        this.rt = setInterval(() => this.setState(s => {
+          const np = Math.min(s.progress[d.id] + 1, d.steps.length);
+          if (np >= d.steps.length) clearInterval(this.rt);
+          return { progress: { ...s.progress, [d.id]: np }, running: np < d.steps.length };
+        }), speed);
+      },
+      back: () => { clearInterval(this.rt); this.setState({ dealId: null, stackOpen: false, running: false }); },
+      goDeals: () => { clearInterval(this.rt); this.setState({ tab: 'deals', dealId: null, stackOpen: false, running: false }); },
+      goMarket: () => this.setState({ tab: 'market' }),
+      goLedger: () => this.setState({ tab: 'ledger' }),
+      goWallet: () => this.setState({ tab: 'wallet' }),
+      tDeals: tab === 'deals' ? '#15355C' : '#95A2B3',
+      tMarket: tab === 'market' ? '#15355C' : '#95A2B3',
+      tLedger: tab === 'ledger' ? '#15355C' : '#95A2B3',
+      tWallet: tab === 'wallet' ? '#15355C' : '#95A2B3',
+      ledger: this.ledgerRows,
+      positions: this.positionsRows
+    };
+  }
+}
+</script>
+</body>
+</html>

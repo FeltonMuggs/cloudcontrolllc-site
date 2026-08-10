@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/cloud-control-design-system-caaaeb7b-6e69-42b9-948f-92e180103ec9/colors_and_type.css">
+  <script src="_ds/cloud-control-design-system-caaaeb7b-6e69-42b9-948f-92e180103ec9/_ds_bundle.js"></script>
+  <style>body{margin:0;background:#0B2138} a{color:#2E8FD6} a:hover{color:#175F94}</style>
+</helmet>
+<x-import component-from-global-scope="deck-stage" from="./deck-stage.js" width="1920" height="1080" hint-size="100%,100%">
+
+  <section data-label="Title" data-speaker-notes="Introduce Inherited Sciences and the product in one line: a mobile broker desk for carbon credits, settled on Flare. Name the track." style="background:#15355C;color:#fff;font-family:Archivo,system-ui,sans-serif;display:flex;flex-direction:column;justify-content:center;padding:0 160px;position:relative;background-image:radial-gradient(circle at 1px 1px, rgba(255,255,255,.08) 1px, transparent 1.5px);background-size:26px 26px">
+    <div style="display:flex;align-items:center;gap:28px;margin-bottom:48px"><div style="width:96px;height:96px;border-radius:16px;background:#fff;display:flex;align-items:center;justify-content:center"><img src="assets/logo-shield.png" alt="" style="width:76px;height:76px;object-fit:contain"></div><div style="font-size:26px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8AC3EC">Inherited Sciences&trade;</div></div>
+    <div style="font-family:'Archivo Black',Archivo,sans-serif;font-size:120px;line-height:1.02;letter-spacing:-0.01em">The Carbon Broker</div>
+    <div style="font-size:34px;color:#C9D6E6;margin-top:28px;max-width:1100px;line-height:1.45">A mobile broker desk for verified carbon credits &mdash; sourced, matched, and settled on Flare with evidence-grade profit.</div>
+    <div style="display:flex;gap:16px;margin-top:56px">
+      <span style="font-size:24px;font-weight:700;background:#2E8FD6;color:#fff;border-radius:6px;padding:12px 24px">Flare Summer Signal &times; DoraHacks</span>
+      <span style="font-size:24px;font-weight:700;background:#102B4A;border:1px solid #2F5784;color:#C9D6E6;border-radius:6px;padding:12px 24px">Track: Interoperable Asset Products</span>
+      <span style="font-size:24px;font-weight:700;background:#102B4A;border:1px solid #2F5784;color:#C9D6E6;border-radius:6px;padding:12px 24px">Deployed: Coston2</span>
+    </div>
+  </section>
+
+  <section data-label="Submission" data-speaker-notes="Walk the judges through the submission fields: what the product is, who it is for, what Flare does in it, and what was newly built during the program." style="background:#F4F7FB;font-family:Archivo,system-ui,sans-serif;padding:100px 160px;display:flex;flex-direction:column">
+    <div style="font-size:26px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#1F7BBE">Submission at a glance</div>
+    <div style="font-family:'Archivo Black',Archivo,sans-serif;font-size:72px;color:#15355C;margin-top:16px">What judges are looking at</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px;margin-top:64px;flex:1">
+      <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:36px"><div style="font-size:24px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6B7A8E">Product</div><div style="font-size:29px;line-height:1.5;color:#2D3D50;margin-top:16px">Brokerage dApp that turns fragmented carbon-credit deals into one auditable, profitable flow: source &rarr; attest &rarr; match &rarr; escrow &rarr; settle &rarr; book P&amp;L.</div></div>
+      <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:36px"><div style="font-size:24px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6B7A8E">Target user</div><div style="font-size:29px;line-height:1.5;color:#2D3D50;margin-top:16px">Carbon brokers and aggregators (Inherited Sciences&trade; first), plus the sellers and corporate buyers on either side of each deal.</div></div>
+      <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:36px"><div style="font-size:24px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6B7A8E">How it uses Flare</div><div style="font-size:29px;line-height:1.5;color:#2D3D50;margin-top:16px">FTSOv2 pricing, FDC JsonApi proofs of Verra / Gold Standard, FDC Payment proofs of XRPL, FAssets FXRP settlement, escrow + atomic swap contracts.</div></div>
+      <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:36px"><div style="font-size:24px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6B7A8E">Newly built</div><div style="font-size:29px;line-height:1.5;color:#2D3D50;margin-top:16px">Mobile broker app, six end-to-end deal scenarios, tokenized-credit marketplace, and the FXRP cross-chain settlement path.</div></div>
+      <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:36px"><div style="font-size:24px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6B7A8E">Contracts</div><div style="font-family:'IBM Plex Mono',monospace;font-size:26px;line-height:1.7;color:#11476F;margin-top:16px">BrokerEscrow.sol<br>ForwardOfftake.sol<br>CarbonToken (ERC-1155)<br>RetirementCert (ERC-721)</div></div>
+      <div style="background:#15355C;border-radius:10px;padding:36px"><div style="font-size:24px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#8AC3EC">Roadmap</div><div style="font-size:29px;line-height:1.5;color:#EAF0F7;margin-top:16px">Live registry APIs &rarr; Songbird pilot with partner sellers &rarr; mainnet + institutional buyer onboarding.</div></div>
+    </div>
+  </section>
+
+  <section data-label="Architecture" data-speaker-notes="The 4-layer Carbon Broker Stack, adapted from the Inherited Sciences framework. Point out where each Flare service sits." style="background:#F4F7FB;font-family:Archivo,system-ui,sans-serif;padding:100px 160px;display:flex;flex-direction:column">
+    <div style="font-size:26px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#1F7BBE">Architecture &middot; adapted from the Inherited Sciences&trade; 4-layer framework</div>
+    <div style="font-family:'Archivo Black',Archivo,sans-serif;font-size:72px;color:#15355C;margin-top:16px">The Carbon Broker Stack</div>
+    <div style="display:flex;flex-direction:column;gap:22px;margin-top:60px;flex:1">
+      <div style="flex:1;display:flex;align-items:center;gap:36px;background:#fff;border:1px solid #DCE4EC;border-left:14px solid #15355C;border-radius:10px;padding:0 48px"><span style="font-family:'IBM Plex Mono',monospace;font-size:30px;font-weight:600;color:#fff;background:#15355C;border-radius:8px;padding:10px 20px;flex:none">L4</span><div><div style="font-size:36px;font-weight:700;color:#15355C">Governance &amp; Deal Legacy</div><div style="font-size:27px;color:#4A5A6E;margin-top:6px">Deal smart contracts &middot; multi-sig treasury custody &middot; automated fee &amp; pro-rata distribution &middot; auditable deal history</div></div></div>
+      <div style="flex:1;display:flex;align-items:center;gap:36px;background:#fff;border:1px solid #DCE4EC;border-left:14px solid #2E8FD6;border-radius:10px;padding:0 48px"><span style="font-family:'IBM Plex Mono',monospace;font-size:30px;font-weight:600;color:#fff;background:#2E8FD6;border-radius:8px;padding:10px 20px;flex:none">L3</span><div><div style="font-size:36px;font-weight:700;color:#15355C">Broker Engine</div><div style="font-size:27px;color:#4A5A6E;margin-top:6px">Matching &amp; spread engine &middot; seller aggregation &middot; inventory book &amp; risk &middot; quoting in FLR / FXRP</div></div></div>
+      <div style="flex:1;display:flex;align-items:center;gap:36px;background:#fff;border:1px solid #DCE4EC;border-left:14px solid #4A8C3D;border-radius:10px;padding:0 48px"><span style="font-family:'IBM Plex Mono',monospace;font-size:30px;font-weight:600;color:#fff;background:#4A8C3D;border-radius:8px;padding:10px 20px;flex:none">L2</span><div><div style="font-size:36px;font-weight:700;color:#15355C">Data &amp; Oracles</div><div style="font-size:27px;color:#4A5A6E;margin-top:6px">FTSOv2 feeds (FLR, XRP) &middot; FDC JsonApi attestations of Verra &amp; Gold Standard &middot; FDC Payment proofs &middot; IPFS project docs</div></div></div>
+      <div style="flex:1;display:flex;align-items:center;gap:36px;background:#fff;border:1px solid #DCE4EC;border-left:14px solid #1B2A3A;border-radius:10px;padding:0 48px"><span style="font-family:'IBM Plex Mono',monospace;font-size:30px;font-weight:600;color:#fff;background:#1B2A3A;border-radius:8px;padding:10px 20px;flex:none">L1</span><div><div style="font-size:36px;font-weight:700;color:#15355C">Foundation &amp; Trust</div><div style="font-size:27px;color:#4A5A6E;margin-top:6px">Flare EVM (Coston2) &middot; FAssets (FXRP) &middot; state-connector-proven XRPL settlement &middot; BrokerEscrow.sol</div></div></div>
+    </div>
+  </section>
+
+  <section data-label="S1 Spot" data-speaker-notes="Scenario 1: the simplest deal. Buy verified credits from one seller, sell to one buyer, settle atomically in FLR. Spread is 12 percent." style="background:#F4F7FB;font-family:Archivo,system-ui,sans-serif;padding:90px 140px;display:flex;flex-direction:column">
+    <div style="display:flex;align-items:baseline;gap:24px"><span style="font-size:24px;font-weight:700;letter-spacing:.12em;background:#15355C;color:#fff;border-radius:6px;padding:8px 18px">SCENARIO 01</span><div style="font-family:'Archivo Black',Archivo,sans-serif;font-size:64px;color:#15355C">Spot brokered buy</div></div>
+    <div style="font-size:29px;color:#4A5A6E;margin-top:14px">GhanaBlue Ltd ($12.40/t) &rarr; <strong>IS&trade; Broker</strong> &rarr; Aureon Logistics ($14.10/t) &middot; VCS-1739 &middot; 500 tCO&#8322;e</div>
+    <div style="display:flex;gap:44px;margin-top:52px;flex:1">
+      <div style="flex:1.5;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-content:start">
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">1 &middot; Credits sourced</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">VCS-1739-2024-GH</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">2 &middot; FDC attestation</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">0x8f2c&hellip;a41d &middot; JsonApi</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">3 &middot; Buyer matched</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">ORDER-2291 &middot; signed</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">4 &middot; FTSO price locked</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">$0.03421 &middot; epoch 918,442</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">5 &middot; Escrow funded</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">206,140 FLR locked</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">6 &middot; Atomic settlement</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">tx 0xc7d1&hellip;e83f</div></div>
+      </div>
+      <div style="flex:1;background:#fff;border:1px solid #DCE4EC;border-radius:10px;overflow:hidden;align-self:start">
+        <div style="background:#1B2A3A;color:#fff;padding:20px 32px;font-size:26px;font-weight:700;letter-spacing:.06em">DEAL P&amp;L</div>
+        <div style="padding:16px 32px 28px;font-size:27px;color:#2D3D50">
+          <div style="display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid #ECF1F6"><span>Sell &middot; 500 t &times; $14.10</span><span style="font-family:'IBM Plex Mono',monospace">$7,050.00</span></div>
+          <div style="display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid #ECF1F6"><span>Buy &middot; 500 t &times; $12.40</span><span style="font-family:'IBM Plex Mono',monospace">&minus;$6,200.00</span></div>
+          <div style="display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid #ECF1F6"><span>Gas + FDC fees</span><span style="font-family:'IBM Plex Mono',monospace">&minus;$3.12</span></div>
+          <div style="display:flex;justify-content:space-between;padding:16px 0;font-weight:700;color:#2F6B2A"><span>Net broker spread</span><span style="font-family:'IBM Plex Mono',monospace">+$846.88</span></div>
+        </div>
+        <div style="padding:0 32px 28px;display:flex;gap:12px;flex-wrap:wrap"><span style="font-size:24px;font-weight:600;background:#E8F3FC;color:#175F94;border-radius:999px;padding:8px 20px">FTSOv2</span><span style="font-size:24px;font-weight:600;background:#E8F3FC;color:#175F94;border-radius:999px;padding:8px 20px">FDC JsonApi</span><span style="font-size:24px;font-weight:600;background:#E8F3FC;color:#175F94;border-radius:999px;padding:8px 20px">Escrow</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="S2 Aggregation" data-speaker-notes="Scenario 2: the upstream deal. Three small sellers, one pre-issuance forward, pooled into a 1,000 ton block and sold to one buyer. Best margin of the spot deals." style="background:#F4F7FB;font-family:Archivo,system-ui,sans-serif;padding:90px 140px;display:flex;flex-direction:column">
+    <div style="display:flex;align-items:baseline;gap:24px"><span style="font-size:24px;font-weight:700;letter-spacing:.12em;background:#15355C;color:#fff;border-radius:6px;padding:8px 18px">SCENARIO 02</span><div style="font-family:'Archivo Black',Archivo,sans-serif;font-size:64px;color:#15355C">Upstream aggregation match</div></div>
+    <div style="font-size:29px;color:#4A5A6E;margin-top:14px">TidalRoots 300t + KijaniGrid 450t + AndeanPeat 250t (pre-issuance fwd) &rarr; <strong>IS&trade;</strong> &rarr; Meridian Steel &middot; 1,000 tCO&#8322;e block</div>
+    <div style="display:flex;gap:44px;margin-top:52px;flex:1">
+      <div style="flex:1.5;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-content:start">
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">1 &middot; Sellers aggregated</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">3 lots &rarr; 1 block</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">2 &middot; Pre-issuance forward</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">FWD-0231 &middot; $10.10/t</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">3 &middot; FDC attestations &times;3</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">0x77aa&hellip;10ce &middot; batch</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">4 &middot; Block tokenized</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">CCT-BLK-07 &middot; ERC-1155</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">5 &middot; Buyer + FTSO lock</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">$0.03425 &middot; epoch 923,118</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">6 &middot; Pro-rata settlement</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">tx 0x1e9b&hellip;77d2</div></div>
+      </div>
+      <div style="flex:1;background:#fff;border:1px solid #DCE4EC;border-radius:10px;overflow:hidden;align-self:start">
+        <div style="background:#1B2A3A;color:#fff;padding:20px 32px;font-size:26px;font-weight:700;letter-spacing:.06em">DEAL P&amp;L</div>
+        <div style="padding:16px 32px 28px;font-size:27px;color:#2D3D50">
+          <div style="display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid #ECF1F6"><span>Sell &middot; 1,000 t &times; $13.20</span><span style="font-family:'IBM Plex Mono',monospace">$13,200.00</span></div>
+          <div style="display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid #ECF1F6"><span>Buy &middot; 3 sellers blended</span><span style="font-family:'IBM Plex Mono',monospace">&minus;$11,105.00</span></div>
+          <div style="display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid #ECF1F6"><span>Gas + FDC fees</span><span style="font-family:'IBM Plex Mono',monospace">&minus;$5.40</span></div>
+          <div style="display:flex;justify-content:space-between;padding:16px 0;font-weight:700;color:#2F6B2A"><span>Net aggregation spread</span><span style="font-family:'IBM Plex Mono',monospace">+$2,089.60</span></div>
+        </div>
+        <div style="padding:0 32px 28px;display:flex;gap:12px;flex-wrap:wrap"><span style="font-size:24px;font-weight:600;background:#E8F3FC;color:#175F94;border-radius:999px;padding:8px 20px">FDC &times;3</span><span style="font-size:24px;font-weight:600;background:#E8F3FC;color:#175F94;border-radius:999px;padding:8px 20px">ERC-1155</span><span style="font-size:24px;font-weight:600;background:#E8F3FC;color:#175F94;border-radius:999px;padding:8px 20px">FTSOv2</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="S3 Resale" data-speaker-notes="Scenario 3: inventory play. IS buys a wholesale block cheap, takes real inventory risk, tokenizes it, and resells retail on the in-app marketplace. Highest margin: 36.5 percent." style="background:#F4F7FB;font-family:Archivo,system-ui,sans-serif;padding:90px 140px;display:flex;flex-direction:column">
+    <div style="display:flex;align-items:baseline;gap:24px"><span style="font-size:24px;font-weight:700;letter-spacing:.12em;background:#15355C;color:#fff;border-radius:6px;padding:8px 18px">SCENARIO 03</span><div style="font-family:'Archivo Black',Archivo,sans-serif;font-size:64px;color:#15355C">Tokenized credit resale</div></div>
+    <div style="font-size:29px;color:#4A5A6E;margin-top:14px">IS book (350 t @ $10.80 wholesale) &rarr; tokenized CCT-1739 &rarr; retail buyers &times;3 @ avg $14.75 &middot; listings marketplace</div>
+    <div style="display:flex;gap:44px;margin-top:52px;flex:1">
+      <div style="flex:1.5;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-content:start">
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">1 &middot; Wholesale block bought</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">350 t &middot; $10.80/t</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">2 &middot; Credits tokenized</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">CCT-1739 &middot; ERC-1155</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">3 &middot; Listed on marketplace</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">LIST-0092 &middot; ask $14.90</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">4 &middot; FTSO pricing feed</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">quotes in FLR live</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">5 &middot; Retail fills &times;3</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">350 t cleared</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">6 &middot; Proceeds settled</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">tx 0xa30f&hellip;c651</div></div>
+      </div>
+      <div style="flex:1;background:#fff;border:1px solid #DCE4EC;border-radius:10px;overflow:hidden;align-self:start">
+        <div style="background:#1B2A3A;color:#fff;padding:20px 32px;font-size:26px;font-weight:700;letter-spacing:.06em">DEAL P&amp;L</div>
+        <div style="padding:16px 32px 28px;font-size:27px;color:#2D3D50">
+          <div style="display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid #ECF1F6"><span>Retail &middot; 350 t &times; $14.75</span><span style="font-family:'IBM Plex Mono',monospace">$5,162.50</span></div>
+          <div style="display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid #ECF1F6"><span>Wholesale &middot; 350 t &times; $10.80</span><span style="font-family:'IBM Plex Mono',monospace">&minus;$3,780.00</span></div>
+          <div style="display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid #ECF1F6"><span>Gas + marketplace fees</span><span style="font-family:'IBM Plex Mono',monospace">&minus;$4.15</span></div>
+          <div style="display:flex;justify-content:space-between;padding:16px 0;font-weight:700;color:#2F6B2A"><span>Net inventory spread &middot; 36.5%</span><span style="font-family:'IBM Plex Mono',monospace">+$1,378.35</span></div>
+        </div>
+        <div style="padding:0 32px 28px;display:flex;gap:12px;flex-wrap:wrap"><span style="font-size:24px;font-weight:600;background:#E8F3FC;color:#175F94;border-radius:999px;padding:8px 20px">ERC-1155</span><span style="font-size:24px;font-weight:600;background:#E8F3FC;color:#175F94;border-radius:999px;padding:8px 20px">Marketplace</span><span style="font-size:24px;font-weight:600;background:#E8F3FC;color:#175F94;border-radius:999px;padding:8px 20px">FTSOv2</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="S4 FXRP" data-speaker-notes="Scenario 4: the interoperable-asset headline. An XRPL-native buyer pays in XRP; FDC proves the payment, FAssets mints FXRP, and the deal settles atomically on Flare." style="background:#F4F7FB;font-family:Archivo,system-ui,sans-serif;padding:90px 140px;display:flex;flex-direction:column">
+    <div style="display:flex;align-items:baseline;gap:24px"><span style="font-size:24px;font-weight:700;letter-spacing:.12em;background:#2E8FD6;color:#fff;border-radius:6px;padding:8px 18px">SCENARIO 04 &middot; TRACK HEADLINE</span><div style="font-family:'Archivo Black',Archivo,sans-serif;font-size:64px;color:#15355C">Cross-chain FXRP settlement</div></div>
+    <div style="font-size:29px;color:#4A5A6E;margin-top:14px">Ryujin Shipping pays 2,527 XRP on XRPL &rarr; FDC Payment proof &rarr; FAssets mints FXRP &rarr; atomic settlement on Flare &middot; 400 tCO&#8322;e</div>
+    <div style="display:flex;gap:44px;margin-top:52px;flex:1">
+      <div style="flex:1.5;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-content:start">
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">1 &middot; Quote in XRP</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">FTSO XRP/USD $2.20</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">2 &middot; Buyer pays on XRPL</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">XRPL tx A4C9&hellip;F210</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">3 &middot; FDC Payment proof</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">0x3fb8&hellip;90e7</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">4 &middot; FXRP minted</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">2,527 FXRP via agent</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">5 &middot; Escrow in FXRP</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">BrokerEscrow.sol</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">6 &middot; Atomic settlement</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">tx 0xbb02&hellip;41cd</div></div>
+      </div>
+      <div style="flex:1;background:#fff;border:1px solid #DCE4EC;border-radius:10px;overflow:hidden;align-self:start">
+        <div style="background:#1B2A3A;color:#fff;padding:20px 32px;font-size:26px;font-weight:700;letter-spacing:.06em">DEAL P&amp;L</div>
+        <div style="padding:16px 32px 28px;font-size:27px;color:#2D3D50">
+          <div style="display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid #ECF1F6"><span>Sell &middot; 400 t &times; $13.90 (XRP)</span><span style="font-family:'IBM Plex Mono',monospace">$5,560.00</span></div>
+          <div style="display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid #ECF1F6"><span>Buy &middot; 400 t &times; $12.30</span><span style="font-family:'IBM Plex Mono',monospace">&minus;$4,920.00</span></div>
+          <div style="display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid #ECF1F6"><span>Gas + FAssets + FDC fees</span><span style="font-family:'IBM Plex Mono',monospace">&minus;$6.20</span></div>
+          <div style="display:flex;justify-content:space-between;padding:16px 0;font-weight:700;color:#2F6B2A"><span>Net spread &middot; held in FXRP</span><span style="font-family:'IBM Plex Mono',monospace">+$633.80</span></div>
+        </div>
+        <div style="padding:0 32px 28px;display:flex;gap:12px;flex-wrap:wrap"><span style="font-size:24px;font-weight:600;background:#E8F3FC;color:#175F94;border-radius:999px;padding:8px 20px">FAssets</span><span style="font-size:24px;font-weight:600;background:#E8F3FC;color:#175F94;border-radius:999px;padding:8px 20px">FDC Payment</span><span style="font-size:24px;font-weight:600;background:#E8F3FC;color:#175F94;border-radius:999px;padding:8px 20px">XRPL</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="S5 Forward" data-speaker-notes="Scenario 5: recurring revenue. A four-tranche forward offtake with milestone escrow; tranche 1 settled, three scheduled." style="background:#F4F7FB;font-family:Archivo,system-ui,sans-serif;padding:90px 140px;display:flex;flex-direction:column">
+    <div style="display:flex;align-items:baseline;gap:24px"><span style="font-size:24px;font-weight:700;letter-spacing:.12em;background:#15355C;color:#fff;border-radius:6px;padding:8px 18px">SCENARIO 05</span><div style="font-family:'Archivo Black',Archivo,sans-serif;font-size:64px;color:#15355C">Forward offtake &middot; tranche 1</div></div>
+    <div style="font-size:29px;color:#4A5A6E;margin-top:14px">Sunbird Energy ($11.75/t locked) &rarr; <strong>IS&trade;</strong> &rarr; Helvion Group ($13.05/t locked) &middot; GS-2211 &middot; 2,000 tCO&#8322;e / 4 tranches</div>
+    <div style="display:flex;gap:44px;margin-top:52px;flex:1">
+      <div style="flex:1.5;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-content:start">
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">1 &middot; Offtake terms agreed</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">TERMS-0117</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">2 &middot; Forward deployed</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">ForwardOfftake.sol</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">3 &middot; FDC issuance proof</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">0x2b77&hellip;c9d0</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">4 &middot; Tranche 1 delivered</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">GS-2211-T1 &middot; 500 t</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">5 &middot; FTSO settlement rate</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">epoch 921,006</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">6 &middot; Tranche 1 settled</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">tx 0x5efa&hellip;1b27</div></div>
+      </div>
+      <div style="flex:1;background:#fff;border:1px solid #DCE4EC;border-radius:10px;overflow:hidden;align-self:start">
+        <div style="background:#1B2A3A;color:#fff;padding:20px 32px;font-size:26px;font-weight:700;letter-spacing:.06em">DEAL P&amp;L</div>
+        <div style="padding:16px 32px 28px;font-size:27px;color:#2D3D50">
+          <div style="display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid #ECF1F6"><span>Revenue &middot; 500 t &times; $13.05</span><span style="font-family:'IBM Plex Mono',monospace">$6,525.00</span></div>
+          <div style="display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid #ECF1F6"><span>Cost &middot; 500 t &times; $11.75</span><span style="font-family:'IBM Plex Mono',monospace">&minus;$5,875.00</span></div>
+          <div style="display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid #ECF1F6"><span>Gas + FDC fees</span><span style="font-family:'IBM Plex Mono',monospace">&minus;$2.87</span></div>
+          <div style="display:flex;justify-content:space-between;padding:16px 0;font-weight:700;color:#2F6B2A"><span>Net &middot; tranche 1 of 4</span><span style="font-family:'IBM Plex Mono',monospace">+$647.13</span></div>
+        </div>
+        <div style="padding:0 32px 28px;font-size:26px;color:#4A5A6E">Projected across all four tranches: <strong style="color:#2F6B2A">+$2,588.52</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="S6 Retirement" data-speaker-notes="Scenario 6: the service business. Retirement executed against Verra, proven by FDC, certificate minted as ERC-721. Small fee, fully recurring." style="background:#F4F7FB;font-family:Archivo,system-ui,sans-serif;padding:90px 140px;display:flex;flex-direction:column">
+    <div style="display:flex;align-items:baseline;gap:24px"><span style="font-size:24px;font-weight:700;letter-spacing:.12em;background:#15355C;color:#fff;border-radius:6px;padding:8px 18px">SCENARIO 06</span><div style="font-family:'Archivo Black',Archivo,sans-serif;font-size:64px;color:#15355C">Retirement &amp; certificate</div></div>
+    <div style="font-size:29px;color:#4A5A6E;margin-top:14px">Aureon Logistics retires 150 tCO&#8322;e against its FY26 target &middot; Verra Web2 API &rarr; FDC proof &rarr; ERC-721 certificate</div>
+    <div style="display:flex;gap:44px;margin-top:52px;flex:1">
+      <div style="flex:1.5;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-content:start">
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">1 &middot; Retirement order</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">RET-0088</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">2 &middot; Registry executed</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">VCS-RET-77120</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">3 &middot; FDC proof</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">0x6d19&hellip;f2c4</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">4 &middot; Certificate minted</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">CERT #0042 &middot; ERC-721</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">5 &middot; Fee settled in FLR</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">3,946 FLR</div></div>
+        <div style="background:#fff;border:1px solid #DCE4EC;border-radius:10px;padding:24px 28px"><div style="font-size:27px;font-weight:700;color:#15355C">6 &middot; Fee booked</div><div style="font-family:'IBM Plex Mono',monospace;font-size:24px;color:#11476F;margin-top:8px">recurring revenue</div></div>
+      </div>
+      <div style="flex:1;background:#fff;border:1px solid #DCE4EC;border-radius:10px;overflow:hidden;align-self:start">
+        <div style="background:#1B2A3A;color:#fff;padding:20px 32px;font-size:26px;font-weight:700;letter-spacing:.06em">DEAL P&amp;L</div>
+        <div style="padding:16px 32px 28px;font-size:27px;color:#2D3D50">
+          <div style="display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid #ECF1F6"><span>Fee &middot; 150 t &times; $0.90</span><span style="font-family:'IBM Plex Mono',monospace">$135.00</span></div>
+          <div style="display:flex;justify-content:space-between;padding:16px 0;border-bottom:1px solid #ECF1F6"><span>Gas + FDC fees</span><span style="font-family:'IBM Plex Mono',monospace">&minus;$1.04</span></div>
+          <div style="display:flex;justify-content:space-between;padding:16px 0;font-weight:700;color:#2F6B2A"><span>Net fee revenue</span><span style="font-family:'IBM Plex Mono',monospace">+$133.96</span></div>
+        </div>
+        <div style="padding:0 32px 28px;display:flex;gap:12px;flex-wrap:wrap"><span style="font-size:24px;font-weight:600;background:#E8F3FC;color:#175F94;border-radius:999px;padding:8px 20px">FDC JsonApi</span><span style="font-size:24px;font-weight:600;background:#E8F3FC;color:#175F94;border-radius:999px;padding:8px 20px">ERC-721</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Roll-up" data-speaker-notes="Close on the money: six scenarios, every one profitable, $5,729.72 total net in the demo book. Then the roadmap." style="background:#15355C;color:#fff;font-family:Archivo,system-ui,sans-serif;padding:100px 160px;display:flex;flex-direction:column;background-image:radial-gradient(circle at 1px 1px, rgba(255,255,255,.08) 1px, transparent 1.5px);background-size:26px 26px">
+    <div style="font-size:26px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8AC3EC">A profitable book, end to end</div>
+    <div style="font-family:'Archivo Black',Archivo,sans-serif;font-size:96px;margin-top:16px">+$5,729.72 <span style="font-size:40px;font-family:Archivo,sans-serif;font-weight:400;color:#C9D6E6">net across six settled scenarios</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin-top:64px">
+      <div style="background:rgba(255,255,255,.06);border:1px solid #2F5784;border-radius:10px;padding:28px 32px"><div style="font-size:25px;color:#95ADC8">01 &middot; Spot brokered buy</div><div style="font-family:'IBM Plex Mono',monospace;font-size:34px;color:#A4CC95;margin-top:8px">+$846.88</div></div>
+      <div style="background:rgba(255,255,255,.06);border:1px solid #2F5784;border-radius:10px;padding:28px 32px"><div style="font-size:25px;color:#95ADC8">02 &middot; Upstream aggregation</div><div style="font-family:'IBM Plex Mono',monospace;font-size:34px;color:#A4CC95;margin-top:8px">+$2,089.60</div></div>
+      <div style="background:rgba(255,255,255,.06);border:1px solid #2F5784;border-radius:10px;padding:28px 32px"><div style="font-size:25px;color:#95ADC8">03 &middot; Tokenized resale</div><div style="font-family:'IBM Plex Mono',monospace;font-size:34px;color:#A4CC95;margin-top:8px">+$1,378.35</div></div>
+      <div style="background:rgba(255,255,255,.06);border:1px solid #2F5784;border-radius:10px;padding:28px 32px"><div style="font-size:25px;color:#95ADC8">04 &middot; Cross-chain FXRP</div><div style="font-family:'IBM Plex Mono',monospace;font-size:34px;color:#A4CC95;margin-top:8px">+$633.80</div></div>
+      <div style="background:rgba(255,255,255,.06);border:1px solid #2F5784;border-radius:10px;padding:28px 32px"><div style="font-size:25px;color:#95ADC8">05 &middot; Forward offtake T1</div><div style="font-family:'IBM Plex Mono',monospace;font-size:34px;color:#A4CC95;margin-top:8px">+$647.13</div></div>
+      <div style="background:rgba(255,255,255,.06);border:1px solid #2F5784;border-radius:10px;padding:28px 32px"><div style="font-size:25px;color:#95ADC8">06 &middot; Retirement fee</div><div style="font-family:'IBM Plex Mono',monospace;font-size:34px;color:#A4CC95;margin-top:8px">+$133.96</div></div>
+    </div>
+    <div style="margin-top:auto;display:flex;align-items:center;gap:24px;font-size:27px;color:#C9D6E6"><img src="assets/logo-shield.png" alt="" style="width:56px;height:56px;object-fit:contain;background:#fff;border-radius:10px;padding:6px">Next: live registry APIs &rarr; Songbird pilot &rarr; mainnet with institutional buyers. Inherited Sciences&trade; &middot; The Carbon Broker.</div>
+  </section>
+
+</x-import>
+</x-dc>
+</body>
+</html>
