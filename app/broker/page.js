@@ -195,7 +195,7 @@ export default function BrokerPage() {
                 </p>
               </div>
               <a
-                href="https://claude.ai/code/artifact/1b6e2106-2286-4172-9007-f9aa3b9bbef4"
+                href="/broker-demo/index.html"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex shrink-0 items-center gap-2 rounded-full bg-wheat px-6 py-3 text-sm font-semibold text-navy-deep transition hover:bg-wheat-light"
