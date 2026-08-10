@@ -461,13 +461,16 @@ function DNaIContent() {
         <DNACanvas />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-[radial-gradient(70%_60%_at_50%_0%,rgba(94,160,73,0.18),transparent_70%)]" />
         <div className="relative z-10 mx-auto flex min-h-screen max-w-8xl flex-col justify-center px-6 md:px-10">
-          <div className="mb-4 inline-flex w-fit items-center gap-2.5 rounded-full border border-field/40 bg-navy-900/40 px-4 py-2 text-xs font-medium tracking-wide text-field backdrop-blur-sm">
-            <span className="h-1.5 w-1.5 rounded-full bg-field" />
-            Cloud Control LLC &middot; Project DNaI
-          </div>
-          <div className="mb-7 inline-flex w-fit items-center gap-2.5 rounded-full border border-wheat/40 bg-wheat/[0.08] px-4 py-2 text-xs font-medium tracking-wide text-wheat-light backdrop-blur-sm">
-            <span aria-hidden="true">&#127942;</span>
-            Built for Flare Summer Signal &middot; Confidential Compute Apps (FTSOv2 + FDC)
+          <div className="mb-7 inline-flex w-fit flex-wrap items-center gap-x-3 gap-y-1.5 rounded-full border border-wheat/40 bg-navy-900/40 px-4 py-2 text-xs font-medium tracking-wide backdrop-blur-sm">
+            <span className="inline-flex items-center gap-2 text-field">
+              <span className="h-1.5 w-1.5 rounded-full bg-field" />
+              Cloud Control LLC &middot; Project DNaI
+            </span>
+            <span className="hidden h-3 w-px bg-white/20 sm:block" aria-hidden="true" />
+            <span className="inline-flex items-center gap-2 text-wheat-light">
+              <span aria-hidden="true">&#127942;</span>
+              Built for Flare Summer Signal &middot; Confidential Compute Apps (FTSOv2 + FDC)
+            </span>
           </div>
           <h1 className="font-serif max-w-5xl text-[12.5vw] font-semibold leading-[0.95] tracking-tight text-cream sm:text-[9vw] md:text-[6.6vw]">
             Your genome<br />
