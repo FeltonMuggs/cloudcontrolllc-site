@@ -182,8 +182,27 @@ export default function BrokerPage() {
               Two minutes, end to end: a broker-matched credit deal, oracle-priced settlement, decentralized attestation of the credit&rsquo;s provenance, and retirement with the disclosure attached. Runs on Flare&rsquo;s Coston2 testnet with simulated deal data.
             </p>
           </Reveal>
+          <Reveal y={24}>
+            <div className="mt-10 flex flex-col items-start gap-4 rounded-3xl border border-wheat/30 bg-wheat/[0.06] p-8 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="font-mono text-xs uppercase tracking-[0.2em] text-wheat-light">Try it live &middot; interactive</p>
+                <h3 className="mt-2 font-serif text-2xl font-medium text-cream">The Carbon Broker app</h3>
+                <p className="mt-2 max-w-xl leading-relaxed text-sky-light/80">
+                  Run all six brokered-deal scenarios end to end &mdash; match, oracle-priced settlement, on-chain attestation, and retirement &mdash; on Flare&rsquo;s Coston2 testnet with simulated deal data.
+                </p>
+              </div>
+              <a
+                href="https://claude.ai/code/artifact/1b6e2106-2286-4172-9007-f9aa3b9bbef4"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex shrink-0 items-center gap-2 rounded-full bg-wheat px-6 py-3 text-sm font-semibold text-navy-deep transition hover:bg-wheat-light"
+              >
+                Launch interactive demo &rarr;
+              </a>
+            </div>
+          </Reveal>
           <Reveal y={32}>
-            <div className="mt-10 overflow-hidden rounded-3xl border border-white/10 shadow-2xl shadow-black/40">
+            <div className="mt-6 overflow-hidden rounded-3xl border border-white/10 shadow-2xl shadow-black/40">
               <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
                 <iframe
                   src="https://www.youtube-nocookie.com/embed/yCi1H4o0gpo"
