@@ -481,13 +481,14 @@ function DNaIContent() {
             DNaI is the genomic sovereign token &mdash; a blockchain-native instrument that transforms every human&rsquo;s genetic code into a verifiable, ownable, and monetizable digital asset. Your DNA. Your data. Your sovereignty.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-4">
-            <a href="#contact" className="rounded-full bg-field px-7 py-3.5 text-sm font-semibold text-cream shadow-xl shadow-field/20 transition-transform hover:scale-[1.04] hover:bg-field-deep active:scale-95">
+            <a href="/dnai/wallet/" className="rounded-full bg-field px-7 py-3.5 text-sm font-semibold text-cream shadow-xl shadow-field/20 transition-transform hover:scale-[1.04] hover:bg-field-deep active:scale-95">
+              Try the Wallet Demo
+            </a>
+            <a href="#contact" className="rounded-full border border-sky-light/40 px-7 py-3.5 text-sm font-semibold text-cream transition-colors hover:border-wheat hover:text-wheat-light">
               Join the Waitlist
             </a>
-            <a href="#overview" className="rounded-full border border-sky-light/40 px-7 py-3.5 text-sm font-semibold text-cream transition-colors hover:border-wheat hover:text-wheat-light">
-              Learn how it works
-            </a>
           </div>
+          <p className="mt-4 text-xs text-sky-light/50">The wallet demo requires a quick registration step before it opens.</p>
           <div className="mt-16 flex flex-wrap gap-8 md:gap-14">
             {[
               { label: 'Genomic Assets', value: '8B+' },
@@ -617,6 +618,12 @@ function DNaIContent() {
                 loading="lazy"
                 className="absolute inset-0 h-full w-full"
               />
+            </div>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+              <a href="/dnai/wallet/" className="rounded-full bg-wheat px-7 py-3.5 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">
+                Open the live wallet demo &rarr;
+              </a>
+              <span className="text-xs text-sky-light/50">Requires a quick registration step</span>
             </div>
           </Reveal>
         </div>
