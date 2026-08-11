@@ -340,7 +340,7 @@ function AccessGate({ onGranted }) {
       if (d.status === 'approved') { grant(em); return true; }
       if (!silent) {
         if (d.status === 'pending') setNote('Your request is still awaiting approval. You’ll be able to enter as soon as Everett approves it — check back shortly.');
-        else if (d.status === 'denied') setNote('This registration was not approved. Questions? Email everett@cloudcontrolllc.com.');
+        else if (d.status === 'denied') setNote('This registration was not approved. Questions? Email info@blockaide.org.');
         else setNote('No registration found for that email — request access below.');
       }
     } catch (e) {
@@ -426,7 +426,7 @@ function AccessGate({ onGranted }) {
           {mode === 'register' ? 'Already registered? Check my status →' : '← Need access? Register here'}
         </button>
         <p className="mt-6 border-t border-white/10 pt-4 text-xs leading-relaxed text-sky-light/50">
-          Cloud Control LLC &middot; questions: <a href="mailto:everett@cloudcontrolllc.com" className="text-sky-light/80 hover:text-cream">everett@cloudcontrolllc.com</a>
+          Cloud Control LLC &middot; questions: <a href="mailto:info@blockaide.org" className="text-sky-light/80 hover:text-cream">info@blockaide.org</a>
         </p>
       </div>
     </div>
@@ -728,7 +728,7 @@ function DNaIContent() {
               DNaI is in active development. Join the waitlist to secure early access, participate in the genesis token event, and help shape the policies governing the world&rsquo;s first sovereign genomic economy.
             </p>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-              <a href="mailto:everett@cloudcontrolllc.com?subject=DNaI%20Waitlist%20Inquiry" className="rounded-full bg-field px-8 py-4 text-sm font-semibold text-cream shadow-xl shadow-field/20 transition-transform hover:scale-[1.04] hover:bg-field-deep active:scale-95">
+              <a href="mailto:info@blockaide.org?subject=DNaI%20Waitlist%20Inquiry" className="rounded-full bg-field px-8 py-4 text-sm font-semibold text-cream shadow-xl shadow-field/20 transition-transform hover:scale-[1.04] hover:bg-field-deep active:scale-95">
                 Join the DNaI Waitlist
               </a>
               <a href="/dnai/wallet/" className="rounded-full bg-wheat px-8 py-4 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">VIP DNaI Deposit &middot; $250</a>
@@ -755,7 +755,7 @@ function DNaIContent() {
             <span className="hidden md:block text-white/20">|</span>
             <span className="hidden md:block text-sm text-field/70 font-medium tracking-wide">DNaI Project</span>
           </div>
-          <p className="text-sm text-sky-light/60">&copy; {new Date().getFullYear()} Cloud Control LLC &mdash; All Rights Reserved.</p>
+          <p className="text-sm text-sky-light/60">Contact: <a href="mailto:info@blockaide.org" className="text-sky-light/80 transition-colors hover:text-cream">info@blockaide.org</a> &middot; &copy; {new Date().getFullYear()} Cloud Control LLC &mdash; All Rights Reserved.</p>
         </div>
       </footer>
     </main>

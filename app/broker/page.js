@@ -98,7 +98,7 @@ function Nav() {
             <a key={l.href} href={l.href} onClick={(e) => go(e, l.href)} className="text-sm font-medium text-sky-light/80 transition-colors hover:text-cream">{l.label}</a>
           ))}
         </nav>
-        <a href="mailto:everett@cloudcontrolllc.com?subject=Carbon%20Broker%20Inquiry" className="rounded-full bg-wheat px-5 py-2.5 text-sm font-semibold text-navy-900 shadow-lg shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">Start a conversation</a>
+        <a href="mailto:info@blockaide.org?subject=Carbon%20Broker%20Inquiry" className="rounded-full bg-wheat px-5 py-2.5 text-sm font-semibold text-navy-900 shadow-lg shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">Start a conversation</a>
       </div>
     </header>
   );
@@ -255,7 +255,7 @@ export default function BrokerPage() {
             <h2 className="font-serif text-4xl font-semibold leading-[1.05] text-cream md:text-5xl">Own land? <span className="italic text-wheat-light">You&rsquo;re the supply side.</span></h2>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-sky-light/80">If you hold land in a mitigation-eligible watershed and want to understand what participation could look like, start a conversation.</p>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-              <a href="mailto:everett@cloudcontrolllc.com?subject=Carbon%20Broker%20Inquiry" className="rounded-full bg-wheat px-8 py-4 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">Start a conversation</a>
+              <a href="mailto:info@blockaide.org?subject=Carbon%20Broker%20Inquiry" className="rounded-full bg-wheat px-8 py-4 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">Start a conversation</a>
               <a href="/" className="rounded-full border border-sky-light/40 px-8 py-4 text-sm font-semibold text-cream transition-colors hover:border-wheat hover:text-wheat-light">Back to Cloud Control</a>
             </div>
           </Reveal>
@@ -267,7 +267,7 @@ export default function BrokerPage() {
             <img src="/logo.png" alt="Cloud Control LLC" className="h-10 w-auto" />
             <span className="text-sm text-sky-light/70">Cloud Control LLC &middot; Colonial Beach, VA</span>
           </div>
-          <p className="text-sm text-sky-light/60">&copy; {new Date().getFullYear()} Cloud Control LLC &mdash; All Rights Reserved.</p>
+          <p className="text-sm text-sky-light/60">Contact: <a href="mailto:info@blockaide.org" className="text-sky-light/80 transition-colors hover:text-cream">info@blockaide.org</a> &middot; &copy; {new Date().getFullYear()} Cloud Control LLC &mdash; All Rights Reserved.</p>
         </div>
       </footer>
     </main>

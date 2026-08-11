@@ -736,7 +736,7 @@ export default function Home() {
             <h2 className="font-serif text-4xl font-semibold leading-[1.05] text-cream md:text-6xl">Move beyond documents.<br /><span className="italic text-wheat-light">Toward verifiable value.</span></h2>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-sky-light/80">Reduce risk, unlock funding, and ensure infrastructure investments deliver measurable, auditable, long-term value.</p>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-              <a href="mailto:everett@cloudcontrolllc.com?subject=BMM%20Assessment%20Inquiry" className="rounded-full bg-wheat px-8 py-4 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">Start a conversation</a>
+              <a href="mailto:info@blockaide.org?subject=BMM%20Assessment%20Inquiry" className="rounded-full bg-wheat px-8 py-4 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">Start a conversation</a>
               <a href="https://www.linkedin.com/in/everettjaymorton" target="_blank" rel="noopener" className="rounded-full border border-sky-light/40 px-8 py-4 text-sm font-semibold text-cream transition-colors hover:border-wheat hover:text-wheat-light">Connect on LinkedIn</a>
             </div>
           </Reveal>
@@ -757,7 +757,7 @@ export default function Home() {
             <img src="/logo.png" alt="Cloud Control LLC" className="h-10 w-auto" />
             <span className="text-sm text-sky-light/70">Cloud Control LLC &middot; Colonial Beach, VA</span>
           </div>
-          <p className="text-sm text-sky-light/60">&copy; {new Date().getFullYear()} Cloud Control LLC &mdash; All Rights Reserved.</p>
+          <p className="text-sm text-sky-light/60">Contact: <a href="mailto:info@blockaide.org" className="text-sky-light/80 transition-colors hover:text-cream">info@blockaide.org</a> &middot; &copy; {new Date().getFullYear()} Cloud Control LLC &mdash; All Rights Reserved.</p>
         </div>
       </footer>
     </main>

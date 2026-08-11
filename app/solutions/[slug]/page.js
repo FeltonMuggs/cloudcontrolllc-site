@@ -228,7 +228,7 @@ export default function SolutionPage({ params }) {
             <img src="/logo.png" alt="Cloud Control LLC" className="h-10 w-auto" />
             <span className="text-sm text-sky-light/70">Cloud Control LLC &middot; Colonial Beach, VA</span>
           </div>
-          <p className="text-sm text-sky-light/60">&copy; {new Date().getFullYear()} Cloud Control LLC &mdash; All Rights Reserved.</p>
+          <p className="text-sm text-sky-light/60">Contact: <a href="mailto:info@blockaide.org" className="text-sky-light/80 transition-colors hover:text-cream">info@blockaide.org</a> &middot; &copy; {new Date().getFullYear()} Cloud Control LLC &mdash; All Rights Reserved.</p>
         </div>
       </footer>
     </main>
