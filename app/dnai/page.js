@@ -201,7 +201,7 @@ function DNACanvas() {
 const NAV_LINKS = [
   { label: 'Overview', href: '#overview' },
   { label: 'How It Works', href: '#how' },
-  { label: 'Watch', href: '#watch' },
+  { label: 'Demo', href: '#demo' },
   { label: 'Token', href: '#token' },
   { label: 'Roadmap', href: '#roadmap' },
   { label: 'Contact', href: '#contact' },
@@ -481,7 +481,7 @@ function DNaIContent() {
             DNaI is the genomic sovereign token &mdash; a blockchain-native instrument that transforms every human&rsquo;s genetic code into a verifiable, ownable, and monetizable digital asset. Your DNA. Your data. Your sovereignty.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-4">
-            <a href="/dnai/wallet/" className="rounded-full bg-field px-7 py-3.5 text-sm font-semibold text-cream shadow-xl shadow-field/20 transition-transform hover:scale-[1.04] hover:bg-field-deep active:scale-95">
+            <a href="#demo" className="rounded-full bg-field px-7 py-3.5 text-sm font-semibold text-cream shadow-xl shadow-field/20 transition-transform hover:scale-[1.04] hover:bg-field-deep active:scale-95">
               Try the Wallet Demo
             </a>
             <a href="#contact" className="rounded-full border border-sky-light/40 px-7 py-3.5 text-sm font-semibold text-cream transition-colors hover:border-wheat hover:text-wheat-light">
@@ -595,10 +595,10 @@ function DNaIContent() {
       </section>
 
       {/* ===== VIDEO ===== */}
-      <section id="watch" className="relative bg-navy-deep px-6 py-24 md:px-10 md:py-32">
+      <section id="demo" className="relative bg-navy-deep px-6 py-24 md:px-10 md:py-32">
         <div className="mx-auto max-w-5xl">
           <Reveal>
-            <p className="mb-3 font-mono text-xs uppercase tracking-[0.25em] text-field text-center">Watch</p>
+            <p className="mb-3 font-mono text-xs uppercase tracking-[0.25em] text-field text-center">The demo</p>
             <h2 className="font-serif text-center text-4xl font-medium leading-[1.08] text-cream md:text-5xl">
               Medical AI without exposing<br />
               <span className="italic text-wheat-light">your DNA.</span>
@@ -606,6 +606,20 @@ function DNaIContent() {
             <p className="mx-auto mt-5 max-w-2xl text-center text-lg leading-relaxed text-sky-light/80">
               See why genomic privacy and AI-powered medicine don&rsquo;t have to be in conflict — and how DNaI makes both possible.
             </p>
+          </Reveal>
+          <Reveal y={32}>
+            <div className="mt-10 flex flex-col items-start gap-4 rounded-3xl border border-wheat/30 bg-wheat/[0.06] p-8 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="font-mono text-xs uppercase tracking-[0.2em] text-wheat-light">Try it live &middot; interactive</p>
+                <h3 className="mt-2 font-serif text-2xl font-medium text-cream">The Sovereign Genomic Wallet</h3>
+                <p className="mt-2 max-w-xl leading-relaxed text-sky-light/80">
+                  Switch between owner and researcher, request access to a segment, sign under 2-of-3 multisig custody, and revoke a live grant &mdash; end to end, on Flare&rsquo;s Coston2 testnet with simulated data.
+                </p>
+              </div>
+              <a href="/dnai-wallet-demo/index.html" target="_blank" rel="noopener noreferrer" className="inline-flex shrink-0 items-center gap-2 rounded-full bg-wheat px-6 py-3 text-sm font-semibold text-navy-deep transition hover:bg-wheat-light">
+                Launch interactive demo &rarr;
+              </a>
+            </div>
           </Reveal>
           <Reveal y={32}>
             <div className="relative mt-12 overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-black/40"
@@ -619,12 +633,9 @@ function DNaIContent() {
                 className="absolute inset-0 h-full w-full"
               />
             </div>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-              <a href="/dnai/wallet/" className="rounded-full bg-wheat px-7 py-3.5 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">
-                Open the live wallet demo &rarr;
-              </a>
-              <span className="text-xs text-sky-light/50">Runs on Flare&rsquo;s Coston2 testnet with simulated data.</span>
-            </div>
+            <p className="mt-6 text-center font-mono text-xs uppercase tracking-[0.2em] text-sky-light/50">
+              Coston2 testnet &middot; simulated data &middot; no real genome is used
+            </p>
           </Reveal>
         </div>
       </section>
@@ -731,7 +742,7 @@ function DNaIContent() {
               <a href="mailto:everett@cloudcontrolllc.com?subject=DNaI%20Waitlist%20Inquiry" className="rounded-full bg-field px-8 py-4 text-sm font-semibold text-cream shadow-xl shadow-field/20 transition-transform hover:scale-[1.04] hover:bg-field-deep active:scale-95">
                 Join the DNaI Waitlist
               </a>
-              <a href="/dnai/wallet/" className="rounded-full bg-wheat px-8 py-4 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">Join the wallet waitlist</a>
+              <a href="#contact" className="rounded-full bg-wheat px-8 py-4 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">Join the wallet waitlist</a>
             </div>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <a href="https://www.linkedin.com/in/everettjaymorton" target="_blank" rel="noopener" className="rounded-full border border-sky-light/25 px-5 py-2.5 text-xs font-semibold text-sky-light/80 transition-colors hover:border-wheat hover:text-wheat-light">LinkedIn &mdash; Everett Morton</a>
