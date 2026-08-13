@@ -488,7 +488,7 @@ function DNaIContent() {
               Join the Waitlist
             </a>
           </div>
-          <p className="mt-4 text-xs text-sky-light/50">The wallet demo requires a quick registration step before it opens.</p>
+          <p className="mt-4 text-xs text-sky-light/50">Runs on Flare&rsquo;s Coston2 testnet with simulated data.</p>
           <div className="mt-16 flex flex-wrap gap-8 md:gap-14">
             {[
               { label: 'Genomic Assets', value: '8B+' },
@@ -623,7 +623,7 @@ function DNaIContent() {
               <a href="/dnai/wallet/" className="rounded-full bg-wheat px-7 py-3.5 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">
                 Open the live wallet demo &rarr;
               </a>
-              <span className="text-xs text-sky-light/50">Requires a quick registration step</span>
+              <span className="text-xs text-sky-light/50">Runs on Flare&rsquo;s Coston2 testnet with simulated data.</span>
             </div>
           </Reveal>
         </div>
@@ -731,7 +731,7 @@ function DNaIContent() {
               <a href="mailto:everett@cloudcontrolllc.com?subject=DNaI%20Waitlist%20Inquiry" className="rounded-full bg-field px-8 py-4 text-sm font-semibold text-cream shadow-xl shadow-field/20 transition-transform hover:scale-[1.04] hover:bg-field-deep active:scale-95">
                 Join the DNaI Waitlist
               </a>
-              <a href="/dnai/wallet/" className="rounded-full bg-wheat px-8 py-4 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">VIP DNaI Deposit &middot; $250</a>
+              <a href="/dnai/wallet/" className="rounded-full bg-wheat px-8 py-4 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">Join the wallet waitlist</a>
             </div>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <a href="https://www.linkedin.com/in/everettjaymorton" target="_blank" rel="noopener" className="rounded-full border border-sky-light/25 px-5 py-2.5 text-xs font-semibold text-sky-light/80 transition-colors hover:border-wheat hover:text-wheat-light">LinkedIn &mdash; Everett Morton</a>
