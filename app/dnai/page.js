@@ -488,7 +488,7 @@ function DNaIContent() {
               Join the Waitlist
             </a>
           </div>
-          <p className="mt-4 text-xs text-sky-light/50">The wallet demo requires a quick registration step before it opens.</p>
+          <p className="mt-4 text-xs text-sky-light/50">Runs on Flare&rsquo;s Coston2 testnet with simulated data.</p>
           <div className="mt-16 flex flex-wrap gap-8 md:gap-14">
             {[
               { label: 'Genomic Assets', value: '8B+' },
@@ -623,7 +623,7 @@ function DNaIContent() {
               <a href="/dnai/wallet/" className="rounded-full bg-wheat px-7 py-3.5 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">
                 Open the live wallet demo &rarr;
               </a>
-              <span className="text-xs text-sky-light/50">Requires a quick registration step</span>
+              <span className="text-xs text-sky-light/50">Runs on Flare&rsquo;s Coston2 testnet with simulated data.</span>
             </div>
           </Reveal>
         </div>
