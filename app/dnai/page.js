@@ -622,8 +622,8 @@ function DNaIContent() {
             <div className="relative mt-12 overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-black/40"
                  style={{ paddingTop: '56.25%' }}>
               <iframe
-                src="https://www.youtube.com/embed/Y6d9MhKyrTo"
-                title="Medical AI without exposing your DNA"
+                src="https://www.youtube.com/embed/Ujlripeho2Q"
+                title="DNaI demo video"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
                 loading="lazy"
