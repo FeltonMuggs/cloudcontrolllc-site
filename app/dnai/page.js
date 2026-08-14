@@ -199,12 +199,9 @@ function DNACanvas() {
 
 /* ---------------- nav ---------------- */
 const NAV_LINKS = [
-  { label: 'Overview', href: '#overview' },
+  { label: 'Mission', href: '#mission' },
   { label: 'How It Works', href: '#how' },
-  { label: 'Watch', href: '#watch' },
-  { label: 'Token', href: '#token' },
-  { label: 'Roadmap', href: '#roadmap' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Demo', href: '#demo' },
 ];
 
 function Nav() {
@@ -481,7 +478,7 @@ function DNaIContent() {
             DNaI is the genomic sovereign token &mdash; a blockchain-native instrument that transforms every human&rsquo;s genetic code into a verifiable, ownable, and monetizable digital asset. Your DNA. Your data. Your sovereignty.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-4">
-            <a href="/dnai/wallet/" className="rounded-full bg-field px-7 py-3.5 text-sm font-semibold text-cream shadow-xl shadow-field/20 transition-transform hover:scale-[1.04] hover:bg-field-deep active:scale-95">
+            <a href="#demo" className="rounded-full bg-field px-7 py-3.5 text-sm font-semibold text-cream shadow-xl shadow-field/20 transition-transform hover:scale-[1.04] hover:bg-field-deep active:scale-95">
               Try the Wallet Demo
             </a>
             <a href="#contact" className="rounded-full border border-sky-light/40 px-7 py-3.5 text-sm font-semibold text-cream transition-colors hover:border-wheat hover:text-wheat-light">
@@ -511,7 +508,7 @@ function DNaIContent() {
       </section>
 
       {/* ===== OVERVIEW / WHAT IS DNaI ===== */}
-      <section id="overview" className="relative bg-navy px-6 pb-24 pt-16 md:px-10 md:pb-32">
+      <section id="mission" className="relative bg-navy px-6 pb-24 pt-16 md:px-10 md:pb-32">
         <div className="mx-auto max-w-5xl text-center">
           <Reveal>
             <p className="mb-5 font-mono text-xs uppercase tracking-[0.3em] text-field">What is DNaI</p>
@@ -595,10 +592,10 @@ function DNaIContent() {
       </section>
 
       {/* ===== VIDEO ===== */}
-      <section id="watch" className="relative bg-navy-deep px-6 py-24 md:px-10 md:py-32">
+      <section id="demo" className="relative bg-navy-deep px-6 py-24 md:px-10 md:py-32">
         <div className="mx-auto max-w-5xl">
           <Reveal>
-            <p className="mb-3 font-mono text-xs uppercase tracking-[0.25em] text-field text-center">Watch</p>
+            <p className="mb-3 font-mono text-xs uppercase tracking-[0.25em] text-field text-center">The demo</p>
             <h2 className="font-serif text-center text-4xl font-medium leading-[1.08] text-cream md:text-5xl">
               Medical AI without exposing<br />
               <span className="italic text-wheat-light">your DNA.</span>
@@ -606,6 +603,20 @@ function DNaIContent() {
             <p className="mx-auto mt-5 max-w-2xl text-center text-lg leading-relaxed text-sky-light/80">
               See why genomic privacy and AI-powered medicine don&rsquo;t have to be in conflict — and how DNaI makes both possible.
             </p>
+          </Reveal>
+          <Reveal y={32}>
+            <div className="mt-10 flex flex-col items-start gap-4 rounded-3xl border border-wheat/30 bg-wheat/[0.06] p-8 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="font-mono text-xs uppercase tracking-[0.2em] text-wheat-light">Try it live &middot; interactive</p>
+                <h3 className="mt-2 font-serif text-2xl font-medium text-cream">The Sovereign Genomic Wallet</h3>
+                <p className="mt-2 max-w-xl leading-relaxed text-sky-light/80">
+                  Switch between owner and researcher, request access to a segment, sign under 2-of-3 multisig custody, and revoke a live grant &mdash; end to end, on Flare&rsquo;s Coston2 testnet with simulated data.
+                </p>
+              </div>
+              <a href="/dnai-wallet-demo/index.html" target="_blank" rel="noopener noreferrer" className="inline-flex shrink-0 items-center gap-2 rounded-full bg-wheat px-6 py-3 text-sm font-semibold text-navy-deep transition hover:bg-wheat-light">
+                Launch interactive demo &rarr;
+              </a>
+            </div>
           </Reveal>
           <Reveal y={32}>
             <div className="relative mt-12 overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-black/40"
@@ -619,12 +630,9 @@ function DNaIContent() {
                 className="absolute inset-0 h-full w-full"
               />
             </div>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-              <a href="/dnai/wallet/" className="rounded-full bg-wheat px-7 py-3.5 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">
-                Open the live wallet demo &rarr;
-              </a>
-              <span className="text-xs text-sky-light/50">Runs on Flare&rsquo;s Coston2 testnet with simulated data.</span>
-            </div>
+            <p className="mt-6 text-center font-mono text-xs uppercase tracking-[0.2em] text-sky-light/50">
+              Coston2 testnet &middot; simulated data &middot; no real genome is used
+            </p>
           </Reveal>
         </div>
       </section>
@@ -653,65 +661,8 @@ function DNaIContent() {
           </Reveal>
         </div>
       </section>
-      <Hills from="bg-navy" to="fill-cream" />
+      <Hills from="bg-navy" to="fill-navy-900" />
 
-      {/* ===== TOKEN FEATURES ===== */}
-      <section id="token" className="relative bg-cream px-6 py-24 md:px-10 md:py-32">
-        <div className="mx-auto max-w-6xl">
-          <Reveal>
-            <p className="mb-3 font-mono text-xs uppercase tracking-[0.25em] text-field-deep">Token Design</p>
-            <h2 className="font-serif max-w-3xl text-4xl font-medium leading-[1.08] text-ink md:text-6xl">
-              Built for sovereignty. Engineered for trust.
-            </h2>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">
-              Every aspect of the DNaI token is designed around one principle: the individual comes first. Privacy, compensation, and governance are defaults, not afterthoughts.
-            </p>
-          </Reveal>
-          <Reveal stagger className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {TOKEN_FEATURES.map((f) => (
-              <div key={f.label} className="rounded-2xl border border-ink/10 bg-navy/[0.04] p-8">
-                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-field to-field-deep shadow-md">
-                  <svg viewBox="0 0 24 24" className="h-5 w-5 fill-none stroke-cream" strokeWidth="2.5"><path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                </div>
-                <h3 className="text-lg font-semibold text-ink">{f.label}</h3>
-                <p className="mt-2 leading-relaxed text-ink-soft">{f.desc}</p>
-              </div>
-            ))}
-          </Reveal>
-        </div>
-      </section>
-      <Hills from="bg-cream" to="fill-navy-deep" />
-
-      {/* ===== ROADMAP ===== */}
-      <section id="roadmap" className="relative bg-navy-deep px-6 py-24 md:px-10 md:py-32">
-        <div className="mx-auto max-w-6xl">
-          <Reveal>
-            <p className="mb-3 font-mono text-xs uppercase tracking-[0.25em] text-wheat">Roadmap</p>
-            <h2 className="font-serif max-w-3xl text-4xl font-medium leading-[1.08] text-cream md:text-6xl">
-              A phased path to genomic sovereignty.
-            </h2>
-          </Reveal>
-          <Reveal stagger className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {ROADMAP.map((r, idx) => (
-              <div key={r.phase} className="rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-transparent p-7">
-                <span className="font-mono text-xs tracking-[0.2em] text-field uppercase">{r.phase}</span>
-                <h3 className="mt-2 font-serif text-xl font-semibold text-cream">{r.title}</h3>
-                <ul className="mt-5 space-y-2.5">
-                  {r.items.map((item) => (
-                    <li key={item} className="flex items-start gap-3">
-                      <span className="mt-1.5 h-1.5 w-1.5 flex-none rounded-full bg-field" />
-                      <span className="text-sm leading-relaxed text-sky-light/75">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </Reveal>
-        </div>
-      </section>
-      <Hills from="bg-navy-deep" to="fill-navy-900" />
-
-      {/* ===== CONTACT / CTA ===== */}
       <section id="contact" className="relative bg-navy-900 px-6 py-28 md:px-10">
         <div className="pointer-events-none absolute inset-0 opacity-15" aria-hidden="true">
           <svg viewBox="0 0 1440 400" preserveAspectRatio="none" className="h-full w-full">
@@ -725,13 +676,37 @@ function DNaIContent() {
               Claim your genomic sovereignty.<br /><span className="italic text-wheat-light">Before someone else does.</span>
             </h2>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-sky-light/80">
-              DNaI is in active development. Join the waitlist to secure early access, participate in the genesis token event, and help shape the policies governing the world&rsquo;s first sovereign genomic economy.
+              DNaI is in active development. Subscribe for early access, token-design and roadmap updates, an invitation to the genesis token event, and a say in the policies governing the world&rsquo;s first sovereign genomic economy.
             </p>
+            <div className="mt-14 grid gap-6 text-left md:grid-cols-2">
+              <div className="rounded-2xl border border-white/10 bg-navy-deep/50 p-7">
+                <p className="font-mono text-xs uppercase tracking-[0.2em] text-wheat-light">What the token carries</p>
+                <ul className="mt-5 space-y-3">
+                  {TOKEN_FEATURES.map((f) => (
+                    <li key={f.label} className="text-sm leading-relaxed text-sky-light/75">
+                      <span className="font-semibold text-cream">{f.label}</span> &mdash; {f.desc}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-navy-deep/50 p-7">
+                <p className="font-mono text-xs uppercase tracking-[0.2em] text-wheat-light">Where it&rsquo;s going</p>
+                <ol className="mt-5 space-y-4">
+                  {ROADMAP.map((r) => (
+                    <li key={r.phase} className="text-sm leading-relaxed text-sky-light/75">
+                      <span className="font-mono text-xs text-field">{r.phase}</span>{' '}
+                      <span className="font-semibold text-cream">{r.title}</span>
+                      <span className="mt-1 block text-sky-light/55">{r.items.join(' \u00b7 ')}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </div>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
               <a href="mailto:everett@cloudcontrolllc.com?subject=DNaI%20Waitlist%20Inquiry" className="rounded-full bg-field px-8 py-4 text-sm font-semibold text-cream shadow-xl shadow-field/20 transition-transform hover:scale-[1.04] hover:bg-field-deep active:scale-95">
                 Join the DNaI Waitlist
               </a>
-              <a href="/dnai/wallet/" className="rounded-full bg-wheat px-8 py-4 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">Join the wallet waitlist</a>
+              <a href="#contact" className="rounded-full bg-wheat px-8 py-4 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">Join the wallet waitlist</a>
             </div>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <a href="https://www.linkedin.com/in/everettjaymorton" target="_blank" rel="noopener" className="rounded-full border border-sky-light/25 px-5 py-2.5 text-xs font-semibold text-sky-light/80 transition-colors hover:border-wheat hover:text-wheat-light">LinkedIn &mdash; Everett Morton</a>

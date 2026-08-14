@@ -1,2 +1,4 @@
 /swan /broker 301
 /swan/* /broker/:splat 301
+/dnai/wallet /dnai/#demo 301
+/dnai/wallet/* /dnai/#demo 301
