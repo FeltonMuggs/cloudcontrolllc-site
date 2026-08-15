@@ -1,30 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="../broker-demo/support.js"></script>
 <title>Inherited Sciences — Sovereign Genomic Wallet</title>
-<template id="__bundler_thumbnail" data-bg-color="#0B2138">
-  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
-    <rect width="1200" height="800" fill="#0B2138"/>
-    <rect x="420" y="180" width="360" height="440" rx="60" fill="#15355C"/>
-    <path d="M600 260 C700 300 700 370 600 410 C500 450 500 520 600 560" stroke="#8AC3EC" stroke-width="20" fill="none" stroke-linecap="round"/>
-    <path d="M600 260 C500 300 500 370 600 410 C700 450 700 520 600 560" stroke="#78B463" stroke-width="20" fill="none" stroke-linecap="round"/>
-    <line x1="540" y1="300" x2="660" y2="300" stroke="#fff" stroke-width="12" stroke-linecap="round" opacity=".8"/>
-    <line x1="540" y1="520" x2="660" y2="520" stroke="#fff" stroke-width="12" stroke-linecap="round" opacity=".8"/>
-  </svg>
-</template>
-</head>
-<body>
-<div id="cc-demo-badge" role="note" style="position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:2147483647;display:flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;border:1px solid rgba(216,168,74,.45);background:rgba(11,33,56,.92);backdrop-filter:blur(6px);box-shadow:0 4px 18px rgba(0,0,0,.35);font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:#E4C97F;white-space:nowrap;pointer-events:none">
-  <span style="width:6px;height:6px;border-radius:50%;background:#E4C97F;flex:none"></span>
-  Demo · Flare Coston2 testnet · simulated data · not a live genome
-</div>
-<x-dc>
-<helmet>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="../broker-demo/_ds/cloud-control-design-system-caaaeb7b-6e69-42b9-948f-92e180103ec9/colors_and_type.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   html,body{margin:0;padding:0;background:#E7ECF3;font-family:Archivo,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
@@ -35,11 +16,18 @@
   .is-scroll::-webkit-scrollbar{display:none}
   @keyframes is-breathe{0%,100%{opacity:.85}50%{opacity:1}}
   @keyframes is-rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-  @keyframes is-dash{to{stroke-dashoffset:-36}}
   @keyframes is-spin{to{transform:rotate(360deg)}}
   .is-screen{animation:is-rise 240ms cubic-bezier(.2,.6,.2,1)}
+  .seg-btn:hover{background:rgba(255,255,255,.09) !important;border-color:rgba(120,180,99,.4) !important}
+  .req-btn:hover{background:rgba(255,255,255,.09) !important;border-color:rgba(46,143,214,.4) !important}
+  .btn-blue:hover{background:#1F7BBE !important}
 </style>
-</helmet>
+</head>
+<body>
+<div id="cc-demo-badge" role="note" style="position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:2147483647;display:flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;border:1px solid rgba(216,168,74,.45);background:rgba(11,33,56,.92);backdrop-filter:blur(6px);box-shadow:0 4px 18px rgba(0,0,0,.35);font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:10.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:#E4C97F;white-space:nowrap;pointer-events:none">
+  <span style="width:6px;height:6px;border-radius:50%;background:#E4C97F;flex:none"></span>
+  Demo · Flare Coston2 testnet · simulated data · not a live genome
+</div>
 
 <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px;box-sizing:border-box;background:radial-gradient(circle at 50% 0%,#F4F7FB,#DDE5EE)">
   <div style="width:390px;max-width:100%;height:min(812px,calc(100vh - 32px));background:#050F1B;border-radius:38px;padding:8px;box-sizing:border-box;box-shadow:0 30px 70px rgba(8,24,42,.35)">
@@ -62,381 +50,43 @@
             <div style="font-size:8.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#5C7DA5;margin-top:1px">Sovereign Genomic Wallet</div>
           </div>
         </div>
-        <button onClick="{{ toggleRole }}" style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:5px 9px 5px 7px;color:#C5E1F6;font-size:10px;font-weight:600">
-          <span style="width:6px;height:6px;border-radius:999px;background:{{ roleDot }}"></span>{{ roleLabel }}
+        <button id="role-toggle" data-action="toggle-role" style="display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:5px 9px 5px 7px;color:#C5E1F6;font-size:10px;font-weight:600">
+          <span id="role-dot" style="width:6px;height:6px;border-radius:999px;background:#78B463"></span><span id="role-label">Owner</span>
         </button>
       </div>
 
-      <!-- ===================== OWNER · VAULT ===================== -->
-      <sc-if value="{{ isVault }}" hint-placeholder-val="{{ true }}">
-        <div class="is-scroll is-screen" style="flex:1;padding:0 20px 16px">
-          <div style="text-align:center;padding-top:2px">
-            <div style="font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#4FA5E2">Genomic Token · 1 of 1</div>
-            <div style="font-size:21px;font-weight:800;color:#fff;margin-top:5px;letter-spacing:-.3px">Whole Genome</div>
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#5C7DA5;margin-top:5px">0x7f3e…91a4 · WGS 30× · 98.2 GB</div>
-          </div>
+      <!-- active screen -->
+      <div id="screen-root" style="flex:1;min-height:0;display:flex;flex-direction:column"></div>
 
-          <!-- helix -->
-          <div style="display:flex;justify-content:center;margin:6px 0 2px;position:relative">
-            <svg width="176" height="290" viewBox="0 0 80 400" style="animation:is-breathe 5s ease-in-out infinite">
-              <path d="M40 0C74 25 74 75 40 100 6 125 6 175 40 200 74 225 74 275 40 300 6 325 6 375 40 400" stroke="#2E8FD6" stroke-width="3" fill="none" opacity=".85"></path>
-              <path d="M40 0C6 25 6 75 40 100 74 125 74 175 40 200 6 225 6 275 40 300 74 325 74 375 40 400" stroke="#1F7BBE" stroke-width="3" fill="none" opacity=".6"></path>
-              <g stroke-width="4" stroke-linecap="round" opacity=".35">
-                <line x1="22" y1="20" x2="58" y2="20" stroke="#5C7DA5"></line><line x1="14" y1="90" x2="66" y2="90" stroke="#5C7DA5"></line>
-                <line x1="22" y1="120" x2="58" y2="120" stroke="#5C7DA5"></line><line x1="14" y1="190" x2="66" y2="190" stroke="#5C7DA5"></line>
-                <line x1="22" y1="220" x2="58" y2="220" stroke="#5C7DA5"></line><line x1="14" y1="290" x2="66" y2="290" stroke="#5C7DA5"></line>
-                <line x1="22" y1="320" x2="58" y2="320" stroke="#5C7DA5"></line><line x1="14" y1="390" x2="66" y2="390" stroke="#5C7DA5"></line>
-              </g>
-              {{ helixRungs }}
-            </svg>
-          </div>
+      <!-- tab bar -->
+      <div id="tab-bar" style="flex:none;height:58px;background:rgba(5,15,27,.9);border-top:1px solid rgba(255,255,255,.09);display:flex;align-items:center;justify-content:space-around;padding-bottom:6px"></div>
 
-          <div style="display:flex;align-items:center;justify-content:space-between;margin:10px 0 9px">
-            <span style="font-size:12.5px;font-weight:700;color:#fff">Licensable segments</span>
-            <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#5C7DA5">{{ activeGrantCount }} active grants</span>
-          </div>
-
-          <sc-for list="{{ segments }}" as="seg" hint-placeholder-count="4">
-            <button onClick="{{ seg.open }}" style="width:100%;display:flex;align-items:center;gap:11px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);border-radius:11px;padding:11px 12px;margin-bottom:8px;text-align:left" style-hover="background:rgba(255,255,255,.09);border-color:rgba(120,180,99,.4)">
-              <span style="width:9px;height:9px;border-radius:2px;flex:none;background:{{ seg.color }}"></span>
-              <span style="flex:1;min-width:0">
-                <span style="display:block;font-size:12.5px;font-weight:600;color:#EAF2FA">{{ seg.name }}</span>
-                <span style="display:block;font-size:10.5px;color:#7B93AF;margin-top:2px">{{ seg.desc }}</span>
-              </span>
-              <span style="text-align:right;flex:none">
-                <span style="display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#5C7DA5">{{ seg.size }}</span>
-                <span style="display:block;font-size:9.5px;font-weight:600;margin-top:3px;color:{{ seg.grantColor }}">{{ seg.grantLabel }}</span>
-              </span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5C7DA5" stroke-width="2" style="flex:none"><path d="m9 5 7 7-7 7"></path></svg>
-            </button>
-          </sc-for>
-
-          <!-- custody -->
-          <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);border-radius:11px;padding:13px;margin-top:4px">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:11px">
-              <span style="font-size:11.5px;font-weight:700;color:#EAF2FA">Custody · 2-of-3 multisig</span>
-              <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#78B463;background:rgba(120,180,99,.14);padding:3px 7px;border-radius:999px">Safe</span>
-            </div>
-            <div style="display:flex;align-items:center">
-              <div style="display:flex">
-                <div style="width:32px;height:32px;border-radius:999px;background:#15355C;border:2px solid #0B2138;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;color:#fff">EF</div>
-                <div style="width:32px;height:32px;border-radius:999px;background:#1F7BBE;border:2px solid #0B2138;margin-left:-9px;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;color:#fff">MF</div>
-                <div style="width:32px;height:32px;border-radius:999px;background:#4A8C3D;border:2px solid #0B2138;margin-left:-9px;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;color:#fff">RF</div>
-              </div>
-              <div style="margin-left:11px">
-                <div style="font-size:11.5px;font-weight:600;color:#EAF2FA">Everett, Mara &amp; Ruth</div>
-                <div style="font-size:10px;color:#7B93AF;margin-top:1px">Any two signatures release a grant</div>
-              </div>
-            </div>
-          </div>
-
-          <div style="display:flex;gap:9px;margin-top:12px">
-            <div style="flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);border-radius:11px;padding:11px 12px">
-              <div style="font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#5C7DA5">Royalties</div>
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:600;color:#78B463;margin-top:5px">{{ royalties }}</div>
-            </div>
-            <div style="flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);border-radius:11px;padding:11px 12px">
-              <div style="font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#5C7DA5">Anchored</div>
-              <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:500;color:#8AC3EC;margin-top:7px">Flare · Coston2</div>
-            </div>
-          </div>
-        </div>
-      </sc-if>
-
-      <!-- ===================== SEGMENT DETAIL ===================== -->
-      <sc-if value="{{ isSegment }}" hint-placeholder-val="{{ false }}">
-        <div class="is-scroll is-screen" style="flex:1;padding:0 20px 16px">
-          <button onClick="{{ backToVault }}" style="display:flex;align-items:center;gap:6px;background:none;border:none;color:#8AC3EC;font-size:11.5px;font-weight:600;padding:0 0 12px">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8AC3EC" stroke-width="2.2"><path d="m15 5-7 7 7 7"></path></svg>Vault
-          </button>
-          <div style="display:flex;align-items:center;gap:10px">
-            <span style="width:12px;height:12px;border-radius:3px;background:{{ segColor }}"></span>
-            <span style="font-size:19px;font-weight:800;color:#fff;letter-spacing:-.3px">{{ segName }}</span>
-          </div>
-          <div style="font-size:11.5px;line-height:1.55;color:#7B93AF;margin-top:7px">{{ segDesc }}</div>
-
-          <div style="display:flex;gap:8px;margin-top:13px;flex-wrap:wrap">
-            <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#C5E1F6;background:rgba(255,255,255,.07);padding:5px 9px;border-radius:999px">{{ segSize }}</span>
-            <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#C5E1F6;background:rgba(255,255,255,.07);padding:5px 9px;border-radius:999px">{{ segVariants }}</span>
-            <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#78B463;background:rgba(120,180,99,.14);padding:5px 9px;border-radius:999px">Encrypted at rest</span>
-          </div>
-
-          <div style="font-size:12.5px;font-weight:700;color:#fff;margin:20px 0 9px">Who has access</div>
-          <sc-for list="{{ segGrants }}" as="g" hint-placeholder-count="2">
-            <div style="display:flex;align-items:center;gap:11px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);border-radius:11px;padding:11px 12px;margin-bottom:8px">
-              <div style="width:32px;height:32px;border-radius:8px;background:#15355C;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#8AC3EC;flex:none">{{ g.initials }}</div>
-              <div style="flex:1;min-width:0">
-                <div style="font-size:12px;font-weight:600;color:#EAF2FA">{{ g.org }}</div>
-                <div style="font-size:10px;color:#7B93AF;margin-top:2px">{{ g.mode }} · expires {{ g.expires }}</div>
-              </div>
-              <button onClick="{{ g.revoke }}" style="background:rgba(197,48,48,.13);border:1px solid rgba(197,48,48,.35);color:#F0A9A9;border-radius:8px;padding:6px 10px;font-size:10.5px;font-weight:600;flex:none">Revoke</button>
-            </div>
-          </sc-for>
-          <sc-if value="{{ segNoGrants }}" hint-placeholder-val="{{ false }}">
-            <div style="border:1px dashed rgba(255,255,255,.17);border-radius:11px;padding:20px;text-align:center;font-size:11.5px;color:#7B93AF">No organization holds access to this segment.</div>
-          </sc-if>
-
-          <div style="background:rgba(46,143,214,.09);border:1px solid rgba(46,143,214,.28);border-radius:11px;padding:13px;margin-top:14px">
-            <div style="display:flex;align-items:center;gap:7px;margin-bottom:7px">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4FA5E2" stroke-width="1.9"><rect x="3" y="11" width="18" height="10" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-              <span style="font-size:11.5px;font-weight:700;color:#C5E1F6">Raw sequence never leaves the vault</span>
-            </div>
-            <div style="font-size:10.5px;line-height:1.55;color:#7B93AF">Grants authorize computation against the segment inside the enclave. Researchers receive results, never the underlying reads.</div>
-          </div>
-        </div>
-      </sc-if>
-
-      <!-- ===================== REQUEST INBOX ===================== -->
-      <sc-if value="{{ isRequests }}" hint-placeholder-val="{{ false }}">
-        <div class="is-scroll is-screen" style="flex:1;padding:0 20px 16px">
-          <div style="font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#4FA5E2">Access requests</div>
-          <div style="font-size:19px;font-weight:800;color:#fff;margin-top:4px;letter-spacing:-.3px">{{ pendingHeadline }}</div>
-          <div style="font-size:11.5px;color:#7B93AF;margin-top:5px;line-height:1.5">Each request arrives as an unsigned smart contract. Nothing executes until two of three signers approve.</div>
-
-          <div style="margin-top:15px">
-            <sc-for list="{{ requests }}" as="r" hint-placeholder-count="3">
-              <button onClick="{{ r.open }}" style="width:100%;text-align:left;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);border-radius:12px;padding:13px;margin-bottom:9px" style-hover="background:rgba(255,255,255,.09);border-color:rgba(46,143,214,.4)">
-                <span style="display:flex;align-items:center;gap:10px">
-                  <span style="width:36px;height:36px;border-radius:9px;background:#15355C;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#8AC3EC;flex:none">{{ r.initials }}</span>
-                  <span style="flex:1;min-width:0">
-                    <span style="display:flex;align-items:center;gap:5px">
-                      <span style="font-size:13px;font-weight:700;color:#fff">{{ r.org }}</span>
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#78B463" stroke-width="2.6"><path d="M20 6 9 17l-5-5"></path></svg>
-                    </span>
-                    <span style="display:block;font-size:10.5px;color:#7B93AF;margin-top:2px">{{ r.meta }}</span>
-                  </span>
-                  <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;padding:4px 8px;border-radius:999px;flex:none;color:{{ r.statusFg }};background:{{ r.statusBg }}">{{ r.status }}</span>
-                </span>
-                <span style="display:block;font-size:11px;line-height:1.5;color:#9DB2C8;margin-top:10px">{{ r.purpose }}</span>
-                <span style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap">
-                  <span style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#C5E1F6;background:rgba(255,255,255,.07);padding:4px 8px;border-radius:6px">{{ r.scope }}</span>
-                  <span style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#C5E1F6;background:rgba(255,255,255,.07);padding:4px 8px;border-radius:6px">{{ r.duration }}</span>
-                  <span style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#78B463;background:rgba(120,180,99,.14);padding:4px 8px;border-radius:6px">{{ r.royalty }}</span>
-                </span>
-              </button>
-            </sc-for>
-          </div>
-
-          <sc-if value="{{ noRequests }}" hint-placeholder-val="{{ false }}">
-            <div style="border:1px dashed rgba(255,255,255,.17);border-radius:12px;padding:28px 20px;text-align:center;margin-top:6px">
-              <div style="font-size:12.5px;font-weight:600;color:#EAF2FA">Inbox clear</div>
-              <div style="font-size:11px;color:#7B93AF;margin-top:6px;line-height:1.5">Switch to the researcher view to submit a new request against this genome.</div>
-            </div>
-          </sc-if>
-        </div>
-      </sc-if>
-
-      <!-- ===================== REQUEST DETAIL ===================== -->
-      <sc-if value="{{ isRequest }}" hint-placeholder-val="{{ false }}">
-        <div class="is-scroll is-screen" style="flex:1;padding:0 20px 16px">
-          <button onClick="{{ backToRequests }}" style="display:flex;align-items:center;gap:6px;background:none;border:none;color:#8AC3EC;font-size:11.5px;font-weight:600;padding:0 0 12px">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8AC3EC" stroke-width="2.2"><path d="m15 5-7 7 7 7"></path></svg>Requests
-          </button>
-
-          <div style="display:flex;align-items:center;gap:11px">
-            <div style="width:44px;height:44px;border-radius:11px;background:#15355C;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#8AC3EC;flex:none">{{ curInitials }}</div>
-            <div>
-              <div style="display:flex;align-items:center;gap:6px">
-                <span style="font-size:16px;font-weight:800;color:#fff;letter-spacing:-.2px">{{ curOrg }}</span>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#78B463" stroke-width="2.6"><path d="M20 6 9 17l-5-5"></path></svg>
-              </div>
-              <div style="font-size:10.5px;color:#7B93AF;margin-top:2px">{{ curMeta }}</div>
-            </div>
-          </div>
-
-          <div style="background:rgba(255,255,255,.05);border-left:2px solid #2E8FD6;border-radius:0 9px 9px 0;padding:12px 13px;margin-top:14px;font-size:11.5px;line-height:1.6;color:#C5E1F6">{{ curPurpose }}</div>
-
-          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.11);border-radius:12px;overflow:hidden;margin-top:14px">
-            <div style="display:flex;align-items:center;gap:8px;padding:11px 13px;background:rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.09)">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8AC3EC" stroke-width="1.9"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"></path><path d="M14 2v6h6M9 13h6M9 17h4"></path></svg>
-              <span style="font-size:11.5px;font-weight:700;color:#fff">Smart-contract terms</span>
-              <span style="margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:9px;color:#5C7DA5">unsigned</span>
-            </div>
-            <div style="padding:4px 13px 10px">
-              <sc-for list="{{ curTerms }}" as="t" hint-placeholder-count="6">
-                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06)">
-                  <span style="font-size:11px;color:#7B93AF;flex:none">{{ t.k }}</span>
-                  <span style="font-size:11.5px;font-weight:600;text-align:right;color:{{ t.color }}">{{ t.v }}</span>
-                </div>
-              </sc-for>
-            </div>
-          </div>
-
-          <div style="display:flex;align-items:flex-start;gap:8px;margin-top:13px;padding:11px 12px;background:rgba(201,168,118,.09);border:1px solid rgba(201,168,118,.28);border-radius:10px">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9A876" stroke-width="1.9" style="flex:none;margin-top:1px"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"></path><path d="M12 9v4M12 17h.01"></path></svg>
-            <span style="font-size:10.5px;line-height:1.55;color:#E0CDA8">Approving mints a revocable access license to the requester's wallet. It does not transfer the genome.</span>
-          </div>
-
-          <div style="display:flex;flex-direction:column;gap:9px;margin-top:16px">
-            <div style="display:flex;gap:9px">
-              <button onClick="{{ deny }}" style="flex:1;background:rgba(197,48,48,.12);border:1.5px solid rgba(197,48,48,.4);color:#F0A9A9;border-radius:11px;padding:14px;font-size:13px;font-weight:700">Deny</button>
-              <button onClick="{{ approve }}" style="flex:2;background:#2E8FD6;border:none;color:#fff;border-radius:11px;padding:14px;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:7px" style-hover="background:#1F7BBE">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><path d="M20 6 9 17l-5-5"></path></svg>Approve &amp; sign
-              </button>
-            </div>
-            <button onClick="{{ counter }}" style="background:none;border:none;color:#8AC3EC;font-size:11.5px;font-weight:600;padding:4px">Counter the terms</button>
-          </div>
-        </div>
-      </sc-if>
-
-      <!-- ===================== ACTIVITY / AUDIT ===================== -->
-      <sc-if value="{{ isActivity }}" hint-placeholder-val="{{ false }}">
-        <div class="is-scroll is-screen" style="flex:1;padding:0 20px 16px">
-          <div style="font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#4FA5E2">On-chain audit log</div>
-          <div style="font-size:19px;font-weight:800;color:#fff;margin-top:4px;letter-spacing:-.3px">Every touch, recorded</div>
-          <div style="font-size:11.5px;color:#7B93AF;margin-top:5px;line-height:1.5">Immutable statements anchored to Flare. Nothing here can be edited or removed — by anyone.</div>
-          <div style="margin-top:16px;position:relative;padding-left:19px">
-            <div style="position:absolute;left:5px;top:6px;bottom:10px;width:1px;background:rgba(255,255,255,.14)"></div>
-            <sc-for list="{{ activity }}" as="a" hint-placeholder-count="5">
-              <div style="position:relative;padding-bottom:17px">
-                <span style="position:absolute;left:-18px;top:3px;width:9px;height:9px;border-radius:999px;border:2px solid #08182A;background:{{ a.color }}"></span>
-                <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px">
-                  <span style="font-size:12px;font-weight:600;color:#EAF2FA">{{ a.title }}</span>
-                  <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#5C7DA5;flex:none">{{ a.time }}</span>
-                </div>
-                <div style="font-size:10.5px;color:#7B93AF;margin-top:3px;line-height:1.5">{{ a.detail }}</div>
-                <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#4FA5E2;margin-top:4px">{{ a.tx }}</div>
-              </div>
-            </sc-for>
-          </div>
-        </div>
-      </sc-if>
-
-      <!-- ===================== RESEARCHER CONSOLE ===================== -->
-      <sc-if value="{{ isResearcher }}" hint-placeholder-val="{{ false }}">
-        <div class="is-scroll is-screen" style="flex:1;padding:0 20px 16px">
-          <div style="display:flex;align-items:center;gap:9px;background:rgba(46,143,214,.1);border:1px solid rgba(46,143,214,.3);border-radius:10px;padding:10px 12px">
-            <div style="width:30px;height:30px;border-radius:8px;background:#15355C;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#8AC3EC;flex:none">NR</div>
-            <div style="flex:1">
-              <div style="font-size:11.5px;font-weight:700;color:#fff">Nordic Rare Disease Institute</div>
-              <div style="font-size:10px;color:#7B93AF;margin-top:1px">Verified requester · Uppsala, SE</div>
-            </div>
-          </div>
-
-          <div style="font-size:19px;font-weight:800;color:#fff;margin-top:16px;letter-spacing:-.3px">Request access</div>
-          <div style="font-size:11.5px;color:#7B93AF;margin-top:5px;line-height:1.5">Compose the terms. The owner signs, counters, or denies — you never see raw sequence either way.</div>
-
-          <div style="font-size:11px;font-weight:700;color:#C5E1F6;margin:17px 0 8px">Segments requested</div>
-          <div style="display:flex;flex-wrap:wrap;gap:7px">
-            <sc-for list="{{ segments }}" as="seg" hint-placeholder-count="4">
-              <button onClick="{{ seg.toggle }}" style="display:flex;align-items:center;gap:7px;border-radius:999px;padding:8px 12px;font-size:11px;font-weight:600;border:1px solid {{ seg.pickBorder }};background:{{ seg.pickBg }};color:{{ seg.pickFg }}">
-                <span style="width:7px;height:7px;border-radius:2px;background:{{ seg.color }}"></span>{{ seg.name }}
-              </button>
-            </sc-for>
-          </div>
-
-          <div style="font-size:11px;font-weight:700;color:#C5E1F6;margin:17px 0 8px">Access mode</div>
-          <div style="display:flex;gap:7px">
-            <sc-for list="{{ modes }}" as="m" hint-placeholder-count="2">
-              <button onClick="{{ m.pick }}" style="flex:1;border-radius:10px;padding:11px 10px;text-align:left;border:1px solid {{ m.border }};background:{{ m.bg }}">
-                <span style="display:block;font-size:11.5px;font-weight:700;color:{{ m.fg }}">{{ m.name }}</span>
-                <span style="display:block;font-size:9.5px;color:#7B93AF;margin-top:3px;line-height:1.4">{{ m.desc }}</span>
-              </button>
-            </sc-for>
-          </div>
-
-          <div style="font-size:11px;font-weight:700;color:#C5E1F6;margin:17px 0 8px">Duration · {{ durationLabel }}</div>
-          <div style="display:flex;gap:7px">
-            <sc-for list="{{ durations }}" as="d" hint-placeholder-count="3">
-              <button onClick="{{ d.pick }}" style="flex:1;border-radius:9px;padding:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;border:1px solid {{ d.border }};background:{{ d.bg }};color:{{ d.fg }}">{{ d.label }}</button>
-            </sc-for>
-          </div>
-
-          <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);border-radius:11px;padding:13px;margin-top:17px">
-            <div style="display:flex;align-items:center;justify-content:space-between">
-              <span style="font-size:11px;color:#7B93AF">Royalty to the owner</span>
-              <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:#78B463">{{ royaltyQuote }}</span>
-            </div>
-            <div style="height:1px;background:rgba(255,255,255,.08);margin:11px 0"></div>
-            <div style="display:flex;align-items:center;justify-content:space-between">
-              <span style="font-size:11px;color:#7B93AF">Escrowed on submission</span>
-              <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:#C5E1F6">{{ escrowQuote }}</span>
-            </div>
-          </div>
-
-          <button onClick="{{ submitRequest }}" style="width:100%;background:#2E8FD6;border:none;color:#fff;border-radius:11px;padding:15px;font-size:13px;font-weight:700;margin-top:15px" style-hover="background:#1F7BBE">Submit request for signature</button>
-          <div style="text-align:center;font-size:10px;color:#5C7DA5;margin-top:9px;line-height:1.5">Submitting writes an unsigned contract to the owner's wallet. Switch roles to review it.</div>
-        </div>
-      </sc-if>
-
-      <!-- ===================== TAB BAR ===================== -->
-      <div style="flex:none;height:58px;background:rgba(5,15,27,.9);border-top:1px solid rgba(255,255,255,.09);display:flex;align-items:center;justify-content:space-around;padding-bottom:6px">
-        <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4">
-          <button onClick="{{ t.go }}" style="background:none;border:none;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 12px;position:relative">
-            <span style="color:{{ t.color }}">{{ t.icon }}</span>
-            <span style="font-size:8.5px;font-weight:600;color:{{ t.color }}">{{ t.label }}</span>
-            <sc-if value="{{ t.badge }}" hint-placeholder-val="{{ false }}">
-              <span style="position:absolute;top:2px;right:6px;min-width:14px;height:14px;border-radius:999px;background:#C53030;color:#fff;font-size:8px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 3px">{{ t.badge }}</span>
-            </sc-if>
-          </button>
-        </sc-for>
-      </div>
-
-      <!-- ===================== SIGNING OVERLAY ===================== -->
-      <sc-if value="{{ signing }}" hint-placeholder-val="{{ false }}">
-        <div style="position:absolute;inset:0;background:rgba(5,15,27,.82);backdrop-filter:blur(6px);display:flex;align-items:flex-end;z-index:20">
-          <div style="width:100%;background:#0E2440;border-top:1px solid rgba(255,255,255,.13);border-radius:20px 20px 31px 31px;padding:22px 20px 26px;animation:is-rise 260ms cubic-bezier(.2,.6,.2,1)">
-            <div style="width:36px;height:4px;border-radius:999px;background:rgba(255,255,255,.2);margin:0 auto 16px"></div>
-            <div style="font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#4FA5E2;text-align:center">{{ signEyebrow }}</div>
-            <div style="font-size:17px;font-weight:800;color:#fff;text-align:center;margin-top:6px;letter-spacing:-.2px">{{ signTitle }}</div>
-            <div style="font-size:11.5px;color:#9DB2C8;text-align:center;margin-top:6px;line-height:1.5">{{ signBody }}</div>
-
-            <div style="margin:18px 0 4px">
-              <sc-for list="{{ signers }}" as="s" hint-placeholder-count="3">
-                <div style="display:flex;align-items:center;gap:11px;padding:9px 0">
-                  <div style="width:32px;height:32px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;color:#fff;flex:none;background:{{ s.avatarBg }}">{{ s.initials }}</div>
-                  <div style="flex:1">
-                    <div style="font-size:12px;font-weight:600;color:#EAF2FA">{{ s.name }}</div>
-                    <div style="font-size:10px;color:#7B93AF;margin-top:1px">{{ s.role }}</div>
-                  </div>
-                  <div style="font-size:10.5px;font-weight:600;color:{{ s.stateColor }}">{{ s.state }}</div>
-                </div>
-              </sc-for>
-            </div>
-
-            <sc-if value="{{ signDone }}" hint-placeholder-val="{{ false }}">
-              <button onClick="{{ closeSigning }}" style="width:100%;background:#4A8C3D;border:none;color:#fff;border-radius:11px;padding:14px;font-size:13px;font-weight:700;margin-top:12px">View the grant</button>
-            </sc-if>
-            <sc-if value="{{ signPending }}" hint-placeholder-val="{{ true }}">
-              <div style="display:flex;align-items:center;justify-content:center;gap:9px;margin-top:14px;padding:13px;background:rgba(255,255,255,.05);border-radius:11px">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8AC3EC" stroke-width="2.4" style="animation:is-spin 900ms linear infinite"><path d="M21 12a9 9 0 1 1-6.2-8.6"></path></svg>
-                <span style="font-size:11.5px;font-weight:600;color:#C5E1F6">Broadcasting to Coston2…</span>
-              </div>
-            </sc-if>
-          </div>
-        </div>
-      </sc-if>
-
-      <!-- toast -->
-      <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
-        <div style="position:absolute;left:16px;right:16px;bottom:70px;background:#15355C;border:1px solid rgba(138,195,236,.35);border-radius:11px;padding:12px 14px;display:flex;align-items:center;gap:9px;z-index:30;animation:is-rise 200ms ease-out;box-shadow:0 10px 30px rgba(0,0,0,.4)">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#78B463" stroke-width="2.4" style="flex:none"><path d="M20 6 9 17l-5-5"></path></svg>
-          <span style="font-size:11.5px;font-weight:600;color:#EAF2FA;line-height:1.4">{{ toast }}</span>
-        </div>
-      </sc-if>
+      <!-- signing overlay + toast -->
+      <div id="overlay-root" style="display:contents"></div>
 
     </div>
   </div>
 </div>
 
-</x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:860}}">
-const SEGMENTS = [
-  { id: 'coding', name: 'Coding genes', color: '#78B463', desc: 'Protein-coding exome, ~20,000 genes', size: '12.4 GB', variants: '38,102 variants' },
-  { id: 'pharma', name: 'Pharmacogenomics', color: '#4FA5E2', desc: 'Drug-metabolism markers, CYP450 panel', size: '2.1 GB', variants: '412 variants' },
-  { id: 'ancestry', name: 'Ancestry', color: '#C9A876', desc: 'Haplogroup and population structure', size: '0.8 GB', variants: '9,640 markers' },
-  { id: 'rare', name: 'Rare variants', color: '#8AC3EC', desc: 'Sub-1% allele frequency, Mendelian candidates', size: '4.6 GB', variants: '1,208 variants' }
-];
+<script>
+(function () {
+  'use strict';
 
-const ICONS = {
-  vault: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z',
-  bell: 'M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M10.3 21a1.9 1.9 0 0 0 3.4 0',
-  log: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8ZM14 2v6h6M9 13h6M9 17h4',
-  lab: 'M9 2v7L4 19a2 2 0 0 0 1.8 3h12.4A2 2 0 0 0 20 19L15 9V2M9 2h6M7 14h10'
-};
+  var SEGMENTS = [
+    { id: 'coding', name: 'Coding genes', color: '#78B463', desc: 'Protein-coding exome, ~20,000 genes', size: '12.4 GB', variants: '38,102 variants' },
+    { id: 'pharma', name: 'Pharmacogenomics', color: '#4FA5E2', desc: 'Drug-metabolism markers, CYP450 panel', size: '2.1 GB', variants: '412 variants' },
+    { id: 'ancestry', name: 'Ancestry', color: '#C9A876', desc: 'Haplogroup and population structure', size: '0.8 GB', variants: '9,640 markers' },
+    { id: 'rare', name: 'Rare variants', color: '#8AC3EC', desc: 'Sub-1% allele frequency, Mendelian candidates', size: '4.6 GB', variants: '1,208 variants' }
+  ];
 
-class Component extends DCLogic {
-  state = {
+  var ICONS = {
+    vault: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z',
+    bell: 'M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M10.3 21a1.9 1.9 0 0 0 3.4 0',
+    log: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8ZM14 2v6h6M9 13h6M9 17h4',
+    lab: 'M9 2v7L4 19a2 2 0 0 0 1.8 3h12.4A2 2 0 0 0 20 19L15 9V2M9 2h6M7 14h10'
+  };
+
+  var state = {
     screen: 'vault',
     role: 'owner',
     segmentId: null,
@@ -471,213 +121,587 @@ class Component extends DCLogic {
     ]
   };
 
-  componentWillUnmount() { clearTimeout(this._t1); clearTimeout(this._t2); clearTimeout(this._t3); }
+  var t1, t2, t3;
 
-  go = (screen) => this.setState({ screen });
+  function fakeTx() {
+    return '0x' + Math.random().toString(16).slice(2, 6) + '…' + Math.random().toString(16).slice(2, 6);
+  }
 
-  flash = (toast) => {
-    this.setState({ toast });
-    clearTimeout(this._t3);
-    this._t3 = setTimeout(() => this.setState({ toast: '' }), 2600);
-  };
+  function setState(patch) {
+    for (var k in patch) state[k] = patch[k];
+    render();
+  }
 
-  approve = () => {
-    this.setState({ signing: true, signStep: 1 });
-    this._t1 = setTimeout(() => this.setState({ signStep: 2 }), 1500);
-    this._t2 = setTimeout(() => {
-      const req = this.state.requests.find(r => r.id === this.state.requestId);
+  function flash(msg) {
+    clearTimeout(t3);
+    setState({ toast: msg });
+    t3 = setTimeout(function () { setState({ toast: '' }); }, 2600);
+  }
+
+  function currentRequest() {
+    for (var i = 0; i < state.requests.length; i++) {
+      if (state.requests[i].id === state.requestId) return state.requests[i];
+    }
+    return state.requests[0] || null;
+  }
+
+  function currentSegment() {
+    for (var i = 0; i < SEGMENTS.length; i++) {
+      if (SEGMENTS[i].id === state.segmentId) return SEGMENTS[i];
+    }
+    return SEGMENTS[0];
+  }
+
+  function researcherRate() { return state.mode === 'zk' ? 0.75 : 0.4; }
+  function researcherRoyalty() { return (researcherRate() * state.picked.length).toFixed(2); }
+  function researcherEscrow() { return Math.round(researcherRate() * state.picked.length * state.duration * 100); }
+
+  /* ---------- actions ---------- */
+
+  var actions = {
+    'toggle-role': function () {
+      var toResearcher = state.role === 'owner';
+      setState({ role: toResearcher ? 'researcher' : 'owner', screen: toResearcher ? 'researcher' : 'vault' });
+    },
+    'go-tab': function (el) {
+      var id = el.getAttribute('data-id');
+      setState({ screen: id, role: id === 'researcher' ? 'researcher' : 'owner' });
+    },
+    'open-segment': function (el) {
+      setState({ screen: 'segment', segmentId: el.getAttribute('data-id') });
+    },
+    'back-vault': function () { setState({ screen: 'vault' }); },
+    'revoke-grant': function (el) {
+      var id = el.getAttribute('data-id');
+      var seg = currentSegment();
+      var grant = null;
+      state.grants = state.grants.filter(function (g) {
+        if (g.id === id) { grant = g; return false; }
+        return true;
+      });
+      if (grant) {
+        state.activity = [{ title: 'Access revoked', detail: grant.org + ' · ' + seg.name.toLowerCase(), time: 'just now', tx: fakeTx(), color: '#C53030' }].concat(state.activity);
+      }
+      flash('Access revoked on-chain. Effective immediately.');
+    },
+    'open-request': function (el) {
+      setState({ screen: 'request', requestId: el.getAttribute('data-id') });
+    },
+    'back-requests': function () { setState({ screen: 'requests' }); },
+    'approve': function () {
+      setState({ signing: true, signStep: 1 });
+      t1 = setTimeout(function () { setState({ signStep: 2 }); }, 1500);
+      t2 = setTimeout(function () {
+        var req = currentRequest();
+        if (!req) return;
+        var segId = SEGMENTS[0].id;
+        for (var i = 0; i < SEGMENTS.length; i++) {
+          if (SEGMENTS[i].name === req.scope) { segId = SEGMENTS[i].id; break; }
+        }
+        state.requests = state.requests.filter(function (r) { return r.id !== req.id; });
+        state.grants = [{ id: 'g' + Date.now(), seg: segId, org: req.org, initials: req.initials, mode: req.mode, expires: 'Aug 2027' }].concat(state.grants);
+        state.activity = [{ title: 'Grant issued', detail: req.org + ' · ' + req.scope.toLowerCase() + ' · ' + req.mode.toLowerCase(), time: 'just now', tx: fakeTx(), color: '#78B463' }].concat(state.activity);
+        setState({ signStep: 3 });
+      }, 3000);
+    },
+    'deny': function () {
+      var req = currentRequest();
       if (!req) return;
-      const segId = (SEGMENTS.find(s => s.name === req.scope) || SEGMENTS[0]).id;
-      this.setState(s => ({
-        signStep: 3,
-        requests: s.requests.filter(r => r.id !== req.id),
-        grants: [{ id: 'g' + Date.now(), seg: segId, org: req.org, initials: req.initials, mode: req.mode, expires: 'Aug 2027' }, ...s.grants],
-        activity: [{ title: 'Grant issued', detail: req.org + ' · ' + req.scope.toLowerCase() + ' · ' + req.mode.toLowerCase(), time: 'just now', tx: '0x' + Math.random().toString(16).slice(2, 6) + '…' + Math.random().toString(16).slice(2, 6), color: '#78B463' }, ...s.activity]
-      }));
-    }, 3000);
+      state.requests = state.requests.filter(function (r) { return r.id !== req.id; });
+      state.activity = [{ title: 'Request denied', detail: req.org + ' · ' + req.scope.toLowerCase(), time: 'just now', tx: fakeTx(), color: '#C53030' }].concat(state.activity);
+      setState({ screen: 'requests' });
+      flash('Request denied. Nothing was written to the vault.');
+    },
+    'counter': function () { flash('Counter-offer drafted. Adjust terms, then re-sign.'); },
+    'close-signing': function () { setState({ signing: false, signStep: 0, screen: 'vault' }); },
+    'pick-segment': function (el) {
+      var id = el.getAttribute('data-id');
+      var i = state.picked.indexOf(id);
+      if (i >= 0) state.picked.splice(i, 1); else state.picked.push(id);
+      render();
+    },
+    'pick-mode': function (el) { setState({ mode: el.getAttribute('data-id') }); },
+    'pick-duration': function (el) { setState({ duration: parseInt(el.getAttribute('data-n'), 10) }); },
+    'submit-request': function () {
+      if (!state.picked.length) { flash('Select at least one segment to request.'); return; }
+      var names = state.picked.map(function (p) {
+        for (var i = 0; i < SEGMENTS.length; i++) if (SEGMENTS[i].id === p) return SEGMENTS[i].name;
+        return p;
+      });
+      state.requests = state.requests.concat([{
+        id: 'r' + Date.now(), org: 'Nordic Rare Disease Institute', initials: 'NR',
+        meta: 'Verified · Uppsala, SE · non-profit',
+        purpose: 'Mapping founder variants across Nordic populations to prioritize antisense therapy targets.',
+        scope: names.join(', '), duration: state.duration + ' months',
+        royalty: researcherRoyalty() + ' FLR / query',
+        mode: state.mode === 'zk' ? 'Compute-only (ZK)' : 'Aggregate statistics',
+        escrow: researcherEscrow().toLocaleString() + ' FLR'
+      }]);
+      flash('Submitted. Awaiting the owner’s signature.');
+    }
   };
 
-  deny = () => {
-    const req = this.state.requests.find(r => r.id === this.state.requestId);
-    if (!req) return;
-    this.setState(s => ({
-      screen: 'requests',
-      requests: s.requests.filter(r => r.id !== req.id),
-      activity: [{ title: 'Request denied', detail: req.org + ' · ' + req.scope.toLowerCase(), time: 'just now', tx: '0x' + Math.random().toString(16).slice(2, 6) + '…' + Math.random().toString(16).slice(2, 6), color: '#C53030' }, ...s.activity]
-    }));
-    this.flash('Request denied. Nothing was written to the vault.');
-  };
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest ? e.target.closest('[data-action]') : null;
+    if (!el) return;
+    var fn = actions[el.getAttribute('data-action')];
+    if (fn) fn(el);
+  });
 
-  renderVals() {
-    const s = this.state;
-    const seg = SEGMENTS.find(x => x.id === s.segmentId) || SEGMENTS[0];
-    const cur = s.requests.find(r => r.id === s.requestId) || s.requests[0] || null;
-    const isOwner = s.role === 'owner';
-    const pendingCount = s.requests.length;
+  /* ---------- screen renderers ---------- */
 
-    const icon = (d, color) => React.createElement('svg', { width: 21, height: 21, viewBox: '0 0 24 24', fill: 'none', stroke: color, strokeWidth: 1.9, strokeLinecap: 'round', strokeLinejoin: 'round' }, React.createElement('path', { d }));
+  function renderVault() {
+    var rungColors = ['#78B463', '#4FA5E2', '#C9A876', '#8AC3EC'];
+    var rungs = [50, 150, 250, 350].map(function (y, i) {
+      var cx = i % 2 === 0 ? 64 : 16;
+      return '<g>' +
+        '<line x1="16" y1="' + y + '" x2="64" y2="' + y + '" stroke="' + rungColors[i] + '" stroke-width="4.5" stroke-linecap="round"></line>' +
+        '<circle cx="' + cx + '" cy="' + y + '" r="6.5" fill="' + rungColors[i] + '"></circle>' +
+        '<circle cx="' + cx + '" cy="' + y + '" r="11" fill="' + rungColors[i] + '" opacity=".22"></circle>' +
+        '</g>';
+    }).join('');
 
-    const tabDefs = [
+    var rows = SEGMENTS.map(function (seg) {
+      var n = state.grants.filter(function (g) { return g.seg === seg.id; }).length;
+      var grantLabel = n ? n + ' grant' + (n > 1 ? 's' : '') : 'private';
+      var grantColor = n ? '#78B463' : '#5C7DA5';
+      return '<button data-action="open-segment" data-id="' + seg.id + '" class="seg-btn" style="width:100%;display:flex;align-items:center;gap:11px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);border-radius:11px;padding:11px 12px;margin-bottom:8px;text-align:left">' +
+        '<span style="width:9px;height:9px;border-radius:2px;flex:none;background:' + seg.color + '"></span>' +
+        '<span style="flex:1;min-width:0">' +
+          '<span style="display:block;font-size:12.5px;font-weight:600;color:#EAF2FA">' + seg.name + '</span>' +
+          '<span style="display:block;font-size:10.5px;color:#7B93AF;margin-top:2px">' + seg.desc + '</span>' +
+        '</span>' +
+        '<span style="text-align:right;flex:none">' +
+          '<span style="display:block;font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:#5C7DA5">' + seg.size + '</span>' +
+          '<span style="display:block;font-size:9.5px;font-weight:600;margin-top:3px;color:' + grantColor + '">' + grantLabel + '</span>' +
+        '</span>' +
+        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5C7DA5" stroke-width="2" style="flex:none"><path d="m9 5 7 7-7 7"></path></svg>' +
+        '</button>';
+    }).join('');
+
+    return '<div class="is-scroll is-screen" style="flex:1;padding:0 20px 16px">' +
+      '<div style="text-align:center;padding-top:2px">' +
+        '<div style="font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#4FA5E2">Genomic Token · 1 of 1</div>' +
+        '<div style="font-size:21px;font-weight:800;color:#fff;margin-top:5px;letter-spacing:-.3px">Whole Genome</div>' +
+        '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:10.5px;color:#5C7DA5;margin-top:5px">0x7f3e…91a4 · WGS 30× · 98.2 GB</div>' +
+      '</div>' +
+      '<div style="display:flex;justify-content:center;margin:6px 0 2px;position:relative">' +
+        '<svg width="176" height="290" viewBox="0 0 80 400" style="animation:is-breathe 5s ease-in-out infinite">' +
+          '<path d="M40 0C74 25 74 75 40 100 6 125 6 175 40 200 74 225 74 275 40 300 6 325 6 375 40 400" stroke="#2E8FD6" stroke-width="3" fill="none" opacity=".85"></path>' +
+          '<path d="M40 0C6 25 6 75 40 100 74 125 74 175 40 200 6 225 6 275 40 300 74 325 74 375 40 400" stroke="#1F7BBE" stroke-width="3" fill="none" opacity=".6"></path>' +
+          '<g stroke-width="4" stroke-linecap="round" opacity=".35">' +
+            '<line x1="22" y1="20" x2="58" y2="20" stroke="#5C7DA5"></line><line x1="14" y1="90" x2="66" y2="90" stroke="#5C7DA5"></line>' +
+            '<line x1="22" y1="120" x2="58" y2="120" stroke="#5C7DA5"></line><line x1="14" y1="190" x2="66" y2="190" stroke="#5C7DA5"></line>' +
+            '<line x1="22" y1="220" x2="58" y2="220" stroke="#5C7DA5"></line><line x1="14" y1="290" x2="66" y2="290" stroke="#5C7DA5"></line>' +
+            '<line x1="22" y1="320" x2="58" y2="320" stroke="#5C7DA5"></line><line x1="14" y1="390" x2="66" y2="390" stroke="#5C7DA5"></line>' +
+          '</g>' + rungs +
+        '</svg>' +
+      '</div>' +
+      '<div style="display:flex;align-items:center;justify-content:space-between;margin:10px 0 9px">' +
+        '<span style="font-size:12.5px;font-weight:700;color:#fff">Licensable segments</span>' +
+        '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:#5C7DA5">' + state.grants.length + ' active grants</span>' +
+      '</div>' +
+      rows +
+      '<div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);border-radius:11px;padding:13px;margin-top:4px">' +
+        '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:11px">' +
+          '<span style="font-size:11.5px;font-weight:700;color:#EAF2FA">Custody · 2-of-3 multisig</span>' +
+          '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:#78B463;background:rgba(120,180,99,.14);padding:3px 7px;border-radius:999px">Safe</span>' +
+        '</div>' +
+        '<div style="display:flex;align-items:center">' +
+          '<div style="display:flex">' +
+            '<div style="width:32px;height:32px;border-radius:999px;background:#15355C;border:2px solid #0B2138;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;color:#fff">EF</div>' +
+            '<div style="width:32px;height:32px;border-radius:999px;background:#1F7BBE;border:2px solid #0B2138;margin-left:-9px;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;color:#fff">MF</div>' +
+            '<div style="width:32px;height:32px;border-radius:999px;background:#4A8C3D;border:2px solid #0B2138;margin-left:-9px;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;color:#fff">RF</div>' +
+          '</div>' +
+          '<div style="margin-left:11px">' +
+            '<div style="font-size:11.5px;font-weight:600;color:#EAF2FA">Everett, Mara &amp; Ruth</div>' +
+            '<div style="font-size:10px;color:#7B93AF;margin-top:1px">Any two signatures release a grant</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div style="display:flex;gap:9px;margin-top:12px">' +
+        '<div style="flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);border-radius:11px;padding:11px 12px">' +
+          '<div style="font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#5C7DA5">Royalties</div>' +
+          '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:15px;font-weight:600;color:#78B463;margin-top:5px">1,284 FLR</div>' +
+        '</div>' +
+        '<div style="flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);border-radius:11px;padding:11px 12px">' +
+          '<div style="font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#5C7DA5">Anchored</div>' +
+          '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:11.5px;font-weight:500;color:#8AC3EC;margin-top:7px">Flare · Coston2</div>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function renderSegment() {
+    var seg = currentSegment();
+    var segGrants = state.grants.filter(function (g) { return g.seg === seg.id; });
+
+    var grantRows = segGrants.map(function (g) {
+      return '<div style="display:flex;align-items:center;gap:11px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);border-radius:11px;padding:11px 12px;margin-bottom:8px">' +
+        '<div style="width:32px;height:32px;border-radius:8px;background:#15355C;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#8AC3EC;flex:none">' + g.initials + '</div>' +
+        '<div style="flex:1;min-width:0">' +
+          '<div style="font-size:12px;font-weight:600;color:#EAF2FA">' + g.org + '</div>' +
+          '<div style="font-size:10px;color:#7B93AF;margin-top:2px">' + g.mode + ' · expires ' + g.expires + '</div>' +
+        '</div>' +
+        '<button data-action="revoke-grant" data-id="' + g.id + '" style="background:rgba(197,48,48,.13);border:1px solid rgba(197,48,48,.35);color:#F0A9A9;border-radius:8px;padding:6px 10px;font-size:10.5px;font-weight:600;flex:none">Revoke</button>' +
+        '</div>';
+    }).join('');
+
+    var empty = segGrants.length === 0
+      ? '<div style="border:1px dashed rgba(255,255,255,.17);border-radius:11px;padding:20px;text-align:center;font-size:11.5px;color:#7B93AF">No organization holds access to this segment.</div>'
+      : '';
+
+    return '<div class="is-scroll is-screen" style="flex:1;padding:0 20px 16px">' +
+      '<button data-action="back-vault" style="display:flex;align-items:center;gap:6px;background:none;border:none;color:#8AC3EC;font-size:11.5px;font-weight:600;padding:0 0 12px">' +
+        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8AC3EC" stroke-width="2.2"><path d="m15 5-7 7 7 7"></path></svg>Vault' +
+      '</button>' +
+      '<div style="display:flex;align-items:center;gap:10px">' +
+        '<span style="width:12px;height:12px;border-radius:3px;background:' + seg.color + '"></span>' +
+        '<span style="font-size:19px;font-weight:800;color:#fff;letter-spacing:-.3px">' + seg.name + '</span>' +
+      '</div>' +
+      '<div style="font-size:11.5px;line-height:1.55;color:#7B93AF;margin-top:7px">' + seg.desc + '</div>' +
+      '<div style="display:flex;gap:8px;margin-top:13px;flex-wrap:wrap">' +
+        '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:#C5E1F6;background:rgba(255,255,255,.07);padding:5px 9px;border-radius:999px">' + seg.size + '</span>' +
+        '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:#C5E1F6;background:rgba(255,255,255,.07);padding:5px 9px;border-radius:999px">' + seg.variants + '</span>' +
+        '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:#78B463;background:rgba(120,180,99,.14);padding:5px 9px;border-radius:999px">Encrypted at rest</span>' +
+      '</div>' +
+      '<div style="font-size:12.5px;font-weight:700;color:#fff;margin:20px 0 9px">Who has access</div>' +
+      grantRows + empty +
+      '<div style="background:rgba(46,143,214,.09);border:1px solid rgba(46,143,214,.28);border-radius:11px;padding:13px;margin-top:14px">' +
+        '<div style="display:flex;align-items:center;gap:7px;margin-bottom:7px">' +
+          '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4FA5E2" stroke-width="1.9"><rect x="3" y="11" width="18" height="10" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>' +
+          '<span style="font-size:11.5px;font-weight:700;color:#C5E1F6">Raw sequence never leaves the vault</span>' +
+        '</div>' +
+        '<div style="font-size:10.5px;line-height:1.55;color:#7B93AF">Grants authorize computation against the segment inside the enclave. Researchers receive results, never the underlying reads.</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function renderRequests() {
+    var pendingCount = state.requests.length;
+    var headline = pendingCount ? pendingCount + ' awaiting your signature' : 'Nothing pending';
+
+    var cards = state.requests.map(function (r) {
+      return '<button data-action="open-request" data-id="' + r.id + '" class="req-btn" style="width:100%;text-align:left;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);border-radius:12px;padding:13px;margin-bottom:9px">' +
+        '<span style="display:flex;align-items:center;gap:10px">' +
+          '<span style="width:36px;height:36px;border-radius:9px;background:#15355C;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#8AC3EC;flex:none">' + r.initials + '</span>' +
+          '<span style="flex:1;min-width:0">' +
+            '<span style="display:flex;align-items:center;gap:5px">' +
+              '<span style="font-size:13px;font-weight:700;color:#fff">' + r.org + '</span>' +
+              '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#78B463" stroke-width="2.6"><path d="M20 6 9 17l-5-5"></path></svg>' +
+            '</span>' +
+            '<span style="display:block;font-size:10.5px;color:#7B93AF;margin-top:2px">' + r.meta + '</span>' +
+          '</span>' +
+          '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;font-weight:600;padding:4px 8px;border-radius:999px;flex:none;color:#E0CDA8;background:rgba(201,168,118,.16)">unsigned</span>' +
+        '</span>' +
+        '<span style="display:block;font-size:11px;line-height:1.5;color:#9DB2C8;margin-top:10px">' + r.purpose + '</span>' +
+        '<span style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap">' +
+          '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:9.5px;color:#C5E1F6;background:rgba(255,255,255,.07);padding:4px 8px;border-radius:6px">' + r.scope + '</span>' +
+          '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:9.5px;color:#C5E1F6;background:rgba(255,255,255,.07);padding:4px 8px;border-radius:6px">' + r.duration + '</span>' +
+          '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:9.5px;color:#78B463;background:rgba(120,180,99,.14);padding:4px 8px;border-radius:6px">' + r.royalty + '</span>' +
+        '</span>' +
+        '</button>';
+    }).join('');
+
+    var empty = pendingCount === 0
+      ? '<div style="border:1px dashed rgba(255,255,255,.17);border-radius:12px;padding:28px 20px;text-align:center;margin-top:6px">' +
+          '<div style="font-size:12.5px;font-weight:600;color:#EAF2FA">Inbox clear</div>' +
+          '<div style="font-size:11px;color:#7B93AF;margin-top:6px;line-height:1.5">Switch to the researcher view to submit a new request against this genome.</div>' +
+        '</div>'
+      : '';
+
+    return '<div class="is-scroll is-screen" style="flex:1;padding:0 20px 16px">' +
+      '<div style="font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#4FA5E2">Access requests</div>' +
+      '<div style="font-size:19px;font-weight:800;color:#fff;margin-top:4px;letter-spacing:-.3px">' + headline + '</div>' +
+      '<div style="font-size:11.5px;color:#7B93AF;margin-top:5px;line-height:1.5">Each request arrives as an unsigned smart contract. Nothing executes until two of three signers approve.</div>' +
+      '<div style="margin-top:15px">' + cards + '</div>' +
+      empty +
+    '</div>';
+  }
+
+  function renderRequest() {
+    var cur = currentRequest();
+    if (!cur) return renderRequests();
+
+    var terms = [
+      { k: 'Scope', v: cur.scope, color: '#EAF2FA' },
+      { k: 'Access mode', v: cur.mode, color: '#EAF2FA' },
+      { k: 'Duration', v: cur.duration, color: '#EAF2FA' },
+      { k: 'Raw data export', v: 'Prohibited', color: '#F0A9A9' },
+      { k: 'Resale / sublicense', v: 'Prohibited', color: '#F0A9A9' },
+      { k: 'Royalty to owner', v: cur.royalty, color: '#78B463' },
+      { k: 'Escrowed up front', v: cur.escrow, color: '#78B463' },
+      { k: 'Revocable by owner', v: 'Any time', color: '#8AC3EC' }
+    ].map(function (t) {
+      return '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06)">' +
+        '<span style="font-size:11px;color:#7B93AF;flex:none">' + t.k + '</span>' +
+        '<span style="font-size:11.5px;font-weight:600;text-align:right;color:' + t.color + '">' + t.v + '</span>' +
+        '</div>';
+    }).join('');
+
+    return '<div class="is-scroll is-screen" style="flex:1;padding:0 20px 16px">' +
+      '<button data-action="back-requests" style="display:flex;align-items:center;gap:6px;background:none;border:none;color:#8AC3EC;font-size:11.5px;font-weight:600;padding:0 0 12px">' +
+        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8AC3EC" stroke-width="2.2"><path d="m15 5-7 7 7 7"></path></svg>Requests' +
+      '</button>' +
+      '<div style="display:flex;align-items:center;gap:11px">' +
+        '<div style="width:44px;height:44px;border-radius:11px;background:#15355C;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#8AC3EC;flex:none">' + cur.initials + '</div>' +
+        '<div>' +
+          '<div style="display:flex;align-items:center;gap:6px">' +
+            '<span style="font-size:16px;font-weight:800;color:#fff;letter-spacing:-.2px">' + cur.org + '</span>' +
+            '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#78B463" stroke-width="2.6"><path d="M20 6 9 17l-5-5"></path></svg>' +
+          '</div>' +
+          '<div style="font-size:10.5px;color:#7B93AF;margin-top:2px">' + cur.meta + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div style="background:rgba(255,255,255,.05);border-left:2px solid #2E8FD6;border-radius:0 9px 9px 0;padding:12px 13px;margin-top:14px;font-size:11.5px;line-height:1.6;color:#C5E1F6">' + cur.purpose + '</div>' +
+      '<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.11);border-radius:12px;overflow:hidden;margin-top:14px">' +
+        '<div style="display:flex;align-items:center;gap:8px;padding:11px 13px;background:rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.09)">' +
+          '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8AC3EC" stroke-width="1.9"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"></path><path d="M14 2v6h6M9 13h6M9 17h4"></path></svg>' +
+          '<span style="font-size:11.5px;font-weight:700;color:#fff">Smart-contract terms</span>' +
+          '<span style="margin-left:auto;font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:#5C7DA5">unsigned</span>' +
+        '</div>' +
+        '<div style="padding:4px 13px 10px">' + terms + '</div>' +
+      '</div>' +
+      '<div style="display:flex;align-items:flex-start;gap:8px;margin-top:13px;padding:11px 12px;background:rgba(201,168,118,.09);border:1px solid rgba(201,168,118,.28);border-radius:10px">' +
+        '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C9A876" stroke-width="1.9" style="flex:none;margin-top:1px"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"></path><path d="M12 9v4M12 17h.01"></path></svg>' +
+        '<span style="font-size:10.5px;line-height:1.55;color:#E0CDA8">Approving mints a revocable access license to the requester’s wallet. It does not transfer the genome.</span>' +
+      '</div>' +
+      '<div style="display:flex;flex-direction:column;gap:9px;margin-top:16px">' +
+        '<div style="display:flex;gap:9px">' +
+          '<button data-action="deny" style="flex:1;background:rgba(197,48,48,.12);border:1.5px solid rgba(197,48,48,.4);color:#F0A9A9;border-radius:11px;padding:14px;font-size:13px;font-weight:700">Deny</button>' +
+          '<button data-action="approve" class="btn-blue" style="flex:2;background:#2E8FD6;border:none;color:#fff;border-radius:11px;padding:14px;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:7px">' +
+            '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><path d="M20 6 9 17l-5-5"></path></svg>Approve &amp; sign' +
+          '</button>' +
+        '</div>' +
+        '<button data-action="counter" style="background:none;border:none;color:#8AC3EC;font-size:11.5px;font-weight:600;padding:4px">Counter the terms</button>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function renderActivity() {
+    var items = state.activity.map(function (a) {
+      return '<div style="position:relative;padding-bottom:17px">' +
+        '<span style="position:absolute;left:-18px;top:3px;width:9px;height:9px;border-radius:999px;border:2px solid #08182A;background:' + a.color + '"></span>' +
+        '<div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px">' +
+          '<span style="font-size:12px;font-weight:600;color:#EAF2FA">' + a.title + '</span>' +
+          '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:#5C7DA5;flex:none">' + a.time + '</span>' +
+        '</div>' +
+        '<div style="font-size:10.5px;color:#7B93AF;margin-top:3px;line-height:1.5">' + a.detail + '</div>' +
+        '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;color:#4FA5E2;margin-top:4px">' + a.tx + '</div>' +
+        '</div>';
+    }).join('');
+
+    return '<div class="is-scroll is-screen" style="flex:1;padding:0 20px 16px">' +
+      '<div style="font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#4FA5E2">On-chain audit log</div>' +
+      '<div style="font-size:19px;font-weight:800;color:#fff;margin-top:4px;letter-spacing:-.3px">Every touch, recorded</div>' +
+      '<div style="font-size:11.5px;color:#7B93AF;margin-top:5px;line-height:1.5">Immutable statements anchored to Flare. Nothing here can be edited or removed — by anyone.</div>' +
+      '<div style="margin-top:16px;position:relative;padding-left:19px">' +
+        '<div style="position:absolute;left:5px;top:6px;bottom:10px;width:1px;background:rgba(255,255,255,.14)"></div>' +
+        items +
+      '</div>' +
+    '</div>';
+  }
+
+  function renderResearcher() {
+    var chips = SEGMENTS.map(function (seg) {
+      var on = state.picked.indexOf(seg.id) >= 0;
+      var bg = on ? 'rgba(46,143,214,.18)' : 'rgba(255,255,255,.05)';
+      var border = on ? 'rgba(46,143,214,.55)' : 'rgba(255,255,255,.13)';
+      var fg = on ? '#C5E1F6' : '#9DB2C8';
+      return '<button data-action="pick-segment" data-id="' + seg.id + '" style="display:flex;align-items:center;gap:7px;border-radius:999px;padding:8px 12px;font-size:11px;font-weight:600;border:1px solid ' + border + ';background:' + bg + ';color:' + fg + '">' +
+        '<span style="width:7px;height:7px;border-radius:2px;background:' + seg.color + '"></span>' + seg.name +
+        '</button>';
+    }).join('');
+
+    var modeDefs = [
+      { id: 'zk', name: 'Compute-only', desc: 'Query runs in the enclave; results only' },
+      { id: 'agg', name: 'Aggregate stats', desc: 'Cohort-level counts, no per-record output' }
+    ];
+    var modes = modeDefs.map(function (m) {
+      var on = state.mode === m.id;
+      var bg = on ? 'rgba(46,143,214,.18)' : 'rgba(255,255,255,.05)';
+      var border = on ? 'rgba(46,143,214,.55)' : 'rgba(255,255,255,.13)';
+      var fg = on ? '#C5E1F6' : '#9DB2C8';
+      return '<button data-action="pick-mode" data-id="' + m.id + '" style="flex:1;border-radius:10px;padding:11px 10px;text-align:left;border:1px solid ' + border + ';background:' + bg + '">' +
+        '<span style="display:block;font-size:11.5px;font-weight:700;color:' + fg + '">' + m.name + '</span>' +
+        '<span style="display:block;font-size:9.5px;color:#7B93AF;margin-top:3px;line-height:1.4">' + m.desc + '</span>' +
+        '</button>';
+    }).join('');
+
+    var durations = [6, 12, 24].map(function (d) {
+      var on = state.duration === d;
+      var bg = on ? 'rgba(46,143,214,.18)' : 'rgba(255,255,255,.05)';
+      var border = on ? 'rgba(46,143,214,.55)' : 'rgba(255,255,255,.13)';
+      var fg = on ? '#C5E1F6' : '#9DB2C8';
+      return '<button data-action="pick-duration" data-n="' + d + '" style="flex:1;border-radius:9px;padding:10px;font-family:\'IBM Plex Mono\',monospace;font-size:11px;font-weight:600;border:1px solid ' + border + ';background:' + bg + ';color:' + fg + '">' + d + ' mo</button>';
+    }).join('');
+
+    return '<div class="is-scroll is-screen" style="flex:1;padding:0 20px 16px">' +
+      '<div style="display:flex;align-items:center;gap:9px;background:rgba(46,143,214,.1);border:1px solid rgba(46,143,214,.3);border-radius:10px;padding:10px 12px">' +
+        '<div style="width:30px;height:30px;border-radius:8px;background:#15355C;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#8AC3EC;flex:none">NR</div>' +
+        '<div style="flex:1">' +
+          '<div style="font-size:11.5px;font-weight:700;color:#fff">Nordic Rare Disease Institute</div>' +
+          '<div style="font-size:10px;color:#7B93AF;margin-top:1px">Verified requester · Uppsala, SE</div>' +
+        '</div>' +
+      '</div>' +
+      '<div style="font-size:19px;font-weight:800;color:#fff;margin-top:16px;letter-spacing:-.3px">Request access</div>' +
+      '<div style="font-size:11.5px;color:#7B93AF;margin-top:5px;line-height:1.5">Compose the terms. The owner signs, counters, or denies — you never see raw sequence either way.</div>' +
+      '<div style="font-size:11px;font-weight:700;color:#C5E1F6;margin:17px 0 8px">Segments requested</div>' +
+      '<div style="display:flex;flex-wrap:wrap;gap:7px">' + chips + '</div>' +
+      '<div style="font-size:11px;font-weight:700;color:#C5E1F6;margin:17px 0 8px">Access mode</div>' +
+      '<div style="display:flex;gap:7px">' + modes + '</div>' +
+      '<div style="font-size:11px;font-weight:700;color:#C5E1F6;margin:17px 0 8px">Duration · ' + state.duration + ' months</div>' +
+      '<div style="display:flex;gap:7px">' + durations + '</div>' +
+      '<div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);border-radius:11px;padding:13px;margin-top:17px">' +
+        '<div style="display:flex;align-items:center;justify-content:space-between">' +
+          '<span style="font-size:11px;color:#7B93AF">Royalty to the owner</span>' +
+          '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:13px;font-weight:600;color:#78B463">' + researcherRoyalty() + ' FLR / query</span>' +
+        '</div>' +
+        '<div style="height:1px;background:rgba(255,255,255,.08);margin:11px 0"></div>' +
+        '<div style="display:flex;align-items:center;justify-content:space-between">' +
+          '<span style="font-size:11px;color:#7B93AF">Escrowed on submission</span>' +
+          '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:13px;font-weight:600;color:#C5E1F6">' + researcherEscrow().toLocaleString() + ' FLR</span>' +
+        '</div>' +
+      '</div>' +
+      '<button data-action="submit-request" class="btn-blue" style="width:100%;background:#2E8FD6;border:none;color:#fff;border-radius:11px;padding:15px;font-size:13px;font-weight:700;margin-top:15px">Submit request for signature</button>' +
+      '<div style="text-align:center;font-size:10px;color:#5C7DA5;margin-top:9px;line-height:1.5">Submitting writes an unsigned contract to the owner’s wallet. Switch roles to review it.</div>' +
+    '</div>';
+  }
+
+  function renderTabBar() {
+    var pendingCount = state.requests.length;
+    var tabDefs = [
       { id: 'vault', label: 'Vault', path: ICONS.vault },
       { id: 'requests', label: 'Requests', path: ICONS.bell, badge: pendingCount || null },
       { id: 'activity', label: 'Activity', path: ICONS.log },
       { id: 'researcher', label: 'Researcher', path: ICONS.lab }
     ];
-    const activeTab = s.screen === 'segment' ? 'vault' : (s.screen === 'request' ? 'requests' : s.screen);
+    var activeTab = state.screen === 'segment' ? 'vault' : (state.screen === 'request' ? 'requests' : state.screen);
 
-    const rungColors = ['#78B463', '#4FA5E2', '#C9A876', '#8AC3EC'];
-    const helixRungs = React.createElement('g', null,
-      ...[50, 150, 250, 350].map((y, i) => React.createElement('g', { key: i },
-        React.createElement('line', { x1: 16, y1: y, x2: 64, y2: y, stroke: rungColors[i], strokeWidth: 4.5, strokeLinecap: 'round' }),
-        React.createElement('circle', { cx: i % 2 === 0 ? 64 : 16, cy: y, r: 6.5, fill: rungColors[i] }),
-        React.createElement('circle', { cx: i % 2 === 0 ? 64 : 16, cy: y, r: 11, fill: rungColors[i], opacity: 0.22 })
-      ))
-    );
-
-    const segGrants = s.grants.filter(g => g.seg === seg.id);
-    const modeDefs = [
-      { id: 'zk', name: 'Compute-only', desc: 'Query runs in the enclave; results only' },
-      { id: 'agg', name: 'Aggregate stats', desc: 'Cohort-level counts, no per-record output' }
-    ];
-    const durationDefs = [6, 12, 24];
-    const rate = s.mode === 'zk' ? 0.75 : 0.4;
-    const royalty = (rate * s.picked.length).toFixed(2);
-    const escrow = Math.round(rate * s.picked.length * s.duration * 100);
-
-    const signers = [
-      { initials: 'EF', name: 'Everett Felton', role: 'Primary signer · this device', avatarBg: '#15355C', done: s.signStep >= 1 },
-      { initials: 'MF', name: 'Mara Felton', role: 'Co-signer · hardware wallet', avatarBg: '#1F7BBE', done: s.signStep >= 2 },
-      { initials: 'RF', name: 'Ruth Felton', role: 'Recovery signer · not required', avatarBg: '#4A8C3D', done: false }
-    ];
-
-    return {
-      helixRungs,
-      isVault: isOwner && s.screen === 'vault',
-      isSegment: isOwner && s.screen === 'segment',
-      isRequests: isOwner && s.screen === 'requests',
-      isRequest: isOwner && s.screen === 'request' && !!cur,
-      isActivity: isOwner && s.screen === 'activity',
-      isResearcher: !isOwner || s.screen === 'researcher',
-
-      roleLabel: isOwner ? 'Owner' : 'Researcher',
-      roleDot: isOwner ? '#78B463' : '#C9A876',
-      toggleRole: () => this.setState(st => ({ role: st.role === 'owner' ? 'researcher' : 'owner', screen: st.role === 'owner' ? 'researcher' : 'vault' })),
-
-      activeGrantCount: s.grants.length,
-      royalties: '1,284 FLR',
-
-      segments: SEGMENTS.map(x => {
-        const n = s.grants.filter(g => g.seg === x.id).length;
-        const on = s.picked.includes(x.id);
-        return {
-          ...x,
-          grantLabel: n ? n + ' grant' + (n > 1 ? 's' : '') : 'private',
-          grantColor: n ? '#78B463' : '#5C7DA5',
-          open: () => this.setState({ screen: 'segment', segmentId: x.id }),
-          toggle: () => this.setState(st => ({ picked: st.picked.includes(x.id) ? st.picked.filter(p => p !== x.id) : [...st.picked, x.id] })),
-          pickBg: on ? 'rgba(46,143,214,.18)' : 'rgba(255,255,255,.05)',
-          pickBorder: on ? 'rgba(46,143,214,.55)' : 'rgba(255,255,255,.13)',
-          pickFg: on ? '#C5E1F6' : '#9DB2C8'
-        };
-      }),
-
-      segName: seg.name, segDesc: seg.desc, segSize: seg.size, segVariants: seg.variants, segColor: seg.color,
-      segNoGrants: segGrants.length === 0,
-      segGrants: segGrants.map(g => ({ ...g, revoke: () => {
-        this.setState(st => ({
-          grants: st.grants.filter(x => x.id !== g.id),
-          activity: [{ title: 'Access revoked', detail: g.org + ' · ' + seg.name.toLowerCase(), time: 'just now', tx: '0x' + Math.random().toString(16).slice(2, 6) + '…' + Math.random().toString(16).slice(2, 6), color: '#C53030' }, ...st.activity]
-        }));
-        this.flash('Access revoked on-chain. Effective immediately.');
-      } })),
-      backToVault: () => this.setState({ screen: 'vault' }),
-
-      pendingHeadline: pendingCount ? pendingCount + ' awaiting your signature' : 'Nothing pending',
-      noRequests: pendingCount === 0,
-      requests: s.requests.map(r => ({
-        ...r,
-        status: 'unsigned', statusFg: '#E0CDA8', statusBg: 'rgba(201,168,118,.16)',
-        open: () => this.setState({ screen: 'request', requestId: r.id })
-      })),
-
-      curOrg: cur ? cur.org : '', curInitials: cur ? cur.initials : '', curMeta: cur ? cur.meta : '', curPurpose: cur ? cur.purpose : '',
-      curTerms: cur ? [
-        { k: 'Scope', v: cur.scope, color: '#EAF2FA' },
-        { k: 'Access mode', v: cur.mode, color: '#EAF2FA' },
-        { k: 'Duration', v: cur.duration, color: '#EAF2FA' },
-        { k: 'Raw data export', v: 'Prohibited', color: '#F0A9A9' },
-        { k: 'Resale / sublicense', v: 'Prohibited', color: '#F0A9A9' },
-        { k: 'Royalty to owner', v: cur.royalty, color: '#78B463' },
-        { k: 'Escrowed up front', v: cur.escrow, color: '#78B463' },
-        { k: 'Revocable by owner', v: 'Any time', color: '#8AC3EC' }
-      ] : [],
-      backToRequests: () => this.setState({ screen: 'requests' }),
-      approve: this.approve,
-      deny: this.deny,
-      counter: () => this.flash('Counter-offer drafted. Adjust terms, then re-sign.'),
-
-      activity: s.activity,
-
-      modes: modeDefs.map(m => ({
-        ...m,
-        pick: () => this.setState({ mode: m.id }),
-        bg: s.mode === m.id ? 'rgba(46,143,214,.18)' : 'rgba(255,255,255,.05)',
-        border: s.mode === m.id ? 'rgba(46,143,214,.55)' : 'rgba(255,255,255,.13)',
-        fg: s.mode === m.id ? '#C5E1F6' : '#9DB2C8'
-      })),
-      durations: durationDefs.map(d => ({
-        label: d + ' mo',
-        pick: () => this.setState({ duration: d }),
-        bg: s.duration === d ? 'rgba(46,143,214,.18)' : 'rgba(255,255,255,.05)',
-        border: s.duration === d ? 'rgba(46,143,214,.55)' : 'rgba(255,255,255,.13)',
-        fg: s.duration === d ? '#C5E1F6' : '#9DB2C8'
-      })),
-      durationLabel: s.duration + ' months',
-      royaltyQuote: royalty + ' FLR / query',
-      escrowQuote: escrow.toLocaleString() + ' FLR',
-      submitRequest: () => {
-        if (!s.picked.length) { this.flash('Select at least one segment to request.'); return; }
-        const names = s.picked.map(p => SEGMENTS.find(x => x.id === p).name);
-        this.setState(st => ({
-          requests: [...st.requests, {
-            id: 'r' + Date.now(), org: 'Nordic Rare Disease Institute', initials: 'NR',
-            meta: 'Verified · Uppsala, SE · non-profit',
-            purpose: 'Mapping founder variants across Nordic populations to prioritize antisense therapy targets.',
-            scope: names.join(', '), duration: st.duration + ' months',
-            royalty: royalty + ' FLR / query',
-            mode: st.mode === 'zk' ? 'Compute-only (ZK)' : 'Aggregate statistics',
-            escrow: escrow.toLocaleString() + ' FLR'
-          }]
-        }));
-        this.flash('Submitted. Awaiting the owner\u2019s signature.');
-      },
-
-      tabs: tabDefs.map(t => {
-        const on = activeTab === t.id;
-        const color = on ? '#8AC3EC' : '#5C7DA5';
-        return { ...t, color, label: t.label, badge: t.badge, icon: icon(t.path, color),
-          go: () => this.setState({ screen: t.id, role: t.id === 'researcher' ? 'researcher' : 'owner' }) };
-      }),
-
-      signing: s.signing,
-      signDone: s.signStep >= 3,
-      signPending: s.signing && s.signStep < 3,
-      signEyebrow: s.signStep >= 3 ? 'Executed' : 'Multisig · 2 of 3',
-      signTitle: s.signStep >= 3 ? 'Access license minted' : 'Collecting signatures',
-      signBody: s.signStep >= 3
-        ? 'The grant is live and revocable. Every query against it will appear in your audit log.'
-        : 'Two of three family signers must approve before the contract executes.',
-      signers: signers.map(x => ({
-        ...x,
-        state: x.done ? 'Signed' : (x.name === 'Ruth Felton' ? 'Not required' : 'Waiting…'),
-        stateColor: x.done ? '#78B463' : '#5C7DA5'
-      })),
-      closeSigning: () => this.setState({ signing: false, signStep: 0, screen: 'vault' }),
-
-      toast: s.toast
-    };
+    return tabDefs.map(function (t) {
+      var color = activeTab === t.id ? '#8AC3EC' : '#5C7DA5';
+      var badge = t.badge
+        ? '<span style="position:absolute;top:2px;right:6px;min-width:14px;height:14px;border-radius:999px;background:#C53030;color:#fff;font-size:8px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 3px">' + t.badge + '</span>'
+        : '';
+      return '<button data-action="go-tab" data-id="' + t.id + '" style="background:none;border:none;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 12px;position:relative">' +
+        '<span style="color:' + color + '"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="' + color + '" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="' + t.path + '"></path></svg></span>' +
+        '<span style="font-size:8.5px;font-weight:600;color:' + color + '">' + t.label + '</span>' +
+        badge +
+        '</button>';
+    }).join('');
   }
-}
+
+  function renderOverlays() {
+    var html = '';
+
+    if (state.signing) {
+      var done = state.signStep >= 3;
+      var signers = [
+        { initials: 'EF', name: 'Everett Felton', role: 'Primary signer · this device', avatarBg: '#15355C', done: state.signStep >= 1 },
+        { initials: 'MF', name: 'Mara Felton', role: 'Co-signer · hardware wallet', avatarBg: '#1F7BBE', done: state.signStep >= 2 },
+        { initials: 'RF', name: 'Ruth Felton', role: 'Recovery signer · not required', avatarBg: '#4A8C3D', done: false }
+      ];
+      var rows = signers.map(function (s) {
+        var stateLabel = s.done ? 'Signed' : (s.name === 'Ruth Felton' ? 'Not required' : 'Waiting…');
+        var stateColor = s.done ? '#78B463' : '#5C7DA5';
+        return '<div style="display:flex;align-items:center;gap:11px;padding:9px 0">' +
+          '<div style="width:32px;height:32px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;color:#fff;flex:none;background:' + s.avatarBg + '">' + s.initials + '</div>' +
+          '<div style="flex:1">' +
+            '<div style="font-size:12px;font-weight:600;color:#EAF2FA">' + s.name + '</div>' +
+            '<div style="font-size:10px;color:#7B93AF;margin-top:1px">' + s.role + '</div>' +
+          '</div>' +
+          '<div style="font-size:10.5px;font-weight:600;color:' + stateColor + '">' + stateLabel + '</div>' +
+          '</div>';
+      }).join('');
+
+      var footer = done
+        ? '<button data-action="close-signing" style="width:100%;background:#4A8C3D;border:none;color:#fff;border-radius:11px;padding:14px;font-size:13px;font-weight:700;margin-top:12px">View the grant</button>'
+        : '<div style="display:flex;align-items:center;justify-content:center;gap:9px;margin-top:14px;padding:13px;background:rgba(255,255,255,.05);border-radius:11px">' +
+            '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8AC3EC" stroke-width="2.4" style="animation:is-spin 900ms linear infinite"><path d="M21 12a9 9 0 1 1-6.2-8.6"></path></svg>' +
+            '<span style="font-size:11.5px;font-weight:600;color:#C5E1F6">Broadcasting to Coston2…</span>' +
+          '</div>';
+
+      html += '<div style="position:absolute;inset:0;background:rgba(5,15,27,.82);backdrop-filter:blur(6px);display:flex;align-items:flex-end;z-index:20">' +
+        '<div style="width:100%;background:#0E2440;border-top:1px solid rgba(255,255,255,.13);border-radius:20px 20px 31px 31px;padding:22px 20px 26px;animation:is-rise 260ms cubic-bezier(.2,.6,.2,1)">' +
+          '<div style="width:36px;height:4px;border-radius:999px;background:rgba(255,255,255,.2);margin:0 auto 16px"></div>' +
+          '<div style="font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#4FA5E2;text-align:center">' + (done ? 'Executed' : 'Multisig · 2 of 3') + '</div>' +
+          '<div style="font-size:17px;font-weight:800;color:#fff;text-align:center;margin-top:6px;letter-spacing:-.2px">' + (done ? 'Access license minted' : 'Collecting signatures') + '</div>' +
+          '<div style="font-size:11.5px;color:#9DB2C8;text-align:center;margin-top:6px;line-height:1.5">' + (done
+            ? 'The grant is live and revocable. Every query against it will appear in your audit log.'
+            : 'Two of three family signers must approve before the contract executes.') + '</div>' +
+          '<div style="margin:18px 0 4px">' + rows + '</div>' +
+          footer +
+        '</div>' +
+      '</div>';
+    }
+
+    if (state.toast) {
+      html += '<div style="position:absolute;left:16px;right:16px;bottom:70px;background:#15355C;border:1px solid rgba(138,195,236,.35);border-radius:11px;padding:12px 14px;display:flex;align-items:center;gap:9px;z-index:30;animation:is-rise 200ms ease-out;box-shadow:0 10px 30px rgba(0,0,0,.4)">' +
+        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#78B463" stroke-width="2.4" style="flex:none"><path d="M20 6 9 17l-5-5"></path></svg>' +
+        '<span style="font-size:11.5px;font-weight:600;color:#EAF2FA;line-height:1.4">' + state.toast + '</span>' +
+        '</div>';
+    }
+
+    return html;
+  }
+
+  /* ---------- root render ---------- */
+
+  var screenRoot = document.getElementById('screen-root');
+  var tabBar = document.getElementById('tab-bar');
+  var overlayRoot = document.getElementById('overlay-root');
+  var roleDot = document.getElementById('role-dot');
+  var roleLabel = document.getElementById('role-label');
+
+  var lastScreenKey = '';
+
+  function render() {
+    var isOwner = state.role === 'owner';
+    roleDot.style.background = isOwner ? '#78B463' : '#C9A876';
+    roleLabel.textContent = isOwner ? 'Owner' : 'Researcher';
+
+    var screenKey, screenHtml;
+    if (!isOwner || state.screen === 'researcher') {
+      screenKey = 'researcher';
+      screenHtml = renderResearcher();
+    } else if (state.screen === 'segment') {
+      screenKey = 'segment:' + state.segmentId;
+      screenHtml = renderSegment();
+    } else if (state.screen === 'requests') {
+      screenKey = 'requests';
+      screenHtml = renderRequests();
+    } else if (state.screen === 'request') {
+      screenKey = 'request:' + state.requestId;
+      screenHtml = currentRequest() ? renderRequest() : renderRequests();
+    } else if (state.screen === 'activity') {
+      screenKey = 'activity';
+      screenHtml = renderActivity();
+    } else {
+      screenKey = 'vault';
+      screenHtml = renderVault();
+    }
+
+    // Preserve scroll position on same-screen re-renders (selection changes,
+    // list mutations); the entry animation only plays on real screen changes.
+    var prevScroll = 0;
+    var prevScreenEl = screenRoot.firstElementChild;
+    var sameScreen = screenKey === lastScreenKey;
+    if (sameScreen && prevScreenEl) prevScroll = prevScreenEl.scrollTop;
+
+    screenRoot.innerHTML = screenHtml;
+    var screenEl = screenRoot.firstElementChild;
+    if (sameScreen && screenEl) {
+      screenEl.classList.remove('is-screen');
+      screenEl.scrollTop = prevScroll;
+    }
+    lastScreenKey = screenKey;
+
+    tabBar.innerHTML = renderTabBar();
+    overlayRoot.innerHTML = renderOverlays();
+  }
+
+  render();
+})();
 </script>
 </body>
 </html>
