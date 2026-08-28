@@ -1,6 +1,6 @@
 # FoMGL Sponsorship — Lead Generation Content Kit
 
-Government Blockchain Association · Future of Money, Government & Law (FoMGL)
+Government Blockchain Association · Future of Money, Governance & the Law (FoMGL)
 
 Outbound and inbound content for filling the FoMGL sponsorship pipeline. Every
 asset here is written to a single job: get a qualified sponsorship conversation
@@ -16,8 +16,9 @@ official GBA sponsorship prospectus before sending a single message.
 |---|---|
 | `[EVENT_DATES]` | Confirmed FoMGL dates, e.g. "March 3–5" |
 | `[EVENT_YEAR]` | Conference year |
-| `[VENUE_NAME]` | Venue |
-| `[VENUE_CITY]` | City, state/country |
+| `[VENUE_NAME]` | Venue — for a multi-city series use `[DC_VENUES]` / `[NY_VENUES]` |
+| `[VENUE_CITY]` | City — for a multi-city series use `[CITY_SCOPE]` |
+| `[SERIES_DATES]` | Full span across cities, for the one-line version |
 | `[ATTENDEE_COUNT]` | Expected or prior-year attendance |
 | `[GOV_ATTENDEE_PCT]` | Share of attendees from government |
 | `[AGENCY_COUNT]` | Number of agencies represented |
@@ -39,6 +40,7 @@ number, cut the claim. Nothing in outbound should be a guess.
 
 | File | Use it for |
 |---|---|
+| `launch-readiness.md` | **Read first** — verified vs unverified facts, blockers, compressed sprint |
 | `icp-and-target-list.md` | Who to target, where to source them, how to score them |
 | `email-sequences.md` | Five outbound sequences + subject line bank |
 | `linkedin-outreach.md` | Connection requests, DM ladder, InMail, engagement plays |
@@ -64,6 +66,9 @@ Every inbound lead — prospectus download, "tell me more" reply, booth inquiry 
 gets qualified against `icp-and-target-list.md` and logged per `crm-workflow.md`.
 
 ## Eight-week run-up
+
+> **This assumes an eight-week runway.** For FoMGL 2026 that runway is already
+> gone — see `launch-readiness.md` for the compressed sprint that replaces it.
 
 | Week | Focus |
 |---|---|

@@ -28,7 +28,7 @@ Five touches over 18 days.
 > exactly the kind of work the officials at FoMGL are trying to find, and most of
 > them will never find it through a procurement portal.
 >
-> FoMGL is GBA's annual conference on the future of money, government and law —
+> FoMGL is GBA's conference series on the future of money, governance and the law —
 > [EVENT_DATES] in [VENUE_CITY]. The room is [ATTENDEE_COUNT] attendees, roughly
 > [GOV_ATTENDEE_PCT] of them from government, across [AGENCY_COUNT] agencies and
 > [COUNTRY_COUNT] countries.

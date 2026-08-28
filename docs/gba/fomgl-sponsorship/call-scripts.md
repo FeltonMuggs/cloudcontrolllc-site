@@ -14,7 +14,7 @@ Permission-based. It beats the enthusiastic version with executives.
 >
 > *(pause — wait for the yes)*
 >
-> "We run FoMGL, our annual conference on money, government and law. It is
+> "We run FoMGL, our conference series on money, governance and the law. It is
 > [EVENT_DATES] in [VENUE_CITY], and the room is about [ATTENDEE_COUNT] people,
 > roughly [GOV_ATTENDEE_PCT] of them from government, across [AGENCY_COUNT]
 > agencies.

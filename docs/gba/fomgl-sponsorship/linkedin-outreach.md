@@ -92,7 +92,7 @@ Different shape: name the ask in the first line, because they know it cost you.
 >
 > [FIRST_NAME], this is a sponsorship inquiry, so I will be direct.
 >
-> FoMGL is GBA's annual conference on money, government and law — [EVENT_DATES],
+> FoMGL is GBA's conference series on money, governance and the law — [EVENT_DATES],
 > [VENUE_CITY]. [ATTENDEE_COUNT] attendees, ~[GOV_ATTENDEE_PCT] government,
 > [AGENCY_COUNT] agencies, [COUNTRY_COUNT] countries.
 >

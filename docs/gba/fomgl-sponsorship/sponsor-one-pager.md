@@ -15,7 +15,7 @@ carry the weight.
 
 ## The 30-second version
 
-> **FoMGL [EVENT_YEAR]** — Future of Money, Government & Law
+> **FoMGL [EVENT_YEAR]** — Future of Money, Governance & the Law
 > [EVENT_DATES] · [VENUE_NAME], [VENUE_CITY]
 >
 > The Government Blockchain Association's annual conference brings
@@ -37,7 +37,7 @@ is reaching the people who can sponsor a program.
 Those people do not answer cold email. They are not reachable through a
 procurement portal until a requirement already exists — by which point the
 specification has usually been shaped by someone else. They do attend FoMGL,
-because it is where the money, government, and law conversation actually happens.
+because it is where the money, governance and law conversation actually happens.
 
 FoMGL is convened by the Government Blockchain Association, whose network spans
 500+ government offices and 50+ working groups where agency staff and industry
