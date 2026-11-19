@@ -9,6 +9,20 @@ export const metadata = {
     url: 'https://cloudcontrolllc.com/isawvern',
     siteName: 'Cloud Control LLC',
     type: 'website',
+    images: [
+      {
+        url: '/isawvern/og.jpg',
+        width: 1200,
+        height: 627,
+        alt: 'Vern, the iSawVern AI legal navigator, beside the headline "Your rights, immutably navigated."',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'iSawVern — Your rights, immutably navigated',
+    description: 'Meet Vern: an AI legal navigator with a tamper-evident record. A Cloud Control LLC project.',
+    images: ['/isawvern/og.jpg'],
   },
 };
 
