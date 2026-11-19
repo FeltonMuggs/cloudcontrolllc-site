@@ -108,6 +108,7 @@ const PROJECT_LINKS = [
   { label: 'DNaI', href: '/dnai', text: 'text-field hover:text-field-deep', dot: 'bg-field' },
   { label: 'Legacy', href: '/legacy', text: 'text-wheat hover:text-wheat-light', dot: 'bg-wheat' },
   { label: 'Carbon Broker', href: '/broker', text: 'text-sky-light hover:text-cream', dot: 'bg-sky-light' },
+  { label: 'iSawVern', href: '/isawvern', text: 'text-wheat-light hover:text-cream', dot: 'bg-wheat-light' },
 ];
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -129,21 +130,21 @@ function Nav() {
       <div className="mx-auto flex max-w-8xl items-center justify-between px-6 py-3.5 md:px-10">
         <a href="#top" onClick={(e) => go(e, '#top')} className="flex items-center gap-3">
           <img src="/logo.png" alt="Cloud Control LLC" className="h-10 w-auto" />
-          <span className="font-serif text-lg font-semibold text-cream leading-none">Cloud Control <span className="text-sky-light">LLC</span></span>
+          <span className="whitespace-nowrap font-serif text-lg font-semibold text-cream leading-none">Cloud Control <span className="text-sky-light">LLC</span></span>
         </a>
-        <nav className="hidden items-center gap-9 lg:flex">
+        <nav className="hidden items-center gap-5 whitespace-nowrap lg:flex xl:gap-7">
           {LINKS.map((l) => (
             <a key={l.href} href={l.href} onClick={(e) => { if (l.href.startsWith('#')) go(e, l.href); }} className="text-sm font-medium text-sky-light/80 transition-colors hover:text-cream">{l.label}</a>
           ))}
-          <span className="h-4 w-[1px] bg-white/15" aria-hidden="true" />
+          <span className="hidden h-4 w-[1px] bg-white/15 min-[1360px]:block" aria-hidden="true" />
           {PROJECT_LINKS.map((l) => (
-            <a key={l.href} href={l.href} className={`flex items-center gap-1.5 text-sm font-medium transition-colors ${l.text}`}>
+            <a key={l.href} href={l.href} className={`hidden min-[1360px]:flex items-center gap-1.5 text-sm font-medium transition-colors ${l.text}`}>
               <span className={`h-1.5 w-1.5 rounded-full ${l.dot}`} />
               {l.label}
             </a>
           ))}
         </nav>
-        <a href="#contact" onClick={(e) => go(e, '#contact')} className="rounded-full bg-wheat px-5 py-2.5 text-sm font-semibold text-navy-900 shadow-lg shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">Start a conversation</a>
+        <a href="#contact" onClick={(e) => go(e, '#contact')} className="shrink-0 whitespace-nowrap rounded-full bg-wheat px-5 py-2.5 text-sm font-semibold text-navy-900 shadow-lg shadow-wheat/20 transition-transform hover:scale-[1.04] active:scale-95">Start a conversation</a>
       </div>
     </header>
   );
@@ -622,6 +623,53 @@ export default function Home() {
                 </p>
                 <div className="mt-8 flex items-center gap-2 text-sm font-semibold text-sky-light transition-colors group-hover:text-cream">
                   Watch the broker demo
+                  <svg viewBox="0 0 20 20" className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="currentColor" aria-hidden="true">
+                    <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
+                  </svg>
+                </div>
+              </div>
+            </a>
+          </Reveal>
+          <Reveal y={32}>
+            <a href="/isawvern" className="group relative mt-8 flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-transparent transition-colors hover:border-wheat-light/50 md:flex-row">
+              {/* scales-of-justice + ledger visual accent */}
+              <div className="relative flex h-48 w-full flex-none items-center justify-center overflow-hidden bg-gradient-to-br from-navy-900 to-navy md:h-auto md:w-72 md:rounded-l-3xl">
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_70%_at_50%_50%,rgba(216,169,63,0.22),transparent_80%)]" />
+                <svg viewBox="0 0 100 120" className="h-28 w-auto opacity-85 md:h-36" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="vn1" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#ecc873" />
+                      <stop offset="100%" stopColor="#5a9bd4" />
+                    </linearGradient>
+                  </defs>
+                  <line x1="50" y1="10" x2="50" y2="84" stroke="url(#vn1)" strokeWidth="3" strokeLinecap="round" />
+                  <line x1="18" y1="24" x2="82" y2="24" stroke="#ecc873" strokeWidth="2.5" strokeLinecap="round" />
+                  <path d="M18 24 L8 50 L28 50 Z" fill="none" stroke="#ecc873" strokeWidth="2" strokeLinejoin="round" />
+                  <path d="M82 24 L72 50 L92 50 Z" fill="none" stroke="#ecc873" strokeWidth="2" strokeLinejoin="round" />
+                  <path d="M6 50 Q18 60 30 50" fill="none" stroke="#ecc873" strokeWidth="2" />
+                  <path d="M70 50 Q82 60 94 50" fill="none" stroke="#ecc873" strokeWidth="2" />
+                  {[0, 1, 2].map((i) => (
+                    <rect key={i} x={22 + i * 20} y="92" width="16" height="16" rx="3" fill="none" stroke="#5a9bd4" strokeWidth="2" strokeOpacity={1 - i * 0.25} />
+                  ))}
+                  <line x1="38" y1="100" x2="42" y2="100" stroke="#5a9bd4" strokeWidth="2" />
+                  <line x1="58" y1="100" x2="62" y2="100" stroke="#5a9bd4" strokeWidth="2" strokeOpacity="0.75" />
+                </svg>
+                <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full border border-wheat-light/50 bg-wheat-light/15 px-3 py-1.5 text-[10px] font-semibold tracking-widest text-wheat-light uppercase md:bottom-5 md:left-5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-wheat-light" style={{ animation: 'pulse 2s cubic-bezier(0.4,0,0.6,1) infinite' }} />
+                  Waitlist Open
+                </div>
+              </div>
+              {/* text */}
+              <div className="flex flex-1 flex-col justify-center p-8 md:p-12">
+                <p className="font-mono text-xs uppercase tracking-[0.25em] text-wheat-light">iSawVern.ai</p>
+                <h3 className="font-serif mt-3 text-3xl font-semibold leading-tight text-cream md:text-4xl">
+                  AI Legal Navigator
+                </h3>
+                <p className="mt-4 max-w-xl text-lg leading-relaxed text-sky-light/80">
+                  Vern guides people who feel the justice system is being used against them &mdash; plain-language procedure, a clean handoff to licensed counsel, and a tamper-evident on-chain record of every step. Built for public defender offices and the clients they serve.
+                </p>
+                <div className="mt-8 flex items-center gap-2 text-sm font-semibold text-wheat-light transition-colors group-hover:text-cream">
+                  Meet Vern
                   <svg viewBox="0 0 20 20" className="h-4 w-4 transition-transform group-hover:translate-x-1" fill="currentColor" aria-hidden="true">
                     <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
                   </svg>
