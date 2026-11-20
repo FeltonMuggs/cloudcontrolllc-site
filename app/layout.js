@@ -28,6 +28,17 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+    <head>
+      {/* Google tag (gtag.js) — GA4 property "Cloud Control LLC" */}
+      <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-PZV428WK"></script>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());`,
+        }}
+      />
+    </head>
     <body>{children}</body>
     </html>
   );
