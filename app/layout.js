@@ -1,4 +1,7 @@
+import Script from 'next/script';
 import './globals.css';
+
+const GA_ID = 'G-TFPDN3XMCJ';
 
 export const metadata = {
   metadataBase: new URL('https://cloudcontrolllc.com'),
@@ -28,7 +31,23 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-    <body>{children}</body>
+    <body>
+      {children}
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+        strategy="afterInteractive"
+      />
+      <Script id="ga4-init" strategy="afterInteractive">
+        {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA_ID}');
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a[href^="mailto:"]');
+  if (a) gtag('event', 'generate_lead', { method: 'email', link_url: a.href });
+});`}
+      </Script>
+    </body>
     </html>
   );
 }
