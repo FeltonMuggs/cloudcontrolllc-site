@@ -192,7 +192,7 @@ export default function ISawVernPage() {
               <a href="#defenders" className="rounded-full border border-sky-light/40 bg-navy-900/30 px-7 py-3.5 text-sm font-semibold text-cream backdrop-blur-sm transition-colors hover:border-wheat hover:text-wheat-light">For defender offices &amp; firms</a>
             </div>
             <p id="talk-to-vern" className="mt-5 max-w-xl font-mono text-[10px] uppercase leading-relaxed tracking-[0.16em] text-sky-light/60">
-              Live demo &middot; Vern starts a case file from your court paperwork only: court, charge as written, and dates. Please don&rsquo;t tell him what happened. This conversation isn&rsquo;t private like one with your lawyer. Not legal advice &middot; Not affiliated with VIDC.
+              Live demo &middot; Vern builds your case file, then points you to your public defender office. He&rsquo;s an AI, not a lawyer: what you tell him is recorded and is not protected like a conversation with your lawyer. You can skip your account and give only your court details. Not legal advice &middot; Not affiliated with VIDC.
             </p>
           </div>
           <div className="relative mx-auto w-full max-w-sm lg:max-w-md">
