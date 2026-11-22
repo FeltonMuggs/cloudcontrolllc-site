@@ -59,6 +59,34 @@ function Reveal({ children, className = '', stagger = false, y = 46 }) {
 /* ---------------- constants ---------------- */
 // Live Base44 app. Switch back to 'https://isawvern.ai' once that domain points at the app.
 const VERN_SITE = 'https://i-saw-vern-44cfc45c.base44.app';
+
+/* ---------------- Vern voice agent (ElevenLabs) ---------------- */
+// Demo voice agent: procedural-only case file intake + Virginia public defender office routing.
+const VERN_AGENT_ID = 'agent_0801m80esk16f4zswembvrt2tgjr';
+const VERN_WIDGET_SRC = 'https://unpkg.com/@elevenlabs/convai-widget-embed';
+
+function useVernWidget() {
+  useEffect(() => {
+    if (document.querySelector(`script[src="${VERN_WIDGET_SRC}"]`)) return;
+    const s = document.createElement('script');
+    s.src = VERN_WIDGET_SRC;
+    s.async = true;
+    s.type = 'text/javascript';
+    document.body.appendChild(s);
+  }, []);
+}
+
+// Opens the corner call widget. Falls back to pointing at it if the widget hasn't loaded yet.
+function talkToVern(e) {
+  e.preventDefault();
+  const widget = document.querySelector('elevenlabs-convai');
+  const btn = widget?.shadowRoot?.querySelector('button');
+  if (btn) {
+    btn.click();
+  } else if (widget) {
+    widget.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  }
+}
 const VERN_PORTRAIT = 'https://media.base44.com/images/public/6afa386987aee88b44cfc45c/144296a79_vern-avatar.jpg';
 const INQUIRY = 'mailto:everett@cloudcontrolllc.com?subject=iSawVern%20Partner%20Pilot';
 
@@ -133,6 +161,7 @@ const DEFENDER_POINTS = [
 
 export default function ISawVernPage() {
   useSmoothScroll();
+  useVernWidget();
   return (
     <main id="top" className="relative bg-navy-deep">
       <Nav />
@@ -159,9 +188,12 @@ export default function ISawVernPage() {
               Vern is an AI legal navigator for people who feel the justice system is being used against them. He reads the record, names the procedure, and shows the next move &mdash; with every step headed for a public ledger so the account can&rsquo;t be rewritten later.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
-              <a href={VERN_SITE} target="_blank" rel="noopener noreferrer" className="rounded-full bg-wheat px-7 py-3.5 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/25 transition-transform hover:scale-[1.04] active:scale-95">Meet Vern &rarr;</a>
+              <a href="#talk-to-vern" onClick={talkToVern} className="rounded-full bg-wheat px-7 py-3.5 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/25 transition-transform hover:scale-[1.04] active:scale-95">Talk to Vern &rarr;</a>
               <a href="#defenders" className="rounded-full border border-sky-light/40 bg-navy-900/30 px-7 py-3.5 text-sm font-semibold text-cream backdrop-blur-sm transition-colors hover:border-wheat hover:text-wheat-light">For defender offices &amp; firms</a>
             </div>
+            <p id="talk-to-vern" className="mt-5 max-w-xl font-mono text-[10px] uppercase leading-relaxed tracking-[0.16em] text-sky-light/60">
+              Live demo &middot; Vern starts a case file from your court paperwork only: court, charge as written, and dates. Please don&rsquo;t tell him what happened. This conversation isn&rsquo;t private like one with your lawyer. Not legal advice &middot; Not affiliated with VIDC.
+            </p>
           </div>
           <div className="relative mx-auto w-full max-w-sm lg:max-w-md">
             <div className="overflow-hidden rounded-3xl border border-white/10 bg-navy-900 shadow-2xl shadow-black/50">
@@ -289,6 +321,7 @@ export default function ISawVernPage() {
           <p className="text-sm text-sky-light/60">&copy; {new Date().getFullYear()} Cloud Control LLC &mdash; All Rights Reserved.</p>
         </div>
       </footer>
+      <elevenlabs-convai agent-id={VERN_AGENT_ID}></elevenlabs-convai>
     </main>
   );
 }
