@@ -87,7 +87,7 @@ function talkToVern(e) {
     widget.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }
 }
-const VERN_PORTRAIT = 'https://media.base44.com/images/public/6afa386987aee88b44cfc45c/144296a79_vern-avatar.jpg';
+const VERN_PORTRAIT = 'https://media.base44.com/images/public/6afa386987aee88b44cfc45c/90fae40e5_isawvern-crest.png';
 const INQUIRY = 'mailto:everett@cloudcontrolllc.com?subject=iSawVern%20Partner%20Pilot';
 
 /* ---------------- nav ---------------- */
@@ -205,7 +205,7 @@ export default function ISawVernPage() {
                 </span>
               </div>
               <div className="relative aspect-[4/5]">
-                <img src={VERN_PORTRAIT} alt="Vern, the iSawVern AI legal navigator avatar" className="absolute inset-0 h-full w-full object-cover" />
+                <img src={VERN_PORTRAIT} alt="I Saw Vern AI crest: Legal Navigator, not Legal Advice" className="absolute inset-0 h-full w-full object-contain px-8 pb-20 pt-10" />
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_45%,transparent_35%,rgba(8,26,43,0.65)_100%)]" />
                 <div className="absolute bottom-4 left-4 border-l-2 border-wheat pl-3">
                   <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-sky-light/60">Vern</p>
