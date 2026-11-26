@@ -1,7 +1,10 @@
 import Script from 'next/script';
 import './globals.css';
 
-const GA_ID = 'G-TFPDN3XMCJ';
+// Google Tag Manager container. GA4 (G-TFPDN3XMCJ) is configured inside
+// this container — do not add a direct gtag.js GA4 tag here, or every
+// visit is counted twice.
+const GTM_ID = 'GTM-WF7KPQVL';
 
 export const metadata = {
   metadataBase: new URL('https://cloudcontrolllc.com'),
@@ -31,22 +34,29 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-    <body>
-      {children}
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-        strategy="afterInteractive"
-      />
-      <Script id="ga4-init" strategy="afterInteractive">
-        {`window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', '${GA_ID}');
+    <head>
+      <Script id="gtm-base" strategy="afterInteractive">
+        {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${GTM_ID}');
 document.addEventListener('click', function (e) {
   var a = e.target.closest && e.target.closest('a[href^="mailto:"]');
-  if (a) gtag('event', 'generate_lead', { method: 'email', link_url: a.href });
+  if (a) window.dataLayer.push({ event: 'generate_lead', method: 'email', link_url: a.href });
 });`}
       </Script>
+    </head>
+    <body>
+      <noscript>
+        <iframe
+          src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+          height="0"
+          width="0"
+          style={{ display: 'none', visibility: 'hidden' }}
+        />
+      </noscript>
+      {children}
     </body>
     </html>
   );
