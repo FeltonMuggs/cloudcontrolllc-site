@@ -189,6 +189,7 @@ export default function ISawVernPage() {
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <a href="#talk-to-vern" onClick={talkToVern} className="rounded-full bg-wheat px-7 py-3.5 text-sm font-semibold text-navy-900 shadow-xl shadow-wheat/25 transition-transform hover:scale-[1.04] active:scale-95">Talk to Vern &rarr;</a>
+              <a href={`${VERN_SITE}/case-file`} target="_blank" rel="noopener noreferrer" className="rounded-full border border-wheat/60 bg-navy-900/30 px-7 py-3.5 text-sm font-semibold text-wheat-light backdrop-blur-sm transition-colors hover:border-wheat hover:text-wheat">Upload your papers</a>
               <a href="#defenders" className="rounded-full border border-sky-light/40 bg-navy-900/30 px-7 py-3.5 text-sm font-semibold text-cream backdrop-blur-sm transition-colors hover:border-wheat hover:text-wheat-light">For defender offices &amp; firms</a>
             </div>
             <p id="talk-to-vern" className="mt-5 max-w-xl font-mono text-[10px] uppercase leading-relaxed tracking-[0.16em] text-sky-light/60">
